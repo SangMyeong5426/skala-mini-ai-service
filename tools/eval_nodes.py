@@ -238,7 +238,9 @@ async def _run(kinds: list[str], args: argparse.Namespace) -> None:
     async with server.lifespan(server.app):
         deps = server.app.state.deps
         health = {"llm_backend": server.app.state.llm_backend,
-                  "fast_llm": deps.fast_llm.name, "quality_llm": deps.quality_llm.name}
+                  "fast_llm": deps.fast_llm.name, "quality_llm": deps.quality_llm.name,
+                  # 서버가 실제로 켠 개선 스위치 (base 코드에는 없다)
+                  "switches": getattr(server.app.state, "switches", None)}
         print(f"코드: {_display(code_root)} ({git_state['commit']}) backend={health['llm_backend']} "
               f"fast={health['fast_llm']} quality={health['quality_llm']}")
         for kind in kinds:
