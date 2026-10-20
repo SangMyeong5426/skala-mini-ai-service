@@ -10,7 +10,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 | --- | --- |
 | 저장소 | <https://github.com/SangMyeong5426/skala-mini-ai-service> |
 | 과제 | **2. 신규 프로젝트** — 게임 등급분류 사전 점검 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
-| 핵심 결과 (LLM 단독 → 에이전트) | 등급 정확도 한 문장 14 → 22/40 · 상세 설명 24 → 27/39 · 분류 15 → 29/30 · 되묻기 6 → 10/12 · 오염 초안 탐지 0 → 7/7 · 제도 문의 2 → 15/17 ([`02-measurement.md`](docs/02-measurement.md)) |
+| 핵심 결과 (LLM 단독 → 에이전트) | 등급 정확도 한 문장 14 → 19/40 · 상세 설명 24 → 27/39 · 분류 15 → 29/30 · 되묻기 6 → 10/12 · 오염 초안 탐지 0 → 7/7 · 제도 문의 2 → 15/17. 한 문장 설명에서는 사례 5건 다수결(22/40)보다 낮다 ([`02-measurement.md`](docs/02-measurement.md)) |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
 | 상세 설계 | [`docs/03-design.md`](docs/03-design.md) |
 | 진행 체크리스트 | [`docs/checklist.md`](docs/checklist.md) |
