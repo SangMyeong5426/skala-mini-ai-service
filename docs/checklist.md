@@ -4,7 +4,7 @@
 끝낸 항목은 체크하고 근거(커밋·파일)를 옆에 적는다. 직접 해야 하는 일(Google Spread 등록 등)은
 **(직접)**으로 표시했다 — 끝나면 체크해 달라.
 
-마지막 갱신: 2026-10-20 (Day1)
+마지막 갱신: 2026-10-20 (Day1) — 개선 항목 1~5 구현·측정을 Day1에 앞당겨 마쳤다.
 
 ## 마감
 
@@ -43,72 +43,81 @@
 - [x] 분류 Before: 23/30 (76.7%) — `runs/eval-route_before_20261020-101334.json`
 - [x] 대상 시스템 Before: 6/15, 엉뚱한 진단 7건, timeout 1건 — `runs/eval-target_before_20261020-102502.json`
 - [x] 검수 Before: 오염 초안 탐지 0/7 — `runs/eval-judge_before_20261020-103034.json`
-- [ ] **(직접)** 회귀 쿼리 지연시간 Before — 백엔드를 새로 띄운 직후 `measure_queries.py run --label before` (최대 30~50분)
-- [ ] 평가 세트 라벨 검토 — 고치면 Before 3종을 다시 잰다
+- [x] 측정 격리: `scripts/measure-at`(커밋을 worktree로 꺼내 측정), 회귀 쿼리 질문마다 서버 새로 띄우기, 답변 작성 `write` 평가 — `468cf17`
+- [x] 답변 작성 Before: 중앙값 34.8초 — `runs/eval-write_before_20261020-110710.json`
+- [x] 회귀 쿼리 Before: 11턴 합계 411.4초, timeout 0 — `runs/e2e_before_20261020-111046.json`
+- [x] runbook 선택 Before: 6/10 — `runs/eval-runbook_before_20261020-112839.json`
+- [ ] 평가 세트 라벨 검토 — 고치면 Before부터 다시 잰다
 
-## Day2 — 구현
+## 구현 (계획상 Day2 — Day1에 진행)
 
-항목마다 같은 순서로 닫는다: 브랜치 → 구현 → 테스트 → 측정 → 결정 기록 → 문서 → `main`에 merge.
+항목마다 같은 순서로 닫았다: 브랜치 → 구현 → 테스트 → 측정 → 결정 기록 → 문서. 브랜치는 이어서 쌓았고
+(`feat/ollama-think` → `feat/semantic-router` → `feat/target-resolver` → `feat/grounded-validator` →
+`feat/runbook-rag`), `main` merge는 확인받은 뒤 한 번에 한다.
 
 ### 항목 1 — Ollama thinking 제어 (`feat/ollama-think`)
 
-- [ ] `OllamaLLM.__init__`에 `think` 인자, `_chat`·`_chat_stream` payload에 반영
-- [ ] `server._build_llms`가 `OLLAMA_THINK` 읽기, `.env.example`에 항목 추가
-- [ ] 테스트 `tests/test_ollama_think.py` (payload 확인, ollama 없이)
-- [ ] `step1` 측정: 회귀 쿼리 + 노드 평가 3종 → 항목 2~4의 Before
-- [ ] 결정 기록 `0002` (한계: 추론을 끈 만큼 품질 변화)
-- [ ] `02-measurement.md`·`01-plan.md` 상태 갱신, merge
+- [x] `OllamaLLM.__init__`에 `think` 인자, `_chat`·`_chat_stream` payload에 반영 — `21961b1`
+- [x] `server._build_llms`가 `OLLAMA_THINK` 읽기, `.env.example`에 항목 추가 — `21961b1`
+- [x] 테스트 `tests/test_ollama_think.py` (payload 확인, ollama 없이, 9개) — `21961b1`
+- [x] `step1` 측정: 노드 평가 3종 + `write` + `e2e` — `runs/*_step1_*.json`
+- [x] 결정 기록 `0002` — 대상 정확도 하락·대화 답변 품질 하락을 한계로 기록
 
 ### 항목 2 — 의미 라우터 (`feat/semantic-router`)
 
-- [ ] `agent/embedding.py` — `OllamaEmbedder`, `cosine`, 질의 지시문
-- [ ] `data/router_examples.json` — 클래스당 15~20문장, 평가 세트와 겹치지 않게
-- [ ] `agent/router.py` — `LLMRouter`, `SemanticRouter`(상위 3개 평균, margin, LLM 폴백)
-- [ ] `SupervisorDeps` 필드 추가, `server._build_components`, `route_node` 분기 + 이벤트 `method`·`scores`
-- [ ] `ROUTER_MARGIN`을 예시 문장 leave-one-out으로 결정
-- [ ] 테스트 `tests/test_router.py` (가짜 embedder, 예시↔평가 세트 겹침 0건)
-- [ ] `step2` 측정: 분류 정확도·폴백 비율·route 지연
-- [ ] 결정 기록 `0003` (한계: 예시 커버리지, margin, 메모리 2.4GB)
-- [ ] 문서 갱신(아키텍처 다이어그램 포함), merge
+- [x] `agent/embedding.py` — `OllamaEmbedder`, `cosine` — `01e3ed9`
+- [x] `data/router_examples.json` — 클래스당 20문장, 평가 세트와 겹치지 않게 — `01e3ed9`
+- [x] `agent/router.py` — `LLMRouter`, `SemanticRouter`(상위 3개 평균, margin, LLM 폴백) — `01e3ed9`
+- [x] `SupervisorDeps` 필드, `server._build_components`, `route_node` 분기 + 이벤트 `method`·`gap` — `01e3ed9`
+- [x] margin을 예시 문장 leave-one-out으로 결정: 0.029, 지시문 없음 — `bdd205e`
+- [x] 테스트 `tests/test_router.py` (가짜 embedder, 예시↔평가 세트 겹침 0건) — `01e3ed9`
+- [x] 측정: 분류 30/30, 임베딩 29 · LLM 폴백 1 — `runs/eval-route_final_20261020-113756.json`
+- [x] 결정 기록 `0003`
 
 ### 항목 3 — 대상 시스템 추정·되묻기 (`feat/target-resolver`)
 
-- [ ] `data/systems.json` 카탈로그 6개(설명 포함)
-- [ ] `mcp_server.py` Resource `catalog://systems`, `mcp_client.find_resource`
-- [ ] `agent/target.py` — `TargetResolver`(이름 매칭 → 대상 밖 → 설명 임베딩 → 되묻기)
-- [ ] `plan_node` 변경(대상 없으면 research 0개 + `ClarifyRequested`, LLM plan은 대상 2개 이상일 때만)
-- [ ] 새 노드 `clarify`, 조건 엣지 `plan → clarify | gate`
-- [ ] auth-service 기본값 세 곳 삭제 (`_extract_system_name`, ollama·openai plan 프롬프트, `_guess_target(s)`)
-- [ ] (선택) `web_chat.html` `STEP_LABELS`에 `ClarifyRequested`
-- [ ] 테스트 `tests/test_target.py` + 스모크에 되묻기 경로
-- [ ] `step3` 측정: target 정확도·되묻기·엉뚱한 진단
-- [ ] 결정 기록 `0004` (한계: 과잉 되묻기, 카탈로그 관리)
-- [ ] 문서 갱신, merge
+- [x] `data/systems.json` 카탈로그 6개(설명 포함) — `eded3b5`
+- [x] `mcp_server.py` Resource `catalog://systems`, `mcp_client.find_resource` — `eded3b5`
+- [x] `agent/target.py` — `TargetResolver`(이름 매칭 → 대상 밖 → 설명 임베딩 → 되묻기) — `eded3b5`
+- [x] `plan_node` 변경(대상 없으면 research 0개 + `ClarifyRequested`, LLM plan은 대상 2개 이상일 때만) — `eded3b5`
+- [x] 새 노드 `clarify`, 조건 엣지 `plan → clarify | gate` — `eded3b5`
+- [x] auth-service 기본값 — 지우지 않고 `TARGET_RESOLVER=legacy` 재현용으로 남김(설계 변경, [03](03-design.md#구현하며-바뀐-것-2026-10-20))
+- [x] `web_chat.html` `STEP_LABELS`에 `ClarifyRequested` — `eded3b5`
+- [x] 테스트 `tests/test_target.py` (규칙 + fake 그래프에서 MCP 카탈로그 실호출) — `eded3b5`
+- [x] min_score 0.40 · margin 0.04를 조정용 문장으로 결정 — `bdd205e`
+- [x] 측정: 대상 13/15, 되묻기 3/5, 엉뚱한 진단 2 — `runs/eval-target_final_20261020-113803.json`
+- [x] 결정 기록 `0004`
 
 ### 항목 4 — 검수 근거 검증 (`feat/grounded-validator`)
 
-- [ ] `agent/validator.py` — 형식 → 수치 대조 → LLM-as-judge
-- [ ] 백엔드 3종 quality 클래스에 `judge()` (fake는 결정론)
-- [ ] `validate_node` 분기 + 이벤트 `stage`·`reason`, 3회 실패 시 경고 문구
-- [ ] 테스트 `tests/test_validator.py` (수치 대조가 정상 5건 통과·b2·b3·b4 탈락)
-- [ ] `step4` 측정: 탐지율·오탐률·검수 지연 + 회귀 쿼리
-- [ ] 결정 기록 `0005` (한계: 판정 모델 편향, 지연 증가)
-- [ ] 문서 갱신, merge
+- [x] `agent/validator.py` — 형식 → 수치 대조 → LLM-as-judge — `fcfdb87`
+- [x] 백엔드 3종 quality 클래스에 `judge()` (fake는 늘 통과) — `fcfdb87`
+- [x] `validate_node` 분기 + 이벤트 `stage`·`reason`, 3회 실패 시 경고 문구 — `fcfdb87`
+- [x] 테스트 `tests/test_validator.py` (수치 대조가 정상 5건 통과·b2·b3·b4 탈락) — `fcfdb87`
+- [x] 측정: 오염 초안 6/7, 정상 오탐 0/5, 검수 +3.5초 — `runs/eval-judge_final_20261020-113227.json`
+- [x] 결정 기록 `0005`
 
 ### 항목 5 — runbook 의미 검색 (선택, `feat/runbook-rag`)
 
-- [ ] `eval_nodes.py`에 `runbook` 하위 명령 추가, 키워드 규칙으로 Before 측정
-- [ ] `agent/runbook.py` — `RunbookSelector`, `replan_check_node` 분기
-- [ ] 측정·결정 기록 `0006`·merge — 시간이 없으면 항목째 뺀다
+- [x] `eval_nodes.py`에 `runbook` 하위 명령, runbook 평가 세트 10문항, 키워드 규칙으로 Before — `6a552f6`
+- [x] `agent/runbook.py` — `RunbookSelector`, `replan_check_node` 분기 — `6a552f6`
+- [x] 측정: 8/10 — 단, 원래 문항만 보면 5/6 → 4/6 — `runs/eval-runbook_final_20261020-113405.json`
+- [x] 결정 기록 `0006` (효과 불확실)
 
-### Day2 저녁
+### 최종 측정
 
-- [ ] `final` 측정 시작: 노드 평가 3종 + 회귀 쿼리 (장애 질문이 오래 걸리므로 미루지 않는다)
+- [x] `final` 측정: 노드 평가 5종 + 회귀 쿼리 — 회귀 쿼리 11턴 411.4초 → 159.0초, timeout 0 — `runs/*_final_*.json`
+- [x] base → step1 → final 표 ([`02-measurement.md`](02-measurement.md#결과-요약--base--final))
+- [x] 아키텍처 다이어그램·소스 구조 갱신 (`project/doc/README.md`)
+- [x] 대화 경로만 thinking 유지(`OLLAMA_THINK_CHAT`, `feat/chat-think`) — `32b59c1`, 결정 기록 `0007`
+- [x] final2 재측정: 회귀 쿼리 110.8초, 대화 답 원래 수준 — `runs/e2e_final2_20261020-132116.json`
+- [x] `main`에 merge
+- [ ] 발표용 수치 확정: base·final2를 `--repeat 3`으로 재측정 (1회 측정 편차 ±30% 안팎)
 
 ## Day3 — 마무리 (13시 마감)
 
-- [ ] `final` 결과를 [`02-measurement.md`](02-measurement.md)에 `base` → 최종 표로 정리
-- [ ] 결정 기록마다 "한계와 트레이드오프" 채움 확인
+- [x] `final` 결과를 [`02-measurement.md`](02-measurement.md)에 `base` → 최종 표로 정리
+- [x] 결정 기록마다 "한계와 트레이드오프" 채움 확인 (0002~0006)
 - [ ] 결과 보고서 작성 (Google Spread)
 - [ ] GitHub 원격 저장소 생성·push
 - [ ] **(직접)** Git 주소·결과 보고서 주소 Google Spread 등록 — 마감 13:00
@@ -120,8 +129,8 @@
 
 | 기준 (배점) | 근거 | 현재 |
 | --- | --- | --- |
-| 기능 구현 완성도 (30) | 항목 1~4 동작 + 테스트 | 설계 완료, 구현 전 |
-| Before/After 실측 (보너스 10) | `runs/` + `02-measurement.md` | Before 노드 평가 3종 완료, 회귀 쿼리 미측정 |
-| 기술 요소 (30) | RAG(2·3·5), MCP(3), 의존성 주입(공통), LangSmith(공통), 모듈화(공통), 단위 테스트(공통) | 설계에 반영. Multi-Agent는 범위 밖 |
-| 한계·트레이드오프 (20) | `decisions/` 각 결정 | 설계에 항목별 예상 한계 초안 |
+| 기능 구현 완성도 (30) | 항목 1~5 동작 + 테스트 66개 | 구현·측정 완료, `main`에 merge |
+| Before/After 실측 (보너스 10) | `runs/` + `02-measurement.md` | base·step1·final·final2 완료, 반복 측정은 남음 |
+| 기술 요소 (30) | RAG(2·3·5), MCP(3 — Resource 추가), 의존성 주입(스위치·`SupervisorDeps`), LangSmith(새 단계 모두 `@traceable`), 모듈화(새 모듈 5개), 단위 테스트(6 → 66) | 반영. Multi-Agent는 범위 밖 |
+| 한계·트레이드오프 (20) | `decisions/` 0002~0007 | 실측 기반으로 작성 |
 | 발표 (20) | 발표 자료 | 미착수 |

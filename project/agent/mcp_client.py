@@ -93,6 +93,22 @@ class MCPClient:
         raise ValueError(
             f"MCP resource template not found on any connected server: {template_name}")
 
+    @traceable(run_type="tool", name="mcp.list_resources")
+    async def list_resources(self, server: str) -> list:
+        async with self._lock:
+            result = await self.sessions[server].list_resources()
+        return result.resources
+
+    @traceable(run_type="tool", name="mcp.find_resource")
+    async def find_resource(self, uri: str) -> str:
+        """템플릿 없는 정적 resource(예: catalog://systems)를 제공하는 서버를 찾는다 —
+        find_resource_template 과 같은 방식으로, 서버를 미리 가정하지 않고 조회한 뒤에만 요청한다."""
+        for server_name in self.sessions:
+            resources = await self.list_resources(server_name)
+            if any(str(r.uri) == uri for r in resources):
+                return server_name
+        raise ValueError(f"MCP resource not found on any connected server: {uri}")
+
     @traceable(run_type="tool", name="mcp.read_resource")
     async def read_resource(self, uri: str, server: str) -> str:
         async with self._lock:

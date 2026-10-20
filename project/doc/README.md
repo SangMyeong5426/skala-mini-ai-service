@@ -52,15 +52,16 @@ flowchart TB
     API --> Graph
 
     subgraph Graph["agent/graph.py — LangGraph StateGraph (v2)"]
-        Route["route"] -->|chat| ChatAnswer["chat_answer"]
+        Route["route<br/>(의미 라우터 → 애매하면 LLM)"] -->|chat| ChatAnswer["chat_answer"]
         Route -->|incident| Plan["plan"]
-        Plan --> Gate["gate"]
+        Plan["plan<br/>(대상 시스템은 코드가 결정)"] -->|대상 있음| Gate["gate"]
+        Plan -->|대상 특정 불가| Clarify["clarify<br/>(되묻기, LLM 없음)"]
         Gate --> Research["research"]
-        Research --> ReplanCheck["replan_check"]
+        Research --> ReplanCheck["replan_check<br/>(runbook 의미 검색)"]
         ReplanCheck -->|부족| Research
         ReplanCheck -->|충분| Analysis["analysis<br/>(task 없으면 내부 스킵)"]
         Analysis --> Write["write"]
-        Write --> Validate["validate"]
+        Write --> Validate["validate<br/>(형식 → 수치 대조 → LLM 판정)"]
         Validate -->|불합격| Write
         Validate -->|합격| Finalize["finalize"]
     end
@@ -75,6 +76,7 @@ flowchart TB
             Tool["Tool: get_monitoring_status"]
             Resource["Resource: runbook://incident-response/{type}"]
             Prompt["Prompt: incident_analysis_prompt"]
+            Catalog["Resource: catalog://systems<br/>(시스템 카탈로그)"]
         end
         subgraph DocsServer["mcp_server_docs.py (server=&quot;docs&quot;, decoy)"]
             DocsResource["Resource: docs://api-reference/{section}<br/>(agent는 사용 안 함)"]
@@ -84,6 +86,9 @@ flowchart TB
     Lifespan --> Deps["SupervisorDeps"]
     Deps --> LLM["fast_llm / quality_llm<br/>(fake · ollama · openai 중 택1)"]
     Deps --> Session["SqliteSessionStore<br/>(session.db)"]
+    Deps --> Parts["embedder · router · target_resolver<br/>validator · runbook_selector<br/>(개선 스위치 — None 이면 base 동작)"]
+    Parts --> Embed["qwen3-embedding:0.6b"]
+    Parts -. "기동 시 1회" .-> Catalog
 
     Graph --> Trace["LangSmith<br/>(계층 트리 trace · Dataset 평가 · Feedback)"]
 ```
@@ -102,6 +107,10 @@ flowchart TB
   연결한다. `plan`/`research` 노드는 어느 서버가 필요한 prompt/resource를 들고
   있는지 코드에 하드코딩하지 않고, `find_prompt()`/`find_resource_template()`로
   연결된 서버들을 먼저 조회한 뒤에야 그 서버로 요청을 보낸다.
+- **개선 항목(이 저장소)**: 환경변수 스위치로 켜고 끈다(루트 `README.md`의 "개선 스위치"). 분류는 예시 문장
+  임베딩으로 먼저 판정하고 애매할 때만 LLM에 넘긴다(항목 2). 조사 대상은 코드가 정하고, 못 정하면 진단 대신
+  `clarify` 노드가 되묻는다(항목 3). 검수는 형식 → 수치 대조 → LLM 판정 순으로 본다(항목 4). runbook은 질문 +
+  알림 문구로 의미 검색한다(항목 5). 근거와 한계는 `docs/decisions/0002~0006`.
 - **분석 단계 분리**: `replan_check`가 조사 결과가 충분하다고 판단하면 항상
   `analysis` 노드로 넘어가지만, gate가 살려둔 `agent=="analysis"` task가 없으면
   `analysis_node`가 내부적으로 스킵하고 바로 `write`로 넘어간다 — `needs_analysis`가
@@ -215,10 +224,17 @@ all_total_vue/
 │   ├── openai_llm.py         # LLM_BACKEND=openai — 실제 OpenAI API 백엔드
 │   ├── mcp_client.py          # MCP 멀티 서버(ops+docs) stdio 클라이언트 — find_resource_template/find_prompt로 서버 탐색 + 의도적 flaky 1회(재시도 데모)
 │   ├── retry.py              # Transient 전용 backoff 재시도
-│   └── session_store.py       # SQLite 세션 저장소
+│   ├── session_store.py       # SQLite 세션 저장소
+│   ├── embedding.py           # (항목 2·3·5) Ollama 임베딩 클라이언트
+│   ├── router.py              # (항목 2) 의미 라우터 + LLM 폴백
+│   ├── target.py              # (항목 3) 대상 시스템 추정 — 못 정하면 되묻기
+│   ├── validator.py           # (항목 4) 형식 → 수치 대조 → LLM 판정
+│   └── runbook.py             # (항목 5) runbook 의미 검색
 │
 ├── data/
 │   ├── monitoring.json        # MCP Tool이 조회하는 모니터링 데이터
+│   ├── systems.json           # (항목 3) 시스템 카탈로그 — MCP Resource catalog://systems
+│   ├── router_examples.json   # (항목 2) 분류 예시 문장
 │   └── runbooks/               # MCP Resource가 조회하는 대응 매뉴얼 6종
 │       ├── db-down.md
 │       ├── cpu-spike.md

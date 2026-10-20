@@ -66,6 +66,7 @@ class AgentState(TypedDict, total=False):
     last_prompt: str
     cost_usd: float
     events: list[dict]
+    clarify: dict          # 항목 3 — 대상 시스템을 정하지 못했을 때 TargetResolver 의 판단
 
 
 def _cost(state: AgentState, usage: dict) -> float:
@@ -74,9 +75,16 @@ def _cost(state: AgentState, usage: dict) -> float:
 
 @traceable(name="route_node")
 async def route_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 5 — 모든 쿼리가 무거운 파이프라인을 탈 필요는 없다."""
-    result, usage = deps.fast_llm.route(state["query"])
-    event = {"type": "RouteDecided", "route": result["route"]}
+    """Wave 5 — 모든 쿼리가 무거운 파이프라인을 탈 필요는 없다.
+
+    항목 2 — deps.router 가 있으면 의미 라우터가 먼저 판정하고, 애매할 때만 LLM 으로 넘긴다.
+    이벤트에 판정 방식(method)과 두 클래스 점수 차(gap)를 남긴다."""
+    if deps.router is not None:
+        result, usage = await deps.router.route(state["query"])
+    else:
+        result, usage = deps.fast_llm.route(state["query"])
+    event = {"type": "RouteDecided", "route": result["route"],
+             **{k: result[k] for k in ("method", "gap") if k in result}}
     return {"route": result["route"], "needs_analysis": result["needs_analysis"],
             "cost_usd": _cost(state, usage),
             "events": state.get("events", []) + [event]}
@@ -103,7 +111,12 @@ async def plan_node(state: AgentState, deps: SupervisorDeps) -> dict:
     """Wave 4 — Plan/Task 분해. Wave 2의 MCP Prompt가 표준 절차를 깔아준다.
 
     resource와 마찬가지로 이름을 어느 서버가 들고 있는지 미리 가정하지 않고,
-    find_prompt()로 연결된 서버들을 먼저 조회해 찾은 뒤에만 get_prompt를 보낸다."""
+    find_prompt()로 연결된 서버들을 먼저 조회해 찾은 뒤에만 get_prompt를 보낸다.
+
+    항목 3 — deps.target_resolver 가 있으면 _plan_with_resolver 가 대신한다. 아래 base 경로는
+    TARGET_RESOLVER=legacy 로 원본 동작(auth-service 폴백 포함)을 재현할 때만 탄다."""
+    if deps.target_resolver is not None:
+        return await _plan_with_resolver(state, deps)
     prompt_server = await deps.mcp.find_prompt("incident_analysis_prompt")
     procedure = await deps.mcp.get_prompt(
         "incident_analysis_prompt",
@@ -117,6 +130,55 @@ async def plan_node(state: AgentState, deps: SupervisorDeps) -> dict:
              "targets": targets}
     return {"tasks": result["tasks"], "needs_analysis": result["needs_analysis"],
             "cost_usd": _cost(state, usage), "events": state["events"] + [event]}
+
+
+async def _plan_with_resolver(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 3 — 조사 대상은 코드(TargetResolver)가 정하고, LLM 에는 분석 필요 여부만 묻는다.
+
+    대상을 정하지 못하면 research task 를 하나도 만들지 않고 clarify 노드로 보낸다 — base 처럼
+    auth-service 로 채워 질문과 무관한 진단을 내지 않는다. LLM plan 은 대상이 둘 이상일 때만
+    부른다. 비교 분석(analyze)은 여러 시스템을 견줄 때만 쓸모가 있기 때문이다."""
+    resolved = await deps.target_resolver.resolve(state["query"])
+    targets = resolved["targets"]
+    if not targets:
+        event = {"type": "ClarifyRequested", "method": resolved["method"],
+                 "reason": resolved["reason"]}
+        return {"tasks": [], "needs_analysis": False, "clarify": resolved,
+                "events": state["events"] + [event]}
+
+    tasks = [{"id": f"task-{i}", "agent": "research", "kind": "monitoring",
+              "target": target, "status": "pending"} for i, target in enumerate(targets)]
+    needs_analysis, cost = False, state.get("cost_usd", 0.0)
+    if len(targets) >= 2:
+        prompt_server = await deps.mcp.find_prompt("incident_analysis_prompt")
+        procedure = await deps.mcp.get_prompt(
+            "incident_analysis_prompt",
+            {"system_name": targets[0], "symptom": state["query"]},
+            server=prompt_server,
+        )
+        result, usage = deps.fast_llm.plan(state["query"], procedure)
+        needs_analysis = result["needs_analysis"]
+        # LLM 이 analysis task 를 넣었는데 needs_analysis 가 거짓이면 gate(Wave 6)가 걸러 낸다.
+        if any(t["agent"] == "analysis" for t in result["tasks"]):
+            tasks.append({"id": "task-analysis", "agent": "analysis",
+                          "kind": "pattern-analysis", "status": "pending"})
+        cost = _cost(state, usage)
+    event = {"type": "PlanCreated", "task_count": len(tasks), "targets": targets,
+             "method": resolved["method"]}
+    return {"tasks": tasks, "needs_analysis": needs_analysis, "cost_usd": cost,
+            "events": state["events"] + [event]}
+
+
+@traceable(name="clarify_node")
+async def clarify_node(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 3 — 대상 시스템을 특정하지 못했을 때 진단 대신 되묻는다. LLM 을 부르지 않는다."""
+    catalog = deps.target_resolver.catalog
+    systems = "\n".join(f"- {s['name']}: {s['description']}" for s in catalog)
+    final = (f"어느 시스템의 문제인지 먼저 확인이 필요합니다 — {state['clarify']['reason']}.\n\n"
+             f"지금 모니터링하는 시스템은 아래 {len(catalog)}개입니다. 시스템 이름이나 증상을 "
+             f"조금 더 구체적으로 알려 주시면 바로 진단하겠습니다.\n\n{systems}")
+    return {"final": final,
+            "events": state["events"] + [{"type": "Finalize", "pipeline": "clarify"}]}
 
 
 @traceable(name="gate_node")
@@ -215,17 +277,26 @@ def _classify_incident_type(collected: list[dict]) -> str:
 
 @traceable(name="replan_check_node")
 async def replan_check_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 7 — 1차 수집 결과 평가. runbook이 없으면 gap task만 추가해 재조사."""
+    """Wave 7 — 1차 수집 결과 평가. runbook이 없으면 gap task만 추가해 재조사.
+
+    항목 5 — deps.runbook_selector 가 있으면 질문 + 알림 문구로 runbook 을 의미 검색한다.
+    없으면 base 의 키워드 규칙(_classify_incident_type)."""
     has_runbook = any(c["source"] == "runbook" for c in state.get("collected", []))
     rounds = state.get("replan_rounds", 0)
     if has_runbook or rounds >= 1:
         verdict = {"type": "ReplanCheck", "round": rounds, "is_sufficient": True}
         return {"events": state["events"] + [verdict]}
-    incident_type = _classify_incident_type(state.get("collected", []))
+    picked = {}
+    if deps.runbook_selector is not None:
+        picked = await deps.runbook_selector.select(state["query"], state.get("collected", []))
+        incident_type = picked["incident_type"]
+    else:
+        incident_type = _classify_incident_type(state.get("collected", []))
     gap_task = {"id": "task-gap-runbook", "agent": "research", "kind": "runbook",
                 "target": incident_type, "status": "pending"}
     verdict = {"type": "ReplanCheck", "round": rounds, "is_sufficient": False,
-               "gap_task": gap_task["id"], "target": incident_type}
+               "gap_task": gap_task["id"], "target": incident_type,
+               **({"method": picked["method"]} if picked else {})}
     return {"tasks": state["tasks"] + [gap_task], "replan_rounds": rounds + 1,
             "events": state["events"] + [verdict]}
 
@@ -273,7 +344,11 @@ async def write_node(state: AgentState, deps: SupervisorDeps) -> dict:
 
 @traceable(name="validate_node")
 async def validate_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 8 — 코드 기준 검증: 30자 이상 + 절차 번호 포함이어야 합격."""
+    """Wave 8 — 코드 기준 검증: 30자 이상 + 절차 번호 포함이어야 합격.
+
+    항목 4 — deps.validator 가 있으면 _validate_grounded 가 대신한다."""
+    if deps.validator is not None:
+        return _validate_grounded(state, deps)
     draft = state["draft"]
     attempts = state.get("validation_attempts", 0) + 1
     ok = len(draft) >= 30 and "1)" in draft
@@ -288,6 +363,29 @@ async def validate_node(state: AgentState, deps: SupervisorDeps) -> dict:
             "events": state["events"] + [event]}
 
 
+def _validate_grounded(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 4 — 형식 → 수치 대조 → LLM 판정. 앞 단계에서 떨어지면 뒤는 부르지 않는다.
+
+    3회째에도 떨어지면 base 처럼 내보내되(무한 재작성 방지), 검수를 통과하지 못했다는 사실과
+    이유를 답변 맨 앞에 붙인다 — base 는 이때 아무 표시 없이 내보냈다."""
+    draft = state["draft"]
+    attempts = state.get("validation_attempts", 0) + 1
+    result = deps.validator.check(state["query"], state.get("collected", []), draft)
+    update: dict = {"validation_attempts": attempts}
+    if result["usage"]:
+        update["cost_usd"] = _cost(state, result["usage"])
+    if result["ok"]:
+        verdict, feedback = "합격", None
+    elif attempts >= 3:
+        verdict, feedback = "합격(최대 시도 도달 — 경고 표시)", None
+        update["draft"] = f"⚠️ 검수를 통과하지 못한 답변입니다 — {result['reason']}\n\n{draft}"
+    else:
+        verdict, feedback = "불합격", result["feedback"]
+    event = {"type": "Validation", "attempt": attempts, "verdict": verdict,
+             "stage": result["stage"], "reason": result["reason"]}
+    return {**update, "validation_feedback": feedback, "events": state["events"] + [event]}
+
+
 @traceable(name="finalize_node")
 async def finalize_node(state: AgentState, deps: SupervisorDeps) -> dict:
     return {"final": state["draft"],
@@ -296,6 +394,10 @@ async def finalize_node(state: AgentState, deps: SupervisorDeps) -> dict:
 
 def _after_route(state: AgentState) -> str:
     return "chat_answer" if state["route"] == "chat" else "plan"
+
+
+def _after_plan(state: AgentState) -> str:
+    return "clarify" if state.get("clarify") else "gate"
 
 
 def _after_replan_check(state: AgentState) -> str:
@@ -313,6 +415,7 @@ def build_graph(deps: SupervisorDeps):
     g.add_node("route", node(route_node))
     g.add_node("chat_answer", node(chat_answer_node))
     g.add_node("plan", node(plan_node))
+    g.add_node("clarify", node(clarify_node))
     g.add_node("gate", node(gate_node))
     g.add_node("research", node(research_node))
     g.add_node("replan_check", node(replan_check_node))
@@ -325,7 +428,8 @@ def build_graph(deps: SupervisorDeps):
     g.add_conditional_edges("route", _after_route,
                             {"chat_answer": "chat_answer", "plan": "plan"})
     g.add_edge("chat_answer", END)
-    g.add_edge("plan", "gate")
+    g.add_conditional_edges("plan", _after_plan, {"clarify": "clarify", "gate": "gate"})
+    g.add_edge("clarify", END)
     g.add_edge("gate", "research")
     g.add_edge("research", "replan_check")
     g.add_conditional_edges("replan_check", _after_replan_check,

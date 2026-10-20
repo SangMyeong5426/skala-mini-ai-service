@@ -9,3 +9,9 @@
 | 번호 | 제목 | 상태 | 날짜 |
 | --- | --- | --- | --- |
 | [0001](0001-repository-layout-and-tooling.md) | 저장소 구조와 개발 도구 | Accepted | 2026-10-20 |
+| [0002](0002-ollama-think-control.md) | Ollama thinking 출력 제어 (항목 1) | Accepted | 2026-10-20 |
+| [0003](0003-semantic-router.md) | 질문 분류를 임베딩 기반 의미 라우터로 (항목 2) | Accepted | 2026-10-20 |
+| [0004](0004-target-resolver.md) | 대상 시스템 추정과 되묻기 (항목 3) | Accepted | 2026-10-20 |
+| [0005](0005-grounded-validator.md) | 검수에 수치 대조와 LLM-as-judge (항목 4) | Accepted | 2026-10-20 |
+| [0006](0006-runbook-selector.md) | runbook 선택을 의미 검색으로 (선택 항목 5) | Accepted — 효과 불확실 | 2026-10-20 |
+| [0007](0007-chat-keeps-thinking.md) | 대화 경로만 thinking 유지 (항목 1 보완) | Accepted | 2026-10-20 |

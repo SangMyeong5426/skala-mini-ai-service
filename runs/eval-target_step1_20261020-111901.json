@@ -1,0 +1,307 @@
+{
+  "kind": "target",
+  "label": "step1",
+  "started_at": "20261020-111901",
+  "evalset": "tools/evalsets/target.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-2YKaDd",
+  "git": {
+    "commit": "63fdab2",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": "false",
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": null
+  },
+  "summary": {
+    "accuracy": 0.333,
+    "correct": "5/15",
+    "diagnose_correct": "5/10",
+    "clarify_correct": "0/5",
+    "off_target": 10,
+    "errors": 0,
+    "latency_median_s": 0.588,
+    "latency_max_s": 1.233
+  },
+  "results": [
+    {
+      "id": "i01",
+      "query": "payments-service 결제 응답이 느려지고 CPU가 치솟았어요, 원인 확인해주세요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "payments-service"
+      ],
+      "expected_runbook": "cpu-spike",
+      "tag": "시스템명 1개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "payments-service"
+      ],
+      "ok": true,
+      "off_target": false,
+      "latency_s": 0.816,
+      "error": null
+    },
+    {
+      "id": "i02",
+      "query": "cache-service 메모리 사용률이 계속 올라가고 있어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "cache-service"
+      ],
+      "expected_runbook": "memory-leak",
+      "tag": "시스템명 1개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "cache-service"
+      ],
+      "ok": true,
+      "off_target": false,
+      "latency_s": 0.43,
+      "error": null
+    },
+    {
+      "id": "i03",
+      "query": "log-service 디스크 공간이 부족하다는 알림이 왔어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "log-service"
+      ],
+      "expected_runbook": "disk-full",
+      "tag": "시스템명 1개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "log-service"
+      ],
+      "ok": true,
+      "off_target": false,
+      "latency_s": 0.43,
+      "error": null
+    },
+    {
+      "id": "i04",
+      "query": "gateway-service에서 payments-service로 가는 요청이 타임아웃 나고 있어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "gateway-service",
+        "payments-service"
+      ],
+      "expected_runbook": "network-timeout",
+      "tag": "시스템명 2개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service",
+        "cache-service",
+        "gateway-service",
+        "log-service",
+        "payments-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.912,
+      "error": null
+    },
+    {
+      "id": "i05",
+      "query": "로그인 응답이 느려요, 원인 확인해주세요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "auth-service"
+      ],
+      "expected_runbook": "high-latency",
+      "tag": "간접 표현 — 로그인 = 인증",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": true,
+      "off_target": false,
+      "latency_s": 0.706,
+      "error": null
+    },
+    {
+      "id": "i07",
+      "query": "web-01 서버가 갑자기 응답을 안 해요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "web-01"
+      ],
+      "expected_runbook": null,
+      "tag": "시스템명 1개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service",
+        "cache-service",
+        "gateway-service",
+        "log-service",
+        "payments-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 1.233,
+      "error": null
+    },
+    {
+      "id": "i08",
+      "query": "결제가 자꾸 실패한다는 고객 문의가 들어오고 있어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "payments-service"
+      ],
+      "expected_runbook": null,
+      "tag": "간접 표현 — 결제",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.541,
+      "error": null
+    },
+    {
+      "id": "i09",
+      "query": "auth-service 커넥션 풀이 꽉 찼다는 알림이 떴어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "auth-service"
+      ],
+      "expected_runbook": "high-latency",
+      "tag": "시스템명 1개",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": true,
+      "off_target": false,
+      "latency_s": 0.588,
+      "error": null
+    },
+    {
+      "id": "i12",
+      "query": "캐시 히트율이 갑자기 떨어졌어요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "cache-service"
+      ],
+      "expected_runbook": null,
+      "tag": "간접 표현 — 캐시",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.508,
+      "error": null
+    },
+    {
+      "id": "i13",
+      "query": "로그 수집이 멈춘 것 같아요, 확인 부탁해요",
+      "expected_action": "diagnose",
+      "expected_targets": [
+        "log-service"
+      ],
+      "expected_runbook": null,
+      "tag": "간접 표현 — 로그",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.793,
+      "error": null
+    },
+    {
+      "id": "i06",
+      "query": "billing-service 응답이 느려요",
+      "expected_action": "clarify",
+      "expected_targets": [],
+      "expected_runbook": null,
+      "tag": "모니터링 대상 밖 시스템",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.553,
+      "error": null
+    },
+    {
+      "id": "i10",
+      "query": "방금 배포한 뒤로 5xx 에러가 급증했어요",
+      "expected_action": "clarify",
+      "expected_targets": [],
+      "expected_runbook": null,
+      "tag": "시스템 특정 불가",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.684,
+      "error": null
+    },
+    {
+      "id": "i11",
+      "query": "사이트가 전체적으로 너무 느려요",
+      "expected_action": "clarify",
+      "expected_targets": [],
+      "expected_runbook": null,
+      "tag": "시스템 특정 불가",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.467,
+      "error": null
+    },
+    {
+      "id": "i14",
+      "query": "DB 연결이 끊겼다는 에러가 계속 나요",
+      "expected_action": "clarify",
+      "expected_targets": [],
+      "expected_runbook": null,
+      "tag": "모니터링 대상 밖 — 어느 서비스의 DB인지 모름",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.708,
+      "error": null
+    },
+    {
+      "id": "i15",
+      "query": "서버가 좀 이상한데?",
+      "expected_action": "clarify",
+      "expected_targets": [],
+      "expected_runbook": null,
+      "tag": "시스템·증상 모두 모호",
+      "got_action": "diagnose",
+      "got_targets": [
+        "auth-service"
+      ],
+      "ok": false,
+      "off_target": true,
+      "latency_s": 0.549,
+      "error": null
+    }
+  ]
+}

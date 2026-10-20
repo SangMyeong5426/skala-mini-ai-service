@@ -1,0 +1,584 @@
+{
+  "started_at": "20261020-113108",
+  "git": {
+    "commit": "6a552f6",
+    "dirty": true,
+    "agent_matches_base": false
+  },
+  "embedder": "ollama:qwen3-embedding:0.6b",
+  "router": {
+    "instruction": {
+      "loo_accuracy": 0.925,
+      "wrong": [
+        {
+          "text": "로드밸런서가 하는 일을 쉽게 설명해 줘",
+          "label": "chat",
+          "gap": 0.0045
+        },
+        {
+          "text": "회원가입 페이지에서 에러가 나요",
+          "label": "incident",
+          "gap": -0.0193
+        },
+        {
+          "text": "헬스체크가 계속 실패하고 있어요",
+          "label": "incident",
+          "gap": -0.0085
+        }
+      ],
+      "suggested_margin": 0.024,
+      "abs_gap_min_median": [
+        0.0045,
+        0.07465
+      ],
+      "curve": [
+        {
+          "margin": 0.0,
+          "decided": 40,
+          "accuracy_decided": 0.925,
+          "fallback_rate": 0.0
+        },
+        {
+          "margin": 0.005,
+          "decided": 39,
+          "accuracy_decided": 0.949,
+          "fallback_rate": 0.025
+        },
+        {
+          "margin": 0.01,
+          "decided": 37,
+          "accuracy_decided": 0.973,
+          "fallback_rate": 0.075
+        },
+        {
+          "margin": 0.015,
+          "decided": 37,
+          "accuracy_decided": 0.973,
+          "fallback_rate": 0.075
+        },
+        {
+          "margin": 0.02,
+          "decided": 34,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.15
+        },
+        {
+          "margin": 0.025,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.03,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.035,
+          "decided": 32,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.2
+        },
+        {
+          "margin": 0.04,
+          "decided": 32,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.2
+        },
+        {
+          "margin": 0.045,
+          "decided": 30,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.25
+        },
+        {
+          "margin": 0.05,
+          "decided": 30,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.25
+        },
+        {
+          "margin": 0.055,
+          "decided": 27,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.325
+        },
+        {
+          "margin": 0.06,
+          "decided": 25,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.375
+        },
+        {
+          "margin": 0.065,
+          "decided": 23,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.425
+        },
+        {
+          "margin": 0.07,
+          "decided": 21,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.475
+        },
+        {
+          "margin": 0.075,
+          "decided": 20,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.5
+        },
+        {
+          "margin": 0.08,
+          "decided": 18,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.55
+        },
+        {
+          "margin": 0.085,
+          "decided": 15,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.625
+        },
+        {
+          "margin": 0.09,
+          "decided": 14,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.65
+        },
+        {
+          "margin": 0.095,
+          "decided": 12,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.7
+        },
+        {
+          "margin": 0.1,
+          "decided": 12,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.7
+        }
+      ]
+    },
+    "none": {
+      "loo_accuracy": 0.95,
+      "wrong": [
+        {
+          "text": "로드밸런서가 하는 일을 쉽게 설명해 줘",
+          "label": "chat",
+          "gap": 0.0235
+        },
+        {
+          "text": "수고 많았어, 오늘은 여기까지 할게",
+          "label": "chat",
+          "gap": 0.0033
+        }
+      ],
+      "suggested_margin": 0.029,
+      "abs_gap_min_median": [
+        0.0033,
+        0.12179999999999999
+      ],
+      "curve": [
+        {
+          "margin": 0.0,
+          "decided": 40,
+          "accuracy_decided": 0.95,
+          "fallback_rate": 0.0
+        },
+        {
+          "margin": 0.005,
+          "decided": 39,
+          "accuracy_decided": 0.974,
+          "fallback_rate": 0.025
+        },
+        {
+          "margin": 0.01,
+          "decided": 38,
+          "accuracy_decided": 0.974,
+          "fallback_rate": 0.05
+        },
+        {
+          "margin": 0.015,
+          "decided": 38,
+          "accuracy_decided": 0.974,
+          "fallback_rate": 0.05
+        },
+        {
+          "margin": 0.02,
+          "decided": 37,
+          "accuracy_decided": 0.973,
+          "fallback_rate": 0.075
+        },
+        {
+          "margin": 0.025,
+          "decided": 36,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.1
+        },
+        {
+          "margin": 0.03,
+          "decided": 36,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.1
+        },
+        {
+          "margin": 0.035,
+          "decided": 36,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.1
+        },
+        {
+          "margin": 0.04,
+          "decided": 35,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.125
+        },
+        {
+          "margin": 0.045,
+          "decided": 34,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.15
+        },
+        {
+          "margin": 0.05,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.055,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.06,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.065,
+          "decided": 33,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.175
+        },
+        {
+          "margin": 0.07,
+          "decided": 32,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.2
+        },
+        {
+          "margin": 0.075,
+          "decided": 32,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.2
+        },
+        {
+          "margin": 0.08,
+          "decided": 32,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.2
+        },
+        {
+          "margin": 0.085,
+          "decided": 31,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.225
+        },
+        {
+          "margin": 0.09,
+          "decided": 28,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.3
+        },
+        {
+          "margin": 0.095,
+          "decided": 26,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.35
+        },
+        {
+          "margin": 0.1,
+          "decided": 26,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.35
+        }
+      ]
+    }
+  },
+  "target": {
+    "instruction": {
+      "chosen": {
+        "min_score": 0.45,
+        "margin": 0.0,
+        "pos_acc": 1.0,
+        "amb_acc": 1.0,
+        "balanced": 1.0,
+        "worst_slack": 0.0058
+      },
+      "tied_best": 42,
+      "positives": [
+        {
+          "query": "사용자 인증 토큰이 자꾸 만료돼요",
+          "target": "auth-service",
+          "top1": "auth-service",
+          "s1": 0.5681,
+          "s2": 0.4193
+        },
+        {
+          "query": "회원 인증 단계에서 오류가 나요",
+          "target": "auth-service",
+          "top1": "auth-service",
+          "s1": 0.5057,
+          "s2": 0.3751
+        },
+        {
+          "query": "웹 페이지가 하얗게 뜨고 안 열려요",
+          "target": "web-01",
+          "top1": "web-01",
+          "s1": 0.4898,
+          "s2": 0.3528
+        },
+        {
+          "query": "첫 화면 응답이 너무 늦어요",
+          "target": "web-01",
+          "top1": "web-01",
+          "s1": 0.4992,
+          "s2": 0.3532
+        },
+        {
+          "query": "환불 처리가 계속 실패해요",
+          "target": "payments-service",
+          "top1": "payments-service",
+          "s1": 0.5162,
+          "s2": 0.3411
+        },
+        {
+          "query": "정산 배치가 끝나지 않아요",
+          "target": "payments-service",
+          "top1": "payments-service",
+          "s1": 0.4633,
+          "s2": 0.3677
+        },
+        {
+          "query": "캐시에 저장된 값이 오래된 데이터예요",
+          "target": "cache-service",
+          "top1": "cache-service",
+          "s1": 0.6355,
+          "s2": 0.4597
+        },
+        {
+          "query": "메모리 캐시 서버가 응답이 없어요",
+          "target": "cache-service",
+          "top1": "cache-service",
+          "s1": 0.6035,
+          "s2": 0.4093
+        },
+        {
+          "query": "외부 API 요청 라우팅이 이상해요",
+          "target": "gateway-service",
+          "top1": "gateway-service",
+          "s1": 0.6705,
+          "s2": 0.4344
+        },
+        {
+          "query": "API 게이트웨이에서 요청을 거부해요",
+          "target": "gateway-service",
+          "top1": "gateway-service",
+          "s1": 0.6427,
+          "s2": 0.4198
+        },
+        {
+          "query": "로그 검색 결과가 비어 있어요",
+          "target": "log-service",
+          "top1": "log-service",
+          "s1": 0.5813,
+          "s2": 0.3398
+        },
+        {
+          "query": "로그 보관 용량 경고가 왔어요",
+          "target": "log-service",
+          "top1": "log-service",
+          "s1": 0.5256,
+          "s2": 0.3652
+        }
+      ],
+      "ambiguous": [
+        {
+          "query": "뭔가 장애가 난 것 같아요",
+          "top1": "log-service",
+          "s1": 0.4442,
+          "s2": 0.3645
+        },
+        {
+          "query": "에러가 갑자기 많아졌어요",
+          "top1": "log-service",
+          "s1": 0.3784,
+          "s2": 0.3348
+        },
+        {
+          "query": "대시보드에 경고가 한꺼번에 떠요",
+          "top1": "log-service",
+          "s1": 0.3662,
+          "s2": 0.3347
+        },
+        {
+          "query": "어디가 문제인지 모르겠는데 사용자 불만이 많아요",
+          "top1": "log-service",
+          "s1": 0.4011,
+          "s2": 0.3441
+        },
+        {
+          "query": "오늘따라 시스템이 전반적으로 버벅여요",
+          "top1": "log-service",
+          "s1": 0.3782,
+          "s2": 0.3513
+        },
+        {
+          "query": "알림이 너무 많이 와요",
+          "top1": "log-service",
+          "s1": 0.4037,
+          "s2": 0.3173
+        }
+      ]
+    },
+    "none": {
+      "chosen": {
+        "min_score": 0.4,
+        "margin": 0.04,
+        "pos_acc": 1.0,
+        "amb_acc": 1.0,
+        "balanced": 1.0,
+        "worst_slack": 0.0202
+      },
+      "tied_best": 96,
+      "positives": [
+        {
+          "query": "사용자 인증 토큰이 자꾸 만료돼요",
+          "target": "auth-service",
+          "top1": "auth-service",
+          "s1": 0.5735,
+          "s2": 0.3983
+        },
+        {
+          "query": "회원 인증 단계에서 오류가 나요",
+          "target": "auth-service",
+          "top1": "auth-service",
+          "s1": 0.5151,
+          "s2": 0.4411
+        },
+        {
+          "query": "웹 페이지가 하얗게 뜨고 안 열려요",
+          "target": "web-01",
+          "top1": "web-01",
+          "s1": 0.4668,
+          "s2": 0.4065
+        },
+        {
+          "query": "첫 화면 응답이 너무 늦어요",
+          "target": "web-01",
+          "top1": "web-01",
+          "s1": 0.5893,
+          "s2": 0.4769
+        },
+        {
+          "query": "환불 처리가 계속 실패해요",
+          "target": "payments-service",
+          "top1": "payments-service",
+          "s1": 0.5057,
+          "s2": 0.3507
+        },
+        {
+          "query": "정산 배치가 끝나지 않아요",
+          "target": "payments-service",
+          "top1": "payments-service",
+          "s1": 0.4823,
+          "s2": 0.3359
+        },
+        {
+          "query": "캐시에 저장된 값이 오래된 데이터예요",
+          "target": "cache-service",
+          "top1": "cache-service",
+          "s1": 0.7418,
+          "s2": 0.4702
+        },
+        {
+          "query": "메모리 캐시 서버가 응답이 없어요",
+          "target": "cache-service",
+          "top1": "cache-service",
+          "s1": 0.6216,
+          "s2": 0.5228
+        },
+        {
+          "query": "외부 API 요청 라우팅이 이상해요",
+          "target": "gateway-service",
+          "top1": "gateway-service",
+          "s1": 0.7468,
+          "s2": 0.4948
+        },
+        {
+          "query": "API 게이트웨이에서 요청을 거부해요",
+          "target": "gateway-service",
+          "top1": "gateway-service",
+          "s1": 0.6706,
+          "s2": 0.5233
+        },
+        {
+          "query": "로그 검색 결과가 비어 있어요",
+          "target": "log-service",
+          "top1": "log-service",
+          "s1": 0.5005,
+          "s2": 0.4254
+        },
+        {
+          "query": "로그 보관 용량 경고가 왔어요",
+          "target": "log-service",
+          "top1": "log-service",
+          "s1": 0.511,
+          "s2": 0.4187
+        }
+      ],
+      "ambiguous": [
+        {
+          "query": "뭔가 장애가 난 것 같아요",
+          "top1": "payments-service",
+          "s1": 0.3232,
+          "s2": 0.2992
+        },
+        {
+          "query": "에러가 갑자기 많아졌어요",
+          "top1": "payments-service",
+          "s1": 0.3492,
+          "s2": 0.3341
+        },
+        {
+          "query": "대시보드에 경고가 한꺼번에 떠요",
+          "top1": "web-01",
+          "s1": 0.3008,
+          "s2": 0.285
+        },
+        {
+          "query": "어디가 문제인지 모르겠는데 사용자 불만이 많아요",
+          "top1": "web-01",
+          "s1": 0.3143,
+          "s2": 0.3077
+        },
+        {
+          "query": "오늘따라 시스템이 전반적으로 버벅여요",
+          "top1": "payments-service",
+          "s1": 0.3663,
+          "s2": 0.3461
+        },
+        {
+          "query": "알림이 너무 많이 와요",
+          "top1": "payments-service",
+          "s1": 0.4417,
+          "s2": 0.4257
+        }
+      ]
+    }
+  }
+}

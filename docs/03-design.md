@@ -3,6 +3,23 @@
 [`01-plan.md`](01-plan.md)의 개선 항목을 **어느 파일·함수를 어떻게 바꾸는지**까지 내린 문서다.
 구현 중에 설계와 다르게 가면 이 문서를 먼저 고치고, 왜 바꿨는지는 해당 결정 기록에 남긴다.
 
+## 구현하며 바뀐 것 (2026-10-20)
+
+아래 본문은 구현 전 설계 그대로 두고, 달라진 점만 여기 모은다. 이유는 각 결정 기록에 있다.
+
+| 항목 | 설계 | 구현 | 이유 |
+| --- | --- | --- | --- |
+| 공통 | 스위치 기본값은 ollama면 개선, `ROUTER`만 fake·openai에서 base | **모든 스위치가** ollama면 개선, fake·openai면 base | fake는 Wave 데모를 결정론으로 재현하는 백엔드, openai는 과금이라 측정 대상이 아니다 |
+| 공통 | step2~4를 커밋마다 스위치 조합으로 잰다 | **final 한 번**으로 잰다 | 노드 평가는 노드 하나만 부른다. route는 `ROUTER`에만, plan은 `TARGET_RESOLVER`에만 반응하므로 final의 노드별 결과가 곧 각 항목의 효과다 |
+| 공통 | — | `/health`에 실제 스위치 값(`switches`) | 결과 파일에 어떤 조합으로 쟀는지 남기기 위해 |
+| 1 | `OLLAMA_THINK` 하나로 모든 호출 | 대화 경로만 `OLLAMA_THINK_CHAT`(기본 true)로 분리 | 생각을 끄면 대화 답이 어색해졌다 — [0007](decisions/0007-chat-keeps-thinking.md) |
+| 2 | 질의에 Qwen3 지시문 | **지시문 없음**, margin 0.029 | 예시 LOO 정답률 0.95(지시문 0.925) — [0003](decisions/0003-semantic-router.md) |
+| 2 | — | `setup_ollama.sh`·`run_agent_ollma.sh`에 임베딩 모델 | 새 PC에서 기동 시 모델이 없으면 lifespan이 실패한다 |
+| 3 | auth-service 기본값 세 곳 **삭제** | **남겨 두고** 새 경로가 닿지 않게 함 | `TARGET_RESOLVER=legacy`로 원본을 그대로 재현하려면 base 경로가 남아 있어야 한다 |
+| 3 | margin·min_score를 예시로 조정 | 별도 조정용 문장(`tools/tuning/target.json`)으로 격자 탐색, min_score 0.40 · margin 0.04 | 대상 추정은 예시 kNN이 아니라 시스템 설명과의 유사도라 LOO를 쓸 수 없다 |
+| 5 | 유사도가 낮으면 키워드 규칙 폴백 | **폴백 없이 1위**, 지시문 없음 | 조정 데이터가 없어 임계값을 정할 근거가 없다. base도 늘 무언가를 고른다(맞는 게 없으면 db-down) |
+| 5 | target 세트의 6문항으로 측정 | runbook 세트 10문항을 새로 만듦 | 6문항으로는 차이를 말하기 어렵다. 새 문항은 설계 뒤에 썼다 — [0006](decisions/0006-runbook-selector.md)에 편향을 적었다 |
+
 ## 공통 원칙
 
 ### 1. 새 기능은 새 모듈 + 의존성 주입
@@ -51,12 +68,15 @@ Before로 쓴다. 발표의 최종 비교는 `base` → 최종 한 번이다.
 
 | 라벨 | 상태 | 재는 것 |
 | --- | --- | --- |
-| `before` | `base` 태그 (측정 완료, 회귀 쿼리만 남음) | 노드 평가 3종 + 회귀 쿼리 |
-| `step1` | 항목 1 | 노드 평가 3종 + 회귀 쿼리 |
+| `before` | `base` 태그 | 노드 평가 3종(완료) + 답변 작성 `write` + 회귀 쿼리 `e2e` |
+| `step1` | 항목 1 | 노드 평가 3종 + `write` + `e2e` |
 | `step2` | 항목 1~2 | route |
 | `step3` | 항목 1~3 | target |
-| `step4` | 항목 1~4 | judge + 회귀 쿼리 |
-| `final` | 전부 | 노드 평가 3종 + 회귀 쿼리 |
+| `step4` | 항목 1~4 | judge + `e2e` |
+| `final` | 전부 | 노드 평가 3종 + `write` + `e2e` |
+
+모두 `scripts/measure-at <커밋> <label> [단계]`으로 잰다 — 커밋을 worktree로 꺼내 재고, 회귀 쿼리는
+질문마다 서버를 새로 띄운다([`02-measurement.md`](02-measurement.md#측정-방법)).
 
 ### 4. 브랜치와 기록
 

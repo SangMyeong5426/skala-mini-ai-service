@@ -26,6 +26,13 @@ from pathlib import Path
 import httpx
 from langsmith import traceable
 
+from .validator import (
+    JUDGE_JSON_INSTRUCTIONS,
+    JUDGE_SYSTEM,
+    judge_user_message,
+    parse_verdict,
+)
+
 OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
 
@@ -236,3 +243,10 @@ class OpenAIQualityLLM(OpenAILLM):
         if on_token is not None:
             on_token(content)
         return content, usage
+
+    @traceable(run_type="llm", name="openai_quality.judge")
+    def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
+        """항목 4 — ollama_llm.py 와 같은 판정. JSON 모드는 스키마까지 강제하지 않아 지시문으로 형식을 준다."""
+        content, usage = self._chat(JUDGE_SYSTEM + " " + JUDGE_JSON_INSTRUCTIONS,
+                                    judge_user_message(query, facts, draft), json_mode=True)
+        return parse_verdict(content), usage
