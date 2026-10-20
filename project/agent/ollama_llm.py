@@ -97,7 +97,7 @@ class OllamaLLM:
         # message.thinking 으로 따로 와서 아래 코드가 읽지 않으므로 화면에 안 보이고 시간만 쓴다.
         self.think = think
 
-    def _payload(self, system: str, user: str, stream: bool) -> dict:
+    def _payload(self, system: str, user: str, stream: bool, think: bool | None) -> dict:
         payload = {
             "model": self.model,
             "messages": [{"role": "system", "content": system},
@@ -105,12 +105,12 @@ class OllamaLLM:
             "stream": stream,
             "options": {"temperature": 0.0},
         }
-        if self.think is not None:
-            payload["think"] = self.think
+        if think is not None:
+            payload["think"] = think
         return payload
 
     def _chat(self, system: str, user: str, schema: dict | None = None) -> tuple[str, dict]:
-        payload = self._payload(system, user, stream=False)
+        payload = self._payload(system, user, stream=False, think=self.think)
         if schema is not None:
             payload["format"] = schema
         resp = httpx.post(OLLAMA_URL, json=payload, timeout=300.0)
@@ -122,12 +122,15 @@ class OllamaLLM:
                  "usd": round(tokens / 1000 * self.usd_per_1k, 6)}
         return content, usage
 
-    async def _chat_stream(self, system: str, user: str, on_token=None) -> tuple[str, dict]:
+    async def _chat_stream(self, system: str, user: str, on_token=None, *,
+                           think: bool | None) -> tuple[str, dict]:
         """사용자 대면 텍스트(최종 답변류) 전용 — Ollama NDJSON 스트림을 토큰 단위로
         받아 on_token(조각)을 즉시 호출해 SSE로 실시간 중계할 수 있게 한다. 분류/계획
         등 JSON 스키마 출력(route/plan/analyze)은 부분 출력이 의미가 없어 그대로 _chat을
-        쓴다."""
-        payload = self._payload(system, user, stream=True)
+        쓴다.
+
+        think 는 부르는 쪽이 정한다 — 대화(chat)와 보고서 작성(write)의 설정이 다르다."""
+        payload = self._payload(system, user, stream=True, think=think)
         chunks: list[str] = []
         usage = {"model": self.name, "tokens": 0, "usd": 0.0}
         async with httpx.AsyncClient(timeout=300.0) as client:
@@ -153,6 +156,13 @@ class OllamaLLM:
 
 class OllamaFastLLM(OllamaLLM):
     """분류·계획·단순 대화 전담 (저사양 소형 모델)."""
+
+    def __init__(self, model: str, usd_per_1k_tokens: float, think: bool | None = None,
+                 chat_think: bool | None = None):
+        super().__init__(model, usd_per_1k_tokens, think)
+        # 대화(chat)만 따로 둔다 — 생각을 끄면 분류·계획은 빨라지지만 대화 답이 어색해진다
+        # (docs/decisions/0007-chat-keeps-thinking.md). server.py 가 OLLAMA_THINK_CHAT 으로 정한다.
+        self.chat_think = chat_think
 
     @traceable(run_type="llm", name="ollama_fast.route")
     def route(self, query: str) -> tuple[dict, dict]:
@@ -238,7 +248,7 @@ class OllamaFastLLM(OllamaLLM):
         rendered = "\n".join(f"{m['role']}: {m['content']}" for m in history[-10:])
         user = (f"## 지금까지의 대화\n{rendered or '(없음)'}\n\n"
                 f"## 사용자의 새 메시지\n{query}")
-        return await self._chat_stream(system, user, on_token=on_token)
+        return await self._chat_stream(system, user, on_token=on_token, think=self.chat_think)
 
 
 class OllamaQualityLLM(OllamaLLM):
@@ -264,7 +274,7 @@ class OllamaQualityLLM(OllamaLLM):
         user = f"## 사용자 요청\n{query}\n\n## 수집된 사실\n" + "\n".join(facts)
         if feedback:
             user += f"\n\n## 이전 초안에 대한 검증 반려 사유 (반드시 반영)\n{feedback}"
-        return await self._chat_stream(system, user, on_token=on_token)
+        return await self._chat_stream(system, user, on_token=on_token, think=self.think)
 
     @traceable(run_type="llm", name="ollama_quality.judge")
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:

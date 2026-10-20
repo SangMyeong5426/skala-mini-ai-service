@@ -37,18 +37,35 @@ class ChatRequest(BaseModel):   # Wave 1 — Pydantic 요청 검증
     thread_id: str = "default"
 
 
+def _parse_think(name: str, value: str) -> bool | None:
+    value = value.strip().lower()
+    if value == "default":
+        return None
+    if value in ("true", "false"):
+        return value == "true"
+    raise ValueError(f"{name} 는 false · true · default 중 하나여야 합니다: {value!r}")
+
+
 def _ollama_think() -> bool | None:
     """OLLAMA_THINK=false(기본) | true | default — qwen3 의 생각(thinking) 출력.
 
     default 는 옵션을 보내지 않는 원본 동작이다. 측정에서 원본을 재현할 때 쓴다
     (docs/decisions/0002-ollama-think-control.md).
     """
-    value = os.environ.get("OLLAMA_THINK", "false").strip().lower()
-    if value == "default":
-        return None
-    if value in ("true", "false"):
-        return value == "true"
-    raise ValueError(f"OLLAMA_THINK 는 false · true · default 중 하나여야 합니다: {value!r}")
+    return _parse_think("OLLAMA_THINK", os.environ.get("OLLAMA_THINK", "false"))
+
+
+def _ollama_think_chat(general: bool | None) -> bool | None:
+    """OLLAMA_THINK_CHAT=true | false | default — 대화(chat) 경로만 따로 정한다.
+
+    지정하지 않으면 OLLAMA_THINK 가 원본(default)일 때는 원본 그대로, 그 밖에는 true 다.
+    대화는 원래 1~2초 경로라 생각을 켜도 비용이 작고, 끄면 답이 어색해진다
+    (docs/decisions/0007-chat-keeps-thinking.md).
+    """
+    value = os.environ.get("OLLAMA_THINK_CHAT")
+    if value is None:
+        return None if general is None else True
+    return _parse_think("OLLAMA_THINK_CHAT", value)
 
 
 def _build_llms():
@@ -58,7 +75,8 @@ def _build_llms():
         from agent.ollama_llm import OllamaFastLLM, OllamaQualityLLM
         think = _ollama_think()
         fast = OllamaFastLLM(os.environ.get("OLLAMA_FAST_MODEL", "qwen3:0.6b"),
-                             usd_per_1k_tokens=0.00015, think=think)
+                             usd_per_1k_tokens=0.00015, think=think,
+                             chat_think=_ollama_think_chat(think))
         quality = OllamaQualityLLM(os.environ.get("OLLAMA_QUALITY_MODEL", "qwen3:8b"),
                                    usd_per_1k_tokens=0.005, think=think)
         return backend, fast, quality
@@ -95,7 +113,11 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
 
     끈 부품은 넣지 않는다 — 필드가 None 이면 노드가 base 동작을 한다(docs/03-design.md 공통 원칙).
     """
-    switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if backend == "ollama" else None,
+    ollama = backend == "ollama"
+    switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if ollama else None,
+                # 실제로 쓰는 값 — 지정이 없을 때 OLLAMA_THINK 에 따라 정해지므로 환경변수가 아니라 결과를 적는다
+                "OLLAMA_THINK_CHAT": ({None: "default", True: "true", False: "false"}[fast_llm.chat_think]
+                                      if ollama else None),
                 "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
                 "TARGET_RESOLVER": _switch("TARGET_RESOLVER", "semantic", "legacy", backend,
                                            ("semantic", "legacy")),
