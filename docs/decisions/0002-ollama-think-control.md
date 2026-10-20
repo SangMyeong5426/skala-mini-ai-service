@@ -73,8 +73,10 @@
 `runs/eval-write_before_20261020-110710.json` ↔ `runs/eval-write_step1_20261020-111914.json`, 노드 평가는
 [`02-measurement.md`](../02-measurement.md).
 
-base 회귀 쿼리 측정에서는 timeout이 한 건도 없었다 — 폭주는 늘 나는 것이 아니라 특정 입력에서 난다
-(plan i08은 두 번 다 났다). 그래서 지연 중앙값보다 **최악의 경우(300초 timeout)가 사라진 것**이 더 큰 차이다.
+base 회귀 쿼리 1회 측정에서는 timeout이 한 건도 없었다 — 폭주는 늘 나는 것이 아니라 가끔 난다(plan i08은 두 번 다
+났다). 3회 반복 측정에서는 **base의 log-service 질문이 3회차에 300초 timeout**에 걸렸고(1회 측정 때는 90.5초),
+항목 1~5를 모두 적용한 final2는 33턴 중 timeout이 없었다. 지연 중앙값보다 **최악의 경우가 사라진 것**이 더 큰
+차이다. 반복 측정 수치는 [`02-measurement.md`](../02-measurement.md#발표용-수치--base--final2-반복-3회-중앙값-2026-10-20).
 
 ## 한계와 트레이드오프
 
