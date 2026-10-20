@@ -18,7 +18,8 @@ class SupervisorDeps:
     mcp: Any             # Wave 2  — MCP stdio 클라이언트 (Tool/Resource/Prompt)
     session_store: Any   # Wave 12 — SQLite 세션 저장소
     version: str         # Wave 14 — SUPERVISOR_VERSION (v1/v2)
-    embedder: Any = None          # 항목 2·3 — 임베딩 클라이언트 (라우터·대상 추정이 나눠 쓴다)
+    embedder: Any = None          # 항목 2·3·5 — 임베딩 클라이언트 (라우터·대상 추정·runbook 선택이 나눠 쓴다)
     router: Any = None            # 항목 2 — None 이면 fast_llm.route
     target_resolver: Any = None   # 항목 3 — None 이면 base 의 plan (auth-service 폴백 포함)
     validator: Any = None         # 항목 4 — None 이면 30자 + "1)" 검사
+    runbook_selector: Any = None  # 항목 5 — None 이면 알림 문구 키워드 규칙
