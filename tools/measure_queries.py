@@ -41,7 +41,7 @@ METRICS = ["latency_s", "cost_usd", "retry_count", "replan_rounds",
 AGENT_PATHS = ["project/agent", "project/server.py", "project/mcp_server.py",
                "project/mcp_server_docs.py", "project/data"]
 # 개선 스위치(docs/03-design.md). 결과 파일에 그대로 남겨 어떤 조합으로 쟀는지 보이게 한다.
-SWITCHES = ["LLM_BACKEND", "OLLAMA_THINK", "ROUTER", "TARGET_RESOLVER", "VALIDATOR",
+SWITCHES = ["LLM_BACKEND", "OLLAMA_THINK", "OLLAMA_THINK_CHAT", "ROUTER", "TARGET_RESOLVER", "VALIDATOR",
             "RUNBOOK_SELECTOR"]
 
 

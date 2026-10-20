@@ -111,3 +111,37 @@ def test_ollama_think_env_rejects_unknown(monkeypatch):
 
     with pytest.raises(ValueError):
         server._ollama_think()
+
+
+def test_chat_uses_its_own_think_setting(monkeypatch):
+    """대화만 생각을 켜고 분류·계획은 끈다 — 같은 모델 인스턴스에서 경로마다 다른 값이 실린다."""
+    sent = _capture_stream(monkeypatch, [
+        {"message": {"content": "민수님이라고 하셨어요."}, "done": False},
+        {"message": {"content": ""}, "done": True, "prompt_eval_count": 3, "eval_count": 2},
+    ])
+    posted = _capture_post(monkeypatch)
+    llm = OllamaFastLLM("qwen3:0.6b", usd_per_1k_tokens=0.0, think=False, chat_think=True)
+
+    asyncio.run(llm.chat("제 이름이 뭐였죠?", []))
+    llm.route("안녕")
+
+    assert sent[0]["think"] is True
+    assert posted[0]["think"] is False
+
+
+@pytest.mark.parametrize(("general", "env", "expected"), [
+    (False, None, True),        # 개선 쪽 기본 — 대화만 생각한다
+    (None, None, None),         # OLLAMA_THINK=default(원본)이면 대화도 원본 그대로
+    (True, None, True),
+    (False, "false", False),    # 명시하면 그 값
+    (False, "default", None),
+])
+def test_ollama_think_chat_env(monkeypatch, general, env, expected):
+    import server
+
+    if env is None:
+        monkeypatch.delenv("OLLAMA_THINK_CHAT", raising=False)
+    else:
+        monkeypatch.setenv("OLLAMA_THINK_CHAT", env)
+
+    assert server._ollama_think_chat(general) is expected
