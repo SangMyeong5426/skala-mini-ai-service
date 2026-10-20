@@ -5,6 +5,7 @@
 #
 #   scripts/measure-at base before write,e2e
 #   OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1
+#   MEASURE_REPEAT=3 scripts/measure-at base before-r3 e2e     # 회귀 쿼리를 3번 반복(중앙값용)
 #
 # steps : 쉼표로 묶는다. 기본값 all = route,target,judge,write,runbook,e2e
 #   route·target·judge·write·runbook  tools/eval_nodes.py — 서버 없이 노드·LLM 호출을 직접 부른다
@@ -26,6 +27,7 @@ steps="${3:-all}"
 py="$repo/project/.venv/bin/python"
 port="${MEASURE_PORT:-8101}"
 out_dir="${MEASURE_OUT:-$repo/runs}"
+repeat="${MEASURE_REPEAT:-1}"
 backend="${LLM_BACKEND:-ollama}"
 export LLM_BACKEND="$backend"
 
@@ -40,7 +42,7 @@ fi
 wt="$(mktemp -d "${TMPDIR:-/tmp}/skala-measure-XXXXXX")"
 git worktree add --detach --quiet "$wt" "$ref"
 trap 'git worktree remove --force "$wt" >/dev/null 2>&1 || true' EXIT
-echo "측정: $ref ($(git -C "$wt" rev-parse --short HEAD)) → label=$label steps=$steps backend=$backend"
+echo "측정: $ref ($(git -C "$wt" rev-parse --short HEAD)) → label=$label steps=$steps backend=$backend repeat=$repeat"
 
 IFS=',' read -ra list <<< "$steps"
 for step in "${list[@]}"; do
@@ -50,7 +52,7 @@ for step in "${list[@]}"; do
         --code-root "$wt" --out-dir "$out_dir" ;;
     e2e)
       "$py" -u tools/measure_queries.py run --label "e2e_$label" --code-root "$wt" --spawn \
-        --base-url "http://127.0.0.1:$port" --out-dir "$out_dir" ;;
+        --base-url "http://127.0.0.1:$port" --out-dir "$out_dir" --repeat "$repeat" ;;
     *) echo "알 수 없는 단계: $step" >&2; exit 1 ;;
   esac
 done
