@@ -11,6 +11,7 @@ RAW_DIR = DATA_DIR / "raw"
 CASES_PATH = DATA_DIR / "cases.json"
 CRITERIA_PATH = DATA_DIR / "criteria.json"
 RULE8_PATH = DATA_DIR / "rule-8.md"
+LAW_PATH = DATA_DIR / "law" / "articles.json"   # tools/fetch_laws.py — 게임산업법·시행령·시행규칙 조문
 ROUTER_EXAMPLES_PATH = DATA_DIR / "router_examples.json"
 # 의미 라우터 판정 기준(점수 차) — tools/tune_embedding.py --domain rating (예시 문장 leave-one-out, 평가셋 미사용).
 # 지시문 없이 LOO 0.867. margin 아래를 맡는 대체 LLM(0.6b)의 예시 정답률(16/30)까지 넣은 결합 정답률이 0.04 에서 가장 높다(0.967).

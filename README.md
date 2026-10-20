@@ -67,6 +67,7 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 | `RATING_ASSESSOR` | `criteria` — 기준표로 항목별 단계 판정, 등급은 코드가 계산 | `direct` — LLM 이 등급을 바로 답함 | 3 |
 | `VALIDATOR` | `grounded` — 등급·사례·수치 대조 + LLM 판정 | `format` | 4 |
 | `RATING_CLARIFY` | `rule` — 정보가 모자라면 되묻기 | `off` | 6 |
+| `CHAT_GROUNDING` | `law` — 제도 문의는 법령 조문에 근거해 답하고, 근거가 없으면 답할 수 없다고 한다 | `off` — 0.6b 가 근거 없이 대화로 답함 | 8 |
 
 판정 기준은 `ROUTER_MARGIN`(0.029)·`TARGET_MIN_SCORE`(0.40)·`TARGET_MARGIN`(0.04)으로 덮어쓸 수 있다.
 임베딩 모델은 `OLLAMA_EMBED_MODEL`(기본 `qwen3-embedding:0.6b`).

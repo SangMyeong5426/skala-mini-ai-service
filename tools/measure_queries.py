@@ -44,7 +44,7 @@ AGENT_PATHS = ["project/agent", "project/server.py", "project/mcp_server.py",
 SWITCHES = ["LLM_BACKEND", "OLLAMA_THINK", "OLLAMA_THINK_CHAT", "ROUTER", "TARGET_RESOLVER", "VALIDATOR",
             "RUNBOOK_SELECTOR",
             # 과제 2 (결정 0009) — 모두 끄면 LLM 단독
-            "AGENT_DOMAIN", "RATING_CLARIFY", "CASE_SEARCH", "RATING_ASSESSOR"]
+            "AGENT_DOMAIN", "RATING_CLARIFY", "CASE_SEARCH", "RATING_ASSESSOR", "CHAT_GROUNDING"]
 
 
 def _display(path: Path) -> str:

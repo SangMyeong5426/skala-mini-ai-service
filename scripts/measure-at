@@ -8,9 +8,9 @@
 #   MEASURE_REPEAT=3 scripts/measure-at base before-r3 e2e     # 회귀 쿼리를 3번 반복(중앙값용)
 #
 # steps : 쉼표로 묶는다. 기본값 all = route,target,judge,write,runbook,e2e (과제 1)
-#         rating = rate,rateb,rroute,rclarify,rjudge,e2e (과제 2 — 회귀 쿼리 기본값도 tools/queries_rating.json)
+#         rating = rate,rateb,rroute,rclarify,rjudge,rlaw,e2e (과제 2 — 회귀 쿼리 기본값도 tools/queries_rating.json)
 #   route·target·judge·write·runbook  tools/eval_nodes.py — 서버 없이 노드·LLM 호출을 직접 부른다 (과제 1)
-#   rate·rateb·rroute·rclarify·rjudge tools/eval_rating.py — 등급 점검 노드를 직접 부른다 (과제 2)
+#   rate·rateb·rroute·rclarify·rjudge·rlaw·rbase  tools/eval_rating.py — 등급 점검 노드를 직접 부른다 (과제 2)
 #   e2e                       tools/measure_queries.py --spawn — 회귀 쿼리마다 서버를 새로 띄운다
 #                             (MEASURE_QUERIES 로 쿼리 파일을 바꾼다)
 #
@@ -29,7 +29,7 @@ steps="${3:-all}"
 queries="${MEASURE_QUERIES:-tools/queries.json}"
 [ "$steps" = all ] && steps="route,target,judge,write,runbook,e2e"
 if [ "$steps" = rating ]; then
-  steps="rate,rateb,rroute,rclarify,rjudge,e2e"
+  steps="rate,rateb,rroute,rclarify,rjudge,rlaw,e2e"
   queries="${MEASURE_QUERIES:-tools/queries_rating.json}"
 fi
 py="$repo/project/.venv/bin/python"
@@ -58,7 +58,7 @@ for step in "${list[@]}"; do
     route|target|judge|write|runbook)
       "$py" -u tools/eval_nodes.py "$step" --label "$label" --backend "$backend" \
         --code-root "$wt" --out-dir "$out_dir" ;;
-    rate|rateb|rroute|rclarify|rjudge|rbase)
+    rate|rateb|rroute|rclarify|rjudge|rbase|rlaw)
       "$py" -u tools/eval_rating.py "$step" --label "$label" --backend "$backend" \
         --code-root "$wt" --out-dir "$out_dir" ;;
     e2e)
