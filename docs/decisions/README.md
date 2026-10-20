@@ -19,3 +19,4 @@
 | [0009](0009-rating-domain.md) | 과제 2 — 등급 점검 도메인을 새 패키지로, LLM 단독을 Before로 (항목 7 제외) | Accepted | 2026-10-20 |
 | [0010](0010-rating-data-and-evalsets.md) | 등급분류 데이터 — 공개 API, 기간 분할, 사행성 게임물 제외, 평가셋을 먼저 | Accepted | 2026-10-20 |
 | [0011](0011-case-search-and-item-levels.md) | 유사 사례 검색 + 항목별 단계 판정 — 등급은 코드가 최댓값으로, 근거 없는 항목은 지운다 | Accepted | 2026-10-20 |
+| [0012](0012-rating-validator.md) | 등급 점검 보고서 검수 — 등급·사례·수치는 코드가, 뜻은 LLM 이 | Accepted | 2026-10-20 |
