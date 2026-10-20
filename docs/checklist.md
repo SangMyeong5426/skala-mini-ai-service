@@ -112,6 +112,7 @@
 - [x] 대화 경로만 thinking 유지(`OLLAMA_THINK_CHAT`, `feat/chat-think`) — `32b59c1`, 결정 기록 `0007`
 - [x] final2 재측정: 회귀 쿼리 110.8초, 대화 답 원래 수준 — `runs/e2e_final2_20261020-132116.json`
 - [x] `main`에 merge
+- [x] 성능 개선 시도: 작성·판정을 작은 모델로 — 기준 미달로 기각 — `runs/try-models_20261020-142735.json`, 결정 기록 `0008`
 - [x] 발표용 수치 확정: base·final2 반복 3회 — 11턴 합계 중앙값 396.5초 → 123.8초(−68.8%), timeout 1 → 0 — `runs/e2e_*-r3_*.json`
 
 ## Day3 — 마무리 (13시 마감)
@@ -132,5 +133,5 @@
 | 기능 구현 완성도 (30) | 항목 1~5 동작 + 테스트 66개 | 구현·측정 완료, `main`에 merge |
 | Before/After 실측 (보너스 10) | `runs/` + `02-measurement.md` | base·step1·final·final2 + 반복 3회 중앙값으로 확정 |
 | 기술 요소 (30) | RAG(2·3·5), MCP(3 — Resource 추가), 의존성 주입(스위치·`SupervisorDeps`), LangSmith(새 단계 모두 `@traceable`), 모듈화(새 모듈 5개), 단위 테스트(6 → 66) | 반영. Multi-Agent는 범위 밖 |
-| 한계·트레이드오프 (20) | `decisions/` 0002~0007 | 실측 기반으로 작성 |
+| 한계·트레이드오프 (20) | `decisions/` 0002~0008 (0008은 기각한 시도) | 실측 기반으로 작성 |
 | 발표 (20) | 발표 자료 | 미착수 |

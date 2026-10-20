@@ -366,6 +366,19 @@ OLLAMA_THINK=false ROUTER=semantic TARGET_RESOLVER=semantic VALIDATOR=grounded R
 - 노드 평가(분류·대상·검수·runbook)는 temperature 0에 고정 입력이라 반복하지 않았다. final route·target을 같은 조건으로
   두 번 재 같은 점수가 나온 것으로 갈음한다.
 
+## 성능 개선 시도 — 작은 모델 교체 (기각) — 2026-10-20
+
+장애 질문 1건 13~20초 중 약 13.5초가 qwen3:8b(작성 약 10초 · 판정 약 3.5초)라, 작은 모델로 바꿔 보는 시험을 했다.
+채택 기준을 먼저 정했고 **세 시험 모두 기준을 넘지 못해 채택하지 않았다** — [0008](decisions/0008-smaller-models-rejected.md).
+
+`LANGCHAIN_TRACING_V2=false project/.venv/bin/python tools/try_models.py` → `runs/try-models_20261020-142735.json`
+
+| 시험 | 속도 | 품질 | 결론 |
+| --- | --- | --- | --- |
+| 작성 qwen3.5:2b (판정 8b) | 5건 43.1초 → 25.8초 (−40%) | 5건 중 3건이 하지 않은 조치를 완료했다고 씀 | 기각 |
+| 판정 qwen3.5:2b | 판정 3.56초 → 1.78초 | 오염 탐지 6/7 → 5/7 | 기각 |
+| 판정 qwen3:0.6b | 판정 3.56초 → 0.56초 | 오염 7/7, 정상 오탐 0/5 → 5/5 | 기각 |
+
 ## 결과 요약 — base → final
 
 | 개선 항목 | 핵심 수치 (base → final) | 결정 기록 |
@@ -375,6 +388,7 @@ OLLAMA_THINK=false ROUTER=semantic TARGET_RESOLVER=semantic VALIDATOR=grounded R
 | 3 대상 추정·되묻기 | 대상 6/15 → **13/15**, 되묻기 0/5 → 3/5, 엉뚱한 진단 7 → 2 | [0004](decisions/0004-target-resolver.md) |
 | 4 검수 근거 검증 | 오염 초안 탐지 0/7 → **6/7**, 정상 오탐 0/5 유지, 검수 +3.5초 | [0005](decisions/0005-grounded-validator.md) |
 | 5 runbook 의미 검색 | 6/10 → 8/10 — **원래 문항만 보면 5/6 → 4/6**, 효과 불확실 | [0006](decisions/0006-runbook-selector.md) |
+| 시도 — 작성·판정 작은 모델 | 작성 −40% 빨라지지만 거짓 완료 주장 3/5 · 작은 판정기는 탐지 저하 또는 전부 반려 → **기각** | [0008](decisions/0008-smaller-models-rejected.md) |
 | 1 보완 — 대화만 thinking | 대화 답 자연스러움 6건 중 1 → 4, 대화 지연 +0.5초 (0.2초 → 0.7초, base 1.2~1.9초) | [0007](decisions/0007-chat-keeps-thinking.md) |
 | **전체 (회귀 쿼리 11턴, 반복 3회 중앙값)** | **396.5초 → 123.8초 (−68.8%)**, timeout 33턴 중 1 → 0, 추정 비용 +1% | [발표용 수치](#발표용-수치--base--final2-반복-3회-중앙값-2026-10-20) |
 | 전체 (1회 측정, 참고) | 411.4초 → 159.0초 (final) · 110.8초 (final2) — 편차가 커서 발표에는 위 줄을 쓴다 | — |
