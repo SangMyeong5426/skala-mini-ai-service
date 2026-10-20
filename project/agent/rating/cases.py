@@ -25,8 +25,10 @@ BATCH = 64
 
 
 def case_text(case: dict) -> str:
-    """색인에 넣는 글 — 제목도 넣는다. 사용자가 시리즈·원작 이름을 말하면 같은 계열의 결정을 찾게."""
-    return f"{case['title']} — {case['genre']} · {case['platform']} — {case['summary']}"
+    """색인에 넣는 글 — 제목도 넣는다. 사용자가 시리즈·원작 이름을 말하면 같은 계열의 결정을 찾게.
+    개요가 없는 결정(간소화 등급분류)은 제목·장르·플랫폼만으로 찾힌다."""
+    tail = f" — {case['summary']}" if case["summary"] else ""
+    return f"{case['title']} — {case['genre']} · {case['platform']}{tail}"
 
 
 def effective_scope(scope: str, genre: str | None, platform: str | None) -> str:

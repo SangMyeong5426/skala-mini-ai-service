@@ -46,6 +46,8 @@
 | 파일 | 개수 | 부르는 노드 | 라벨 | 기능 |
 | --- | --- | --- | --- | --- |
 | `rating.json` (A) | 40 (등급마다 10) | plan → research → replan_check → analysis | `label.rating`, `label.descriptors` | 3 사례 검색·단계 판정 |
+| `rating_benign.json` | 10 (모두 전체이용가 기대) | 〃 | `label.rating` | 과대평가 점검 — 청소년이용불가·15세 이상으로 올린 수 |
+| `rating_dev.json` (개발용) | 38 | 〃 | 〃 | 결합 규칙 선택에만(결정 0016) |
 | `rating_detail.json` (B) | 39 (전체 3 · 12세 7 · 15세 10 · 청소년이용불가 19) | 〃 | 〃 | 3 — 상세 설명일 때 |
 | `rating_route.json` | 30 (chat 15 · review 15) | `route_node` | `expected_route` | 5 의미 라우터 |
 | `rating_clarify.json` | 12 (되묻기 6 · 점검 6) | plan → … → analysis | `expected_action`(clarify/assess) | 6 되묻기 |
@@ -62,6 +64,9 @@
   자기 자신과 같은 제목의 사례를 검색에서 뺀다. 등급이 고르지 않다 — **늘 청소년이용불가라고 답해도 19/39**다.
   출처: 공공데이터포털 「게임물관리위원회_등급분류증명서 및 결정서 정보」 2026년 2분기(공공누리 1유형, 출처 표시),
   `source/grac_decision_reasons_2026q2.csv`(원본 CP949를 UTF-8로 바꿔 저장).
+- **rating_benign**: 농장·퍼즐·레이싱·리듬·교육·요리·축구·펫·낚시·러너 — 폭력·노출·사행 요소가 없는 평범한 게임 설명 10개.
+  **결합 규칙 R1 이 회귀 쿼리에서 평범한 게임을 청소년이용불가로 올린 것을 본 뒤에 썼다**(결정 0017). 정답은 모두 전체이용가로 두고,
+  청소년이용불가·15세 이상으로 올린 수를 본다. 코드를 쓴 사람이 쓴 문항이다.
 - **rating_route**: 출시할 게임 하나의 등급을 예상·점검해 달라면 `review`, 제도 질문·인사·기능 질문은 `chat`.
   등급 이름("청소년이용불가")이나 항목 이름("폭력성")이 들어 있어도 특정 게임의 점검이 아니면 `chat`이다.
 - **rating_clarify**: 무엇을 하는 게임인지(내용·표현) 한 줄도 없으면 `clarify`, 짧아도 내용이 있으면 `assess`.

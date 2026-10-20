@@ -1,5 +1,29 @@
 [
  {
+  "id": "SC-OM-240102-001",
+  "date": "2024-01-02",
+  "title": "플라잉팜",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240102-002",
+  "date": "2024-01-02",
+  "title": "이쪽저쪽",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240104-001",
   "date": "2024-01-04",
   "title": "DARK AND DARKER (다크앤다커)",
@@ -76,6 +100,32 @@
    "폭력성"
   ],
   "summary": "지구방위군이 되어 외계 생명체들의 침입에 맞서 지구를 지키는 3인칭 액션 슈팅게임"
+ },
+ {
+  "id": "SC-OM-240104-001",
+  "date": "2024-01-04",
+  "title": "Dead Ahead: Zombie Warfare",
+  "applicant": "ABE ENTERTAINMENT LIMITED",
+  "rating": "청소년이용불가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "공포",
+   "언어"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240104-002",
+  "date": "2024-01-04",
+  "title": "고양이와 블록",
+  "applicant": "비긴파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-NP-240111-001",
@@ -181,6 +231,20 @@
    "약물"
   ],
   "summary": "오랫동안 버려진 가족 소유지를 탐험하고 과거를 파헤치는 여행을 시작하는 Tess와 Opal의 이야기를 그린 어드벤쳐 게임물"
+ },
+ {
+  "id": "SC-OM-240111-001",
+  "date": "2024-01-11",
+  "title": "Luck be a Landlord",
+  "applicant": "TrampolineTales LLC",
+  "rating": "청소년이용불가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "사행성",
+   "약물"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-240112-001",
@@ -376,6 +440,30 @@
    "폭력성"
   ],
   "summary": "1997년에 발매한 게임을 새롭게 콘솔로 이식한 로봇 커스터마이징 액션 게임"
+ },
+ {
+  "id": "SC-OM-240116-001",
+  "date": "2024-01-16",
+  "title": "사과게임",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240116-002",
+  "date": "2024-01-16",
+  "title": "블랙홀게임",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NP-240118-002",
@@ -650,6 +738,17 @@
    "약물"
   ],
   "summary": "캔터베리 왕국의 신병인 주인공이 용사가 되어 왕국의 공주와 함께 다른 챔피언들을 찾아 모험을 떠나는 내용의 롤플레잉 게임"
+ },
+ {
+  "id": "SC-OM-240129-001",
+  "date": "2024-01-29",
+  "title": "마이리틀스토어",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-NP-240201-001",
@@ -1029,6 +1128,160 @@
   "summary": "미지의 호텔에 진입하여 단서를 수집하고 퍼즐을 푸는 내용의 어드벤처 게임물"
  },
  {
+  "id": "SC-OM-240223-001",
+  "date": "2024-02-23",
+  "title": "무브무브 블록크러쉬",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240223-002",
+  "date": "2024-02-23",
+  "title": "버블넘버",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240223-003",
+  "date": "2024-02-23",
+  "title": "페어퍼즐",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-001",
+  "date": "2024-02-26",
+  "title": "감별게임(Discrimination Game)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-002",
+  "date": "2024-02-26",
+  "title": "쥬시팡(Juicy Pang)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-003",
+  "date": "2024-02-26",
+  "title": "짝맞추기＋(Matching Pairs)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-004",
+  "date": "2024-02-26",
+  "title": "짝맞추기(Matching Pairs)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-005",
+  "date": "2024-02-26",
+  "title": "순서기억하기(Remembering Order)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-006",
+  "date": "2024-02-26",
+  "title": "많은먹거리고르기(Selecting Many Foods)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-007",
+  "date": "2024-02-26",
+  "title": "터치＋(Touch＋)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-008",
+  "date": "2024-02-26",
+  "title": "업앤다운(Up and Down)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-009",
+  "date": "2024-02-26",
+  "title": "슬라이드(Slide)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-010",
+  "date": "2024-02-26",
+  "title": "감별s가위바위보(Discriminations Rock Paper Scissors)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240226-011",
+  "date": "2024-02-26",
+  "title": "감별s버블버블(Discriminations Bubble Bubble)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240229-001",
   "date": "2024-02-29",
   "title": "S.T.A.L.K.E.R.: Legends of the Zone Trilogy (스토커:레전드 오브 존 트릴로지)",
@@ -1175,6 +1428,17 @@
    "폭력성"
   ],
   "summary": "원시시대 부터 미래까지 역사를 따라 국가를 건설하는 턴제 전략시뮬레이션 게임물"
+ },
+ {
+  "id": "SC-OM-240305-001",
+  "date": "2024-03-05",
+  "title": "팔도감사과게임",
+  "applicant": "주식회사 라포테이블",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-NP-240307-001",
@@ -1643,6 +1907,33 @@
   "summary": "Nintendo 64의 클래식 게임을 플레이할 수 있는 Nintendo Switch용 소프트웨어"
  },
  {
+  "id": "SC-OM-240325-001",
+  "date": "2024-03-25",
+  "title": "꼬마악마키우기 : 데몬원정대",
+  "applicant": "(주)하이게임즈",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240327-001",
+  "date": "2024-03-27",
+  "title": "매치 오브 스펠블레이드",
+  "applicant": "롤링제이",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240328-004",
   "date": "2024-03-28",
   "title": "디아블로 IV: 증오의 그릇 (Diablo IV: Vessel of Hatred)",
@@ -1971,6 +2262,36 @@
   "summary": "무한한 복셀 세계를 배경으로 한 1인칭 공장 건설 시뮬레이션 게임물"
  },
  {
+  "id": "SC-OM-240417-002",
+  "date": "2024-04-17",
+  "title": "Left to Survive",
+  "applicant": "MY.GAMES B.V.",
+  "rating": "청소년이용불가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240417-003",
+  "date": "2024-04-17",
+  "title": "Arcane Saga : Turn Based RPG",
+  "applicant": "주식회사 와이제이엠게임즈 삼성동지점",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240418-002",
   "date": "2024-04-18",
   "title": "야수의심장",
@@ -2077,6 +2398,35 @@
   "summary": "신 요소가 추가된 소닉 제너레이션즈와 완전 신작 섀도우 제너레이션즈, 2 타이틀이 수록된 궁극의 컬렉션입니다."
  },
  {
+  "id": "SC-OM-240422-001",
+  "date": "2024-04-22",
+  "title": "간단한 벌칙게임 - 카드뽑기, 랜덤게임, 복불복",
+  "applicant": "김민태",
+  "rating": "15세이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240422-002",
+  "date": "2024-04-22",
+  "title": "도사: 가디언즈",
+  "applicant": "(주)라이펄스",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240425-002",
   "date": "2024-04-25",
   "title": "사이코데믹 특수 수사 사건부 X-FILE",
@@ -2126,6 +2476,20 @@
    "선정성"
   ],
   "summary": "‘로프꾼’ 이라는 캐릭터가 되어 ‘공동’을 탐색하고 적을 무찌르는 모험을 담은 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-OM-240502-001",
+  "date": "2024-05-02",
+  "title": "마왕 슬라임 키우기",
+  "applicant": "주식회사 젤리게임즈",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-240503-001",
@@ -2350,6 +2714,44 @@
   "summary": "북해 석유 굴착 플랫폼을 배경으로 한 서바이벌 호러 게임물"
  },
  {
+  "id": "SC-OM-240509-001",
+  "date": "2024-05-09",
+  "title": "용과 전사",
+  "applicant": "(주)웹젠",
+  "rating": "15세이용가",
+  "genre": "MMORPG",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240509-002",
+  "date": "2024-05-09",
+  "title": "십원으로 황제 키우기",
+  "applicant": "주식회사 트리피 게임즈",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240509-003",
+  "date": "2024-05-09",
+  "title": "올마트",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-240516-001",
   "date": "2024-05-16",
   "title": "루나온라인 오리진-어덜트(Luna Online Origin-Adult)",
@@ -2439,6 +2841,20 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "새를 타는 목동이 되어 숲을 탐험하며 생물을 돌보는 게임물"
+ },
+ {
+  "id": "SC-OM-240516-001",
+  "date": "2024-05-16",
+  "title": "던전스쿼드",
+  "applicant": "주식회사 게임코스터",
+  "rating": "청소년이용불가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-240517-001",
@@ -2961,6 +3377,39 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "2025시즌 미식축구 경기를 현실적으로 묘사한 PS4용 스포츠 게임"
+ },
+ {
+  "id": "SC-OM-240531-001",
+  "date": "2024-05-31",
+  "title": "푸빌라랠리",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240531-002",
+  "date": "2024-05-31",
+  "title": "하늘에서 면세품이 내려와",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240604-001",
+  "date": "2024-06-04",
+  "title": "두뇌훈련",
+  "applicant": "주식회사 레브잇",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-NP-240605-004",
@@ -3525,6 +3974,30 @@
   "summary": "독특하고 현대적인 시스템을 갖춘 레트로 스타일의 2D 대전 격투 게임"
  },
  {
+  "id": "SC-OM-240628-001",
+  "date": "2024-06-28",
+  "title": "Wa버블팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240703-001",
+  "date": "2024-07-03",
+  "title": "로켓 리그 사이드스와이프",
+  "applicant": "에픽게임즈코리아",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-240704-002",
   "date": "2024-07-04",
   "title": "헌팅의 추억 (Drop Blocks)",
@@ -3549,6 +4022,19 @@
    "폭력성"
   ],
   "summary": "FPS 전투와 로그 라이크 업그레이드를 결합한 온라인 1인칭 대전 슈팅 게임물"
+ },
+ {
+  "id": "SC-OM-240704-001",
+  "date": "2024-07-04",
+  "title": "랜덤 체스",
+  "applicant": "웹앱게임즈",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-240711-001",
@@ -3640,6 +4126,32 @@
   "platform": "PC/온라인 게임",
   "descriptors": [],
   "summary": "2024 파리올림픽에서 진행하는 종목을 주제로 한 스포츠 게임물"
+ },
+ {
+  "id": "SC-OM-240711-001",
+  "date": "2024-07-11",
+  "title": "PUUVILLA PANG",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240711-002",
+  "date": "2024-07-11",
+  "title": "Last Shelter: Survival",
+  "applicant": "Long Tech Network Limited",
+  "rating": "15세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "공포",
+   "약물"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-240712-001",
@@ -3819,6 +4331,19 @@
    "선정성"
   ],
   "summary": "던전을 모험하며 다양한 작품의 등장인물과 싸우며 동료가 되는 내용의 덱 빌딩형 로그 라이트 RPG"
+ },
+ {
+  "id": "SC-OM-240715-001",
+  "date": "2024-07-15",
+  "title": "트릴리온 - 오피스 로맨스",
+  "applicant": "KAKU DIGITAL LIMITED",
+  "rating": "15세이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-240718-001",
@@ -4068,6 +4593,19 @@
    "폭력성"
   ],
   "summary": "종말 이후 미래를 배경으로 하는 오픈월드 생존 게임물"
+ },
+ {
+  "id": "SC-OM-240724-001",
+  "date": "2024-07-24",
+  "title": "손가락 올림픽",
+  "applicant": "남우주",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-240725-003",
@@ -4336,6 +4874,17 @@
   "summary": "졸업을 앞둔 세 친구가 오래된 낚시 노트를 복원하기 위하여 낚시 여행을 떠나는 내용의 어드벤처 게임"
  },
  {
+  "id": "SC-OM-240726-001",
+  "date": "2024-07-26",
+  "title": "애큐온 쏴라팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-240801-001",
   "date": "2024-08-01",
   "title": "신화:소녀 어드벤처",
@@ -4601,6 +5150,32 @@
   "summary": "갑자기 바니걸이 되어버린 토끼 에리나가 주인의 여동생 찾으러 가는 내용을 다룬 액션 게임"
  },
  {
+  "id": "SC-OM-240812-002",
+  "date": "2024-08-12",
+  "title": "스노우 브레이크: 포비든 존",
+  "applicant": "SEASUN GAMES PTE. LTD.",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240821-001",
+  "date": "2024-08-21",
+  "title": "농사팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-240822-001",
   "date": "2024-08-22",
   "title": "War Elite",
@@ -4748,6 +5323,30 @@
   "summary": "헬리콥터를 조종하여 적을 공격하는 슈팅 게임"
  },
  {
+  "id": "SC-OM-240827-002",
+  "date": "2024-08-27",
+  "title": "Zombie State: Roguelike FPS",
+  "applicant": "MY.GAMES B.V.",
+  "rating": "청소년이용불가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240828-001",
+  "date": "2024-08-28",
+  "title": "PUUVILLA ADVENTURE(푸빌라 탐험)",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-240829-004",
   "date": "2024-08-29",
   "title": "4th세븐천사 Mobile",
@@ -4796,6 +5395,17 @@
    "폭력성"
   ],
   "summary": "만화 및 애니메이션 ‘진격의 거인’을 원작으로 제작된 액션 VR 게임"
+ },
+ {
+  "id": "SC-OM-240904-001",
+  "date": "2024-09-04",
+  "title": "Matchday Champions",
+  "applicant": "Matchday Inc",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-240905-001",
@@ -5102,6 +5712,17 @@
   "summary": "끝없이 반복되는 지하도에서 8번 출구를 찾아 탈출하는 내용의 공포 어드벤처게임"
  },
  {
+  "id": "SC-OM-240910-001",
+  "date": "2024-09-10",
+  "title": "행복마을",
+  "applicant": "KAKU DIGITAL LIMITED",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-240912-001",
   "date": "2024-09-12",
   "title": "리메멘토 - 하얀 그림자 (12세이용가)",
@@ -5139,6 +5760,20 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "펭귄 캐릭터를 조종하여 최대 40명의 플레이어와 경쟁하는 서바이벌 액션 레이싱 게임"
+ },
+ {
+  "id": "SC-OM-240920-001",
+  "date": "2024-09-20",
+  "title": "MUDOL2 RUN",
+  "applicant": "주식회사 나트리스",
+  "rating": "15세이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-240926-002",
@@ -5362,6 +5997,53 @@
   "summary": "점핑 게임과 8비트 음악 앨범 등이 포함된 액션 게임"
  },
  {
+  "id": "SC-OM-240930-001",
+  "date": "2024-09-30",
+  "title": "퀸잇 물감게임",
+  "applicant": "주식회사 라포랩스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-240930-002",
+  "date": "2024-09-30",
+  "title": "퀸잇 블록게임",
+  "applicant": "주식회사 라포랩스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241002-001",
+  "date": "2024-10-02",
+  "title": "전란:호협전",
+  "applicant": "HK FOREVER9 TECHNOLOGY CO.,LIMITED",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241007-001",
+  "date": "2024-10-07",
+  "title": "PUUVILLA BUBBLE SHOOT(푸빌라 버블슛)",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OP-241010-001",
   "date": "2024-10-10",
   "title": "《ARENA BREAKOUT: INFINITE》",
@@ -5404,6 +6086,21 @@
    "언어"
   ],
   "summary": "좀비 아포칼립스에서 생존을 위해 진행되는 8인 협동 게임"
+ },
+ {
+  "id": "SC-OM-241010-001",
+  "date": "2024-10-10",
+  "title": "Rise of Castles",
+  "applicant": "Long Tech Network Limited",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "공포"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-241011-001",
@@ -5636,6 +6333,32 @@
   "summary": "인터넷에 떠도는 다양한 도시전설을 주제로한 사건을 해결하는 내용을 담은 어드벤처 게임물"
  },
  {
+  "id": "SC-OM-241022-001",
+  "date": "2024-10-22",
+  "title": "Last Empire: War Z",
+  "applicant": "Long Tech Network Limited",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241023-001",
+  "date": "2024-10-23",
+  "title": "팔도감미니게임",
+  "applicant": "주식회사 라포테이블",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241024-002",
   "date": "2024-10-24",
   "title": "전장의 그녀 6",
@@ -5734,6 +6457,17 @@
   "summary": "동키콩을 조작하여 장애물을 피하고 다양한 아이템을 획득하는 방식의 액션 게임"
  },
  {
+  "id": "SC-OM-241030-001",
+  "date": "2024-10-30",
+  "title": "라포랩스 사과게임",
+  "applicant": "주식회사 라포랩스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241031-002",
   "date": "2024-10-31",
   "title": "십이지천M REBORN",
@@ -5774,6 +6508,19 @@
   "summary": "화면을 터치로 총알을 발사하여 벽을 일정이상 파괴시 여성을 구하고 일러스트를 수집하는 게임물"
  },
  {
+  "id": "SC-OM-241106-001",
+  "date": "2024-11-06",
+  "title": "Fable Town: Merging Games",
+  "applicant": "MY.GAMES B.V.",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OP-241107-001",
   "date": "2024-11-07",
   "title": "DayZ",
@@ -5802,6 +6549,20 @@
    "약물"
   ],
   "summary": "17세기 배경으로 해적들의 이야기를 그린 게임"
+ },
+ {
+  "id": "SC-OM-241107-001",
+  "date": "2024-11-07",
+  "title": "에코칼립스:진홍의 서약",
+  "applicant": "YOUZU (SINGAPORE) PTE. LTD",
+  "rating": "청소년이용불가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-241108-001",
@@ -5959,6 +6720,17 @@
   "summary": "전차를 강화하면서 전투를 벌이는 콘솔용 액션 게임"
  },
  {
+  "id": "SC-OM-241113-001",
+  "date": "2024-11-13",
+  "title": "똑똑테이블 플러스",
+  "applicant": "(주)엠에이치소프트",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241114-002",
   "date": "2024-11-14",
   "title": "레전드 오브 이미르",
@@ -6012,6 +6784,219 @@
    "폭력성"
   ],
   "summary": "멸망을 향해 달려가는 그을음의 나라를 떠돌며, 인간과 호문쿨루스를 구원하는 주인공의 여정을 그린 액션 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-OM-241119-001",
+  "date": "2024-11-19",
+  "title": "산적 악어",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-002",
+  "date": "2024-11-19",
+  "title": "세렝게티 스카이 콩콩",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-003",
+  "date": "2024-11-19",
+  "title": "사파리 팡팡",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-004",
+  "date": "2024-11-19",
+  "title": "사바나 블루마블",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-005",
+  "date": "2024-11-19",
+  "title": "후엠아이 농구왕",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-006",
+  "date": "2024-11-19",
+  "title": "사바나의 요란한 집들이",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-007",
+  "date": "2024-11-19",
+  "title": "사바나 사진관",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-241119-008",
+  "date": "2024-11-19",
+  "title": "사바나 러쉬",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "레이싱",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241120-001",
+  "date": "2024-11-20",
+  "title": "기계소녀",
+  "applicant": "김재현",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-001",
+  "date": "2024-11-20",
+  "title": "Trapper",
+  "applicant": "김택근",
+  "rating": "15세이용가",
+  "genre": "FPS/TPS",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-002",
+  "date": "2024-11-20",
+  "title": "돈미세 용병단",
+  "applicant": "진태규",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-003",
+  "date": "2024-11-20",
+  "title": "피아",
+  "applicant": "김택근",
+  "rating": "12세이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-004",
+  "date": "2024-11-20",
+  "title": "Vision Predator",
+  "applicant": "이준혁",
+  "rating": "15세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성",
+   "공포",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-005",
+  "date": "2024-11-20",
+  "title": "KSANA",
+  "applicant": "이준명",
+  "rating": "15세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포",
+   "언어",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-006",
+  "date": "2024-11-20",
+  "title": "Midnight Cleanup",
+  "applicant": "이선아",
+  "rating": "12세이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-007",
+  "date": "2024-11-20",
+  "title": "4Quest",
+  "applicant": "박기빈",
+  "rating": "15세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241120-008",
+  "date": "2024-11-20",
+  "title": "Chronos",
+  "applicant": "이홍준",
+  "rating": "15세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-241121-001",
@@ -6092,6 +7077,20 @@
   "summary": "외계 문명들의 전투에 휘말려 지구를 잃어버린 인류가 미지의 행성 ‘미라’에서 생존하기 위해 탐색하는 내용의 롤플레잉 게임"
  },
  {
+  "id": "SC-FP-241126-001",
+  "date": "2024-11-26",
+  "title": "온누리온",
+  "applicant": "문유현",
+  "rating": "12세이용가",
+  "genre": "기타",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241128-001",
   "date": "2024-11-28",
   "title": "카르나크",
@@ -6148,6 +7147,188 @@
   "summary": "에일리언 영화시리즈에서 영감을 받은 세계관을 배경으로한 VR FPS 호러 게임물"
  },
  {
+  "id": "SC-FM-241130-001",
+  "date": "2024-11-30",
+  "title": "Animal Rookies",
+  "applicant": "윤준혁",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-001",
+  "date": "2024-11-30",
+  "title": "SEMO",
+  "applicant": "권태서",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-002",
+  "date": "2024-11-30",
+  "title": "浪人-Ronin-",
+  "applicant": "LIU TIANFU",
+  "rating": "12세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-003",
+  "date": "2024-11-30",
+  "title": "Chrono",
+  "applicant": "김재영",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-004",
+  "date": "2024-11-30",
+  "title": "EpicCrossroad",
+  "applicant": "박종성",
+  "rating": "12세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-005",
+  "date": "2024-11-30",
+  "title": "Oracle＇s Prophecy(신탁의 예언)",
+  "applicant": "이창훈",
+  "rating": "15세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-006",
+  "date": "2024-11-30",
+  "title": "Survival of the Hell",
+  "applicant": "이준우",
+  "rating": "12세이용가",
+  "genre": "FPS/TPS",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-007",
+  "date": "2024-11-30",
+  "title": "이상한 베이커리",
+  "applicant": "정태균",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-008",
+  "date": "2024-11-30",
+  "title": "Quadra Clash",
+  "applicant": "전세혁",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-009",
+  "date": "2024-11-30",
+  "title": "깨끗해져라! 버려버려섬 대작전",
+  "applicant": "조하진",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-010",
+  "date": "2024-11-30",
+  "title": "the T",
+  "applicant": "이신웅",
+  "rating": "15세이용가",
+  "genre": "격투게임",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "공포",
+   "약물",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-011",
+  "date": "2024-11-30",
+  "title": "The Last One Cup",
+  "applicant": "황지인",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241130-012",
+  "date": "2024-11-30",
+  "title": "타부티",
+  "applicant": "장광호",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241202-001",
+  "date": "2024-12-02",
+  "title": "내 친구 오트리온",
+  "applicant": "문유현",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241205-001",
   "date": "2024-12-05",
   "title": "Grand Criminal Online(그랜드 크리미널 온라인)",
@@ -6189,6 +7370,20 @@
    "언어"
   ],
   "summary": "적을 처치하여 재료를 획득하고 장비를 강화하는 TPS 게임물"
+ },
+ {
+  "id": "SC-OM-241205-001",
+  "date": "2024-12-05",
+  "title": "Mech vs Aliens: War Robots RPG",
+  "applicant": "Rightsoft Labs LTD",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-241206-001",
@@ -6316,6 +7511,294 @@
   "summary": "거북이가 달리기 경주에서 다양한 방해를 이겨내며 결승선에 도착하는 내용의 캐주얼 게임"
  },
  {
+  "id": "SC-OM-241206-001",
+  "date": "2024-12-06",
+  "title": "리메멘토 - 하얀 그림자 (15세이용가)",
+  "applicant": "주식회사 블랙스톰",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-001",
+  "date": "2024-12-09",
+  "title": "축귀",
+  "applicant": "강민주",
+  "rating": "15세이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "공포",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-002",
+  "date": "2024-12-09",
+  "title": "Aphotica",
+  "applicant": "이민경",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-003",
+  "date": "2024-12-09",
+  "title": "나의 바다",
+  "applicant": "임수민",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-004",
+  "date": "2024-12-09",
+  "title": "코모서스의 파인애플",
+  "applicant": "이정범",
+  "rating": "12세이용가",
+  "genre": "기타",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-005",
+  "date": "2024-12-09",
+  "title": "라자냐 33세",
+  "applicant": "정동진",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-006",
+  "date": "2024-12-09",
+  "title": "은랑의 마탄",
+  "applicant": "김동영",
+  "rating": "12세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-007",
+  "date": "2024-12-09",
+  "title": "마나볼 스트라이크",
+  "applicant": "이진우",
+  "rating": "12세이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-008",
+  "date": "2024-12-09",
+  "title": "대환장게임즈",
+  "applicant": "정지우",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-009",
+  "date": "2024-12-09",
+  "title": "미드나잇드림",
+  "applicant": "표준호",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-010",
+  "date": "2024-12-09",
+  "title": "Railway To HELL",
+  "applicant": "조준영",
+  "rating": "15세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "언어",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-011",
+  "date": "2024-12-09",
+  "title": "Shotgun Princess: Iron horse knight",
+  "applicant": "고재호",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241209-012",
+  "date": "2024-12-09",
+  "title": "마족 나와!",
+  "applicant": "구경모",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241210-001",
+  "date": "2024-12-10",
+  "title": "Short RPG",
+  "applicant": "권준혁",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241211-001",
+  "date": "2024-12-11",
+  "title": "Roll Me : The Cube",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-001",
+  "date": "2024-12-11",
+  "title": "No Sound Aloud",
+  "applicant": "김혜리",
+  "rating": "15세이용가",
+  "genre": "기타",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포",
+   "언어",
+   "범죄"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-002",
+  "date": "2024-12-11",
+  "title": "Time Player",
+  "applicant": "윤지석",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-003",
+  "date": "2024-12-11",
+  "title": "이주대탐험",
+  "applicant": "정재훈",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-004",
+  "date": "2024-12-11",
+  "title": "Who＇s That",
+  "applicant": "박서진",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-005",
+  "date": "2024-12-11",
+  "title": "던전 배달부",
+  "applicant": "이재용",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-006",
+  "date": "2024-12-11",
+  "title": "Path of Trust",
+  "applicant": "이재찬",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241211-007",
+  "date": "2024-12-11",
+  "title": "신비한 한약의 숲",
+  "applicant": "이채원",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-241212-001",
   "date": "2024-12-12",
   "title": "Dragonheir: Silent Gods",
@@ -6342,6 +7825,96 @@
    "언어"
   ],
   "summary": "프랑스 벨 에포크 시대를 배경으로 하는 판타지 턴제 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-FM-241216-001",
+  "date": "2024-12-16",
+  "title": "Bursting Germs",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-002",
+  "date": "2024-12-16",
+  "title": "Gravity Handler",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-003",
+  "date": "2024-12-16",
+  "title": "Jelly Wars (왕국의 시대)",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-004",
+  "date": "2024-12-16",
+  "title": "Twist Mania",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-005",
+  "date": "2024-12-16",
+  "title": "Flomico",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-006",
+  "date": "2024-12-16",
+  "title": "Twist Carnival",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-241216-007",
+  "date": "2024-12-16",
+  "title": "Dr. Jelfi",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-241216-001",
+  "date": "2024-12-16",
+  "title": "Suro Throw",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-241219-001",
@@ -6396,6 +7969,17 @@
    "언어"
   ],
   "summary": "1980년대 영화를 원작으로, 인간과 외계인삐에로가 역할을 분담해 진행하는 호러 액션 게임물"
+ },
+ {
+  "id": "SC-FM-241219-001",
+  "date": "2024-12-19",
+  "title": "Pet ME!",
+  "applicant": "박서진",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-241220-002",
@@ -6489,6 +8073,20 @@
    "언어"
   ],
   "summary": "뱀파이어가 되어 미스터리를 해결하는 1인칭 액션 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-OM-250102-001",
+  "date": "2025-01-02",
+  "title": "종말의 날: 아포칼립스",
+  "applicant": "KAKU DIGITAL LIMITED",
+  "rating": "15세이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250103-001",
@@ -6623,6 +8221,20 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "2425시즌의 축구 감독이 되어서 구단을 관리하고 성장시키는 콘솔용 시뮬레이션 게임"
+ },
+ {
+  "id": "SC-OM-250103-001",
+  "date": "2025-01-03",
+  "title": "계엄123",
+  "applicant": "한재혁",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "범죄"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NP-250109-001",
@@ -6855,6 +8467,17 @@
   "summary": "여러장의 그림퍼즐 중 동일한 그림 두장을 찾아 제공되는 모든 그림을 제거하면 클리어되는 내용의 퍼즐형 일러스트 수집 게임물"
  },
  {
+  "id": "SC-OM-250116-001",
+  "date": "2025-01-16",
+  "title": "NEW마티팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "GC-CC-NP-250117-001",
   "date": "2025-01-17",
   "title": "YS는 잘 맞춰",
@@ -7051,6 +8674,30 @@
   "summary": "북유럽 로마신화를 각색한 세계관을 배경인 액션 MMORPG"
  },
  {
+  "id": "SC-FP-250124-001",
+  "date": "2025-01-24",
+  "title": "NEON CITY RUN",
+  "applicant": "이은진",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-250124-002",
+  "date": "2025-01-24",
+  "title": "Garbage defense",
+  "applicant": "이은진",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NV-250206-001",
   "date": "2025-02-06",
   "title": "Death Stranding 2: On The Beach (데스 스트랜딩 2: 온 더 비치)",
@@ -7148,6 +8795,20 @@
    "사행성"
   ],
   "summary": "유명 JRPG 시리즈 \"LUNAR SILVER STAR STORY\"와 \"LUNAR 2 ETERNAL BLUE\"의 리마스터 합본 게임물"
+ },
+ {
+  "id": "SC-OM-250206-001",
+  "date": "2025-02-06",
+  "title": "체이서즈",
+  "applicant": "(주)라이펄스",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250207-001",
@@ -7706,6 +9367,20 @@
   "summary": "판타지세계가 배경인 고전방식의 던전 크롤러 롤플레잉 게임물"
  },
  {
+  "id": "SC-OM-250305-001",
+  "date": "2025-03-05",
+  "title": "협객전",
+  "applicant": "HK FOREVER9 TECHNOLOGY CO.,LIMITED",
+  "rating": "12세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-250306-001",
   "date": "2025-03-06",
   "title": "CALIVERSE : INVASION",
@@ -7787,6 +9462,19 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "그림책을 읽어가며 밈들의 세계를 구원하고, 최고의 요리를 만드는 내용의 게임물"
+ },
+ {
+  "id": "SC-OM-250306-001",
+  "date": "2025-03-06",
+  "title": "뿜뿜히어로즈",
+  "applicant": "(주)하이게임즈",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250307-001",
@@ -7907,6 +9595,17 @@
   "summary": "주인공 ‘아기 오구’가 맵을 탐험하고 수수께끼를 풀며 곤경에 처한 친구들을 돕고 세상을 구한다는 내용의 어드벤처 게임"
  },
  {
+  "id": "SC-OM-250310-001",
+  "date": "2025-03-10",
+  "title": "ICE RUN(지구방위대)",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-250313-001",
   "date": "2025-03-13",
   "title": "버나드 쏜의 편지",
@@ -7947,6 +9646,19 @@
    "선정성"
   ],
   "summary": "화면을 터치해 2분 동안 등장하는 클레이를 격파하여 일러스트를 수집하는 게임물"
+ },
+ {
+  "id": "SC-FP-250313-001",
+  "date": "2025-03-13",
+  "title": "Dice Making Ending(주사위가 엔딩을 만든다)",
+  "applicant": "정상택",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NV-250320-001",
@@ -8236,6 +9948,32 @@
   "summary": "레고를 테마로 다양한 미니게임, 보드게임을 즐길 수 있는 게임물"
  },
  {
+  "id": "SC-OM-250327-001",
+  "date": "2025-03-27",
+  "title": "약빤삼국: 캐주얼 대전 RPG",
+  "applicant": "주식회사 미플게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250401-001",
+  "date": "2025-04-01",
+  "title": "World Tour Merge: Merging Game",
+  "applicant": "Soloband Games Ltd",
+  "rating": "청소년이용불가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250403-001",
   "date": "2025-04-03",
   "title": "magl",
@@ -8405,6 +10143,19 @@
    "선정성"
   ],
   "summary": "다양한 함선을 이용한 해상 전투를 경험할 수 있는 콘솔용 액션 게임"
+ },
+ {
+  "id": "SC-OM-250407-001",
+  "date": "2025-04-07",
+  "title": "Tactical OPS－FPS Shooting Game",
+  "applicant": "Edkon Games GmbH",
+  "rating": "15세이용가",
+  "genre": "FPS/TPS",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NP-250410-001",
@@ -8720,6 +10471,61 @@
   "summary": "기존에 발매했던 건볼트 시리즈 3작품의 합본팩"
  },
  {
+  "id": "SC-OM-250422-001",
+  "date": "2025-04-22",
+  "title": "슬라이딩 퍼즐",
+  "applicant": "주식회사 똑똑한개발자",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250422-002",
+  "date": "2025-04-22",
+  "title": "Remove The Apple(사과를 제거하라!)",
+  "applicant": "주식회사 똑똑한개발자",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250422-003",
+  "date": "2025-04-22",
+  "title": "지렁이 키우기(Infinity Worm)",
+  "applicant": "주식회사 똑똑한개발자",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250422-004",
+  "date": "2025-04-22",
+  "title": "절대색감(Find Color)",
+  "applicant": "주식회사 똑똑한개발자",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250422-005",
+  "date": "2025-04-22",
+  "title": "티켓팅 게임(Ticketing Game)",
+  "applicant": "주식회사 똑똑한개발자",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-250424-001",
   "date": "2025-04-24",
   "title": "Mafia The Old Country (마피아 올드 컨트리)",
@@ -8788,6 +10594,47 @@
    "폭력성"
   ],
   "summary": "고등학교를 배경으로 글리치 세계의 디자이어와 대적하는 내용을 그린 롤플레잉 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-250424-001",
+  "date": "2025-04-24",
+  "title": "Kiss of the Inferno (키스오브더인페르노)",
+  "applicant": "주식회사 애니듀",
+  "rating": "15세이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성",
+   "언어"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250428-001",
+  "date": "2025-04-28",
+  "title": "던전탈출",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250429-001",
+  "date": "2025-04-29",
+  "title": "소녀의 숲",
+  "applicant": "HK FOREVER9 TECHNOLOGY CO.,LIMITED",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NP-250508-002",
@@ -9120,6 +10967,44 @@
    "선정성"
   ],
   "summary": "동방Project 인기 어레인지 악곡과 원곡을 플레이 가능한 탄막 슈팅과 리듬 게임의 요소를 합친 게임물"
+ },
+ {
+  "id": "SC-FP-250521-001",
+  "date": "2025-05-21",
+  "title": "Inner Scape",
+  "applicant": "이상민",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250521-001",
+  "date": "2025-05-21",
+  "title": "Drift Racing:3v3",
+  "applicant": "Nicety Games",
+  "rating": "12세이용가",
+  "genre": "레이싱",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250521-002",
+  "date": "2025-05-21",
+  "title": "Element Fission",
+  "applicant": "Shenzhen Fullstackhero Technology Co.,Ltd.",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NP-250522-001",
@@ -9587,6 +11472,39 @@
   "summary": "다양한 무기와 카라쿠리를 사용하여 케모노를 사냥하는 Nintendo Switch 2용 액션 게임"
  },
  {
+  "id": "SC-FP-250527-001",
+  "date": "2025-05-27",
+  "title": "Traffic Quest",
+  "applicant": "오규환",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250527-001",
+  "date": "2025-05-27",
+  "title": "AniParty 애니파티",
+  "applicant": "Fansister Techonology Limited",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-FP-250528-001",
+  "date": "2025-05-28",
+  "title": "Follow the Instructions, Please",
+  "applicant": "국동진",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "PC/온라인 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-250529-001",
   "date": "2025-05-29",
   "title": "크로노 오디세이(Chrono Odyssey)",
@@ -9699,6 +11617,28 @@
    "범죄"
   ],
   "summary": "암살자가 되어 다양한 방법을 사용해 목표를 암살하는 내용의 잠입 액션 게임물인 히트맨 시리즈의 합본 게임물"
+ },
+ {
+  "id": "SC-OM-250529-001",
+  "date": "2025-05-29",
+  "title": "CapyParty 카피파티",
+  "applicant": "Fansister Techonology Limited",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250604-001",
+  "date": "2025-06-04",
+  "title": "Maze Of The Element",
+  "applicant": "조윤아",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-NP-250605-004",
@@ -9883,6 +11823,19 @@
   "summary": "아돌 크리스틴 일행의 오벨리아만 모험을 다룬 롤플레잉 게임물"
  },
  {
+  "id": "SC-FM-250611-001",
+  "date": "2025-06-11",
+  "title": "Affectra",
+  "applicant": "이준상",
+  "rating": "12세이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-NP-250612-002",
   "date": "2025-06-12",
   "title": "과몰입금지2: 여름포차",
@@ -9994,6 +11947,94 @@
    "언어"
   ],
   "summary": "전쟁의 위기에 처한 세계에서 신뢰와 구원, 희생에 관한 이야기를 그린 액션 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-250612-001",
+  "date": "2025-06-12",
+  "title": "세렝게티 연못의 개구리",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-002",
+  "date": "2025-06-12",
+  "title": "바오밥나무 오르기",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-003",
+  "date": "2025-06-12",
+  "title": "바오밥나무를 지켜라",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-004",
+  "date": "2025-06-12",
+  "title": "FC 후엠아이",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-005",
+  "date": "2025-06-12",
+  "title": "숨은 펫 구슬찾기",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-006",
+  "date": "2025-06-12",
+  "title": "후엠아이 보석잇기",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-007",
+  "date": "2025-06-12",
+  "title": "세렝게티 과일가게",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250612-008",
+  "date": "2025-06-12",
+  "title": "사파리 만찬",
+  "applicant": "지니웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250613-001",
@@ -10203,6 +12244,19 @@
    "약물"
   ],
   "summary": "직장을 배경으로 퇴사를 향한 장대한 여정 속에서 회사 동료들을 날려 버리는 벨트스크롤 액션게임"
+ },
+ {
+  "id": "SC-FP-250616-001",
+  "date": "2025-06-16",
+  "title": "감정의 정원",
+  "applicant": "김현",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "PC/온라인 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-NV-250619-001",
@@ -10737,6 +12791,31 @@
   "summary": "오르스테라 대륙을 무대로 진행되는 롤플레잉 게임물"
  },
  {
+  "id": "SC-OM-250707-001",
+  "date": "2025-07-07",
+  "title": "Block Puzzle King",
+  "applicant": "Tran Van Hung",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250708-001",
+  "date": "2025-07-08",
+  "title": "Dark War Survival",
+  "applicant": "FLORERE GAME LIMITED",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250710-001",
   "date": "2025-07-10",
   "title": "조선협객전 클래식",
@@ -11085,6 +13164,30 @@
   "summary": "2017년에 발매된 ‘리틀 나이트메어’의 본편과 DLC가 포함된 버전으로 화질 등 품질을 향상시킨 개선 버전"
  },
  {
+  "id": "SC-OM-250715-001",
+  "date": "2025-07-15",
+  "title": "Link : Adventure Story",
+  "applicant": "버터소프트 주식회사",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250715-002",
+  "date": "2025-07-15",
+  "title": "두뇌왕중왕",
+  "applicant": "Fansister Techonology Limited",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250717-001",
   "date": "2025-07-17",
   "title": "트라이워M",
@@ -11124,6 +13227,19 @@
    "폭력성"
   ],
   "summary": "로봇들에게 점령당한 도시를 사이보그 소녀들이 구하는 액션 게임물"
+ },
+ {
+  "id": "SC-OM-250718-001",
+  "date": "2025-07-18",
+  "title": "엉망 삼국지",
+  "applicant": "HK FOREVER9 TECHNOLOGY CO.,LIMITED",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250725-001",
@@ -11302,6 +13418,17 @@
   "summary": "검은 옷의 소녀 ‘시로하’가 종이 인형 ‘시오리’와 함께 잃어버린 기억을 되찾아 원래 세계로의 귀환을 목표로 하는 2D 횡스크롤 액션 게임"
  },
  {
+  "id": "SC-OM-250725-001",
+  "date": "2025-07-25",
+  "title": "Mahjong solitaire classic",
+  "applicant": "비트망고",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250731-004",
   "date": "2025-07-31",
   "title": "열혈강호: 귀환",
@@ -11410,6 +13537,17 @@
    "약물"
   ],
   "summary": "＇Surviving Mars＇의 리마스터로 화성을 개척하고 생존하는 내용의 전략 시뮬레이션 게임물"
+ },
+ {
+  "id": "SC-OM-250807-001",
+  "date": "2025-08-07",
+  "title": "포토퍼즐",
+  "applicant": "김예찬",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250808-001",
@@ -11542,6 +13680,30 @@
   "summary": "인간과 정령이 공존하는 세계 리제 맥시아에서 대이변의 원인을 파악하기 위해 두 주인공이 겪는 모험을 다룬 롤플레잉 게임"
  },
  {
+  "id": "SC-OM-250808-001",
+  "date": "2025-08-08",
+  "title": "펭구르르",
+  "applicant": "어반스토어",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250808-002",
+  "date": "2025-08-08",
+  "title": "Stoopid Blocks",
+  "applicant": "Aurix Interactive",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250814-001",
   "date": "2025-08-14",
   "title": "AION2",
@@ -11580,6 +13742,17 @@
    "선정성"
   ],
   "summary": "화면을 터치해 사방에서 날라오는 적의 미사일을 회피하며 1분을 버티는 내용의 일러스트 수집형 게임물"
+ },
+ {
+  "id": "SC-OM-250819-001",
+  "date": "2025-08-19",
+  "title": "애큐온 모아팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-250821-001",
@@ -11649,6 +13822,72 @@
    "언어"
   ],
   "summary": "위험에 처한 동료를 구하기 위해 그가 일했던 시설을 탐험하는 내용을 담은 액션 게임물"
+ },
+ {
+  "id": "SC-OM-250821-001",
+  "date": "2025-08-21",
+  "title": "쏴파랑 활의전설",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250821-002",
+  "date": "2025-08-21",
+  "title": "픽미 동물친구들",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250821-003",
+  "date": "2025-08-21",
+  "title": "달콤달콤 사천성",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250821-004",
+  "date": "2025-08-21",
+  "title": "합쳐팡 인 포레스트",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250821-005",
+  "date": "2025-08-21",
+  "title": "브릭팡 벽돌의제왕",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250821-006",
+  "date": "2025-08-21",
+  "title": "매직 버블슛",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250822-001",
@@ -11757,6 +13996,17 @@
    "폭력성"
   ],
   "summary": "전투기를 조종해 적들의 포탄을 피하고, 물리치는 슈팅 액션 게임"
+ },
+ {
+  "id": "SC-OM-250902-001",
+  "date": "2025-09-02",
+  "title": "BBB(비비비)",
+  "applicant": "리비트게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-250904-001",
@@ -11930,6 +14180,70 @@
   "summary": "버려진 장난감 공장에서 퍼즐을 풀고 괴물로부터 살아남아야 하는 서바이벌 호러 장르"
  },
  {
+  "id": "SC-OM-250905-001",
+  "date": "2025-09-05",
+  "title": "Ricochet Squad",
+  "applicant": "NICE PLANS STUDIO LTD",
+  "rating": "전체이용가",
+  "genre": "FPS/TPS",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250905-002",
+  "date": "2025-09-05",
+  "title": "캣걸서바이벌 오리진 (Cat Girl Survivor Origin)",
+  "applicant": "주식회사 미니멈스튜디오",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250908-001",
+  "date": "2025-09-08",
+  "title": "프룻체스",
+  "applicant": "박찬휘",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250908-002",
+  "date": "2025-09-08",
+  "title": "DC: Dark Legion（DC: 다크 리전）",
+  "applicant": "FunPlus International AG",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-FM-250909-001",
+  "date": "2025-09-09",
+  "title": "집사VS냥냥",
+  "applicant": "서동환",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250911-003",
   "date": "2025-09-11",
   "title": "이클립스: 더 어웨이크닝",
@@ -11957,6 +14271,50 @@
    "약물"
   ],
   "summary": "우연히 발견한 수수께끼의 석판을 계기로 판타지 세계의 모험을 수행해 나가는 롤플레잉 게임"
+ },
+ {
+  "id": "SC-OM-250911-002",
+  "date": "2025-09-11",
+  "title": "홈런왕 : 슈퍼홈런더비",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250916-001",
+  "date": "2025-09-16",
+  "title": "쬬르디 짝 맞추기",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250916-002",
+  "date": "2025-09-16",
+  "title": "쬬르디 퍼즐 맞추기",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250916-003",
+  "date": "2025-09-16",
+  "title": "쬬르디 알캐치",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-250918-001",
@@ -12023,6 +14381,41 @@
    "약물"
   ],
   "summary": "좌초된 우주비행사 얀이 자신을 복제하여 낯선 행성에서 탈출하는 내용을 그린 어드벤쳐 게임물"
+ },
+ {
+  "id": "SC-OM-250918-001",
+  "date": "2025-09-18",
+  "title": "JUMPING PET",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250918-002",
+  "date": "2025-09-18",
+  "title": "페이펫 사천성",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250918-003",
+  "date": "2025-09-18",
+  "title": "Party Up",
+  "applicant": "(주)위펀인터렉티브",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-250919-001",
@@ -12313,6 +14706,41 @@
   "summary": "팀에서 한 명의 플레이어를 3인칭 관점으로 플레이하는 축구 스포츠 액션 게임"
  },
  {
+  "id": "SC-OM-250924-001",
+  "date": "2025-09-24",
+  "title": "FruitToktok 과일톡톡",
+  "applicant": "Fansister Techonology Limited",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250924-002",
+  "date": "2025-09-24",
+  "title": "World War Armies: WW2 PvP RTS",
+  "applicant": "Hypemasters, Inc.",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250924-003",
+  "date": "2025-09-24",
+  "title": "냥이퍼즐타임",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-250925-001",
   "date": "2025-09-25",
   "title": "호라이즌 워커(Horizon Walker)",
@@ -12409,6 +14837,151 @@
   "summary": "50여가지의 리뎀션 아케이드 게임 등 을 즐길 수 있는 세컨드라이프 게임물"
  },
  {
+  "id": "SC-OM-250925-001",
+  "date": "2025-09-25",
+  "title": "로디의 대모험",
+  "applicant": "(주)엘루오씨앤씨",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250925-002",
+  "date": "2025-09-25",
+  "title": "냥냥매치",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250925-003",
+  "date": "2025-09-25",
+  "title": "애니멀체스",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250926-001",
+  "date": "2025-09-26",
+  "title": "어부 일기",
+  "applicant": "(주)루미디아게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250926-002",
+  "date": "2025-09-26",
+  "title": "오션 팡팡",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250926-003",
+  "date": "2025-09-26",
+  "title": "Merge Planet (머지 플래닛)",
+  "applicant": "레이어랩",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250926-004",
+  "date": "2025-09-26",
+  "title": "점프점프",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250926-005",
+  "date": "2025-09-26",
+  "title": "Cat Wars (캣 워즈)",
+  "applicant": "레이어랩",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250929-001",
+  "date": "2025-09-29",
+  "title": "내 감튀 내놔! Seagulls vs Fries",
+  "applicant": "Fansister Techonology Limited",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250929-002",
+  "date": "2025-09-29",
+  "title": "우주 대모험",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-250930-001",
+  "date": "2025-09-30",
+  "title": "원볼퍼즐",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251001-001",
+  "date": "2025-10-01",
+  "title": "알록달록 시험관",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251001-002",
+  "date": "2025-10-01",
+  "title": "플라워 퍼즐",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251002-002",
   "date": "2025-10-02",
   "title": "K-POP OX QUIZ",
@@ -12451,6 +15024,32 @@
   "platform": "모바일 게임",
   "descriptors": [],
   "summary": "귀여운 파티셰 고양이와 함께 다양한 디저트를 만들어 수집하는 내용의 캐주얼 게임물"
+ },
+ {
+  "id": "SC-OM-251002-001",
+  "date": "2025-10-02",
+  "title": "GEMPANG",
+  "applicant": "주식회사 빅크",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251014-001",
+  "date": "2025-10-14",
+  "title": "Warp Knights",
+  "applicant": "VIZTA PTE. LTD.",
+  "rating": "15세이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OM-251016-003",
@@ -12652,6 +15251,60 @@
   "summary": "끝나지 않는 악몽을 탈출하기 위한 사투를 그린 로그라이트 액션 게임"
  },
  {
+  "id": "SC-OM-251020-001",
+  "date": "2025-10-20",
+  "title": "Last Survival: Fleet Wars",
+  "applicant": "LIFE GAME PTE. LTD.",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성",
+   "약물"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251020-002",
+  "date": "2025-10-20",
+  "title": "Missile Rush (미사일 러시)",
+  "applicant": "레이어랩",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251020-003",
+  "date": "2025-10-20",
+  "title": "V Man (브이맨)",
+  "applicant": "레이어랩",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251021-001",
+  "date": "2025-10-21",
+  "title": "DRONE WAR (드론 워)",
+  "applicant": "조영환",
+  "rating": "전체이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251023-001",
   "date": "2025-10-23",
   "title": "I9: 인페르노 나인(19) - 세로형 RPG",
@@ -12693,6 +15346,50 @@
    "선정성"
   ],
   "summary": "화면을 터치해 블럭퍼즐을 맞추고 하트를 모아서 일러스트를 수집하는 게임물"
+ },
+ {
+  "id": "SC-OM-251024-001",
+  "date": "2025-10-24",
+  "title": "jumpers high (점퍼스하이)",
+  "applicant": "김현수",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251027-001",
+  "date": "2025-10-27",
+  "title": "헬스 히어로",
+  "applicant": "주식회사 디지레이",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251028-001",
+  "date": "2025-10-28",
+  "title": "셜록터틀",
+  "applicant": "크한",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251029-001",
+  "date": "2025-10-29",
+  "title": "SpinGo(스핀고)",
+  "applicant": "박상혁",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-251030-001",
@@ -12869,6 +15566,118 @@
   "summary": "화면에 나타나는 적들을 조준하고 사격하여 물리치는 레일 슈터 방식의 건 슈팅 액션 게임"
  },
  {
+  "id": "SC-OM-251031-001",
+  "date": "2025-10-31",
+  "title": "드래곤 플라이트 2 (DRAGON FLIGHT Ⅱ)",
+  "applicant": "(주)플레이위드코리아",
+  "rating": "15세이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251031-002",
+  "date": "2025-10-31",
+  "title": "범죄도시디펜스",
+  "applicant": "범죄도시디펜스",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251103-001",
+  "date": "2025-11-03",
+  "title": "바나나 점프 (BANANA JUMP)",
+  "applicant": "씨몽키 (SEE MONKEY)",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251103-002",
+  "date": "2025-11-03",
+  "title": "몬스터클리너(Monster Cleaner)",
+  "applicant": "(주)폴리아트",
+  "rating": "12세이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251104-001",
+  "date": "2025-11-04",
+  "title": "슬라임 대소동",
+  "applicant": "주식회사 미니멈스튜디오",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251104-002",
+  "date": "2025-11-04",
+  "title": "스틸 프론티어",
+  "applicant": "KAKU DIGITAL LIMITED",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251105-001",
+  "date": "2025-11-05",
+  "title": "병뚜껑 챔피언",
+  "applicant": "차승택",
+  "rating": "전체이용가",
+  "genre": "레이싱",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251105-002",
+  "date": "2025-11-05",
+  "title": "지뢰찾기 챌린지",
+  "applicant": "심플런",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251105-003",
+  "date": "2025-11-05",
+  "title": "Our Last Summer (그여름, 우리는)",
+  "applicant": "주식회사 애니듀",
+  "rating": "12세이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251106-001",
   "date": "2025-11-06",
   "title": "젖어버린그녀",
@@ -12963,6 +15772,42 @@
    "약물"
   ],
   "summary": "누명을 쓴 기자와 극비 임무를 띤 잠입경찰, 두 동물이 교도소의 거대한 음모를 파헤치는 생존 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-251111-001",
+  "date": "2025-11-11",
+  "title": "오션 테라리움",
+  "applicant": "김진",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251112-001",
+  "date": "2025-11-12",
+  "title": "NBA Basketball World(NBA농구월드)",
+  "applicant": "Hong Kong Qushang Technology Co., Limited",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "사행성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251112-002",
+  "date": "2025-11-12",
+  "title": "snake game",
+  "applicant": "네온픽셀",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OP-251113-001",
@@ -13209,6 +16054,17 @@
   "summary": "무시무시한 요괴를 만나고, 어둠이 도사리는 위험천만한 마을을 탐험하며, 지옥의 불길한 존재에 맞서 싸우는 액션 RPG"
  },
  {
+  "id": "SC-OM-251117-001",
+  "date": "2025-11-17",
+  "title": "Emoji 10",
+  "applicant": "주섭주섬",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251120-001",
   "date": "2025-11-20",
   "title": "소녀전쟁: 환상의 천하통일전(구글, 원스토어)",
@@ -13231,6 +16087,98 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "손님이 요청한 음식의 재료를 조합해 제한된 시간 안에 조리하고 제공하는 방식의 캐주얼 게임물"
+ },
+ {
+  "id": "SC-OM-251121-001",
+  "date": "2025-11-21",
+  "title": "Sol - 기억별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251121-002",
+  "date": "2025-11-21",
+  "title": "Sol - 기회의별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251121-003",
+  "date": "2025-11-21",
+  "title": "Sol - 정리별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251125-001",
+  "date": "2025-11-25",
+  "title": "와우 용병단",
+  "applicant": "주식회사 엔드나인게임즈",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251125-002",
+  "date": "2025-11-25",
+  "title": "오션 워:삼각 격돌",
+  "applicant": "FT Entertainment Limited",
+  "rating": "15세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251125-003",
+  "date": "2025-11-25",
+  "title": "사 to the 과 to the 게임",
+  "applicant": "주식회사 블로믹스",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251126-001",
+  "date": "2025-11-26",
+  "title": "Sol - 질주의 별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251126-002",
+  "date": "2025-11-26",
+  "title": "Sol - 저축의 별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-251127-002",
@@ -13269,6 +16217,17 @@
    "선정성"
   ],
   "summary": "1990년 ＇PC엔진＇으로 발매된 만화 원작의 ＇시티헌터＇를 리메이크한 게임물"
+ },
+ {
+  "id": "SC-OM-251127-001",
+  "date": "2025-11-27",
+  "title": "폐의약품 수거히어로, 달려라 우체통!",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "레이싱",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-251128-001",
@@ -13420,6 +16379,39 @@
   "summary": "‘라이덴 파이터즈’ 시리즈의 3가지 작품이 수록된 비행슈팅 게임"
  },
  {
+  "id": "SC-OM-251128-001",
+  "date": "2025-11-28",
+  "title": "퍼즐 블록 마스터 (Puzzle Block Master)",
+  "applicant": "주식회사 슈퍼진",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251202-001",
+  "date": "2025-12-02",
+  "title": "Sol - 지구별 게임",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251203-001",
+  "date": "2025-12-03",
+  "title": "워드러시: 베네치아",
+  "applicant": "양성우",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251204-001",
   "date": "2025-12-04",
   "title": "Shoot Out",
@@ -13487,6 +16479,28 @@
    "약물"
   ],
   "summary": "여대를 무대로 한 실사 기반 연애 시뮬레이션 게임물"
+ },
+ {
+  "id": "SC-OM-251208-001",
+  "date": "2025-12-08",
+  "title": "데이지 피우기",
+  "applicant": "스튜디오 선재(STUDIO SEONJAE)",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251208-002",
+  "date": "2025-12-08",
+  "title": "TilePuzzlePop",
+  "applicant": "콰피게임즈",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-251211-001",
@@ -13580,6 +16594,52 @@
    "선정성"
   ],
   "summary": "하프 지니 영웅 ＇샨테＇가 유물을 되찾고 고향을 지키기 위한 여정을 담은 게임물"
+ },
+ {
+  "id": "SC-OM-251211-001",
+  "date": "2025-12-11",
+  "title": "일이삼",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251211-002",
+  "date": "2025-12-11",
+  "title": "BOOMBAYA(붐바야)",
+  "applicant": "상현네트웍스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251211-003",
+  "date": "2025-12-11",
+  "title": "피지컬 1％",
+  "applicant": "바이탈랩스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251211-004",
+  "date": "2025-12-11",
+  "title": "싹쓸이블랙홀",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-251212-001",
@@ -13803,6 +16863,28 @@
   "summary": "애니메이션 「마왕님, 리트라이! R」를 원작으로 하는 육성 RPG 게임물"
  },
  {
+  "id": "SC-OM-251218-001",
+  "date": "2025-12-18",
+  "title": "냥티비",
+  "applicant": "코다크리에이티브",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-251222-001",
+  "date": "2025-12-22",
+  "title": "이탈리안 브레인롯 2048",
+  "applicant": "주식회사 미디어나비",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "GC-CC-NP-251226-001",
   "date": "2025-12-26",
   "title": "미드나잇 워커스",
@@ -13977,6 +17059,19 @@
   "summary": "에너지 자원을 찾기 위해 행성을 탐험하며 전투를 진행하는 로그라이크 TPS 게임"
  },
  {
+  "id": "SC-OM-251229-001",
+  "date": "2025-12-29",
+  "title": "기어몬: 타워 디펜스",
+  "applicant": "PERFEGGS TECHNOLOGY CO., LIMITED",
+  "rating": "12세이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-251230-001",
   "date": "2025-12-30",
   "title": "새비지 서바이벌: 쥬라기 아일",
@@ -14095,6 +17190,39 @@
    "폭력성"
   ],
   "summary": "대재앙 이후 괴물로 황폐해진 일본에서 저주받은 인간과 반려견의 여정을 그린 액션 RPG 게임물"
+ },
+ {
+  "id": "SC-OM-251230-001",
+  "date": "2025-12-30",
+  "title": "Fluffy Fling",
+  "applicant": "콰피게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260105-001",
+  "date": "2026-01-05",
+  "title": "코지 타일즈 (Cozy Tiles)",
+  "applicant": "주식회사 슈퍼진",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260107-001",
+  "date": "2026-01-07",
+  "title": "타자월드",
+  "applicant": "다운테크",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-260108-001",
@@ -14409,6 +17537,17 @@
   "summary": "‘슈퍼 마리오브라더스 원더’에 새로운 월드인 ‘방울 파크’가 추가된 액션 게임"
  },
  {
+  "id": "SC-OM-260113-001",
+  "date": "2026-01-13",
+  "title": "브레인롯 팡팡",
+  "applicant": "주식회사 미디어나비",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260115-001",
   "date": "2026-01-15",
   "title": "황혼의 태양",
@@ -14450,6 +17589,87 @@
   "summary": "혈교의 음모에 맞서 중원을 수호하는 무인의 서사를 다룬 도트 그래픽 기반의 무협 RPG"
  },
  {
+  "id": "SC-OM-260115-001",
+  "date": "2026-01-15",
+  "title": "레인보우칵테일",
+  "applicant": "주식회사 베리팟",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260115-002",
+  "date": "2026-01-15",
+  "title": "Smashworld: Beat Explorers",
+  "applicant": "Smash Labs S.R.L.",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260119-001",
+  "date": "2026-01-19",
+  "title": "바드캣 키우기",
+  "applicant": "레이어랩",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260119-002",
+  "date": "2026-01-19",
+  "title": "호이월드",
+  "applicant": "호이월드",
+  "rating": "전체이용가",
+  "genre": "MMORPG",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260120-001",
+  "date": "2026-01-20",
+  "title": "캔디팡",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260120-002",
+  "date": "2026-01-20",
+  "title": "todaysfarm",
+  "applicant": "주식회사 스파크게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260121-001",
+  "date": "2026-01-21",
+  "title": "빙판 위의 꿈 스케이트 챌린지 도전",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "스포츠",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260122-001",
   "date": "2026-01-22",
   "title": "Headshot ZD : Survivors vs Zombie Doomsday",
@@ -14488,6 +17708,19 @@
    "폭력성"
   ],
   "summary": "섬에 추락한 후 고립된 섬 중앙에 있는 산을 올라 탈출하는 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-260122-001",
+  "date": "2026-01-22",
+  "title": "펜슬피커",
+  "applicant": "단테컴퍼니",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260123-001",
@@ -14711,6 +17944,39 @@
   "summary": "주인공 ‘필로’가 미지의 행성을 탐험하며, 신비로운 발견을 ‘홀로북’에 스티커로 기록하는 어드벤처 게임"
  },
  {
+  "id": "SC-OM-260126-001",
+  "date": "2026-01-26",
+  "title": "페이펫 2048",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260126-002",
+  "date": "2026-01-26",
+  "title": "페이펫 블록퍼즐",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260126-003",
+  "date": "2026-01-26",
+  "title": "브레인롯 아이들",
+  "applicant": "주식회사 미디어나비",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260129-001",
   "date": "2026-01-29",
   "title": "전장의 그녀 8",
@@ -14752,6 +18018,61 @@
    "약물"
   ],
   "summary": "지명수배 범죄자가 된 여동생을 구하기 위해 무법자가 되어 대형 제약회사를 무너뜨리기 위한 여정을 그린 FPS 게임물"
+ },
+ {
+  "id": "SC-OM-260129-001",
+  "date": "2026-01-29",
+  "title": "항구 키우기",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260203-001",
+  "date": "2026-02-03",
+  "title": "냥이 대탈출",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260204-001",
+  "date": "2026-02-04",
+  "title": "랜덤 쬬르디 찾기",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260204-002",
+  "date": "2026-02-04",
+  "title": "말티쬬 점프점프!",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260204-003",
+  "date": "2026-02-04",
+  "title": "프루티슛",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-260205-003",
@@ -15075,6 +18396,61 @@
   "summary": "외계 문명들의 전투에 휘말려 지구를 잃어버린 인류가 미지의 행성 ‘미라’에서 생존하기 위해 탐색하는 내용의 롤플레잉 게임"
  },
  {
+  "id": "SC-OM-260206-001",
+  "date": "2026-02-06",
+  "title": "열차건설단",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260206-002",
+  "date": "2026-02-06",
+  "title": "페이펫 매치",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260206-003",
+  "date": "2026-02-06",
+  "title": "머지펫",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260206-004",
+  "date": "2026-02-06",
+  "title": "페이펫 트리플",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260209-001",
+  "date": "2026-02-09",
+  "title": "Touch Jump",
+  "applicant": "에고웍스(EGO-Works)",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260212-001",
   "date": "2026-02-12",
   "title": "S.O.S: 스테이트 오브 서바이벌",
@@ -15138,6 +18514,17 @@
   "platform": "PC/온라인 게임",
   "descriptors": [],
   "summary": "일본어를 기초부터 단계적으로 학습할 수 있는 교육용 언어 학습 게임물"
+ },
+ {
+  "id": "SC-OM-260212-001",
+  "date": "2026-02-12",
+  "title": "잘라라! 과일팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260213-001",
@@ -15265,6 +18652,17 @@
   "summary": "Granblue Fantasy: Relink의 확장팩 Endless Ragnarok을 포함한 합본 게임물"
  },
  {
+  "id": "SC-OM-260219-001",
+  "date": "2026-02-19",
+  "title": "매치x매치",
+  "applicant": "라인넥스트 주식회사",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260226-001",
   "date": "2026-02-26",
   "title": "페달소녀",
@@ -15332,6 +18730,19 @@
    "약물"
   ],
   "summary": "세 명의 절친이 함께 보내는 마지막 날을 배경으로 한 싱글 플레이어 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-260226-001",
+  "date": "2026-02-26",
+  "title": "꿈꾸는 가구점",
+  "applicant": "주식회사 케이8게임즈",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260227-001",
@@ -15540,6 +18951,87 @@
   "summary": "봄버맨을 조작하여 폭탄을 설치 후 터트려서 아이템을 수집하고 적과 전투를 수행하는 액션 게임"
  },
  {
+  "id": "SC-OM-260227-001",
+  "date": "2026-02-27",
+  "title": "내일은 요리왕",
+  "applicant": "플라잉스톤",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260227-002",
+  "date": "2026-02-27",
+  "title": "매일 단어 추리",
+  "applicant": "마블소프트",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260304-001",
+  "date": "2026-03-04",
+  "title": "탭브레인(Tapbrain)",
+  "applicant": "(주)스마트빅",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260304-002",
+  "date": "2026-03-04",
+  "title": "SWIFT",
+  "applicant": "마블소프트",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260304-003",
+  "date": "2026-03-04",
+  "title": "세종으로 환생했다",
+  "applicant": "마블소프트",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260304-004",
+  "date": "2026-03-04",
+  "title": "좀비 사태가 벌어졌다",
+  "applicant": "마블소프트",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260304-005",
+  "date": "2026-03-04",
+  "title": "오늘도 환생 2",
+  "applicant": "이꼬르",
+  "rating": "12세이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260305-001",
   "date": "2026-03-05",
   "title": "드래곤네스트 월드 (Dragon Nest WORLD)",
@@ -15575,6 +19067,85 @@
   "platform": "비디오 게임",
   "descriptors": [],
   "summary": "폭탄을 설치 후 터트려서 아이템을 수집하고 적과 전투를 수행하는 SUPER BOMBERMAN 1~5 시리즈의 합본팩"
+ },
+ {
+  "id": "SC-OM-260305-001",
+  "date": "2026-03-05",
+  "title": "냥머지",
+  "applicant": "민랩스",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260309-001",
+  "date": "2026-03-09",
+  "title": "떡상 디펜스",
+  "applicant": "버스터",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260310-001",
+  "date": "2026-03-10",
+  "title": "마피아 게임 도우미",
+  "applicant": "파크앤리",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260310-002",
+  "date": "2026-03-10",
+  "title": "Mighty Card Game - Giruda",
+  "applicant": "박준규",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260310-003",
+  "date": "2026-03-10",
+  "title": "벽돌 깨고 살아남기",
+  "applicant": "마블소프트",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260311-001",
+  "date": "2026-03-11",
+  "title": "냥이 스낵샵",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260311-002",
+  "date": "2026-03-11",
+  "title": "냥이 퍼즐팡 구해줘 냥이!",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-260312-001",
@@ -15932,6 +19503,28 @@
   "summary": "황금 펜을 찾기 위해 블루이와 함께 모험을 떠나는 어드벤처 게임"
  },
  {
+  "id": "SC-OM-260316-001",
+  "date": "2026-03-16",
+  "title": "BNK경남은행 퍼즐팡",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260316-002",
+  "date": "2026-03-16",
+  "title": "BNK경남은행 다른액션을찾아라!",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260319-002",
   "date": "2026-03-19",
   "title": "그녀와 미사일 피하기 6",
@@ -15956,6 +19549,44 @@
    "선정성"
   ],
   "summary": "화면을 터치해 2분 동안 등장하는 클레이를 격파하여 일러스트를 수집하는 게임물"
+ },
+ {
+  "id": "SC-OM-260319-001",
+  "date": "2026-03-19",
+  "title": "초자연 작전팀",
+  "applicant": "Giant Games",
+  "rating": "12세이용가",
+  "genre": "어드벤처",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성",
+   "공포"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260319-002",
+  "date": "2026-03-19",
+  "title": "내 두뇌 몇 등?",
+  "applicant": "파크앤리",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260323-001",
+  "date": "2026-03-23",
+  "title": "레인저스 키우기",
+  "applicant": "라인스튜디오 주식회사",
+  "rating": "전체이용가",
+  "genre": "롤플레잉",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "CC-OP-260326-001",
@@ -16142,6 +19773,30 @@
   "summary": "리듬에 맞춰 버튼을 눌러 다양한 미니게임을 즐기는 리듬 게임"
  },
  {
+  "id": "SC-OM-260401-001",
+  "date": "2026-04-01",
+  "title": "포마이닝(4Mining)",
+  "applicant": "(주)프롬더레드",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260401-002",
+  "date": "2026-04-01",
+  "title": "SWITCH LASER(스위치 레이저)",
+  "applicant": "알디유니버스",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OP-260402-001",
   "date": "2026-04-02",
   "title": "Chasing Kaleidorider",
@@ -16181,6 +19836,28 @@
    "언어"
   ],
   "summary": "종합격투기 대회인 UFC(Ultimate Fighting Championship)를 소재로 진행되는 시뮬레이션 격투 게임물"
+ },
+ {
+  "id": "SC-OM-260402-001",
+  "date": "2026-04-02",
+  "title": "전국민의 369",
+  "applicant": "주식회사 호우브로",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260407-001",
+  "date": "2026-04-07",
+  "title": "동물합치기",
+  "applicant": "구재회",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OP-260409-001",
@@ -16335,6 +20012,63 @@
   "summary": "삼합파와 함께 수수께끼가 가득한 미개척지를 무대로 모험을 펼치는 3인칭 슈팅 게임"
  },
  {
+  "id": "SC-OM-260410-001",
+  "date": "2026-04-10",
+  "title": "착착블록정리",
+  "applicant": "이백코딩(200Coding)",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260414-001",
+  "date": "2026-04-14",
+  "title": "스틱맨 대전",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260414-002",
+  "date": "2026-04-14",
+  "title": "사각구슬팡",
+  "applicant": "이백코딩(200Coding)",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260415-001",
+  "date": "2026-04-15",
+  "title": "사과를사각",
+  "applicant": "구재회",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260415-002",
+  "date": "2026-04-15",
+  "title": "별빛 유리 퍼즐",
+  "applicant": "김건",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260416-001",
   "date": "2026-04-16",
   "title": "Kiss of War",
@@ -16416,6 +20150,43 @@
   "summary": "농장 생활과 탐험을 병행하며 마을의 저주와 비밀을 파헤치는 스토리형 시뮬레이션 게임"
  },
  {
+  "id": "SC-OM-260417-001",
+  "date": "2026-04-17",
+  "title": "VOID SURVIVAL",
+  "applicant": "베터(WETTER)",
+  "rating": "12세이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260417-002",
+  "date": "2026-04-17",
+  "title": "Hollywood Merge",
+  "applicant": "VOYAGERONE DISTRIBUTION LIMITED",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260421-001",
+  "date": "2026-04-21",
+  "title": "무한의 알캐치",
+  "applicant": "주식회사 카카오",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260423-003",
   "date": "2026-04-23",
   "title": "CHAOS WORLD",
@@ -16455,6 +20226,19 @@
    "언어"
   ],
   "summary": "마블의 가디언즈 오브 갤럭시의 모험을 다룬 3인칭 액션 어드벤처 게임"
+ },
+ {
+  "id": "SC-OM-260423-001",
+  "date": "2026-04-23",
+  "title": "Hollywood Crush",
+  "applicant": "VOYAGERONE DISTRIBUTION LIMITED",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260424-001",
@@ -16660,6 +20444,61 @@
   "summary": "과거에 출시된 아케이드 게임 ‘텀블팝’을 현대적으로 리메이크한 액션 게임"
  },
  {
+  "id": "SC-OM-260427-001",
+  "date": "2026-04-27",
+  "title": "케이크 플레이",
+  "applicant": "이찬샘",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260427-002",
+  "date": "2026-04-27",
+  "title": "타로 카드 배틀",
+  "applicant": "플라워굿",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260427-003",
+  "date": "2026-04-27",
+  "title": "업다운 한수",
+  "applicant": "이인용",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260428-001",
+  "date": "2026-04-28",
+  "title": "탕탕 스네이크",
+  "applicant": "(주)쑨왕코리아",
+  "rating": "전체이용가",
+  "genre": "어드벤처",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260428-002",
+  "date": "2026-04-28",
+  "title": "솔리테어 시티 저니 (Solitaire City Journey)",
+  "applicant": "주식회사 슈퍼진",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OP-260430-001",
   "date": "2026-04-30",
   "title": "Road To Empress Ⅱ",
@@ -16699,6 +20538,56 @@
    "공포"
   ],
   "summary": "사신병에 걸려 ＇이서관＇으로 사라진 언니를 찾아 나선 주인공 모노의 여정을 담은 어드벤처 게임물"
+ },
+ {
+  "id": "SC-OM-260430-001",
+  "date": "2026-04-30",
+  "title": "식물 운빨 디펜스",
+  "applicant": "주식회사 골드플로우게임즈",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260430-002",
+  "date": "2026-04-30",
+  "title": "PetLand(팻렌드)",
+  "applicant": "THREE KINGDOMS LIMITED",
+  "rating": "12세이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260430-003",
+  "date": "2026-04-30",
+  "title": "암산의 신",
+  "applicant": "아현이네",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260506-001",
+  "date": "2026-05-06",
+  "title": "치킨삼국전",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "전략시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260508-001",
@@ -16832,6 +20721,39 @@
   "summary": "‘피트니스 복싱 3’에 일부 기능이 추가된 업그레이드 버전으로 트레이너의 지시 동작에 맞춰 복싱 트레이닝을 진행하는 스포츠 게임"
  },
  {
+  "id": "SC-OM-260511-001",
+  "date": "2026-05-11",
+  "title": "팡버블팡",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260513-001",
+  "date": "2026-05-13",
+  "title": "분식대란",
+  "applicant": "주식회사 케이티나스미디어",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260513-002",
+  "date": "2026-05-13",
+  "title": "스도쿠 마스터",
+  "applicant": "챗자비스(ChatJAVIS)",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260514-003",
   "date": "2026-05-14",
   "title": "킹덤2: 타오르는 전장",
@@ -16843,6 +20765,63 @@
    "사행성"
   ],
   "summary": "판타지를 배경으로 하는 오픈 필드 기반의 MMORPG 게임물"
+ },
+ {
+  "id": "SC-OM-260514-001",
+  "date": "2026-05-14",
+  "title": "Happiz POP",
+  "applicant": "주식회사 두잇파이브",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260518-001",
+  "date": "2026-05-18",
+  "title": "젬젬매치",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260518-002",
+  "date": "2026-05-18",
+  "title": "응애 신령 키우기",
+  "applicant": "펜션클라우드",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260518-003",
+  "date": "2026-05-18",
+  "title": "땅따먹기 클래식",
+  "applicant": "플랜트리",
+  "rating": "12세이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "선정성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260519-001",
+  "date": "2026-05-19",
+  "title": "번쩍 두뇌",
+  "applicant": "딴판팩토리",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-260521-001",
@@ -16912,6 +20891,28 @@
    "선정성"
   ],
   "summary": "가상의 세계를 배경으로 주인공과 동료들의 모험담을 그린 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-OM-260521-001",
+  "date": "2026-05-21",
+  "title": "토스트를 네 입에 토쓰",
+  "applicant": "말랑",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260521-002",
+  "date": "2026-05-21",
+  "title": "SPEED 가위바위보",
+  "applicant": "루프랩스",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260522-001",
@@ -17153,6 +21154,19 @@
   "summary": "Nintendo 64의 클래식 게임을 플레이할 수 있는 Nintendo Switch용 소프트웨어"
  },
  {
+  "id": "SC-OM-260522-001",
+  "date": "2026-05-22",
+  "title": "가로세로땅따먹기",
+  "applicant": "양용직",
+  "rating": "전체이용가",
+  "genre": "보드게임",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260528-001",
   "date": "2026-05-28",
   "title": "그녀와 함께 슬라이딩 퍼즐 5",
@@ -17195,6 +21209,56 @@
    "약물"
   ],
   "summary": "비앙카와 플로라라는 두 소녀가 몬스터와 마음으로 교감하며 「몬스터 마스터」로 성장해 나가는 이야기를 담은 드래곤 퀘스트 신작 롤플레잉 게임물"
+ },
+ {
+  "id": "SC-OM-260528-001",
+  "date": "2026-05-28",
+  "title": "왁뿌왁뿌",
+  "applicant": "이준한",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260528-002",
+  "date": "2026-05-28",
+  "title": "강철사령부",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260528-003",
+  "date": "2026-05-28",
+  "title": "마이드림키친",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260528-004",
+  "date": "2026-05-28",
+  "title": "쿵푸 클래시",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260529-001",
@@ -17401,6 +21465,30 @@
    "언어"
   ],
   "summary": "냉전시대를 배경으로 다양한 작전에 참가해 전투를 벌이는 FPS 게임"
+ },
+ {
+  "id": "SC-OM-260602-001",
+  "date": "2026-06-02",
+  "title": "종말특공대",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260604-001",
+  "date": "2026-06-04",
+  "title": "식물 키우기",
+  "applicant": "조태준",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "GC-CC-NP-260605-001",
@@ -17692,6 +21780,17 @@
    "약물"
   ],
   "summary": "판타지 세계를 배경으로 여주인공 에스텔의 모험을 다룬 싱글플레이 JRPG"
+ },
+ {
+  "id": "SC-OM-260616-001",
+  "date": "2026-06-16",
+  "title": "매칭 넘버: 숫자 퍼즐 게임",
+  "applicant": "루프랩스",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  },
  {
   "id": "CC-OM-260618-002",
@@ -18069,6 +22168,52 @@
   "summary": "기술적으로 매우 발전된 공중에 떠 있는 섬들로 이루어진 세계를 배경으로 하는 생존 시뮬레이션 게임"
  },
  {
+  "id": "SC-OM-260619-001",
+  "date": "2026-06-19",
+  "title": "펀쌤 학습",
+  "applicant": "펀쌤 액션뮤직 잉글리쉬",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260622-001",
+  "date": "2026-06-22",
+  "title": "지도퀴즈",
+  "applicant": "임상욱",
+  "rating": "전체이용가",
+  "genre": "교육용",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260622-002",
+  "date": "2026-06-22",
+  "title": "깡총 히어로",
+  "applicant": "박누리",
+  "rating": "전체이용가",
+  "genre": "액션",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260623-001",
+  "date": "2026-06-23",
+  "title": "마녀의 아뜰리에",
+  "applicant": "일레븐피엠 스튜디오",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
   "id": "CC-OM-260625-002",
   "date": "2026-06-25",
   "title": "Charming Secret",
@@ -18120,5 +22265,110 @@
    "폭력성"
   ],
   "summary": "북미 아이스하키 경기를 현실적으로 묘사한 스포츠 게임"
+ },
+ {
+  "id": "SC-OM-260626-001",
+  "date": "2026-06-26",
+  "title": "무한의 슈팅",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "비행슈팅",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260626-002",
+  "date": "2026-06-26",
+  "title": "모두의 브르르르",
+  "applicant": "임민규",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-001",
+  "date": "2026-06-30",
+  "title": "화풀기",
+  "applicant": "토더",
+  "rating": "전체이용가",
+  "genre": "격투게임",
+  "platform": "모바일 게임",
+  "descriptors": [
+   "폭력성"
+  ],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-002",
+  "date": "2026-06-30",
+  "title": "요기월드",
+  "applicant": "주식회사 위대한상상",
+  "rating": "전체이용가",
+  "genre": "기타",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-003",
+  "date": "2026-06-30",
+  "title": "PIXEL BEADS",
+  "applicant": "주식회사 해온스튜디오",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-004",
+  "date": "2026-06-30",
+  "title": "똥 피하기",
+  "applicant": "김재원",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-005",
+  "date": "2026-06-30",
+  "title": "대비록: 옥좌의 저울",
+  "applicant": "주식회사 뤼튼테크놀로지스",
+  "rating": "전체이용가",
+  "genre": "시뮬레이션",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-006",
+  "date": "2026-06-30",
+  "title": "오늘의 야구왕",
+  "applicant": "이것저것",
+  "rating": "전체이용가",
+  "genre": "퍼즐",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
+ },
+ {
+  "id": "SC-OM-260630-007",
+  "date": "2026-06-30",
+  "title": "무한의 목장",
+  "applicant": "주식회사 넵튠",
+  "rating": "전체이용가",
+  "genre": "캐주얼",
+  "platform": "모바일 게임",
+  "descriptors": [],
+  "summary": ""
  }
 ]

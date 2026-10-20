@@ -18,6 +18,7 @@ from agent.rating.data import (
     load_criteria,
     load_raw,
     usable,
+    usable_case,
 )
 
 
@@ -30,7 +31,6 @@ def test_cases_end_before_eval_period():
 
 def test_cases_follow_the_filter():
     for c in load_cases():
-        assert c["summary"].strip()
         assert c["rating"] in RATINGS
         assert c["platform"] not in EXCLUDED_PLATFORMS
         assert c["genre"] not in EXCLUDED_GENRES
@@ -42,12 +42,21 @@ def test_cases_file_is_rebuilt_from_raw():
     assert build_cases(load_raw()) == load_cases()
 
 
+def test_cases_keep_simplified_decisions_without_summary():
+    """간소화 등급분류(개요 없음)를 빼면 모바일 사례가 청소년이용불가로 쏠린다(결정 0017)."""
+    mobile = [c for c in load_cases() if c["platform"] == "모바일 게임"]
+    no_summary = [c for c in mobile if not c["summary"].strip()]
+
+    assert no_summary, "개요 없는 결정이 사례 DB 에 없다"
+    assert sum(c["rating"] == "전체이용가" for c in mobile) > sum(c["rating"] == "청소년이용불가" for c in mobile)
+
+
 def test_usable_drops_refused_canceled_and_gambling():
     row = {"summary": "검으로 몬스터를 베는 액션 게임", "rating": "12세이용가",
            "platform": "모바일 게임", "genre": "액션", "canceled": False}
 
-    assert usable(row)
-    assert not usable({**row, "summary": " "})
+    assert usable(row) and usable_case(row)
+    assert not usable({**row, "summary": " "}) and usable_case({**row, "summary": " "})
     assert not usable({**row, "rating": "등급거부"})
     assert not usable({**row, "canceled": True})
     assert not usable({**row, "platform": "아케이드 게임"})

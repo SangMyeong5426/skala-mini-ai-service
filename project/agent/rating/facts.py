@@ -19,7 +19,8 @@ def latest(collected: list[dict], source: str):
 
 def render_case(case: dict) -> str:
     descriptors = ", ".join(case["descriptors"]) or "내용정보 없음"
-    return f"「{case['title']}」({case['rating']} · {descriptors}) {case['genre']} · {case['platform']} — {case['summary']}"
+    summary = case["summary"] or "개요 없음(간소화 등급분류 등)"
+    return f"「{case['title']}」({case['rating']} · {descriptors}) {case['genre']} · {case['platform']} — {summary}"
 
 
 def render_stats(stats: dict) -> str:
