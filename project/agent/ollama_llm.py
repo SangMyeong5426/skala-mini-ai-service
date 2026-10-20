@@ -86,19 +86,29 @@ PLAN_SCHEMA = {
 
 
 class OllamaLLM:
-    def __init__(self, model: str, usd_per_1k_tokens: float):
+    def __init__(self, model: str, usd_per_1k_tokens: float, think: bool | None = None):
         self.name = f"ollama:{model}"
         self.model = model
         self.usd_per_1k = usd_per_1k_tokens
+        # thinking 모델(qwen3)의 생각 출력 여부 — server.py 가 OLLAMA_THINK 로 정해 넘긴다.
+        # None 이면 옵션을 보내지 않는다(원본 동작, 모델 기본값대로 생각한다). 생각은
+        # message.thinking 으로 따로 와서 아래 코드가 읽지 않으므로 화면에 안 보이고 시간만 쓴다.
+        self.think = think
 
-    def _chat(self, system: str, user: str, schema: dict | None = None) -> tuple[str, dict]:
+    def _payload(self, system: str, user: str, stream: bool) -> dict:
         payload = {
             "model": self.model,
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
-            "stream": False,
+            "stream": stream,
             "options": {"temperature": 0.0},
         }
+        if self.think is not None:
+            payload["think"] = self.think
+        return payload
+
+    def _chat(self, system: str, user: str, schema: dict | None = None) -> tuple[str, dict]:
+        payload = self._payload(system, user, stream=False)
         if schema is not None:
             payload["format"] = schema
         resp = httpx.post(OLLAMA_URL, json=payload, timeout=300.0)
@@ -115,13 +125,7 @@ class OllamaLLM:
         받아 on_token(조각)을 즉시 호출해 SSE로 실시간 중계할 수 있게 한다. 분류/계획
         등 JSON 스키마 출력(route/plan/analyze)은 부분 출력이 의미가 없어 그대로 _chat을
         쓴다."""
-        payload = {
-            "model": self.model,
-            "messages": [{"role": "system", "content": system},
-                         {"role": "user", "content": user}],
-            "stream": True,
-            "options": {"temperature": 0.0},
-        }
+        payload = self._payload(system, user, stream=True)
         chunks: list[str] = []
         usage = {"model": self.name, "tokens": 0, "usd": 0.0}
         async with httpx.AsyncClient(timeout=300.0) as client:
