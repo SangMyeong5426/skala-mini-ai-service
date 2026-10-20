@@ -119,7 +119,8 @@
 
 - [x] `final` 결과를 [`02-measurement.md`](02-measurement.md)에 `base` → 최종 표로 정리
 - [x] 결정 기록마다 "한계와 트레이드오프" 채움 확인 (0002~0006)
-- [ ] 결과 보고서 작성 (Google Spread)
+- [x] 결과 보고서 초안 — [`04-report.md`](04-report.md) (문제 → 개선 포인트 → Before/After → 한계·추가 개선)
+- [ ] **(직접)** 결과 보고서를 Google Spread에 옮기고 이름·UID·Git 주소 칸 채우기
 - [ ] GitHub 원격 저장소 생성·push
 - [ ] **(직접)** Git 주소·결과 보고서 주소 Google Spread 등록 — 마감 13:00
 - [ ] 발표 자료: 문제 → 개선 포인트 → Before/After 수치 → 한계·추가 개선
@@ -134,4 +135,4 @@
 | Before/After 실측 (보너스 10) | `runs/` + `02-measurement.md` | base·step1·final·final2 + 반복 3회 중앙값으로 확정 |
 | 기술 요소 (30) | RAG(2·3·5), MCP(3 — Resource 추가), 의존성 주입(스위치·`SupervisorDeps`), LangSmith(새 단계 모두 `@traceable`), 모듈화(새 모듈 5개), 단위 테스트(6 → 66) | 반영. Multi-Agent는 범위 밖 |
 | 한계·트레이드오프 (20) | `decisions/` 0002~0008 (0008은 기각한 시도) | 실측 기반으로 작성 |
-| 발표 (20) | 발표 자료 | 미착수 |
+| 발표 (20) | 발표 자료 — 결과 보고서와 같은 순서 | 보고서 초안 완료, 슬라이드 미착수 |
