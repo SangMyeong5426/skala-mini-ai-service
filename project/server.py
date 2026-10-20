@@ -37,15 +37,30 @@ class ChatRequest(BaseModel):   # Wave 1 — Pydantic 요청 검증
     thread_id: str = "default"
 
 
+def _ollama_think() -> bool | None:
+    """OLLAMA_THINK=false(기본) | true | default — qwen3 의 생각(thinking) 출력.
+
+    default 는 옵션을 보내지 않는 원본 동작이다. 측정에서 원본을 재현할 때 쓴다
+    (docs/decisions/0002-ollama-think-control.md).
+    """
+    value = os.environ.get("OLLAMA_THINK", "false").strip().lower()
+    if value == "default":
+        return None
+    if value in ("true", "false"):
+        return value == "true"
+    raise ValueError(f"OLLAMA_THINK 는 false · true · default 중 하나여야 합니다: {value!r}")
+
+
 def _build_llms():
     """LLM_BACKEND=fake(기본, 결정론) | ollama(로컬 실모델) | openai(실제 OpenAI API)."""
     backend = os.environ.get("LLM_BACKEND", "fake")
     if backend == "ollama":
         from agent.ollama_llm import OllamaFastLLM, OllamaQualityLLM
+        think = _ollama_think()
         fast = OllamaFastLLM(os.environ.get("OLLAMA_FAST_MODEL", "qwen3:0.6b"),
-                             usd_per_1k_tokens=0.00015)
+                             usd_per_1k_tokens=0.00015, think=think)
         quality = OllamaQualityLLM(os.environ.get("OLLAMA_QUALITY_MODEL", "qwen3:8b"),
-                                   usd_per_1k_tokens=0.005)
+                                   usd_per_1k_tokens=0.005, think=think)
         return backend, fast, quality
     if backend == "openai":
         from agent.openai_llm import OpenAIFastLLM, OpenAIQualityLLM
