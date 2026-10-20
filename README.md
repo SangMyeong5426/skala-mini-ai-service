@@ -36,6 +36,15 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 | 1'' | 백엔드 — OpenAI (**과금**, y/N 확인) | `bash sh/run_agent_openai.sh` | <http://127.0.0.1:8100> |
 | 2 | 프론트 — Vue 채팅 화면 (새 터미널) | `bash sh/run_frontend.sh` | <http://localhost:8600> |
 
+### 개선 스위치
+
+개선마다 환경변수 하나로 켜고 끈다. 값은 `project/.env`에 적거나 실행할 때 앞에 붙인다.
+측정에서 원본 동작을 재현하거나, 문제가 생겼을 때 재배포 없이 끄는 데 쓴다.
+
+| 환경변수 | 값 | 항목 |
+| --- | --- | --- |
+| `OLLAMA_THINK` | `false`(기본) · `true` · `default`(원본 동작 — 옵션을 보내지 않음) | 1 — [결정 0002](docs/decisions/0002-ollama-think-control.md) |
+
 ## 개발
 
 ```bash
@@ -44,11 +53,12 @@ cd project
 .venv/bin/ruff check .          # 린트
 ```
 
-Before/After 측정 — 백엔드를 띄운 상태에서 저장소 루트에서:
+Before/After 측정 — 잴 커밋을 worktree로 꺼내 그 코드로 잰다. ollama가 떠 있어야 한다
+(자세한 방법은 [`docs/02-measurement.md`](docs/02-measurement.md#측정-방법)).
 
 ```bash
-project/.venv/bin/python tools/measure_queries.py run --label before --repeat 3
-project/.venv/bin/python tools/measure_queries.py compare runs/before_<시각>.json runs/after_<시각>.json
+scripts/measure-at base before write,e2e
+OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1
 ```
 
 clone 직후 한 번, 커밋 템플릿과 pre-commit 훅(AGENTS≡CLAUDE, `.env` 차단, ruff)을 켠다.
@@ -87,7 +97,7 @@ skala-mini-ai-service/
 │   ├── measure_queries.py       회귀 쿼리 실측·비교
 │   └── queries.json             회귀 쿼리 10개 (11턴)
 ├── runs/                    실측 원자료 (커밋한다)
-├── scripts/                 setup-git-hooks, check-rule-docs
+├── scripts/                 measure-at(커밋 단위 측정), setup-git-hooks, check-rule-docs
 ├── .github/workflows/ci.yml ruff + pytest(fake) + AGENTS≡CLAUDE
 ├── AGENTS.md / CLAUDE.md    작업 규칙 (같은 문서)
 └── .gitmessage              커밋 템플릿

@@ -43,7 +43,8 @@
 - [x] 분류 Before: 23/30 (76.7%) — `runs/eval-route_before_20261020-101334.json`
 - [x] 대상 시스템 Before: 6/15, 엉뚱한 진단 7건, timeout 1건 — `runs/eval-target_before_20261020-102502.json`
 - [x] 검수 Before: 오염 초안 탐지 0/7 — `runs/eval-judge_before_20261020-103034.json`
-- [ ] **(직접)** 회귀 쿼리 지연시간 Before — 백엔드를 새로 띄운 직후 `measure_queries.py run --label before` (최대 30~50분)
+- [x] 측정 격리: `scripts/measure-at`(커밋을 worktree로 꺼내 측정), 회귀 쿼리 질문마다 서버 새로 띄우기, 답변 작성 `write` 평가 — `468cf17`
+- [ ] 답변 작성(`write`)·회귀 쿼리(`e2e`) Before — `scripts/measure-at base before write,e2e` (측정 중)
 - [ ] 평가 세트 라벨 검토 — 고치면 Before 3종을 다시 잰다
 
 ## Day2 — 구현
@@ -52,11 +53,11 @@
 
 ### 항목 1 — Ollama thinking 제어 (`feat/ollama-think`)
 
-- [ ] `OllamaLLM.__init__`에 `think` 인자, `_chat`·`_chat_stream` payload에 반영
-- [ ] `server._build_llms`가 `OLLAMA_THINK` 읽기, `.env.example`에 항목 추가
-- [ ] 테스트 `tests/test_ollama_think.py` (payload 확인, ollama 없이)
-- [ ] `step1` 측정: 회귀 쿼리 + 노드 평가 3종 → 항목 2~4의 Before
-- [ ] 결정 기록 `0002` (한계: 추론을 끈 만큼 품질 변화)
+- [x] `OllamaLLM.__init__`에 `think` 인자, `_chat`·`_chat_stream` payload에 반영 — `21961b1`
+- [x] `server._build_llms`가 `OLLAMA_THINK` 읽기, `.env.example`에 항목 추가 — `21961b1`
+- [x] 테스트 `tests/test_ollama_think.py` (payload 확인, ollama 없이, 9개) — `21961b1`
+- [ ] `step1` 측정: 노드 평가 3종 + `write` + `e2e` → 항목 2~4의 Before
+- [ ] 결정 기록 `0002` (한계: 추론을 끈 만큼 품질 변화) — 초안 작성, 수치 대기
 - [ ] `02-measurement.md`·`01-plan.md` 상태 갱신, merge
 
 ### 항목 2 — 의미 라우터 (`feat/semantic-router`)

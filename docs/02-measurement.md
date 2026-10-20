@@ -6,24 +6,28 @@
 
 ## 측정 방법
 
-1. 서버를 **새로** 띄운다. MCP 클라이언트가 프로세스 첫 모니터링 조회를 일부러 한 번
-   실패시키므로(재시도 데모), 띄운 직후에 재야 Before와 After의 retry 조건이 같다.
+**`scripts/measure-at`으로 잰다.** 잴 커밋을 git worktree로 따로 꺼내 그 코드로 돌린다. 측정 도구와
+평가 세트는 지금 작업 트리의 것을, 에이전트 코드만 그 커밋의 것을 쓰므로 Before와 After가 같은 입력·같은
+채점으로 잰다. 측정 도중 작업 트리의 파일을 고쳐도 결과에 섞이지 않는다.
 
-   ```bash
-   cd project && bash sh/run_agent_ollma.sh
-   ```
+```bash
+scripts/measure-at base before write,e2e                      # Before (원본 코드)
+OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1  # 항목 1 적용, 전 단계
+project/.venv/bin/python tools/measure_queries.py compare runs/e2e_before_<시각>.json runs/e2e_step1_<시각>.json
+```
 
-2. 다른 터미널에서 회귀 쿼리([`tools/queries.json`](../tools/queries.json), 10개 · 11턴)를 보낸다.
+| 단계 | 도구 | 하는 일 |
+| --- | --- | --- |
+| `route`·`target`·`judge` | `tools/eval_nodes.py` | 노드를 직접 불러 라벨 세트로 채점 (아래 "노드 단위 평가") |
+| `write` | `tools/eval_nodes.py write` | 답변 작성 LLM 호출(`quality_llm.write`) 하나의 지연·토큰. judge 세트 정상 5건의 질문·수집 사실을 입력으로 쓰고, 300초를 넘기면 취소해 timeout으로 센다 |
+| `e2e` | `tools/measure_queries.py --spawn` | 회귀 쿼리([`tools/queries.json`](../tools/queries.json), 10개 · 11턴)를 `POST /chat`으로 보낸다. **질문마다 서버를 새로 띄우고 끝나면 내린다** |
 
-   ```bash
-   project/.venv/bin/python tools/measure_queries.py run --label before --repeat 3
-   ```
+질문마다 서버를 새로 띄우는 이유: base에서는 클라이언트가 300초 timeout으로 끊어도 서버가 그 요청의
+LLM 생성을 끝까지 계속한다. 한 서버로 이어서 재면 앞 질문의 생성이 ollama를 붙잡아 뒤 질문의 지연에
+섞인다. 프로세스를 내리면 연결이 끊기며 ollama 생성도 취소된다. 대신 MCP 첫 조회 재시도(데모)가 장애
+질문마다 한 번씩 일어나 `retry_count`가 늘 1이다 — Before와 After 조건이 같으므로 비교에는 문제없다.
 
-3. 개선 후 같은 백엔드·모델·repeat로 다시 재고 비교한다.
-
-   ```bash
-   project/.venv/bin/python tools/measure_queries.py compare runs/before_<시각>.json runs/after_<시각>.json
-   ```
+측정하는 동안 같은 ollama로 다른 요청(웹 채팅 등)을 보내지 않는다. 지연시간이 섞인다.
 
 | 지표 | 뜻 | 출처 |
 | --- | --- | --- |
@@ -45,6 +49,10 @@
   토큰 수에 가상 단가(`server.py`의 `usd_per_1k_tokens`)를 곱한 추정이다. 표에 그렇게 적는다.
 - 같은 백엔드·같은 모델·같은 repeat 수로 잰 것끼리만 비교한다. `compare`가 다르면 경고한다.
 - 측정 시점의 커밋은 결과 파일의 `git.commit`에 남는다. Before는 `base` 태그에서 잰다.
+  개선 스위치(`OLLAMA_THINK` 등) 값은 `switches`에 남는다.
+- route·target·judge의 Before(10:13~10:30)는 `scripts/measure-at`을 만들기 전에 작업 트리에서 쟀다
+  (`agent_matches_base: true`, LangSmith 추적 켜짐). 이후 측정은 worktree에 `.env`가 없어 추적이 꺼진
+  채로 돈다. 추적은 별도 스레드로 보내므로 LLM 호출 시간(초 단위)에 비해 차이는 무시할 만하다.
 
 ## 노드 단위 평가
 
