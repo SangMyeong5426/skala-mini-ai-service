@@ -19,9 +19,11 @@ from langsmith import traceable
 
 from .embedding import cosine
 
+# 비교용 지시문. 조정에서 지시문 없이가 경계 여유가 더 커(0.020 대 0.006) 기본은 쓰지 않는다.
 TARGET_INSTRUCTION = "운영 장애 신고 문장이 어느 시스템의 문제인지 찾는다"
-DEFAULT_MIN_SCORE = 0.3   # 임시값 — tools/tune_embedding.py 결과로 갱신한다
-DEFAULT_MARGIN = 0.03     # 임시값
+# tools/tune_embedding.py — 조정용 문장 18개를 모두 맞히는 조합 중 경계 여유가 가장 큰 값(지시문 없이).
+DEFAULT_MIN_SCORE = 0.4
+DEFAULT_MARGIN = 0.04
 # 시스템 이름처럼 생긴 토큰. 한글 조사가 바로 붙어도("billing-service가") 잡히도록 \b 를 쓰지 않는다.
 SERVICE_LIKE = re.compile(r"(?<![a-z0-9-])[a-z][a-z0-9]*(?:-[a-z0-9]+)*-(?:service|\d+)(?![a-z0-9-])")
 
@@ -29,7 +31,7 @@ SERVICE_LIKE = re.compile(r"(?<![a-z0-9-])[a-z][a-z0-9]*(?:-[a-z0-9]+)*-(?:servi
 class TargetResolver:
     def __init__(self, embedder, catalog: list[dict], system_vecs: list[list[float]],
                  min_score: float = DEFAULT_MIN_SCORE, margin: float = DEFAULT_MARGIN,
-                 instruction: str | None = TARGET_INSTRUCTION):
+                 instruction: str | None = None):
         self.embedder = embedder
         self.catalog = catalog
         self.system_vecs = system_vecs

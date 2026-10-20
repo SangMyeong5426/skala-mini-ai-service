@@ -16,6 +16,7 @@ from langsmith import traceable
 from .embedding import cosine
 
 RUNBOOK_DIR = Path(__file__).resolve().parent.parent / "data" / "runbooks"
+# 조정 데이터가 없어 고르지 않았다. 같은 "질문 ↔ 문서" 구조인 대상 추정에서 지시문 없이가 나아 그대로 따른다.
 RUNBOOK_INSTRUCTION = "운영 장애 증상과 알림에 맞는 대응 매뉴얼을 찾는다"
 
 
@@ -31,7 +32,7 @@ def symptom_text(query: str, collected: list[dict]) -> str:
 
 class RunbookSelector:
     def __init__(self, embedder, types: list[str], runbook_vecs: list[list[float]],
-                 instruction: str | None = RUNBOOK_INSTRUCTION):
+                 instruction: str | None = None):
         self.embedder = embedder
         self.types = types
         self.runbook_vecs = runbook_vecs
