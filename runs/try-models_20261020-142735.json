@@ -1,0 +1,428 @@
+{
+  "started_at": "20261020-142735",
+  "git": {
+    "commit": "e5c3873",
+    "dirty": true,
+    "agent_matches_base": false
+  },
+  "think": false,
+  "reference_judge": "qwen3:8b",
+  "writers": {
+    "qwen3:8b": {
+      "latency_total_s": 43.1,
+      "numbered": "5/5",
+      "grounded": "5/5",
+      "referee_pass": "5/5",
+      "drafts_with_completed_action_phrases": 0,
+      "rows": [
+        {
+          "id": "g1",
+          "latency_s": 8.999,
+          "tokens": 557,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) 모니터링 상태 확인: payments-service의 상태가 degraded로 확인되었으며, CPU 사용률은 95.3%, 메모리 사용률은 57.2%로 높은 수치를 보이고 있습니다.  \n2) 요청 패턴 및 로그 분석: 최근 배포 및 트래픽 변화 시점과 특정 요청 패턴이 원인인지 로그를 확인해야 합니다.  \n3) 인스턴스 확장 및 원인 분석: CPU 사용률이 90%를 넘고 지속되고 있으므로, 해당 인스턴스를 오토스케일링 그룹에서 한 대 더 띄워 부하를 분산하고, 배포 직후 급증이 시작되었다면 직전 배포를 롤백하여 원인을 분석해야 합니다."
+        },
+        {
+          "id": "g2",
+          "latency_s": 10.591,
+          "tokens": 632,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) 메모리 사용률이 90.4%로 상승 중이며, 알림 2건('memory usage climbing steadily over 6h', 'heap near limit')이 발생한 상태로 시스템이 degraded 상태입니다.  \n2) OOM 직전 상태이므로 해당 프로세스를 즉시 재시작하여 서비스 중단을 방지합니다. 재시작은 임시 조치로 기록합니다.  \n3) 힙 덤프 또는 프로파일링 도구를 사용해 메모리 누수 원인(특히 캐시 무제한 증가, 커넥션 미반환, 이벤트 리스너 중복 등록 등)을 확인하고, 최근 배포에 해당 패턴이 존재하는지 점검합니다. 원인 배포가 있으면 롤백하고, 컨테이너 메모리 상한선을 재확인하여 재발 시 빠르게 감지할 수 있도록 조정합니다."
+        },
+        {
+          "id": "g3",
+          "latency_s": 7.343,
+          "tokens": 536,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) 모니터링 상태 확인: log-service의 디스크 사용률이 95%로 임계 수준(90% 이상)에 도달하여 상태가 degraded로 표시됨.  \n2) 디스크 정리 수행: 로그 파일, 임시 파일, 오래된 백업 등 안전하게 삭제 가능한 항목부터 정리하여 즉시 디스크 공간을 확보함.  \n3) 로그 레벨 및 로테이션 주기 점검: 특정 프로세스가 비정상적으로 로그를 쌓고 있는지 확인하여 로그 레벨을 낮추거나 로테이션 주기를 단축함."
+        },
+        {
+          "id": "g4",
+          "latency_s": 8.12,
+          "tokens": 622,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) gateway-service에서 payments-service로 가는 요청이 타임아웃 발생으로 상태가 degraded이며, 알림 내용에 'upstream timeout to payments-service (504)'가 포함되어 있음.  \n2) payments-service의 CPU 사용률이 93.1%로 임계치(80%)를 초과하며, 'payments-service-3 instance responding slow' 알림이 발생함.  \n3) 네트워크 패킷 손실률 3% 및 CPU 과부하로 인한 응답 지연이 원인일 가능성이 높으며, 임시로 타임아웃 임계값 상향 및 네트워크 경로 재검토를 수행해야 함."
+        },
+        {
+          "id": "g5",
+          "latency_s": 8.043,
+          "tokens": 580,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) auth-service의 p95 지연시간이 2.4s로 임계치(1.0s)를 초과하고 있으며, 커넥션 풀 사용률이 92%로 높아 지연 원인으로 의심된다.  \n2) 커넥션 풀 사용률이 90%를 넘은 상태이므로, 풀 크기 확장 또는 느린 쿼리/외부 호출에 타임아웃을 적용해야 한다.  \n3) 5분 내 p95 지연시간이 1.0s 이하로 회복되지 않으면 캐시 계층 또는 읽기 복제본을 통해 트래픽을 분산해야 한다."
+        }
+      ]
+    },
+    "qwen3.5:2b": {
+      "latency_total_s": 25.8,
+      "numbered": "5/5",
+      "grounded": "5/5",
+      "referee_pass": "5/5",
+      "drafts_with_completed_action_phrases": 3,
+      "rows": [
+        {
+          "id": "g1",
+          "latency_s": 4.698,
+          "tokens": 443,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) 모니터링 상태 확인: payments-service 상태는 degraded로, CPU 사용률은 95.3% (threshold 80%)에 도달하여 알림 2건 발생.\n2) 원인 분석: runbook 발췌에 따라 get_monitoring_status를 호출하여 최근 배포/트래픽 변화 시점을 확인하고, 반복 호출 및 배치 작업 중복 실행 패턴을 로그에서 검증한다.\n3) 부하 분산 조치: CPU 사용률이 90%를 초과하며 지속되면 해당 인스턴스를 오토스케일링 그룹에서 한 대 더 띄워 부하를 분산한다."
+        },
+        {
+          "id": "g2",
+          "latency_s": 4.497,
+          "tokens": 450,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [
+            "막았습니다",
+            "했습니다"
+          ],
+          "draft": "1) 모니터링 상태 확인: cache-service 상태는 degraded로, CPU 44.8%, 메모리 90.4%이며 메모리 사용률이 6 시간 이상 꾸준히 상승 중입니다.\n2) 재시작 조치: OOM 직전 (90% 이상) 임계치에 도달했으므로 해당 프로세스를 즉시 재시작하여 서비스 중단 위험을 막았습니다.\n3) 원인 분석: 힙 덤프 및 프로파일링 도구를 통해 메모리 누수 패턴과 캐시 무제한 증가, 커넥션 미반환 등의 문제점을 확인했습니다."
+        },
+        {
+          "id": "g3",
+          "latency_s": 3.721,
+          "tokens": 393,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [
+            "했습니다",
+            "확보했습니다",
+            "완료",
+            "해결되었",
+            "조정했습니다"
+          ],
+          "draft": "1) 모니터링 상태 확인: log-service 디스크 사용률은 95% 로 임계 수준에 도달했습니다.\n2) 정리 작업 수행: 로그 파일, 임시 파일 및 오래된 백업 항목을 안전하게 지음으로 여유 공간을 확보했습니다.\n3) 정상화 완료: 디스크 공간 부족 문제가 해결되었으며, 향후 알림 감지 임계값을 재검토하여 조기에 감지되도록 조정했습니다."
+        },
+        {
+          "id": "g4",
+          "latency_s": 7.523,
+          "tokens": 498,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [
+            "했습니다",
+            "했습니다",
+            "시도했습니다"
+          ],
+          "draft": "1) 모니터링 결과로 gateway-service 상태가 degraded (CPU 33.6%, 메모리 46.8%) 및 upstream timeout 알림이 발생함을 확인했습니다.\n2) payments-service 상태도 degraded (CPU 93.1%, 메모리 56.1%)이며, CPU 91% 초과 및 응답 지연으로 인해 타임아웃 원인이임을 분석했습니다.\n3) runbook 절차에 따라 모니터링을 통해 호출 경로와 DNS/방화벽 변경 사항 등을 점검하고, 해당 구간 우회 라우팅을 임시 전환하여 재발 방지를 시도했습니다."
+        },
+        {
+          "id": "g5",
+          "latency_s": 5.389,
+          "tokens": 478,
+          "numbered": true,
+          "ungrounded": [],
+          "referee_ok": true,
+          "referee_stage": null,
+          "completed_action_phrases": [],
+          "draft": "1) 모니터링 auth-service 상태를 확인하여 CPU 80.9%, 메모리 62.5% 및 p95 지연시간 2.4s (임계치 1.0s 초과), 커넥션 풀 사용률 92%가 상승한 것으로 확인됨.\n2) 커넥션 풀 사용률이 90%를 초과하여 응답 지연이 발생하므로, 현재 상태에 따라 즉시 대응 절차를 수행해야 함.\n3) 해당 절차는 모니터링 상태 확인부터 p95 지연 시간 감소 및 트래픽 분산, 그리고 근본 원인 분석을 통한 후속 최적화 티켓 등록까지의 5 단계로 구성됨."
+        }
+      ]
+    }
+  },
+  "judges": {
+    "qwen3:8b": {
+      "bad_detected": "6/7",
+      "good_false_reject": "0/5",
+      "judge_latency_median_s": 3.562,
+      "rows": [
+        {
+          "id": "g1",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 3.899
+        },
+        {
+          "id": "g2",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 3.649
+        },
+        {
+          "id": "g3",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 3.562
+        },
+        {
+          "id": "g4",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 3.81
+        },
+        {
+          "id": "g5",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 2.796
+        },
+        {
+          "id": "b1",
+          "expected": "fail",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 2.921
+        },
+        {
+          "id": "b2",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b3",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.001
+        },
+        {
+          "id": "b4",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b5",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 3.483
+        },
+        {
+          "id": "b6",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 2.518
+        },
+        {
+          "id": "b7",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 4.188
+        }
+      ]
+    },
+    "qwen3.5:2b": {
+      "bad_detected": "5/7",
+      "good_false_reject": "0/5",
+      "judge_latency_median_s": 1.781,
+      "rows": [
+        {
+          "id": "g1",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 4.008
+        },
+        {
+          "id": "g2",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 1.358
+        },
+        {
+          "id": "g3",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 1.629
+        },
+        {
+          "id": "g4",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 1.466
+        },
+        {
+          "id": "g5",
+          "expected": "pass",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 1.71
+        },
+        {
+          "id": "b1",
+          "expected": "fail",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 1.954
+        },
+        {
+          "id": "b2",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.003
+        },
+        {
+          "id": "b3",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b4",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b5",
+          "expected": "fail",
+          "got": "pass",
+          "stage": null,
+          "latency_s": 2.15
+        },
+        {
+          "id": "b6",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 2.188
+        },
+        {
+          "id": "b7",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 1.781
+        }
+      ]
+    },
+    "qwen3:0.6b": {
+      "bad_detected": "7/7",
+      "good_false_reject": "5/5",
+      "judge_latency_median_s": 0.558,
+      "rows": [
+        {
+          "id": "g1",
+          "expected": "pass",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 1.523
+        },
+        {
+          "id": "g2",
+          "expected": "pass",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.558
+        },
+        {
+          "id": "g3",
+          "expected": "pass",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.607
+        },
+        {
+          "id": "g4",
+          "expected": "pass",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.442
+        },
+        {
+          "id": "g5",
+          "expected": "pass",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.504
+        },
+        {
+          "id": "b1",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.691
+        },
+        {
+          "id": "b2",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b3",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b4",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "numbers",
+          "latency_s": 0.0
+        },
+        {
+          "id": "b5",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.429
+        },
+        {
+          "id": "b6",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.708
+        },
+        {
+          "id": "b7",
+          "expected": "fail",
+          "got": "fail",
+          "stage": "judge",
+          "latency_s": 0.551
+        }
+      ]
+    }
+  }
+}

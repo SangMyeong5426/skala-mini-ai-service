@@ -109,6 +109,7 @@ skala-mini-ai-service/
 │   ├── measure_queries.py       회귀 쿼리 실측·비교 (--spawn: 질문마다 서버 새로)
 │   ├── eval_nodes.py            노드 단위 평가 — route·target·judge·write·runbook
 │   ├── tune_embedding.py        의미 판정 기준 조정 (평가 세트 미사용)
+│   ├── try_models.py            작성·판정 모델 교체 시험 (기각, 결정 0008)
 │   ├── queries.json             회귀 쿼리 10개 (11턴)
 │   ├── evalsets/                라벨 평가 세트 4종
 │   └── tuning/                  조정용 문장 (평가 세트 아님)
