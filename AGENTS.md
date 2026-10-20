@@ -65,6 +65,9 @@ SKALA 「AI 서비스 개발 Mini-project」(3일, 개인 과제) 저장소다. 
 | 새 환경변수 | `project/.env.example`, `README.md` |
 | 회귀 쿼리 | `tools/queries.json`, `project/doc/regression_test_queries.md` |
 | 평가 세트 라벨·문항 | `tools/evalsets/*.json`, `tools/evalsets/README.md` — 바꾸면 Before부터 다시 잰다. 개선 코드를 보고 라벨을 옮기지 않는다 |
+| 분류 예시(`project/data/router_examples.json`)·시스템 설명(`project/data/systems.json`)·조정용 문장(`tools/tuning/`) | `tools/tune_embedding.py`로 판정 기준을 다시 정하고 `agent/router.py`·`agent/target.py` 기본값과 결정 0003·0004를 고친다. **판정 기준을 평가 세트로 고르지 않는다** |
+| 시스템 추가·삭제 | `project/data/monitoring.json`과 `project/data/systems.json`을 함께 (`tests/test_target.py`가 어긋남을 잡는다) |
+| 개선 스위치 추가 | `server._build_components`, `agent/deps.py`, `tools/measure_queries.py`의 `SWITCHES`, `README.md` 스위치 표, `project/.env.example` |
 | `route_node`·`plan_node`·`validate_node`의 반환 모양 | `tools/eval_nodes.py`의 채점 약속(모듈 docstring) — plan이 되묻기를 할 때는 research task를 하나도 만들지 않는다 |
 | 개선 항목 하나를 끝냈을 때 | `docs/01-plan.md` 상태, `docs/02-measurement.md` 결과, `docs/decisions/` 새 결정, `docs/checklist.md` 체크 |
 | 할 일을 끝냈을 때 | `docs/checklist.md`에 체크하고 근거(커밋·파일)를 적는다. 사용자가 직접 할 일(**(직접)**)은 사용자가 알려 줄 때만 체크한다 |
