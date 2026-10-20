@@ -1,0 +1,8 @@
+[
+  {"name": "auth-service", "description": "로그인·회원 인증과 세션 토큰 발급을 맡는 인증 서비스"},
+  {"name": "web-01", "description": "사용자 요청을 처음 받아 웹 페이지를 응답하는 웹 서버 1번"},
+  {"name": "payments-service", "description": "결제 승인·취소·환불과 정산을 처리하는 결제 서비스"},
+  {"name": "cache-service", "description": "자주 쓰는 데이터를 메모리에 올려 두고 빠르게 돌려주는 캐시 서비스"},
+  {"name": "gateway-service", "description": "외부 API 요청을 받아 내부 서비스로 라우팅하는 API 게이트웨이"},
+  {"name": "log-service", "description": "각 서비스의 로그를 수집·저장하고 검색하게 해 주는 로그 서비스"}
+]

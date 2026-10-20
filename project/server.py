@@ -96,15 +96,26 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
     끈 부품은 넣지 않는다 — 필드가 None 이면 노드가 base 동작을 한다(docs/03-design.md 공통 원칙).
     """
     switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if backend == "ollama" else None,
-                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm"))}
+                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
+                "TARGET_RESOLVER": _switch("TARGET_RESOLVER", "semantic", "legacy", backend,
+                                           ("semantic", "legacy"))}
     parts: dict = {}
-    if switches["ROUTER"] == "semantic":
+    if "semantic" in (switches["ROUTER"], switches["TARGET_RESOLVER"]):
         parts["embedder"] = _make_embedder()
     if switches["ROUTER"] == "semantic":   # 항목 2
         from agent.router import DEFAULT_MARGIN, LLMRouter, SemanticRouter, load_examples
         parts["router"] = await SemanticRouter.create(
             parts["embedder"], LLMRouter(fast_llm), load_examples(),
             margin=float(os.environ.get("ROUTER_MARGIN", DEFAULT_MARGIN)))
+    if switches["TARGET_RESOLVER"] == "semantic":   # 항목 3 — 카탈로그는 MCP Resource 로 받는다
+        from agent.target import DEFAULT_MARGIN as TARGET_MARGIN
+        from agent.target import DEFAULT_MIN_SCORE, TargetResolver
+        catalog_server = await mcp.find_resource("catalog://systems")
+        catalog = json.loads(await mcp.read_resource("catalog://systems", server=catalog_server))
+        parts["target_resolver"] = await TargetResolver.create(
+            parts["embedder"], catalog,
+            min_score=float(os.environ.get("TARGET_MIN_SCORE", DEFAULT_MIN_SCORE)),
+            margin=float(os.environ.get("TARGET_MARGIN", TARGET_MARGIN)))
     return parts, switches
 
 

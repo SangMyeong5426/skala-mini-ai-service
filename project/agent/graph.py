@@ -66,6 +66,7 @@ class AgentState(TypedDict, total=False):
     last_prompt: str
     cost_usd: float
     events: list[dict]
+    clarify: dict          # 항목 3 — 대상 시스템을 정하지 못했을 때 TargetResolver 의 판단
 
 
 def _cost(state: AgentState, usage: dict) -> float:
@@ -110,7 +111,12 @@ async def plan_node(state: AgentState, deps: SupervisorDeps) -> dict:
     """Wave 4 — Plan/Task 분해. Wave 2의 MCP Prompt가 표준 절차를 깔아준다.
 
     resource와 마찬가지로 이름을 어느 서버가 들고 있는지 미리 가정하지 않고,
-    find_prompt()로 연결된 서버들을 먼저 조회해 찾은 뒤에만 get_prompt를 보낸다."""
+    find_prompt()로 연결된 서버들을 먼저 조회해 찾은 뒤에만 get_prompt를 보낸다.
+
+    항목 3 — deps.target_resolver 가 있으면 _plan_with_resolver 가 대신한다. 아래 base 경로는
+    TARGET_RESOLVER=legacy 로 원본 동작(auth-service 폴백 포함)을 재현할 때만 탄다."""
+    if deps.target_resolver is not None:
+        return await _plan_with_resolver(state, deps)
     prompt_server = await deps.mcp.find_prompt("incident_analysis_prompt")
     procedure = await deps.mcp.get_prompt(
         "incident_analysis_prompt",
@@ -124,6 +130,55 @@ async def plan_node(state: AgentState, deps: SupervisorDeps) -> dict:
              "targets": targets}
     return {"tasks": result["tasks"], "needs_analysis": result["needs_analysis"],
             "cost_usd": _cost(state, usage), "events": state["events"] + [event]}
+
+
+async def _plan_with_resolver(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 3 — 조사 대상은 코드(TargetResolver)가 정하고, LLM 에는 분석 필요 여부만 묻는다.
+
+    대상을 정하지 못하면 research task 를 하나도 만들지 않고 clarify 노드로 보낸다 — base 처럼
+    auth-service 로 채워 질문과 무관한 진단을 내지 않는다. LLM plan 은 대상이 둘 이상일 때만
+    부른다. 비교 분석(analyze)은 여러 시스템을 견줄 때만 쓸모가 있기 때문이다."""
+    resolved = await deps.target_resolver.resolve(state["query"])
+    targets = resolved["targets"]
+    if not targets:
+        event = {"type": "ClarifyRequested", "method": resolved["method"],
+                 "reason": resolved["reason"]}
+        return {"tasks": [], "needs_analysis": False, "clarify": resolved,
+                "events": state["events"] + [event]}
+
+    tasks = [{"id": f"task-{i}", "agent": "research", "kind": "monitoring",
+              "target": target, "status": "pending"} for i, target in enumerate(targets)]
+    needs_analysis, cost = False, state.get("cost_usd", 0.0)
+    if len(targets) >= 2:
+        prompt_server = await deps.mcp.find_prompt("incident_analysis_prompt")
+        procedure = await deps.mcp.get_prompt(
+            "incident_analysis_prompt",
+            {"system_name": targets[0], "symptom": state["query"]},
+            server=prompt_server,
+        )
+        result, usage = deps.fast_llm.plan(state["query"], procedure)
+        needs_analysis = result["needs_analysis"]
+        # LLM 이 analysis task 를 넣었는데 needs_analysis 가 거짓이면 gate(Wave 6)가 걸러 낸다.
+        if any(t["agent"] == "analysis" for t in result["tasks"]):
+            tasks.append({"id": "task-analysis", "agent": "analysis",
+                          "kind": "pattern-analysis", "status": "pending"})
+        cost = _cost(state, usage)
+    event = {"type": "PlanCreated", "task_count": len(tasks), "targets": targets,
+             "method": resolved["method"]}
+    return {"tasks": tasks, "needs_analysis": needs_analysis, "cost_usd": cost,
+            "events": state["events"] + [event]}
+
+
+@traceable(name="clarify_node")
+async def clarify_node(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 3 — 대상 시스템을 특정하지 못했을 때 진단 대신 되묻는다. LLM 을 부르지 않는다."""
+    catalog = deps.target_resolver.catalog
+    systems = "\n".join(f"- {s['name']}: {s['description']}" for s in catalog)
+    final = (f"어느 시스템의 문제인지 먼저 확인이 필요합니다 — {state['clarify']['reason']}.\n\n"
+             f"지금 모니터링하는 시스템은 아래 {len(catalog)}개입니다. 시스템 이름이나 증상을 "
+             f"조금 더 구체적으로 알려 주시면 바로 진단하겠습니다.\n\n{systems}")
+    return {"final": final,
+            "events": state["events"] + [{"type": "Finalize", "pipeline": "clarify"}]}
 
 
 @traceable(name="gate_node")
@@ -305,6 +360,10 @@ def _after_route(state: AgentState) -> str:
     return "chat_answer" if state["route"] == "chat" else "plan"
 
 
+def _after_plan(state: AgentState) -> str:
+    return "clarify" if state.get("clarify") else "gate"
+
+
 def _after_replan_check(state: AgentState) -> str:
     last = state["events"][-1]
     return "analysis" if last.get("is_sufficient") else "research"
@@ -320,6 +379,7 @@ def build_graph(deps: SupervisorDeps):
     g.add_node("route", node(route_node))
     g.add_node("chat_answer", node(chat_answer_node))
     g.add_node("plan", node(plan_node))
+    g.add_node("clarify", node(clarify_node))
     g.add_node("gate", node(gate_node))
     g.add_node("research", node(research_node))
     g.add_node("replan_check", node(replan_check_node))
@@ -332,7 +392,8 @@ def build_graph(deps: SupervisorDeps):
     g.add_conditional_edges("route", _after_route,
                             {"chat_answer": "chat_answer", "plan": "plan"})
     g.add_edge("chat_answer", END)
-    g.add_edge("plan", "gate")
+    g.add_conditional_edges("plan", _after_plan, {"clarify": "clarify", "gate": "gate"})
+    g.add_edge("clarify", END)
     g.add_edge("gate", "research")
     g.add_edge("research", "replan_check")
     g.add_conditional_edges("replan_check", _after_replan_check,
