@@ -10,6 +10,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 | --- | --- |
 | 과제 | **1. Base AI Agent 개선** — 질문을 제대로 이해하고 근거 있는 답만 내보내는 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
+| 상세 수정 설계 | [`docs/03-design.md`](docs/03-design.md) |
 | Before/After 실측 | [`docs/02-measurement.md`](docs/02-measurement.md) |
 | 결정 기록 | [`docs/decisions/`](docs/decisions/) |
 
@@ -77,6 +78,7 @@ skala-mini-ai-service/
 │   ├── 00-assignment.md         과제 요건·일정·평가 기준
 │   ├── 01-plan.md               진행 계획 (Google Spread 등록 원본)
 │   ├── 02-measurement.md        Before/After 실측
+│   ├── 03-design.md             항목별 상세 수정 설계
 │   ├── decisions/               결정 기록 — 개선 항목별 한계·트레이드오프
 │   └── followups.md             미해결·확인 대기
 ├── tools/
