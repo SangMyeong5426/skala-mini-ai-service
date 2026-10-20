@@ -51,6 +51,7 @@ class RatingState(TypedDict, total=False):
     parallel_elapsed: float
     assessment: dict
     clarify: dict
+    law: dict               # 기능 8 — 제도 문의에 대한 법령 근거 답(LawAnswerer.answer)
     draft: str
     validation_attempts: int
     validation_feedback: str
@@ -82,7 +83,16 @@ async def route_node(state: RatingState, deps: SupervisorDeps) -> dict:
 
 @traceable(name="rating.chat_answer_node")
 async def chat_answer_node(state: RatingState, deps: SupervisorDeps) -> dict:
+    """제도 문의·잡담. deps.law_answerer 가 있으면 법령 조문에 근거해 답하고, 근거가 없으면 답할 수 없다고 한다(기능 8).
+    없으면 Before — fast 모델(0.6b)이 근거 없이 대화로 답한다."""
     writer = get_stream_writer()
+    if deps.law_answerer is not None:
+        result, usage = await deps.law_answerer.answer(state["query"])
+        writer({"type": "AnswerToken", "delta": result["text"]})
+        event = {"type": "LawAnswer", "kind": result["kind"], "answerable": result["answerable"],
+                 "citations": result["citations"], "searched": result["searched"], "reason": result["reason"]}
+        return {"final": result["text"], "law": result, "cost_usd": _cost(state, usage),
+                "events": state["events"] + [event, {"type": "Finalize", "pipeline": "chat-law"}]}
     reply, usage = await deps.fast_llm.chat(
         state["query"], state.get("history", []),
         on_token=lambda piece: writer({"type": "AnswerToken", "delta": piece}))

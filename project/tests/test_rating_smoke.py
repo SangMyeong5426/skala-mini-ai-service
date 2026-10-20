@@ -19,6 +19,7 @@ def test_health_reports_rating_domain_with_all_parts_off(rating_client):
     assert body["switches"]["RATING_ASSESSOR"] == "direct"
     assert body["switches"]["VALIDATOR"] == "format"
     assert body["switches"]["RATING_CLARIFY"] == "off"
+    assert body["switches"]["CHAT_GROUNDING"] == "off"
 
 
 def test_policy_question_goes_to_chat(rating_client):

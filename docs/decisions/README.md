@@ -22,3 +22,4 @@
 | [0012](0012-rating-validator.md) | 등급 점검 보고서 검수 — 등급·사례·수치는 코드가, 뜻은 LLM 이 | Accepted | 2026-10-20 |
 | [0013](0013-rating-router-and-clarify.md) | 등급 점검 라우팅과 되묻기 — 과제 1 의미 라우터 재사용, 설명이 없으면 묻는다 | Accepted | 2026-10-20 |
 | [0014](0014-detail-evalset.md) | 상세 설명 평가셋 B — 위원회 결정서 사유에서 결론을 지워 입력으로 | Accepted | 2026-10-20 |
+| [0015](0015-law-grounded-answers.md) | 제도 문의는 법령 조문에 근거해 답하고, 근거가 없으면 답할 수 없다고 한다 | Accepted | 2026-10-20 |

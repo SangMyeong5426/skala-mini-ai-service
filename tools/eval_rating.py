@@ -14,6 +14,7 @@
 | rclarify  | plan → research ⇄ replan_check → analysis | evalsets/rating_clarify.json | 되묻기 정답률                              |
 | rjudge    | validate_node                             | evalsets/rating_judge.json   | 오염 초안 탐지율, 정상 초안 오탐률          |
 | rbase     | case_retriever 만 (LLM 없음)              | rating.json · rating_detail.json | 기준선 — 가장 가까운 사례 1건, 5건 다수결 |
+| rlaw      | law_answerer.answer (Before: fast_llm.chat) | evalsets/rating_law.json   | 근거 조문 인용, 지어낸 수치 없음, 답할 수 없음, 잡담 |
 
 의존성은 server.py 의 lifespan 을 AGENT_DOMAIN=rating 으로 실행해 얻는다. 부품 스위치(ROUTER·CASE_SEARCH·
 RATING_ASSESSOR·RATING_CLARIFY·VALIDATOR)는 환경변수로 준다 — 모두 끄면 LLM 단독(Before)이다(결정 0009).
@@ -25,6 +26,9 @@ RATING_ASSESSOR·RATING_CLARIFY·VALIDATOR)는 환경변수로 준다 — 모두
 - rjudge        : validate_node 가 돌려준 validation_feedback 이 None 이면 합격.
 - rbase         : 그래프와 같은 범위 넓히기(사례 3건 미만이면 장르+플랫폼 → 플랫폼 → 전체)로 찾은 사례의 등급만 본다.
                   5건 다수결이 동률이면 더 가까운 사례의 등급. CASE_SEARCH=semantic 이어야 한다.
+- rlaw          : answer — 답했고 기대 조문 중 하나를 인용. defer — 금지 수치(지어낸 나이·금액)가 없음. refuse — 답할 수 없다고 함.
+                  smalltalk — 잡담으로 처리. Before(0.6b 대화)는 글만 있으므로 조문 번호("제21조")가 나오는지,
+                  "답할 수 없"류 문구가 있는지로 같은 기준을 적용한다.
 
 --code-root 로 다른 체크아웃(scripts/measure-at 이 만든 git worktree)의 project/ 코드를 잴 수 있다. 평가셋과 채점은
 늘 이 파일 옆의 것을 쓴다. 결과는 runs/eval-<하위 명령>_<label>_<시각>.json 에 남는다.
@@ -33,6 +37,7 @@ import argparse
 import asyncio
 import json
 import os
+import re
 import sys
 from collections import Counter
 from datetime import datetime
@@ -44,7 +49,8 @@ from measure_queries import ROOT, _display, _git_state, _switches
 EVALSETS = ROOT / "tools" / "evalsets"
 DEFAULT_OUT_DIR = ROOT / "runs"
 FILES = {"rate": "rating", "rateb": "rating_detail", "rroute": "rating_route", "rclarify": "rating_clarify",
-         "rjudge": "rating_judge", "rbase": "rating"}
+         "rjudge": "rating_judge", "rbase": "rating", "rlaw": "rating_law"}
+REFUSAL_HINT = re.compile(r"답할 수 없|근거를 찾지 못|확인할 수 없|알 수 없")
 MAX_ROUNDS = 4   # research ⇄ replan_check 왕복 상한 — 그래프는 범위를 두 번까지만 넓힌다
 
 
@@ -230,8 +236,49 @@ async def eval_rbase(deps, ctx: dict) -> tuple[list[dict], dict]:
     return rows, {"A": summarize("rate"), "B": summarize("rateb")}
 
 
+def _score_law(item: dict, text: str, result: dict | None) -> bool:
+    """result 는 법령 근거 답(After)의 구조, Before 는 None — 글만 본다."""
+    expect = item["expect"]
+    if expect == "answer":
+        if result is not None:
+            return result["answerable"] and bool(set(item["articles"]) & set(result["citations"]))
+        return any(k.split(" ")[-1] in text for k in item["articles"]) and not REFUSAL_HINT.search(text)
+    if expect == "refuse":
+        return (result["kind"] == "law" and not result["answerable"]) if result is not None \
+            else bool(REFUSAL_HINT.search(text))
+    if expect == "defer":
+        return not re.search(item["forbidden"], text)
+    return result["kind"] == "smalltalk" if result is not None else not REFUSAL_HINT.search(text)
+
+
+async def eval_rlaw(deps, ctx: dict) -> tuple[list[dict], dict]:
+    rows = []
+    for item in _load("rlaw"):
+        if deps.law_answerer is not None:
+            out, latency, error = await _timed(deps.law_answerer.answer(item["query"]))
+            result = out[0] if out else None
+            text = result["text"] if result else ""
+        else:
+            out, latency, error = await _timed(deps.fast_llm.chat(item["query"], [], on_token=None))
+            result, text = None, out[0] if out else ""
+        ok = error is None and _score_law(item, text, result)
+        rows.append({"id": item["id"], "expect": item["expect"], "ok": ok,
+                     "answerable": result["answerable"] if result else None,
+                     "citations": result["citations"] if result else None,
+                     "reason": result["reason"] if result else None, "text": text,
+                     "latency_s": latency, "error": error})
+        print(f"  {item['id']} {item['expect']:>9} {'✓' if ok else '✗'} {latency:5.1f}s  {text[:60]!r}")
+    groups = {}
+    for r in rows:
+        groups.setdefault(r["expect"], []).append(r["ok"])
+    summary = {"n": len(rows), "ok": f"{sum(r['ok'] for r in rows)}/{len(rows)}",
+               **{k: f"{sum(v)}/{len(v)}" for k, v in groups.items()},
+               "latency_median_s": _median([r["latency_s"] for r in rows])}
+    return rows, summary
+
+
 EVALUATORS = {"rate": eval_rate, "rateb": eval_rateb, "rroute": eval_rroute, "rclarify": eval_rclarify,
-              "rjudge": eval_rjudge, "rbase": eval_rbase}
+              "rjudge": eval_rjudge, "rbase": eval_rbase, "rlaw": eval_rlaw}
 
 
 async def _run(kinds: list[str], args: argparse.Namespace) -> None:

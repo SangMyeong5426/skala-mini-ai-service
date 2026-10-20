@@ -192,9 +192,10 @@ async def _build_rating_components(backend: str, fast_llm, quality_llm, mcp) -> 
                 "CASE_SEARCH": _switch("CASE_SEARCH", "semantic", "off", backend, ("semantic", "off")),
                 "RATING_ASSESSOR": _switch("RATING_ASSESSOR", "criteria", "direct", backend,
                                            ("criteria", "direct")),
-                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend, ("grounded", "format"))}
+                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend, ("grounded", "format")),
+                "CHAT_GROUNDING": _switch("CHAT_GROUNDING", "law", "off", backend, ("law", "off"))}
     parts: dict = {"domain": "rating"}
-    if "semantic" in (switches["ROUTER"], switches["CASE_SEARCH"]):
+    if "semantic" in (switches["ROUTER"], switches["CASE_SEARCH"]) or switches["CHAT_GROUNDING"] == "law":
         parts["embedder"] = _make_embedder()
     if switches["ROUTER"] == "semantic":   # 기능 5 — 과제 1 의미 라우터에 등급 점검 예시 문장
         from agent.rating.data import ROUTER_EXAMPLES_PATH, ROUTER_MARGIN
@@ -216,6 +217,11 @@ async def _build_rating_components(backend: str, fast_llm, quality_llm, mcp) -> 
     if switches["VALIDATOR"] == "grounded":   # 기능 4
         from agent.rating.check import RatingValidator
         parts["validator"] = RatingValidator(quality_llm)
+    if switches["CHAT_GROUNDING"] == "law":   # 기능 8 — 조문은 MCP Resource 로 받는다
+        from agent.rating.law import LawAnswerer
+        law_server = await mcp.find_resource("law://game-industry/articles")
+        law = json.loads(await mcp.read_resource("law://game-industry/articles", server=law_server))
+        parts["law_answerer"] = await LawAnswerer.create(parts["embedder"], quality_llm, law["articles"])
     return parts, switches
 
 

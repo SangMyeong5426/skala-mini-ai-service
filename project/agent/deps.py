@@ -23,8 +23,9 @@ class SupervisorDeps:
     target_resolver: Any = None   # 항목 3 — None 이면 base 의 plan (auth-service 폴백 포함)
     validator: Any = None         # 항목 4 — None 이면 30자 + "1)" 검사
     runbook_selector: Any = None  # 항목 5 — None 이면 알림 문구 키워드 규칙
-    # 과제 2 (AGENT_DOMAIN=rating, docs/03-design.md). 셋 다 None 이면 LLM 단독 — router·validator 는 위 필드를 함께 쓴다.
+    # 과제 2 (AGENT_DOMAIN=rating, docs/03-design.md). 아래가 모두 None 이면 LLM 단독 — router·validator 는 위 필드를 함께 쓴다.
     domain: str = "incident"
     case_retriever: Any = None    # 기능 3 — None 이면 유사 사례·통계를 모으지 않는다
     assessor: Any = None          # 기능 3 — None 이면 quality_llm.rate_direct 가 등급을 바로 답한다
     clarifier: Any = None         # 기능 6 — None 이면 되묻지 않는다
+    law_answerer: Any = None      # 기능 8 — None 이면 제도 문의를 fast_llm.chat 이 근거 없이 답한다

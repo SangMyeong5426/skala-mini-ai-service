@@ -74,7 +74,7 @@ WRITE_SYSTEM = (
     "판정 결과에 없는 항목은 쓰지 않는다. 해당 항목이 없으면 한 줄로 그렇게 쓴다.\n"
     "2) 비슷한 실제 사례 — 사례는 반드시 「제목」(등급 · 내용정보) 형식으로, 수집된 사례 목록에 있는 것만, 등급은 목록 그대로 쓴다.\n"
     "3) 같은 장르·플랫폼 통계 — 수치는 통계에 있는 값만 그대로 쓴다. 통계가 없으면 이 줄을 뺀다.\n"
-    "4) 등급을 낮추려면 — 단계를 올린 표현을 어떻게 바꾸면 되는지.\n"
+    "4) 등급을 낮추려면 — 판정 결과의 '등급을 낮추려면' 문장을 그대로 옮기고, 설명에 맞게 한 문장만 덧붙인다.\n"
     f"마지막 줄: '{DISCLAIMER}'\n"
     "판정 결과와 다른 등급을 쓰지 않는다. 등급을 보장하거나 심의를 받지 않아도 된다고 말하지 않는다. "
     "날짜·기간·등급분류번호는 쓰지 않는다."
@@ -87,6 +87,31 @@ JUDGE_SYSTEM = (
     "등급을 보장하거나('반드시 ~받는다'), 등급분류를 받지 않아도 된다는 식으로 사실과 다른 안내를 하면 false.\n"
     "reason 에는 판정 근거를 한국어 한 문장으로 쓴다. 문제가 없으면 둘 다 true 다."
 )
+
+
+LAW_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "kind": {"type": "string", "enum": ["smalltalk", "law"]},
+        "answerable": {"type": "boolean"},
+        "answer": {"type": "string"},
+        "citations": {"type": "array", "items": {"type": "string"}},
+    },
+    "required": ["kind", "answerable", "answer", "citations"],
+}
+LAW_SYSTEM = (
+    "당신은 게임 등급분류 제도 안내자다. 아래 '조문'만 근거로 한국어로 답한다.\n"
+    "- 인사·감사·잡담이면 kind=smalltalk, answerable=false, answer=\"\", citations=[].\n"
+    "- 조문에 질문의 답이 있으면 kind=law, answerable=true, answer 에 두세 문장으로 답하고, citations 에 근거 조문의 "
+    "key(예: \"게임산업법 제21조\")를 그대로 적는다.\n"
+    "- 조문에 답의 일부만 있으면(예: 다른 법률에 맡긴다) 조문에 있는 것만 말하고, 조문에 없는 나이·금액·기간·연락처 같은 "
+    "수치나 사실은 쓰지 않는다. 답이 전혀 없으면 kind=law, answerable=false."
+)
+
+
+def law_user_message(question: str, articles: list[dict]) -> str:
+    rows = "\n\n".join(f"[{a['key']}] ({a['title']})\n{a['text']}" for a in articles)
+    return f"## 조문\n{rows}\n\n## 질문\n{question}"
 
 
 def criteria_text(criteria: dict) -> str:
@@ -166,6 +191,15 @@ class OllamaRatingQualityLLM(OllamaLLM):
         return await self._chat_stream(WRITE_SYSTEM, write_user_message(query, assessment, collected, feedback),
                                        on_token=on_token, think=self.think)
 
+    @traceable(run_type="llm", name="ollama_rating_quality.answer_law")
+    def answer_law(self, question: str, articles: list[dict]) -> tuple[dict, dict]:
+        """기능 8 — 검색된 조문만 보고 제도 질문에 답한다. 인용·수치 검사는 law.LawAnswerer 가 한다."""
+        content, usage = self._chat(LAW_SYSTEM, law_user_message(question, articles), schema=LAW_SCHEMA)
+        try:
+            return json.loads(content), usage
+        except json.JSONDecodeError:
+            return {}, usage
+
     @traceable(run_type="llm", name="ollama_rating_quality.judge")
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
         content, usage = self._chat(JUDGE_SYSTEM, judge_user_message(query, facts, draft), schema=JUDGE_SCHEMA)
@@ -232,6 +266,18 @@ class FakeRatingQualityLLM(FakeLLM):
         if on_token is not None:
             on_token(draft)
         return draft, self._usage(query, draft)
+
+    @traceable(run_type="llm", name="fake_rating_quality.answer_law")
+    def answer_law(self, question: str, articles: list[dict]) -> tuple[dict, dict]:
+        """인사는 smalltalk, 질문에 조문 제목 낱말이 있으면 그 조문을 인용, 아니면 답할 수 없음."""
+        if re.search(r"안녕|고마|감사", question):
+            result = {"kind": "smalltalk", "answerable": False, "answer": "", "citations": []}
+        else:
+            hit = next((a for a in articles if a["title"][:2] in question), None)
+            result = ({"kind": "law", "answerable": True, "answer": f"{hit['title']}에 관한 규정이 있습니다.",
+                       "citations": [hit["key"]]} if hit else
+                      {"kind": "law", "answerable": False, "answer": "", "citations": []})
+        return result, self._usage(question, str(result))
 
     @traceable(run_type="llm", name="fake_rating_quality.judge")
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:

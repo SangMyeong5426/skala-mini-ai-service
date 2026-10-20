@@ -7,11 +7,19 @@ data/ratings/ 의 파일만 읽는다 — 실행 중에는 게임물관리위원
 - Resource criteria://descriptors      : 내용정보 7항목 × 4단계 기준표(사례집 요약표)
 - Resource law://game-industry/rule-8  : 시행규칙 제8조(등급분류기준) 원문
 - Resource ratings://cases             : 사례 DB 전체 — 에이전트가 기동 때 한 번 읽어 유사 사례 검색 색인을 만든다
+- Resource law://game-industry/articles : 게임산업법·시행령·시행규칙 조문 — 제도 문의의 근거(기능 8)
 """
 from fastmcp import FastMCP
 from pydantic import BaseModel, Field
 
-from agent.rating.data import CASES_PATH, CRITERIA_PATH, RULE8_PATH, compute_stats, load_cases
+from agent.rating.data import (
+    CASES_PATH,
+    CRITERIA_PATH,
+    LAW_PATH,
+    RULE8_PATH,
+    compute_stats,
+    load_cases,
+)
 
 mcp = FastMCP(name="game-rating")
 
@@ -40,6 +48,12 @@ def get_descriptor_criteria() -> str:
 def get_rule_8() -> str:
     """게임산업진흥에 관한 법률 시행규칙 제8조(등급분류기준 등) 원문."""
     return RULE8_PATH.read_text()
+
+
+@mcp.resource("law://game-industry/articles")
+def get_law_articles() -> str:
+    """게임산업진흥에 관한 법률·시행령·시행규칙 조문(JSON) — 국가법령정보센터 원문, 개정 표시 제거."""
+    return LAW_PATH.read_text()
 
 
 @mcp.resource("ratings://cases")
