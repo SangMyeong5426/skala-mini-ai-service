@@ -5,7 +5,7 @@
 | 이름 · UID | TBD |
 | 과제 | **1. Base AI Agent 기능 개선/추가** |
 | 주제 | 질문을 제대로 이해하고, 근거 있는 답만 내보내는 인시던트 대응 에이전트 |
-| Git | TBD — GitHub 저장소 생성 후 |
+| Git | <https://github.com/SangMyeong5426/skala-mini-ai-service> |
 | 실행 환경 | Apple M5 · RAM 16GB, ollama 0.33.0, qwen3:0.6b(분류·계획·대화) · qwen3:8b(보고서 작성·검수) · qwen3-embedding:0.6b, temperature 0 |
 
 모든 수치는 이 저장소에서 직접 실행해 얻은 값이다. 원자료는 `runs/`, 계산 과정은

@@ -121,7 +121,7 @@
 - [x] 결정 기록마다 "한계와 트레이드오프" 채움 확인 (0002~0006)
 - [x] 결과 보고서 초안 — [`04-report.md`](04-report.md) (문제 → 개선 포인트 → Before/After → 한계·추가 개선)
 - [ ] **(직접)** 결과 보고서를 Google Spread에 옮기고 이름·UID·Git 주소 칸 채우기
-- [ ] GitHub 원격 저장소 생성·push
+- [x] GitHub public 저장소 생성·push — <https://github.com/SangMyeong5426/skala-mini-ai-service>
 - [ ] **(직접)** Git 주소·결과 보고서 주소 Google Spread 등록 — 마감 13:00
 - [ ] 발표 자료: 문제 → 개선 포인트 → Before/After 수치 → 한계·추가 개선
 - [ ] 발표 리허설 — 코드 설명 질문 대비(항목별 결정 기록이 답안)
