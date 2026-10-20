@@ -56,7 +56,7 @@ def case_problems(draft: str, cases: list[dict]) -> list[str]:
 
 
 def ungrounded_numbers(draft: str, collected: list[dict], description: str) -> list[str]:
-    """보고서의 수치 중 통계 Tool 결과·사례 수·게임 설명 어디에도 없는 것.
+    """보고서의 수치 중 통계 Tool 결과·사례(수·제목·개요)·게임 설명 어디에도 없는 것.
 
     사례 제목·괄호(③이 본다), 따옴표 속 설명 인용(근거 검사가 본다), 등급분류번호, "단계 N", 목록 번호 "1)"은
     수치로 보지 않는다.
@@ -67,7 +67,10 @@ def ungrounded_numbers(draft: str, collected: list[dict], description: str) -> l
     if stats:
         allowed |= {float(stats["total"]), *map(float, stats["by_rating"].values()),
                     *map(float, stats["descriptors"].values())}
-    allowed.add(float(len(latest(collected, "cases") or [])))
+    cases = latest(collected, "cases") or []
+    allowed.add(float(len(cases)))
+    # 사례의 제목·개요도 수집한 사실이다 — 보고서가 "블럭 3개", "8인 협동"처럼 옮겨 쓸 수 있다(2026-10-20 회귀 쿼리).
+    allowed |= {float(n) for c in cases for n in NUMBER.findall(f"{c['title']} {c['summary']}")}
     text = LEVEL.sub(" ", CASE_ID.sub(" ", QUOTED.sub(" ", CITED.sub(" ", draft))))
     unknown: list[str] = []
     for token in NUMBER.findall(LIST_MARKER.sub(" ", text)):
