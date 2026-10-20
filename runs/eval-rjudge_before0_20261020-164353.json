@@ -1,0 +1,182 @@
+{
+  "kind": "rjudge",
+  "label": "before0",
+  "started_at": "20261020-164353",
+  "evalset": "tools/evalsets/rating_judge.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-xREaAb",
+  "git": {
+    "commit": "b0cb295",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format"
+    }
+  },
+  "summary": {
+    "n": 12,
+    "detected": "0/7",
+    "false_reject": "0/5",
+    "stages": {},
+    "latency_median_s": 0.0
+  },
+  "results": [
+    {
+      "id": "n1",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "n2",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "n3",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "n4",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "n5",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p1",
+      "expected": "fail",
+      "defect": "rating_mismatch",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p2",
+      "expected": "fail",
+      "defect": "unknown_case",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p3",
+      "expected": "fail",
+      "defect": "case_rating",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p4",
+      "expected": "fail",
+      "defect": "stats_number",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p5",
+      "expected": "fail",
+      "defect": "item_mismatch",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p6",
+      "expected": "fail",
+      "defect": "irrelevant",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p7",
+      "expected": "fail",
+      "defect": "overclaim",
+      "passed": true,
+      "ok": false,
+      "stage": null,
+      "reason": null,
+      "latency_s": 0.0,
+      "error": null
+    }
+  ]
+}

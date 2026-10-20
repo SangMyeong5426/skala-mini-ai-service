@@ -1,0 +1,1100 @@
+{
+  "kind": "rate",
+  "label": "before0",
+  "started_at": "20261020-163956",
+  "evalset": "tools/evalsets/rating.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-xREaAb",
+  "git": {
+    "commit": "b0cb295",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format"
+    }
+  },
+  "summary": {
+    "n": 40,
+    "accuracy": "14/40",
+    "within_one": "31/40",
+    "under": 25,
+    "over": 1,
+    "clarified": 0,
+    "errors": 0,
+    "descriptors": {
+      "precision": 0.158,
+      "recall": 0.651,
+      "f1": 0.255
+    },
+    "accuracy_by_label": {
+      "전체이용가": "10/10",
+      "12세이용가": "2/10",
+      "15세이용가": "1/10",
+      "청소년이용불가": "1/10"
+    },
+    "accuracy_applicant_in_cases": "9/29",
+    "accuracy_applicant_new": "5/11",
+    "confusion": {
+      "전체이용가": {
+        "전체이용가": 10
+      },
+      "12세이용가": {
+        "전체이용가": 7,
+        "12세이용가": 2,
+        "15세이용가": 1
+      },
+      "15세이용가": {
+        "전체이용가": 4,
+        "12세이용가": 5,
+        "15세이용가": 1
+      },
+      "청소년이용불가": {
+        "15세이용가": 4,
+        "전체이용가": 3,
+        "12세이용가": 2,
+        "청소년이용불가": 1
+      }
+    },
+    "dropped_items": 0,
+    "latency_median_s": 4.728,
+    "cost_usd_sum": 0.06517
+  },
+  "results": [
+    {
+      "id": "a01",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.789,
+      "cost_usd": 0.001755,
+      "error": null
+    },
+    {
+      "id": "a02",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.626,
+      "cost_usd": 0.00165,
+      "error": null
+    },
+    {
+      "id": "a03",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.77,
+      "cost_usd": 0.001625,
+      "error": null
+    },
+    {
+      "id": "a04",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.464,
+      "cost_usd": 0.001595,
+      "error": null
+    },
+    {
+      "id": "a05",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 4.997,
+      "cost_usd": 0.00162,
+      "error": null
+    },
+    {
+      "id": "a06",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 4.156,
+      "cost_usd": 0.00162,
+      "error": null
+    },
+    {
+      "id": "a07",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 5.37,
+      "cost_usd": 0.001715,
+      "error": null
+    },
+    {
+      "id": "a08",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 4.054,
+      "cost_usd": 0.00162,
+      "error": null
+    },
+    {
+      "id": "a09",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 6.141,
+      "cost_usd": 0.001855,
+      "error": null
+    },
+    {
+      "id": "a10",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.302,
+      "cost_usd": 0.001765,
+      "error": null
+    },
+    {
+      "id": "a11",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.924,
+      "cost_usd": 0.001765,
+      "error": null
+    },
+    {
+      "id": "a12",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.945,
+      "cost_usd": 0.001615,
+      "error": null
+    },
+    {
+      "id": "a13",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.442,
+      "cost_usd": 0.00163,
+      "error": null
+    },
+    {
+      "id": "a14",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 6.159,
+      "cost_usd": 0.00184,
+      "error": null
+    },
+    {
+      "id": "a15",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.687,
+      "cost_usd": 0.00177,
+      "error": null
+    },
+    {
+      "id": "a16",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "범죄"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.475,
+      "cost_usd": 0.001485,
+      "error": null
+    },
+    {
+      "id": "a17",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 4.687,
+      "cost_usd": 0.00163,
+      "error": null
+    },
+    {
+      "id": "a18",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.215,
+      "cost_usd": 0.0016,
+      "error": null
+    },
+    {
+      "id": "a19",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.982,
+      "cost_usd": 0.001655,
+      "error": null
+    },
+    {
+      "id": "a20",
+      "label": "12세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 3.704,
+      "cost_usd": 0.001535,
+      "error": null
+    },
+    {
+      "id": "a21",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.796,
+      "cost_usd": 0.001735,
+      "error": null
+    },
+    {
+      "id": "a22",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 5.232,
+      "cost_usd": 0.00177,
+      "error": null
+    },
+    {
+      "id": "a23",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.883,
+      "cost_usd": 0.00162,
+      "error": null
+    },
+    {
+      "id": "a24",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.769,
+      "cost_usd": 0.0016,
+      "error": null
+    },
+    {
+      "id": "a25",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.103,
+      "cost_usd": 0.001605,
+      "error": null
+    },
+    {
+      "id": "a26",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.421,
+      "cost_usd": 0.001445,
+      "error": null
+    },
+    {
+      "id": "a27",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.209,
+      "cost_usd": 0.001635,
+      "error": null
+    },
+    {
+      "id": "a28",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "약물",
+        "범죄"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.511,
+      "cost_usd": 0.00158,
+      "error": null
+    },
+    {
+      "id": "a29",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.949,
+      "cost_usd": 0.0016,
+      "error": null
+    },
+    {
+      "id": "a30",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 5.175,
+      "cost_usd": 0.001735,
+      "error": null
+    },
+    {
+      "id": "a31",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "범죄"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.434,
+      "cost_usd": 0.001495,
+      "error": null
+    },
+    {
+      "id": "a32",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 4.769,
+      "cost_usd": 0.00165,
+      "error": null
+    },
+    {
+      "id": "a33",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포",
+        "언어",
+        "약물",
+        "범죄",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 5.736,
+      "cost_usd": 0.001705,
+      "error": null
+    },
+    {
+      "id": "a34",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 3.525,
+      "cost_usd": 0.00151,
+      "error": null
+    },
+    {
+      "id": "a35",
+      "label": "청소년이용불가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.634,
+      "cost_usd": 0.00152,
+      "error": null
+    },
+    {
+      "id": "a36",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "범죄"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.727,
+      "cost_usd": 0.00155,
+      "error": null
+    },
+    {
+      "id": "a37",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "공포"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.418,
+      "cost_usd": 0.0015,
+      "error": null
+    },
+    {
+      "id": "a38",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.402,
+      "cost_usd": 0.00144,
+      "error": null
+    },
+    {
+      "id": "a39",
+      "label": "청소년이용불가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 3.71,
+      "cost_usd": 0.001465,
+      "error": null
+    },
+    {
+      "id": "a40",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 4.454,
+      "cost_usd": 0.001665,
+      "error": null
+    }
+  ]
+}

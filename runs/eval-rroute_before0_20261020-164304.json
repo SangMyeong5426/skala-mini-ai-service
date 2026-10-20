@@ -1,0 +1,353 @@
+{
+  "kind": "rroute",
+  "label": "before0",
+  "started_at": "20261020-164304",
+  "evalset": "tools/evalsets/rating_route.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-xREaAb",
+  "git": {
+    "commit": "b0cb295",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format"
+    }
+  },
+  "summary": {
+    "n": 30,
+    "accuracy": "15/30",
+    "chat_as_review": 0,
+    "review_as_chat": 15,
+    "methods": {
+      "llm": 30
+    },
+    "latency_median_s": 0.084
+  },
+  "results": [
+    {
+      "id": "c01",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.137,
+      "error": null
+    },
+    {
+      "id": "c02",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.078,
+      "error": null
+    },
+    {
+      "id": "c03",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.078,
+      "error": null
+    },
+    {
+      "id": "c04",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.08,
+      "error": null
+    },
+    {
+      "id": "c05",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.071,
+      "error": null
+    },
+    {
+      "id": "c06",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.078,
+      "error": null
+    },
+    {
+      "id": "c07",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.082,
+      "error": null
+    },
+    {
+      "id": "c08",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.075,
+      "error": null
+    },
+    {
+      "id": "c09",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.081,
+      "error": null
+    },
+    {
+      "id": "c10",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.09,
+      "error": null
+    },
+    {
+      "id": "c11",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.082,
+      "error": null
+    },
+    {
+      "id": "c12",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.078,
+      "error": null
+    },
+    {
+      "id": "c13",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.087,
+      "error": null
+    },
+    {
+      "id": "c14",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.071,
+      "error": null
+    },
+    {
+      "id": "c15",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.081,
+      "error": null
+    },
+    {
+      "id": "r01",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.084,
+      "error": null
+    },
+    {
+      "id": "r02",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.071,
+      "error": null
+    },
+    {
+      "id": "r03",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.092,
+      "error": null
+    },
+    {
+      "id": "r04",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.087,
+      "error": null
+    },
+    {
+      "id": "r05",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.088,
+      "error": null
+    },
+    {
+      "id": "r06",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.084,
+      "error": null
+    },
+    {
+      "id": "r07",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.09,
+      "error": null
+    },
+    {
+      "id": "r08",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.073,
+      "error": null
+    },
+    {
+      "id": "r09",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.084,
+      "error": null
+    },
+    {
+      "id": "r10",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.085,
+      "error": null
+    },
+    {
+      "id": "r11",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.087,
+      "error": null
+    },
+    {
+      "id": "r12",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.09,
+      "error": null
+    },
+    {
+      "id": "r13",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.09,
+      "error": null
+    },
+    {
+      "id": "r14",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.087,
+      "error": null
+    },
+    {
+      "id": "r15",
+      "expected": "review",
+      "pred": "chat",
+      "ok": false,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.083,
+      "error": null
+    }
+  ]
+}

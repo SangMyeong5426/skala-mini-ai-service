@@ -1,0 +1,384 @@
+{
+  "started_at": "20261020-164654",
+  "git": {
+    "commit": "3024e52",
+    "dirty": true,
+    "agent_matches_base": false
+  },
+  "embedder": "ollama:qwen3-embedding:0.6b",
+  "domain": "rating",
+  "router": {
+    "instruction": {
+      "loo_accuracy": 0.833,
+      "wrong": [
+        {
+          "text": "해적이 되어 배를 몰고 보물을 찾는 PC 어드벤처인데 몇 세가 나올까요?",
+          "label": "review",
+          "gap": -0.0014,
+          "llm": "chat"
+        },
+        {
+          "text": "탱크로 적 기지를 부수는 전쟁 게임 몇 세 받을지 궁금해요",
+          "label": "review",
+          "gap": -0.0042,
+          "llm": "chat"
+        },
+        {
+          "text": "중세 판타지 세계에서 마법을 쓰는 오픈월드 RPG예요. 등급 좀 봐 주세요",
+          "label": "review",
+          "gap": -0.0165,
+          "llm": "chat"
+        },
+        {
+          "text": "외계인을 레이저로 쏘는 우주 슈팅 게임인데 이번에 심의 받을 거예요",
+          "label": "review",
+          "gap": -0.0132,
+          "llm": "chat"
+        },
+        {
+          "text": "범죄 조직에 잠입하는 잠입 액션 게임인데 마약 거래 장면이 있어요. 몇 세일까",
+          "label": "review",
+          "gap": -0.0153,
+          "llm": "chat"
+        }
+      ],
+      "suggested_margin": 0.0,
+      "abs_gap_min_median": [
+        0.0014,
+        0.0322
+      ],
+      "curve": [
+        {
+          "margin": 0.0,
+          "decided": 30,
+          "accuracy_decided": 0.833,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.833
+        },
+        {
+          "margin": 0.005,
+          "decided": 28,
+          "accuracy_decided": 0.893,
+          "fallback_rate": 0.067,
+          "combined_accuracy": 0.833
+        },
+        {
+          "margin": 0.01,
+          "decided": 27,
+          "accuracy_decided": 0.889,
+          "fallback_rate": 0.1,
+          "combined_accuracy": 0.8
+        },
+        {
+          "margin": 0.015,
+          "decided": 25,
+          "accuracy_decided": 0.92,
+          "fallback_rate": 0.167,
+          "combined_accuracy": 0.767
+        },
+        {
+          "margin": 0.02,
+          "decided": 22,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.267,
+          "combined_accuracy": 0.733
+        },
+        {
+          "margin": 0.025,
+          "decided": 20,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.333,
+          "combined_accuracy": 0.7
+        },
+        {
+          "margin": 0.03,
+          "decided": 16,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.467,
+          "combined_accuracy": 0.667
+        },
+        {
+          "margin": 0.035,
+          "decided": 14,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.533,
+          "combined_accuracy": 0.633
+        },
+        {
+          "margin": 0.04,
+          "decided": 12,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.6,
+          "combined_accuracy": 0.633
+        },
+        {
+          "margin": 0.045,
+          "decided": 8,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.733,
+          "combined_accuracy": 0.6
+        },
+        {
+          "margin": 0.05,
+          "decided": 8,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.733,
+          "combined_accuracy": 0.6
+        },
+        {
+          "margin": 0.055,
+          "decided": 3,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.9,
+          "combined_accuracy": 0.567
+        },
+        {
+          "margin": 0.06,
+          "decided": 3,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.9,
+          "combined_accuracy": 0.567
+        },
+        {
+          "margin": 0.065,
+          "decided": 1,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.967,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.07,
+          "decided": 1,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.967,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.075,
+          "decided": 1,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.967,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.08,
+          "decided": 0,
+          "accuracy_decided": null,
+          "fallback_rate": 1.0,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.085,
+          "decided": 0,
+          "accuracy_decided": null,
+          "fallback_rate": 1.0,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.09,
+          "decided": 0,
+          "accuracy_decided": null,
+          "fallback_rate": 1.0,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.095,
+          "decided": 0,
+          "accuracy_decided": null,
+          "fallback_rate": 1.0,
+          "combined_accuracy": 0.533
+        },
+        {
+          "margin": 0.1,
+          "decided": 0,
+          "accuracy_decided": null,
+          "fallback_rate": 1.0,
+          "combined_accuracy": 0.533
+        }
+      ]
+    },
+    "none": {
+      "loo_accuracy": 0.867,
+      "wrong": [
+        {
+          "text": "해외 게임을 국내에 출시하려면 절차가 어떻게 되나요?",
+          "label": "chat",
+          "gap": 0.0387,
+          "llm": "chat"
+        },
+        {
+          "text": "청소년이용불가 게임을 청소년이 하면 처벌받아요?",
+          "label": "chat",
+          "gap": 0.0613,
+          "llm": "chat"
+        },
+        {
+          "text": "자체등급분류 게임물은 어디서 조회해요?",
+          "label": "chat",
+          "gap": 0.0207,
+          "llm": "chat"
+        },
+        {
+          "text": "사행성 게임물이 뭔지 알려 줘",
+          "label": "chat",
+          "gap": 0.0262,
+          "llm": "chat"
+        }
+      ],
+      "suggested_margin": 0.04,
+      "abs_gap_min_median": [
+        0.0207,
+        0.06735
+      ],
+      "curve": [
+        {
+          "margin": 0.0,
+          "decided": 30,
+          "accuracy_decided": 0.867,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.867
+        },
+        {
+          "margin": 0.005,
+          "decided": 30,
+          "accuracy_decided": 0.867,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.867
+        },
+        {
+          "margin": 0.01,
+          "decided": 30,
+          "accuracy_decided": 0.867,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.867
+        },
+        {
+          "margin": 0.015,
+          "decided": 30,
+          "accuracy_decided": 0.867,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.867
+        },
+        {
+          "margin": 0.02,
+          "decided": 30,
+          "accuracy_decided": 0.867,
+          "fallback_rate": 0.0,
+          "combined_accuracy": 0.867
+        },
+        {
+          "margin": 0.025,
+          "decided": 29,
+          "accuracy_decided": 0.897,
+          "fallback_rate": 0.033,
+          "combined_accuracy": 0.9
+        },
+        {
+          "margin": 0.03,
+          "decided": 27,
+          "accuracy_decided": 0.926,
+          "fallback_rate": 0.1,
+          "combined_accuracy": 0.933
+        },
+        {
+          "margin": 0.035,
+          "decided": 27,
+          "accuracy_decided": 0.926,
+          "fallback_rate": 0.1,
+          "combined_accuracy": 0.933
+        },
+        {
+          "margin": 0.04,
+          "decided": 25,
+          "accuracy_decided": 0.96,
+          "fallback_rate": 0.167,
+          "combined_accuracy": 0.967
+        },
+        {
+          "margin": 0.045,
+          "decided": 24,
+          "accuracy_decided": 0.958,
+          "fallback_rate": 0.2,
+          "combined_accuracy": 0.967
+        },
+        {
+          "margin": 0.05,
+          "decided": 21,
+          "accuracy_decided": 0.952,
+          "fallback_rate": 0.3,
+          "combined_accuracy": 0.9
+        },
+        {
+          "margin": 0.055,
+          "decided": 21,
+          "accuracy_decided": 0.952,
+          "fallback_rate": 0.3,
+          "combined_accuracy": 0.9
+        },
+        {
+          "margin": 0.06,
+          "decided": 18,
+          "accuracy_decided": 0.944,
+          "fallback_rate": 0.4,
+          "combined_accuracy": 0.8
+        },
+        {
+          "margin": 0.065,
+          "decided": 17,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.433,
+          "combined_accuracy": 0.833
+        },
+        {
+          "margin": 0.07,
+          "decided": 14,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.533,
+          "combined_accuracy": 0.8
+        },
+        {
+          "margin": 0.075,
+          "decided": 11,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.633,
+          "combined_accuracy": 0.733
+        },
+        {
+          "margin": 0.08,
+          "decided": 11,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.633,
+          "combined_accuracy": 0.733
+        },
+        {
+          "margin": 0.085,
+          "decided": 11,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.633,
+          "combined_accuracy": 0.733
+        },
+        {
+          "margin": 0.09,
+          "decided": 10,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.667,
+          "combined_accuracy": 0.733
+        },
+        {
+          "margin": 0.095,
+          "decided": 9,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.7,
+          "combined_accuracy": 0.7
+        },
+        {
+          "margin": 0.1,
+          "decided": 9,
+          "accuracy_decided": 1.0,
+          "fallback_rate": 0.7,
+          "combined_accuracy": 0.7
+        }
+      ]
+    }
+  }
+}
