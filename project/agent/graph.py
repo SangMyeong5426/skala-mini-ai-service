@@ -335,7 +335,11 @@ async def write_node(state: AgentState, deps: SupervisorDeps) -> dict:
 
 @traceable(name="validate_node")
 async def validate_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 8 — 코드 기준 검증: 30자 이상 + 절차 번호 포함이어야 합격."""
+    """Wave 8 — 코드 기준 검증: 30자 이상 + 절차 번호 포함이어야 합격.
+
+    항목 4 — deps.validator 가 있으면 _validate_grounded 가 대신한다."""
+    if deps.validator is not None:
+        return _validate_grounded(state, deps)
     draft = state["draft"]
     attempts = state.get("validation_attempts", 0) + 1
     ok = len(draft) >= 30 and "1)" in draft
@@ -348,6 +352,29 @@ async def validate_node(state: AgentState, deps: SupervisorDeps) -> dict:
     event = {"type": "Validation", "attempt": attempts, "verdict": verdict}
     return {"validation_attempts": attempts, "validation_feedback": feedback,
             "events": state["events"] + [event]}
+
+
+def _validate_grounded(state: AgentState, deps: SupervisorDeps) -> dict:
+    """항목 4 — 형식 → 수치 대조 → LLM 판정. 앞 단계에서 떨어지면 뒤는 부르지 않는다.
+
+    3회째에도 떨어지면 base 처럼 내보내되(무한 재작성 방지), 검수를 통과하지 못했다는 사실과
+    이유를 답변 맨 앞에 붙인다 — base 는 이때 아무 표시 없이 내보냈다."""
+    draft = state["draft"]
+    attempts = state.get("validation_attempts", 0) + 1
+    result = deps.validator.check(state["query"], state.get("collected", []), draft)
+    update: dict = {"validation_attempts": attempts}
+    if result["usage"]:
+        update["cost_usd"] = _cost(state, result["usage"])
+    if result["ok"]:
+        verdict, feedback = "합격", None
+    elif attempts >= 3:
+        verdict, feedback = "합격(최대 시도 도달 — 경고 표시)", None
+        update["draft"] = f"⚠️ 검수를 통과하지 못한 답변입니다 — {result['reason']}\n\n{draft}"
+    else:
+        verdict, feedback = "불합격", result["feedback"]
+    event = {"type": "Validation", "attempt": attempts, "verdict": verdict,
+             "stage": result["stage"], "reason": result["reason"]}
+    return {**update, "validation_feedback": feedback, "events": state["events"] + [event]}
 
 
 @traceable(name="finalize_node")

@@ -123,3 +123,9 @@ class QualityLLM(FakeLLM):
         if on_token is not None:
             on_token(draft)
         return draft, self._usage(query + str(feedback), draft)
+
+    @traceable(run_type="llm", name="quality_llm.judge")
+    def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
+        """항목 4 — fake 백엔드는 판정을 흉내만 낸다(늘 통과). 판정 규칙의 검증은 tests 가 맡는다."""
+        verdict = {"relevant": True, "faithful": True, "reason": "fake 백엔드 — 판정 생략"}
+        return verdict, self._usage(query + facts + draft, str(verdict))
