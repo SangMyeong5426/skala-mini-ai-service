@@ -60,3 +60,16 @@ def test_rating_stats_tool_is_found_by_lookup(rating_client):
     assert server == "rating"
     assert stats["filter"] == {"genre": "FPS/TPS", "platform": "PC/온라인 게임"}
     assert stats["total"] == sum(stats["by_rating"].values())
+
+
+def test_criteria_assessor_reads_criteria_through_mcp(rating_app):
+    """RATING_ASSESSOR=criteria — 기준표를 MCP Resource 로 받아 항목별로 판정하고, 등급은 코드가 계산한다."""
+    with rating_app(RATING_ASSESSOR="criteria") as client:
+        body = client.post("/chat", json={"message": REVIEW, "thread_id": "t-criteria"}).json()
+    tasks = [e for e in body["events"] if e["type"] == "TaskCompleted"]
+    analysis = next(e for e in body["events"] if e["type"] == "AnalysisCompleted")
+
+    assert [t["source"] for t in tasks] == ["criteria"]
+    assert analysis["method"] == "criteria"
+    assert analysis["rating"] == "15세이용가"   # fake 규칙: 피 → 폭력성 2단계
+    assert body["reply"].startswith("예상 등급: 15세이용가")
