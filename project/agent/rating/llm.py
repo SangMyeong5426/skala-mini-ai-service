@@ -178,10 +178,13 @@ FAKE_RULES = [("신체", "폭력성", 3), ("피", "폭력성", 2), ("칼", "폭�
 
 
 def _fake_items(description: str) -> dict:
+    """설명에 낱말이 있으면 그 낱말부터 몇 글자를 근거 구절로 인용한다(한 글자 근거는 근거 검사에서 지워진다)."""
     items = {name: {"present": False, "level": 0, "evidence": "", "case_ids": []} for name in ITEMS}
     for word, name, level in FAKE_RULES:
-        if word in description and level > items[name]["level"]:
-            items[name] = {"present": True, "level": level, "evidence": word, "case_ids": []}
+        at = description.find(word)
+        if at >= 0 and level > items[name]["level"]:
+            quote = description[at:at + len(word) + 4].strip()
+            items[name] = {"present": True, "level": level, "evidence": quote, "case_ids": []}
     return items
 
 
