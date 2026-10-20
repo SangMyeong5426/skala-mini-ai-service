@@ -11,6 +11,9 @@ RAW_DIR = DATA_DIR / "raw"
 CASES_PATH = DATA_DIR / "cases.json"
 CRITERIA_PATH = DATA_DIR / "criteria.json"
 RULE8_PATH = DATA_DIR / "rule-8.md"
+ROUTER_EXAMPLES_PATH = DATA_DIR / "router_examples.json"
+# 의미 라우터 판정 기준(점수 차). 과제 1 값(0.029)으로 시작하고 tools/tune_embedding.py 로 다시 정한다.
+ROUTER_MARGIN = 0.029
 
 # 단계 0~3. 사례집 요약표의 열 순서와 같다(전체 · 12 · 15 · 청소년이용불가).
 RATINGS = ["전체이용가", "12세이용가", "15세이용가", "청소년이용불가"]

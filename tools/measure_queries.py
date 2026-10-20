@@ -39,10 +39,12 @@ METRICS = ["latency_s", "cost_usd", "retry_count", "replan_rounds",
            "validation_attempts", "task_count", "gate_removed"]
 # 에이전트 동작을 정하는 경로. 측정 시점에 이 경로가 base 태그와 같으면 Before 로 쓸 수 있다.
 AGENT_PATHS = ["project/agent", "project/server.py", "project/mcp_server.py",
-               "project/mcp_server_docs.py", "project/data"]
+               "project/mcp_server_docs.py", "project/mcp_server_rating.py", "project/data"]
 # 개선 스위치(docs/03-design.md). 결과 파일에 그대로 남겨 어떤 조합으로 쟀는지 보이게 한다.
 SWITCHES = ["LLM_BACKEND", "OLLAMA_THINK", "OLLAMA_THINK_CHAT", "ROUTER", "TARGET_RESOLVER", "VALIDATOR",
-            "RUNBOOK_SELECTOR"]
+            "RUNBOOK_SELECTOR",
+            # 과제 2 (결정 0009) — 모두 끄면 LLM 단독
+            "AGENT_DOMAIN", "RATING_CLARIFY", "CASE_SEARCH", "RATING_ASSESSOR"]
 
 
 def _display(path: Path) -> str:

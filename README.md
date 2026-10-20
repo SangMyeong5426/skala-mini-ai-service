@@ -56,6 +56,18 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 | `VALIDATOR` | `grounded` | `format` | 4 — [0005](docs/decisions/0005-grounded-validator.md) |
 | `RUNBOOK_SELECTOR` | `semantic` | `keyword` | 5 — [0006](docs/decisions/0006-runbook-selector.md) |
 
+과제 2(`AGENT_DOMAIN=rating`, 기본값)는 아래 부품을 더 쓴다. `ROUTER`·`VALIDATOR`는 같은 이름으로 도메인에 맞는
+부품이 켜진다. **모두 끄면 LLM 단독이고, 그것이 과제 2의 Before다**([결정 0009](docs/decisions/0009-rating-domain.md)).
+`AGENT_DOMAIN=incident`면 과제 1 그대로 돈다.
+
+| 환경변수 | 개선 (ollama 기본) | 원본 (LLM 단독) | 기능 |
+| --- | --- | --- | --- |
+| `ROUTER` | `semantic` — 등급 점검 예시 문장 | `llm` | 5 의미 라우터 |
+| `CASE_SEARCH` | `semantic` — 유사 사례 검색 + 통계 Tool | `off` | 3 |
+| `RATING_ASSESSOR` | `criteria` — 기준표로 항목별 단계 판정, 등급은 코드가 계산 | `direct` — LLM 이 등급을 바로 답함 | 3 |
+| `VALIDATOR` | `grounded` — 등급·사례·수치 대조 + LLM 판정 | `format` | 4 |
+| `RATING_CLARIFY` | `rule` — 정보가 모자라면 되묻기 | `off` | 6 |
+
 판정 기준은 `ROUTER_MARGIN`(0.029)·`TARGET_MIN_SCORE`(0.40)·`TARGET_MARGIN`(0.04)으로 덮어쓸 수 있다.
 임베딩 모델은 `OLLAMA_EMBED_MODEL`(기본 `qwen3-embedding:0.6b`).
 

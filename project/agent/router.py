@@ -27,9 +27,10 @@ DEFAULT_MARGIN = 0.029
 DEFAULT_K = 3
 
 
-def load_examples(path: Path = EXAMPLES_PATH) -> dict[str, list[str]]:
+def load_examples(path: Path = EXAMPLES_PATH, work_label: str = "incident") -> dict[str, list[str]]:
+    """{"chat": [...], <work_label>: [...]}. 과제 2(등급 점검)는 work_label="review" 로 자기 예시 파일을 읽는다."""
     data = json.loads(path.read_text())
-    return {"chat": data["chat"], "incident": data["incident"]}
+    return {"chat": data["chat"], work_label: data[work_label]}
 
 
 def class_scores(query_vec: list[float], example_vecs: dict[str, list[list[float]]],
@@ -56,13 +57,14 @@ class LLMRouter:
 class SemanticRouter:
     def __init__(self, embedder, fallback: LLMRouter, example_vecs: dict[str, list[list[float]]],
                  margin: float = DEFAULT_MARGIN, k: int = DEFAULT_K,
-                 instruction: str | None = None):
+                 instruction: str | None = None, work_label: str = "incident"):
         self.embedder = embedder
         self.fallback = fallback
         self.example_vecs = example_vecs
         self.margin = margin
         self.k = k
         self.instruction = instruction
+        self.work_label = work_label   # chat 이 아닌 쪽 — 과제 1 incident, 과제 2 review
 
     @classmethod
     async def create(cls, embedder, fallback: LLMRouter, examples: dict[str, list[str]],
@@ -77,10 +79,10 @@ class SemanticRouter:
     async def route(self, query: str) -> tuple[dict, dict]:
         [query_vec] = await self.embedder.embed([query], self.instruction)
         scores = class_scores(query_vec, self.example_vecs, self.k)
-        gap = scores["incident"] - scores["chat"]
+        gap = scores[self.work_label] - scores["chat"]
         if abs(gap) >= self.margin:
             # incident 경로에서는 plan_node 가 needs_analysis 를 자기 판단으로 덮어쓴다 — 여기서 정하지 않는다.
-            result = {"route": "incident" if gap > 0 else "chat", "needs_analysis": False,
+            result = {"route": self.work_label if gap > 0 else "chat", "needs_analysis": False,
                       "method": "semantic"}
             usage = {"model": self.embedder.name, "tokens": 0, "usd": 0.0}
         else:

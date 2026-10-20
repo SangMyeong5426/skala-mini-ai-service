@@ -25,7 +25,8 @@ from pydantic import BaseModel
 from agent.deps import SupervisorDeps
 from agent.fake_llm import FastLLM, QualityLLM
 from agent.graph import build_graph
-from agent.mcp_client import MCPClient
+from agent.mcp_client import RATING_SERVER_SCRIPTS, MCPClient
+from agent.rating.graph import build_rating_graph
 from agent.session_store import SqliteSessionStore
 from agent.supervisor_v1 import run_v1
 
@@ -68,9 +69,19 @@ def _ollama_think_chat(general: bool | None) -> bool | None:
     return _parse_think("OLLAMA_THINK_CHAT", value)
 
 
-def _build_llms():
+def _domain() -> str:
+    """AGENT_DOMAIN=rating(기본, 과제 2 등급 점검) | incident(과제 1 인시던트 대응) — 결정 0009."""
+    value = os.environ.get("AGENT_DOMAIN", "rating").strip().lower()
+    if value not in ("rating", "incident"):
+        raise ValueError(f"AGENT_DOMAIN 은 rating · incident 중 하나여야 합니다: {value!r}")
+    return value
+
+
+def _build_llms(domain: str = "incident"):
     """LLM_BACKEND=fake(기본, 결정론) | ollama(로컬 실모델) | openai(실제 OpenAI API)."""
     backend = os.environ.get("LLM_BACKEND", "fake")
+    if domain == "rating":
+        return _build_rating_llms(backend)
     if backend == "ollama":
         from agent.ollama_llm import OllamaFastLLM, OllamaQualityLLM
         think = _ollama_think()
@@ -90,6 +101,24 @@ def _build_llms():
     fast = FastLLM("fast-model-stub", usd_per_1k_tokens=0.00015)
     quality = QualityLLM("quality-model-stub", usd_per_1k_tokens=0.005)
     return backend, fast, quality
+
+
+def _build_rating_llms(backend: str):
+    """과제 2 — 프롬프트만 등급 점검용이고 모델·thinking 설정은 과제 1 과 같다."""
+    if backend == "openai":
+        raise ValueError("AGENT_DOMAIN=rating 은 openai 백엔드를 지원하지 않습니다 — 과금이라 범위 밖(결정 0009)")
+    if backend == "ollama":
+        from agent.rating.llm import OllamaRatingFastLLM, OllamaRatingQualityLLM
+        think = _ollama_think()
+        fast = OllamaRatingFastLLM(os.environ.get("OLLAMA_FAST_MODEL", "qwen3:0.6b"),
+                                   usd_per_1k_tokens=0.00015, think=think,
+                                   chat_think=_ollama_think_chat(think))
+        quality = OllamaRatingQualityLLM(os.environ.get("OLLAMA_QUALITY_MODEL", "qwen3:8b"),
+                                         usd_per_1k_tokens=0.005, think=think)
+        return backend, fast, quality
+    from agent.rating.llm import FakeRatingFastLLM, FakeRatingQualityLLM
+    return (backend, FakeRatingFastLLM("fast-model-stub", usd_per_1k_tokens=0.00015),
+            FakeRatingQualityLLM("quality-model-stub", usd_per_1k_tokens=0.005))
 
 
 def _switch(name: str, improved: str, base: str, backend: str, allowed: tuple[str, ...]) -> str:
@@ -151,14 +180,55 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
     return parts, switches
 
 
+async def _build_rating_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[dict, dict]:
+    """과제 2 — 등급 점검 부품을 스위치대로 만든다. 모두 끄면 LLM 단독(Before)이다(결정 0009)."""
+    ollama = backend == "ollama"
+    switches = {"AGENT_DOMAIN": "rating",
+                "OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if ollama else None,
+                "OLLAMA_THINK_CHAT": ({None: "default", True: "true", False: "false"}[fast_llm.chat_think]
+                                      if ollama else None),
+                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
+                "RATING_CLARIFY": _switch("RATING_CLARIFY", "rule", "off", backend, ("rule", "off")),
+                "CASE_SEARCH": _switch("CASE_SEARCH", "semantic", "off", backend, ("semantic", "off")),
+                "RATING_ASSESSOR": _switch("RATING_ASSESSOR", "criteria", "direct", backend,
+                                           ("criteria", "direct")),
+                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend, ("grounded", "format"))}
+    parts: dict = {"domain": "rating"}
+    if "semantic" in (switches["ROUTER"], switches["CASE_SEARCH"]):
+        parts["embedder"] = _make_embedder()
+    if switches["ROUTER"] == "semantic":   # 기능 5 — 과제 1 의미 라우터에 등급 점검 예시 문장
+        from agent.rating.data import ROUTER_EXAMPLES_PATH, ROUTER_MARGIN
+        from agent.router import LLMRouter, SemanticRouter, load_examples
+        parts["router"] = await SemanticRouter.create(
+            parts["embedder"], LLMRouter(fast_llm), load_examples(ROUTER_EXAMPLES_PATH, "review"),
+            margin=float(os.environ.get("ROUTER_MARGIN", ROUTER_MARGIN)), work_label="review")
+    if switches["CASE_SEARCH"] == "semantic":   # 기능 3 — 사례 DB 는 MCP Resource 로 받는다
+        from agent.rating.cases import CaseRetriever
+        cases_server = await mcp.find_resource("ratings://cases")
+        cases = json.loads(await mcp.read_resource("ratings://cases", server=cases_server))
+        parts["case_retriever"] = await CaseRetriever.create(parts["embedder"], cases)
+    if switches["RATING_ASSESSOR"] == "criteria":   # 기능 3 — 판정은 답변을 쓰는 quality 모델이 맡는다
+        from agent.rating.assess import CriteriaAssessor
+        parts["assessor"] = CriteriaAssessor(quality_llm)
+    if switches["RATING_CLARIFY"] == "rule":   # 기능 6
+        from agent.rating.clarify import ClarifyRule
+        parts["clarifier"] = ClarifyRule()
+    if switches["VALIDATOR"] == "grounded":   # 기능 4
+        from agent.rating.check import RatingValidator
+        parts["validator"] = RatingValidator(quality_llm)
+    return parts, switches
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global CREATION_COUNT
     CREATION_COUNT += 1
-    mcp = MCPClient()
+    domain = _domain()
+    mcp = MCPClient(server_scripts=RATING_SERVER_SCRIPTS if domain == "rating" else None)
     await mcp.start()   # Wave 2 — MCP subprocess는 서버 수명 동안 딱 1개
-    backend, fast_llm, quality_llm = _build_llms()
-    parts, switches = await _build_components(backend, fast_llm, quality_llm, mcp)
+    backend, fast_llm, quality_llm = _build_llms(domain)
+    build = _build_rating_components if domain == "rating" else _build_components
+    parts, switches = await build(backend, fast_llm, quality_llm, mcp)
     app.state.llm_backend = backend
     app.state.switches = switches
     deps = SupervisorDeps(
@@ -166,11 +236,13 @@ async def lifespan(app: FastAPI):
         quality_llm=quality_llm,
         mcp=mcp,
         session_store=SqliteSessionStore(),
-        version=os.environ.get("SUPERVISOR_VERSION", "v2"),
+        # 등급 점검은 v2 그래프만 있다 — v1(Wave 14 legacy)은 인시던트 도메인 것이다.
+        version=os.environ.get("SUPERVISOR_VERSION", "v2") if domain == "incident" else "v2",
         **parts,
     )
     app.state.deps = deps
-    app.state.graph = build_graph(deps) if deps.version == "v2" else None
+    graph_builder = build_rating_graph if domain == "rating" else build_graph
+    app.state.graph = graph_builder(deps) if deps.version == "v2" else None
     app.state.instance_id = id(deps)
     yield
     await mcp.stop()
@@ -189,6 +261,7 @@ app = FastAPI(lifespan=lifespan)
 async def health():
     return {"status": "ok", "instance_id": app.state.instance_id,
             "creation_count": CREATION_COUNT,
+            "domain": app.state.deps.domain,
             "supervisor_version": app.state.deps.version,
             "llm_backend": app.state.llm_backend,
             "fast_llm": app.state.deps.fast_llm.name,

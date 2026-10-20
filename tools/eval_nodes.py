@@ -266,6 +266,7 @@ async def _run(kinds: list[str], args: argparse.Namespace) -> None:
     git_state = _git_state(code_root)   # 시작 시점 — 측정 도중 파일이 바뀌어도 기록이 흔들리지 않게
     # server import 전에 정한다 — server.py 의 load_dotenv() 는 이미 있는 값을 덮어쓰지 않는다.
     os.environ["LLM_BACKEND"] = args.backend
+    os.environ["AGENT_DOMAIN"] = "incident"   # 과제 1 노드 평가 — 과제 2 는 tools/eval_rating.py
     os.environ["LANGCHAIN_PROJECT"] = "capstone-all-total-eval"
     switches = _switches()
     sys.path.insert(0, str(project))
