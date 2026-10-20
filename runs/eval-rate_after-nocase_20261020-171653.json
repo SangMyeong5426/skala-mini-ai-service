@@ -1,0 +1,899 @@
+{
+  "kind": "rate",
+  "label": "after-nocase",
+  "started_at": "20261020-171653",
+  "evalset": "tools/evalsets/rating.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-TAqPFU",
+  "git": {
+    "commit": "0876038",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": null,
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": null
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "semantic",
+      "RATING_CLARIFY": "rule",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "criteria",
+      "VALIDATOR": "grounded"
+    }
+  },
+  "summary": {
+    "n": 40,
+    "accuracy": "8/40",
+    "within_one": "21/40",
+    "under": 27,
+    "over": 0,
+    "clarified": 5,
+    "errors": 0,
+    "descriptors": {
+      "precision": 0.556,
+      "recall": 0.116,
+      "f1": 0.192
+    },
+    "accuracy_by_label": {
+      "전체이용가": "7/10",
+      "12세이용가": "1/10",
+      "15세이용가": "0/10",
+      "청소년이용불가": "0/10"
+    },
+    "accuracy_applicant_in_cases": "5/29",
+    "accuracy_applicant_new": "3/11",
+    "confusion": {
+      "전체이용가": {
+        "전체이용가": 7,
+        "clarify": 3
+      },
+      "12세이용가": {
+        "전체이용가": 8,
+        "clarify": 1,
+        "12세이용가": 1
+      },
+      "15세이용가": {
+        "전체이용가": 5,
+        "12세이용가": 5
+      },
+      "청소년이용불가": {
+        "12세이용가": 2,
+        "전체이용가": 7,
+        "clarify": 1
+      }
+    },
+    "dropped_items": 0,
+    "latency_median_s": 11.602,
+    "cost_usd_sum": 0.21768
+  },
+  "results": [
+    {
+      "id": "a01",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 12.185,
+      "cost_usd": 0.005425,
+      "error": null
+    },
+    {
+      "id": "a02",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.301,
+      "cost_usd": 0.005355,
+      "error": null
+    },
+    {
+      "id": "a03",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.065,
+      "cost_usd": 0.005395,
+      "error": null
+    },
+    {
+      "id": "a04",
+      "label": "전체이용가",
+      "pred": null,
+      "action": "clarify",
+      "ok": false,
+      "diff": null,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.191,
+      "cost_usd": 0.00539,
+      "error": null
+    },
+    {
+      "id": "a05",
+      "label": "전체이용가",
+      "pred": null,
+      "action": "clarify",
+      "ok": false,
+      "diff": null,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.425,
+      "cost_usd": 0.00536,
+      "error": null
+    },
+    {
+      "id": "a06",
+      "label": "전체이용가",
+      "pred": null,
+      "action": "clarify",
+      "ok": false,
+      "diff": null,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.046,
+      "cost_usd": 0.00545,
+      "error": null
+    },
+    {
+      "id": "a07",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.047,
+      "cost_usd": 0.0054,
+      "error": null
+    },
+    {
+      "id": "a08",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.305,
+      "cost_usd": 0.00547,
+      "error": null
+    },
+    {
+      "id": "a09",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 10.959,
+      "cost_usd": 0.005475,
+      "error": null
+    },
+    {
+      "id": "a10",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.142,
+      "cost_usd": 0.00547,
+      "error": null
+    },
+    {
+      "id": "a11",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.204,
+      "cost_usd": 0.005405,
+      "error": null
+    },
+    {
+      "id": "a12",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.126,
+      "cost_usd": 0.005385,
+      "error": null
+    },
+    {
+      "id": "a13",
+      "label": "12세이용가",
+      "pred": null,
+      "action": "clarify",
+      "ok": false,
+      "diff": null,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.754,
+      "cost_usd": 0.00533,
+      "error": null
+    },
+    {
+      "id": "a14",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "약물"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.445,
+      "cost_usd": 0.005445,
+      "error": null
+    },
+    {
+      "id": "a15",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 12.057,
+      "cost_usd": 0.005435,
+      "error": null
+    },
+    {
+      "id": "a16",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "범죄"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.646,
+      "cost_usd": 0.00539,
+      "error": null
+    },
+    {
+      "id": "a17",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.442,
+      "cost_usd": 0.00542,
+      "error": null
+    },
+    {
+      "id": "a18",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.406,
+      "cost_usd": 0.00536,
+      "error": null
+    },
+    {
+      "id": "a19",
+      "label": "12세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.69,
+      "cost_usd": 0.005415,
+      "error": null
+    },
+    {
+      "id": "a20",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 12.259,
+      "cost_usd": 0.005565,
+      "error": null
+    },
+    {
+      "id": "a21",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "언어"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.073,
+      "cost_usd": 0.005405,
+      "error": null
+    },
+    {
+      "id": "a22",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 10.935,
+      "cost_usd": 0.005495,
+      "error": null
+    },
+    {
+      "id": "a23",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 12.052,
+      "cost_usd": 0.005475,
+      "error": null
+    },
+    {
+      "id": "a24",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 13.135,
+      "cost_usd": 0.005605,
+      "error": null
+    },
+    {
+      "id": "a25",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 13.657,
+      "cost_usd": 0.00564,
+      "error": null
+    },
+    {
+      "id": "a26",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.811,
+      "cost_usd": 0.005405,
+      "error": null
+    },
+    {
+      "id": "a27",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.293,
+      "cost_usd": 0.005455,
+      "error": null
+    },
+    {
+      "id": "a28",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성",
+        "약물",
+        "범죄"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.301,
+      "cost_usd": 0.00538,
+      "error": null
+    },
+    {
+      "id": "a29",
+      "label": "15세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 12.19,
+      "cost_usd": 0.005565,
+      "error": null
+    },
+    {
+      "id": "a30",
+      "label": "15세이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.619,
+      "cost_usd": 0.005455,
+      "error": null
+    },
+    {
+      "id": "a31",
+      "label": "청소년이용불가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "범죄"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 15.726,
+      "cost_usd": 0.005735,
+      "error": null
+    },
+    {
+      "id": "a32",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 13.325,
+      "cost_usd": 0.00541,
+      "error": null
+    },
+    {
+      "id": "a33",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.864,
+      "cost_usd": 0.00535,
+      "error": null
+    },
+    {
+      "id": "a34",
+      "label": "청소년이용불가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -2,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 12.732,
+      "cost_usd": 0.00553,
+      "error": null
+    },
+    {
+      "id": "a35",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.422,
+      "cost_usd": 0.00542,
+      "error": null
+    },
+    {
+      "id": "a36",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.755,
+      "cost_usd": 0.005435,
+      "error": null
+    },
+    {
+      "id": "a37",
+      "label": "청소년이용불가",
+      "pred": null,
+      "action": "clarify",
+      "ok": false,
+      "diff": null,
+      "descriptors_label": [
+        "폭력성",
+        "공포"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.585,
+      "cost_usd": 0.00542,
+      "error": null
+    },
+    {
+      "id": "a38",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.744,
+      "cost_usd": 0.00536,
+      "error": null
+    },
+    {
+      "id": "a39",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": true,
+      "latency_s": 11.711,
+      "cost_usd": 0.005345,
+      "error": null
+    },
+    {
+      "id": "a40",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "applicant_in_cases": false,
+      "latency_s": 11.672,
+      "cost_usd": 0.005455,
+      "error": null
+    }
+  ]
+}
