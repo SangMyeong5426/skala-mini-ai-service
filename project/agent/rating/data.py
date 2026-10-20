@@ -46,6 +46,27 @@ def build_cases(rows: list[dict], until: str = CASES_UNTIL) -> list[dict]:
     return sorted(cases, key=lambda c: (c["date"], c["id"]))
 
 
+def compute_stats(cases: list[dict], genre: str = "", platform: str = "", min_total: int = 5) -> dict:
+    """같은 장르·플랫폼 사례의 등급 분포와 내용정보 빈도 — MCP Tool rating_stats 의 본체.
+
+    장르·플랫폼이 둘 다 맞는 사례가 min_total 건보다 적으면 장르 조건을 빼고 플랫폼만으로 센다.
+    실제로 적용한 조건을 filter 에 남긴다 — 답변이 "같은 장르·플랫폼"이라고 잘못 말하지 않게.
+    """
+    def pick(g: str, p: str) -> list[dict]:
+        return [c for c in cases if (not g or c["genre"] == g) and (not p or c["platform"] == p)]
+
+    applied = {"genre": genre or None, "platform": platform or None}
+    chosen = pick(genre, platform)
+    if len(chosen) < min_total and genre:
+        applied["genre"] = None
+        chosen = pick("", platform)
+    by_rating = {r: sum(c["rating"] == r for c in chosen) for r in RATINGS}
+    descriptors = {i: sum(i in c["descriptors"] for c in chosen) for i in ITEMS}
+    dates = [c["date"] for c in cases]
+    return {"filter": applied, "total": len(chosen), "by_rating": by_rating, "descriptors": descriptors,
+            "period": f"{min(dates)} ~ {max(dates)}" if dates else None}
+
+
 def load_cases(path: Path = CASES_PATH) -> list[dict]:
     return json.loads(path.read_text())
 

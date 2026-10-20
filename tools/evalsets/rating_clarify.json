@@ -1,0 +1,14 @@
+[
+  {"id": "k01", "query": "우리 게임 몇 세 등급 받을까요?", "expected_action": "clarify", "tag": "게임 설명 없음"},
+  {"id": "k02", "query": "이번에 출시할 모바일 게임 등급 점검해 주세요", "expected_action": "clarify", "tag": "플랫폼만 있음"},
+  {"id": "k03", "query": "RPG 게임 만들었는데 등급이 어떻게 나올지 알려 줘", "expected_action": "clarify", "tag": "장르만 있음"},
+  {"id": "k04", "query": "저희 회사 신작 PC 게임이 심의를 받으면 어떤 등급이 나올지 미리 알고 싶습니다", "expected_action": "clarify", "tag": "문장은 길지만 내용 설명 없음"},
+  {"id": "k05", "query": "액션 게임인데 15세 받을 수 있을까요?", "expected_action": "clarify", "tag": "장르와 희망 등급만 있음"},
+  {"id": "k06", "query": "등급 예상해 줘", "expected_action": "clarify", "tag": "요청만 있음"},
+  {"id": "k07", "query": "고양이가 상자에 숨어 생선을 모으는 모바일 퍼즐 게임이에요. 몇 세일까요?", "expected_action": "assess", "tag": "짧지만 내용이 있다"},
+  {"id": "k08", "query": "총으로 테러리스트를 제압하는 PC FPS인데 피 표현이 사실적이에요. 등급 점검 부탁해요", "expected_action": "assess", "tag": "내용과 수위가 있다"},
+  {"id": "k09", "query": "마법 학교 학생이 되어 친구들과 퀴즈 대결을 하는 교육용 게임 등급 예상해 줘", "expected_action": "assess", "tag": "내용이 있다"},
+  {"id": "k10", "query": "무덤에서 되살아난 시체를 도끼로 처치하는 호러 액션 게임인데 신체 절단 묘사가 있어요", "expected_action": "assess", "tag": "요청 문구 없이 설명만"},
+  {"id": "k11", "query": "몬스터와 싸우는 모바일 RPG인데 마을에서 무료 칩으로 포커와 슬롯을 즐기는 미니게임이 있어요. 몇 세가 나올까요?", "expected_action": "assess", "tag": "내용이 있다"},
+  {"id": "k12", "query": "연인과 데이트하며 대화 선택지를 고르는 연애 시뮬레이션, 키스 장면이 한 번 나와요. 등급 알려 주세요", "expected_action": "assess", "tag": "내용이 있다"}
+]
