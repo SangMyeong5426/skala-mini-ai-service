@@ -109,6 +109,20 @@ LAW_SYSTEM = (
 )
 
 
+LAW_JUDGE_SCHEMA = {
+    "type": "object",
+    "properties": {"supported": {"type": "boolean"}, "reason": {"type": "string"}},
+    "required": ["supported", "reason"],
+}
+LAW_JUDGE_SYSTEM = (
+    "당신은 법령 안내의 검수자다. 질문, 인용 조문 원문, 답을 보고 supported 를 판정한다.\n"
+    "supported=true: 답의 모든 내용이 인용 조문에 직접 쓰여 있고, 질문이 묻는 대상에 대한 내용이다.\n"
+    "supported=false: 조문의 다른 항목·다른 대상의 내용을 질문의 대상에 붙였거나(예: 15세이용가의 기준을 청소년이용불가의 "
+    "나이로 씀), 조문에 없는 나이·금액·기간·사실을 덧붙였거나, 조문이 다른 법률에 맡긴 내용을 단정했다.\n"
+    "reason 에는 판정 근거를 한국어 한 문장으로 쓴다."
+)
+
+
 def law_user_message(question: str, articles: list[dict]) -> str:
     rows = "\n\n".join(f"[{a['key']}] ({a['title']})\n{a['text']}" for a in articles)
     return f"## 조문\n{rows}\n\n## 질문\n{question}"
@@ -200,6 +214,17 @@ class OllamaRatingQualityLLM(OllamaLLM):
         except json.JSONDecodeError:
             return {}, usage
 
+    @traceable(run_type="llm", name="ollama_rating_quality.judge_law")
+    def judge_law(self, question: str, articles: list[dict], answer: str) -> tuple[dict, dict]:
+        """기능 8 검수 — 답이 인용 조문으로 직접 뒷받침되는가. JSON 이 깨지면 뒷받침되지 않는 것으로 본다(답하지 않는 쪽)."""
+        user = f"{law_user_message(question, articles)}\n\n## 답\n{answer}"
+        content, usage = self._chat(LAW_JUDGE_SYSTEM, user, schema=LAW_JUDGE_SCHEMA)
+        try:
+            raw = json.loads(content)
+            return {"supported": bool(raw.get("supported")), "reason": str(raw.get("reason", ""))}, usage
+        except (json.JSONDecodeError, AttributeError):
+            return {"supported": False, "reason": "검수 판정 JSON 을 읽지 못함"}, usage
+
     @traceable(run_type="llm", name="ollama_rating_quality.judge")
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
         content, usage = self._chat(JUDGE_SYSTEM, judge_user_message(query, facts, draft), schema=JUDGE_SCHEMA)
@@ -278,6 +303,11 @@ class FakeRatingQualityLLM(FakeLLM):
                        "citations": [hit["key"]]} if hit else
                       {"kind": "law", "answerable": False, "answer": "", "citations": []})
         return result, self._usage(question, str(result))
+
+    @traceable(run_type="llm", name="fake_rating_quality.judge_law")
+    def judge_law(self, question: str, articles: list[dict], answer: str) -> tuple[dict, dict]:
+        verdict = {"supported": True, "reason": "fake 백엔드 — 판정 생략"}
+        return verdict, self._usage(question + answer, str(verdict))
 
     @traceable(run_type="llm", name="fake_rating_quality.judge")
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
