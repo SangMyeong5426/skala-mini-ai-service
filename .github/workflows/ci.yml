@@ -1,0 +1,46 @@
+# LLM 없이 도는 것만 건다.
+#
+# 테스트는 fake 백엔드(결정론)로 lifespan·MCP subprocess·그래프·세션·SSE 전체를
+# 실제로 돌린다. ollama/openai 는 CI 에 없다 — 모델 품질·지연시간은 로컬에서
+# tools/measure_queries.py 로 재고 runs/ 에 남긴다.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    # 타임아웃이 없으면 GitHub 기본값 360분이 걸린다. 이 검사는 1분 안에 끝난다.
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: project/requirements*.txt
+
+      - name: 의존성
+        working-directory: project
+        run: pip install -r requirements-dev.txt
+
+      - name: 린트
+        run: |
+          (cd project && ruff check .)
+          ruff check --config project/pyproject.toml tools
+
+      - name: 테스트 (fake 백엔드)
+        working-directory: project
+        run: pytest -q
+
+      # 규칙 문서 둘이 한 글자도 달라선 안 된다. pre-commit 이 로컬에서 잡지만
+      # 훅을 켜지 않은 clone 도 있을 수 있어 여기서 다시 본다.
+      - name: AGENTS ≡ CLAUDE
+        run: ./scripts/check-rule-docs

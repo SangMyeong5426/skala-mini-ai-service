@@ -1,0 +1,22 @@
+#!/bin/sh
+# 커밋 전 빠른 검사 — 몇 초 안에 끝나는 것만 건다. 테스트는 CI 가 돌린다.
+#
+# scripts/setup-git-hooks 를 실행해야 동작한다. clone 직후 한 번 실행한다.
+
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+
+# 1) AGENTS.md 와 CLAUDE.md 는 같은 문서다.
+scripts/check-rule-docs >/dev/null
+
+# 2) .env 가 스테이징되면 막는다. .gitignore 를 -f 로 넘긴 경우를 잡는다.
+if git diff --cached --name-only | grep -E '(^|/)\.env$' >/dev/null; then
+  printf '%s\n' "ERROR: .env 파일은 커밋하지 않습니다. git restore --staged <파일> 로 내리세요." >&2
+  exit 1
+fi
+
+# 3) ruff — .venv 가 있을 때만. 없으면 CI 에 맡긴다.
+if [ -x project/.venv/bin/ruff ]; then
+  (cd project && .venv/bin/ruff check --quiet .)
+  project/.venv/bin/ruff check --quiet --config project/pyproject.toml tools
+fi

@@ -1,0 +1,20 @@
+# 줄바꿈 정규화
+#
+# 저장소에는 항상 LF로 저장한다. 작업 트리는 OS 기본값을 따르되,
+# 아래 예외는 Windows에서도 반드시 LF를 유지한다.
+* text=auto
+
+# ── 셸 스크립트: 반드시 LF ────────────────────────────────
+# CRLF로 바뀌면 shebang이 '#!/usr/bin/env bash\r' 가 되어
+# "bad interpreter" 오류로 실행되지 않는다.
+.githooks/**    text eol=lf
+scripts/**      text eol=lf
+*.sh            text eol=lf
+
+# ── 바이너리: 변환하지 않는다 ─────────────────────────────
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.pdf           binary
+*.ico           binary

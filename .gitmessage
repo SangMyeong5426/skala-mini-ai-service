@@ -1,0 +1,17 @@
+# <type>(<scope>): <summary>
+#
+# Why:
+#
+# What:
+#
+# Before/After (측정했다면 runs/ 파일명과 핵심 수치):
+#
+# 허용 type:
+# feat, fix, refactor, docs, test, chore, ci, build, perf, revert
+#
+# scope 예시:
+# agent, mcp, api, fe, data, eval, docs, infra
+#
+# 예:
+# feat(agent): research 노드를 로그·메트릭·런북 서브그래프로 분리
+# test(eval): 회귀 쿼리 측정 스크립트에 repeat 옵션 추가
