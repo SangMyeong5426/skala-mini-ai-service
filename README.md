@@ -13,6 +13,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
 | 상세 수정 설계 | [`docs/03-design.md`](docs/03-design.md) |
 | 진행 체크리스트 | [`docs/checklist.md`](docs/checklist.md) |
+| 결과 보고서 (초안) | [`docs/04-report.md`](docs/04-report.md) |
 | Before/After 실측 | [`docs/02-measurement.md`](docs/02-measurement.md) |
 | 결정 기록 | [`docs/decisions/`](docs/decisions/) |
 
@@ -102,6 +103,7 @@ skala-mini-ai-service/
 │   ├── 01-plan.md               진행 계획 (Google Spread 등록 원본)
 │   ├── 02-measurement.md        Before/After 실측
 │   ├── 03-design.md             항목별 상세 수정 설계
+│   ├── 04-report.md             결과 보고서 초안 (Google Spread 붙여넣기용 요약 포함)
 │   ├── checklist.md             3일 체크리스트 — 진행 상황
 │   ├── decisions/               결정 기록 — 개선 항목별 한계·트레이드오프
 │   └── followups.md             미해결·확인 대기
