@@ -1,0 +1,1479 @@
+{
+ "source": "https://www.grac.or.kr/WebService/GameSearchSvc.asmx/game",
+ "month": "2026-01",
+ "fetched_at": "2026-10-20T16:21:58",
+ "count": 104,
+ "items": [
+  {
+   "id": "SC-OM-260105-001",
+   "date": "2026-01-05",
+   "title": "코지 타일즈 (Cozy Tiles)",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 슈퍼진",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260107-001",
+   "date": "2026-01-07",
+   "title": "타자월드",
+   "org": "게임물관리위원회",
+   "applicant": "다운테크",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "교육용",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-08",
+   "title": "6bari",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 에프아이티그룹",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-08",
+   "title": "wowland m",
+   "org": "게임물관리위원회",
+   "applicant": "주)와우가챠월드",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-08",
+   "title": "꽃노리2",
+   "org": "게임물관리위원회",
+   "applicant": "스튜디오베스트",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-001",
+   "date": "2026-01-08",
+   "title": "ZZANG FRIENDS II (짱 프렌즈 II)",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사짱",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 크레인 방식의 게임물(1인용)",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-002",
+   "date": "2026-01-08",
+   "title": "CATCHING DUCK2",
+   "org": "게임물관리위원회",
+   "applicant": "대승인터컴",
+   "summary": "조이스틱과 버튼을 활용해 집게를 조작하여 경품을 획득하는 1인용 크레인 형태의 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-003",
+   "date": "2026-01-08",
+   "title": "CATCHING DUCK BIG2",
+   "org": "게임물관리위원회",
+   "applicant": "대승인터컴",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 게임",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-004",
+   "date": "2026-01-08",
+   "title": "CATCHING DUCK BIG3",
+   "org": "게임물관리위원회",
+   "applicant": "대승인터컴",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 게임",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-005",
+   "date": "2026-01-08",
+   "title": "CATCHING DUCK 4P2",
+   "org": "게임물관리위원회",
+   "applicant": "대승인터컴",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 4인용 크레인 방식의 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260108-006",
+   "date": "2026-01-08",
+   "title": "CATCHING DUCK 4P BOX",
+   "org": "게임물관리위원회",
+   "applicant": "대승인터컴",
+   "summary": "레버와 버튼을 사용하여 집게로 경품을 획득하는 4인용 크레인 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260108-001",
+   "date": "2026-01-08",
+   "title": "SunRise 바둑이",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 바둑이 포커 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260108-002",
+   "date": "2026-01-08",
+   "title": "SunRise 맞고",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 맞고 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260108-003",
+   "date": "2026-01-08",
+   "title": "SunRise 홀덤",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 홀덤 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260108-004",
+   "date": "2026-01-08",
+   "title": "SunRise 토너먼트",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 홀덤 토너먼트 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260108-001",
+   "date": "2026-01-08",
+   "title": "TOZ",
+   "org": "게임물관리위원회",
+   "applicant": "AFK Studio",
+   "summary": "카드나 질문지를 이용한 파티용 엔터테인먼트 게임물",
+   "rating": "청소년이용불가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "선정성",
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260108-002",
+   "date": "2026-01-08",
+   "title": "Red Dead Redemption NETFLIX",
+   "org": "게임물관리위원회",
+   "applicant": "Netflix Inc",
+   "summary": "1900년대 미국 서부를 배경으로 생존을 위해 적을 처치하는 오픈월드 기반 액션 어드벤처 게임물",
+   "rating": "청소년이용불가",
+   "genre": "액션",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성",
+    "사행성",
+    "공포",
+    "언어",
+    "약물",
+    "범죄"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260108-003",
+   "date": "2026-01-08",
+   "title": "TriWarM Global",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 유니온게임즈",
+   "summary": "트라이아 대륙의 하라칸, 글라시온, 린델 세 종족간 세력다툼을 배경으로한 MMORPG 게임물",
+   "rating": "청소년이용불가",
+   "genre": "MMORPG",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성",
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260108-004",
+   "date": "2026-01-08",
+   "title": "야심한 병동",
+   "org": "게임물관리위원회",
+   "applicant": "톤 워커",
+   "summary": "미니게임을 통해 수집한 재화로 여성캐릭터의 이미지 앨범을 수집하는 캐주얼 게임물",
+   "rating": "청소년이용불가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260108-005",
+   "date": "2026-01-08",
+   "title": "그녀를 구해줘! 10",
+   "org": "게임물관리위원회",
+   "applicant": "젠스티",
+   "summary": "화면을 터치해 총탄을 발사하면 나무배경이 파괴되어 여성을 구하는 내용의 일러스트 수집형 게임물",
+   "rating": "청소년이용불가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OP-260108-001",
+   "date": "2026-01-08",
+   "title": "도라에몽 코믹 트래블러",
+   "org": "게임물관리위원회",
+   "applicant": "CTWinc.",
+   "summary": "애니메이션 「도라에몽」에 등장하는 캐릭터들과 함께 미지의 행성을 탐험하는 RPG 게임물",
+   "rating": "12세이용가",
+   "genre": "롤플레잉",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-001",
+   "date": "2026-01-09",
+   "title": "스크리멀즈",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "위아래로 조작하며 장애물을 피해 음표를 모아 목적지에 도착하는 캐주얼 러닝 액션 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-002",
+   "date": "2026-01-09",
+   "title": "픽셀린트(Pixelint)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "도트를 이용하여 화면에 나온 이미지를 따라 그리는 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-003",
+   "date": "2026-01-09",
+   "title": "오목(OMOK)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "가로/세로/대각선으로 돌 5개를 연속으로 놓으면 이기는 오목 게임",
+   "rating": "전체이용가",
+   "genre": "보드게임",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-004",
+   "date": "2026-01-09",
+   "title": "머지갤럭시(MergeGalaxy)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "행성을 날려 작은 행성들과 합치며 더 큰 행성을 만드는 머지류 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-005",
+   "date": "2026-01-09",
+   "title": "그래니히어로(GRANNY HERO)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "중앙에서 회전하는 프라이팬을 타이밍에 맞춰 눌러 표시된 적을 맞추는 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-006",
+   "date": "2026-01-09",
+   "title": "머지볼 H5(MERGE BALL H5)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "같은 종류의 볼을 합쳐 상위 볼을 만들고 블록을 부숴 목표 지점에 도달하는 머지류 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-007",
+   "date": "2026-01-09",
+   "title": "머지팜(Merge Farm)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "머지 방식으로 상위 단계의 동물을 만들어 자금을 생성하고 농장을 구성하는 방치형 시뮬레이션 게임",
+   "rating": "전체이용가",
+   "genre": "시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-008",
+   "date": "2026-01-09",
+   "title": "머지플라워(Merge Flower)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "같은 종류의 꽃을 합쳐 상위 단계의 꽃을 만드는 방식의 머지류 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-009",
+   "date": "2026-01-09",
+   "title": "볼가이(Ball Guy)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "공을 발사하여 배치된 블록을 제거하는 캐주얼 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-010",
+   "date": "2026-01-09",
+   "title": "블라스트볼3D(BlastBall3D)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "중앙에 회전하는 원기둥과 구슬을 타이밍에 맞춰 클릭해 블록을 파괴하는 캐주얼 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-011",
+   "date": "2026-01-09",
+   "title": "슈가큐브(SUGAR CUBE)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "육각형 모양의 판 위에 블록을 배치해 라인을 완성하는 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-012",
+   "date": "2026-01-09",
+   "title": "스네이크 D(SNAKE D)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "자동으로 움직이는 뱀을 조종해 먹이를 먹으며 생존하는 캐주얼 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-013",
+   "date": "2026-01-09",
+   "title": "스핀다운(SPIN DOWN)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "중앙에 있는 원기둥과 구슬을 타이밍에 맞춰 회전시켜 블록을 피하는 캐주얼 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-014",
+   "date": "2026-01-09",
+   "title": "슬라이드 퀘스트(SLIDE QUEST)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "블록을 움직여서 비눗방울에 갇힌 보석을 획득하는 캐주얼 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-015",
+   "date": "2026-01-09",
+   "title": "Wood FreeCell",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "4개의 홈 셀에 4가지 문양의 카드를 순차적으로 옮기는 솔리테어 카드 게임",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-016",
+   "date": "2026-01-09",
+   "title": "캔디 블라켓 (CANDY BRACKET)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "가로, 세로로 같은 색상의 블록을 찾아 교차되는 빈 공간을 클릭해 블록을 제거하는 퍼즐 게임",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-017",
+   "date": "2026-01-09",
+   "title": "헌드레드 라인 -최종방위학원-",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "아크시스템웍스아시아 주식회사",
+   "summary": "학교 겸 방어 기지인 최종방위학원에서 100일 동안 침입자와 싸우며 학원을 지키고 학원과 인류의 비밀을 밝혀야 내어야 하는 어드벤처 시뮬레이션 게임",
+   "rating": "청소년이용불가",
+   "genre": "어드벤처",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260109-018",
+   "date": "2026-01-09",
+   "title": "린 크로니클",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)인포바인",
+   "summary": "빛의 신족과 어둠의 신족이 공존하는 세계를 배경으로 하는 독특한 아트페인팅 텍스처 기법이 더해진 수집형 RPG",
+   "rating": "15세이용가",
+   "genre": "롤플레잉",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NV-260109-001",
+   "date": "2026-01-09",
+   "title": "요시와 신기한 도감",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "한국닌텐도 주식회사",
+   "summary": "요시가 신기한 도감 속을 탐험하며 다양한 생물들을 발견하는 어드벤처 게임",
+   "rating": "전체이용가",
+   "genre": "어드벤처",
+   "platform": "비디오 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NV-260109-002",
+   "date": "2026-01-09",
+   "title": "슈퍼 마리오브라더스 원더 Nintendo Switch 2 Edition ＋ 다 함께 방울 파크",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "한국닌텐도 주식회사",
+   "summary": "‘슈퍼 마리오브라더스 원더’에 새로운 월드인 ‘방울 파크’가 추가된 액션 게임",
+   "rating": "전체이용가",
+   "genre": "액션",
+   "platform": "비디오 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260113-001",
+   "date": "2026-01-13",
+   "title": "브레인롯 팡팡",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 미디어나비",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-15",
+   "title": "PangPang Toy",
+   "org": "게임물관리위원회",
+   "applicant": "팡팡토이",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-15",
+   "title": "PangPang Toy Mini",
+   "org": "게임물관리위원회",
+   "applicant": "팡팡토이",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-15",
+   "title": "으라차차",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 읏차컴퍼니",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "",
+   "date": "2026-01-15",
+   "title": "으라차차4",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 읏차컴퍼니",
+   "summary": "",
+   "rating": "등급거부",
+   "genre": "",
+   "platform": "",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-001",
+   "date": "2026-01-15",
+   "title": "SHOOTING GALLERY VS",
+   "org": "게임물관리위원회",
+   "applicant": "(주)엔터스",
+   "summary": "모의총기를 이용해 레이저 포인트로 조준 사격하는 2인용 게임물",
+   "rating": "전체이용가",
+   "genre": "FPS/TPS",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-002",
+   "date": "2026-01-15",
+   "title": "PLAY CUK!(플레이 콕!)",
+   "org": "게임물관리위원회",
+   "applicant": "게임웍스",
+   "summary": "레버와 버튼을 사용하여 집게로 경품을 획득하는 4인용 크레인 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-003",
+   "date": "2026-01-15",
+   "title": "Smile King #(스마일킹 샾)",
+   "org": "게임물관리위원회",
+   "applicant": "스마일컴퍼니",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-004",
+   "date": "2026-01-15",
+   "title": "Smile Crane #(스마일크레인 샾)",
+   "org": "게임물관리위원회",
+   "applicant": "스마일컴퍼니",
+   "summary": "레버와 버튼을 사용하여 집게로 경품을 획득하는 크레인 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-005",
+   "date": "2026-01-15",
+   "title": "Smile Toy #(스마일토이샾)",
+   "org": "게임물관리위원회",
+   "applicant": "스마일컴퍼니",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 게임",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260115-006",
+   "date": "2026-01-15",
+   "title": "COCO ZZANG III",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사짱",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 1인용 크레인 방식의 게임",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260115-001",
+   "date": "2026-01-15",
+   "title": "황혼의 태양",
+   "org": "게임물관리위원회",
+   "applicant": "Dream Plus Games Limited",
+   "summary": "초자연적인 존재들의 위협에 맞서 싸우는 내용의 RPG 요소가 가미된 경영 시뮬레이션 게임물",
+   "rating": "15세이용가",
+   "genre": "시뮬레이션",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성",
+    "약물"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260115-002",
+   "date": "2026-01-15",
+   "title": "RAGNAROK ORIGIN CLASSIC(라그나로크 오리진 클래식)",
+   "org": "게임물관리위원회",
+   "applicant": "(주)그라비티",
+   "summary": "미드가르드 대륙을 배경으로, 신화와 모험이 어우러진 판타지 RPG",
+   "rating": "청소년이용불가",
+   "genre": "MMORPG",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260115-003",
+   "date": "2026-01-15",
+   "title": "해적스토리",
+   "org": "게임물관리위원회",
+   "applicant": "더게임",
+   "summary": "5X5 슬롯을 돌려 족보에 따라 점수를 획득하는 슬롯머신을 모사한 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260115-004",
+   "date": "2026-01-15",
+   "title": "잠룡 : 무협 도트 RPG",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 스탠드에그",
+   "summary": "혈교의 음모에 맞서 중원을 수호하는 무인의 서사를 다룬 도트 그래픽 기반의 무협 RPG",
+   "rating": "청소년이용불가",
+   "genre": "MMORPG",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260115-001",
+   "date": "2026-01-15",
+   "title": "레인보우칵테일",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 베리팟",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260115-002",
+   "date": "2026-01-15",
+   "title": "Smashworld: Beat Explorers",
+   "org": "게임물관리위원회",
+   "applicant": "Smash Labs S.R.L.",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260119-001",
+   "date": "2026-01-19",
+   "title": "바드캣 키우기",
+   "org": "게임물관리위원회",
+   "applicant": "레이어랩",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "롤플레잉",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260119-002",
+   "date": "2026-01-19",
+   "title": "호이월드",
+   "org": "게임물관리위원회",
+   "applicant": "호이월드",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "MMORPG",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260120-001",
+   "date": "2026-01-20",
+   "title": "캔디팡",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 넵튠",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260120-002",
+   "date": "2026-01-20",
+   "title": "todaysfarm",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 스파크게임즈",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260121-001",
+   "date": "2026-01-21",
+   "title": "빙판 위의 꿈 스케이트 챌린지 도전",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 두잇파이브",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "스포츠",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260122-001",
+   "date": "2026-01-22",
+   "title": "PLAYKING HOCKEY",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 닉플레이",
+   "summary": "스틱을 이용하여 테이블 위에 있는 퍽을 상대 골대에 넣어 점수를 획득하는 2인 아케이드 에어 하키 게임물",
+   "rating": "전체이용가",
+   "genre": "기타",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260122-002",
+   "date": "2026-01-22",
+   "title": "Puzzle＆GoldDragon(퍼즐앤골드드래곤)",
+   "org": "게임물관리위원회",
+   "applicant": "보라미디어",
+   "summary": "주어진 시간 동안 그림판에 위치한 아이콘을 관찰하고, 화면에 제시된 아이콘과 같은 아이콘을 찾아 점수를 획득하는 퍼즐 게임물",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260122-003",
+   "date": "2026-01-22",
+   "title": "wowland m",
+   "org": "게임물관리위원회",
+   "applicant": "주)와우가챠월드",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 4인용 크레인 방식의 게임물",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260122-001",
+   "date": "2026-01-22",
+   "title": "JACKPOT SEA",
+   "org": "게임물관리위원회",
+   "applicant": "에스앤에이",
+   "summary": "3x4의 슬롯을 돌려 점수표에 있는 족보에 따라 점수를 획득하는 단독형 CD 패키지 슬롯 모사 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260122-002",
+   "date": "2026-01-22",
+   "title": "더플러스블랙잭",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 뉴박스",
+   "summary": "베팅과 배당을 내용으로 하는 블랙잭을 모사한 베팅성 무료 웹보드 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260122-001",
+   "date": "2026-01-22",
+   "title": "Headshot ZD : Survivors vs Zombie Doomsday",
+   "org": "게임물관리위원회",
+   "applicant": "레이어랩",
+   "summary": "포스트 아포칼립스 배경의 좀비가 등장하는 2D 픽셀 생존 액션 게임물",
+   "rating": "청소년이용불가",
+   "genre": "액션",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260122-002",
+   "date": "2026-01-22",
+   "title": "Tomb Raider",
+   "org": "게임물관리위원회",
+   "applicant": "Feral Interactive",
+   "summary": "폭풍에 휘말려 섬에 조난 당한 주인공과 동료들의 모험을 다루는 어드벤처 게임물",
+   "rating": "청소년이용불가",
+   "genre": "액션",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성",
+    "언어"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OP-260122-001",
+   "date": "2026-01-22",
+   "title": "PEAK",
+   "org": "게임물관리위원회",
+   "applicant": "Aggro Crab Games LLC",
+   "summary": "섬에 추락한 후 고립된 섬 중앙에 있는 산을 올라 탈출하는 어드벤처 게임물",
+   "rating": "15세이용가",
+   "genre": "어드벤처",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260122-001",
+   "date": "2026-01-22",
+   "title": "펜슬피커",
+   "org": "게임물관리위원회",
+   "applicant": "단테컴퍼니",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-001",
+   "date": "2026-01-23",
+   "title": "머지픽셀(Merge Pixel)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)모비소프트",
+   "summary": "화면에 생성되는 같은 픽셀 캐릭터를 모아 합치고, 다음 단계로 진화시키는 방치형 시뮬레이션 게임",
+   "rating": "전체이용가",
+   "genre": "시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-002",
+   "date": "2026-01-23",
+   "title": "Rise ＆ Shine",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "주식회사 스마일게이트",
+   "summary": "주인공 Rise를 조작하여 다양한 적과 전투를 벌이며 스테이지별로 구성된 전장을 돌파해 나가는 횡스크롤 액션 슈터 게임",
+   "rating": "청소년이용불가",
+   "genre": "액션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-003",
+   "date": "2026-01-23",
+   "title": "전생 보험 주식회사 (R.I.P. - Reincarnation Insurance Program)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "주식회사 스마일게이트",
+   "summary": "좀비가 들끓는 포스트 아포칼립스 세계에서 좀비와 몬스터들을 해치워 아이템을 획득하고 보스를 클리어하는 슈팅 액션 게임",
+   "rating": "청소년이용불가",
+   "genre": "액션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-004",
+   "date": "2026-01-23",
+   "title": "스페셜포스리마스터(SpecialForce Remastered)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)드래곤플라이",
+   "summary": "최대 16명의 인원이 온라인상에서 다양한 룰로 가상의 밀리터리 전투를 펼치는 온라인 FPS 게임",
+   "rating": "청소년이용불가",
+   "genre": "FPS/TPS",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-005",
+   "date": "2026-01-23",
+   "title": "진・삼국무쌍2 with 맹장전 Remastered",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)디지털터치",
+   "summary": "삼국시대를 배경으로 무장이 되어 광활한 전장에서 수많은 적을 물리치는 액션 게임",
+   "rating": "15세이용가",
+   "genre": "액션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "약물"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-006",
+   "date": "2026-01-23",
+   "title": "DARK IN LIGHT",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "메이크리조이스게임즈",
+   "summary": "도심 한복판에서 정체불명의 괴물로부터 살아남아 집으로 돌아가기 위한 여정을 그린 액션 서라이벌 호러 게임",
+   "rating": "15세이용가",
+   "genre": "액션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "공포"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-007",
+   "date": "2026-01-23",
+   "title": "Age of Empires Mobile: PC Edition(에이지 오브 엠파이어 모바일: PC 에디션)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "한국마이크로소프트(유)",
+   "summary": "중세시대를 배경으로 가상의 왕국인 킹스랜드애서 펼쳐지는 전쟁 전략 시뮬레이션 게임",
+   "rating": "12세이용가",
+   "genre": "전략시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-008",
+   "date": "2026-01-23",
+   "title": "후즈 마이 마니또 (시크릿 플러스)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "주식회사 스마일게이트",
+   "summary": "대학교 새내기가 된 주인공이 대학교 홍보대사활동을 하며 친목 도모를 위한 마니또 게임을 통해 여성 캐릭터와 가까워진다는 내용의 비주얼 노벨 게임물",
+   "rating": "청소년이용불가",
+   "genre": "시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-009",
+   "date": "2026-01-23",
+   "title": "마스터 오브 피스 (Master of Piece)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)아이엠파인",
+   "summary": "검은 연기에 휩싸인 세계 속에서 원정대와 세상의 비밀을 밝히는 덱 빌딩 로그라이트 게임",
+   "rating": "12세이용가",
+   "genre": "전략시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-010",
+   "date": "2026-01-23",
+   "title": "Serious Sam: Shatterverse (시리어스 샘: 섀터버스)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "바다게임즈",
+   "summary": "시공간이 조각난 ＇섀터버스＇에서, 샘 스톤이 뒤섞인 차원을 바로잡고 인류를 구하기 위해 숙적 ＇멘탈(Mental)＇의 군단과 끝없는 전쟁을 벌이는 FPS게임",
+   "rating": "청소년이용불가",
+   "genre": "FPS/TPS",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "언어"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-011",
+   "date": "2026-01-23",
+   "title": "Hashire HEBEREKE EX(달려라 헤베레케 EX)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "(주)그라비티",
+   "summary": "슈퍼패미컴 게임 Hashire Hebereke를 현대적으로 리메이크한 경주 게임",
+   "rating": "전체이용가",
+   "genre": "스포츠",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-012",
+   "date": "2026-01-23",
+   "title": "Basement(지하실)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "김명근",
+   "summary": "지하 단칸방으로 이사온 주인공이 지하에 숨겨진 보물을 찾아 탐험하는 시뮬레이션 게임",
+   "rating": "12세이용가",
+   "genre": "시뮬레이션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "공포"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-013",
+   "date": "2026-01-23",
+   "title": "KILL THE WITCH",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "스네이크이글(SnakeEagle)",
+   "summary": "야구 배트를 쥔 마녀 ‘요나’가 앞을 가로막는 모든 것들과 싸우며 나아가는 내용의 2D 액션 플랫포머 게임",
+   "rating": "15세이용가",
+   "genre": "액션",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NP-260123-014",
+   "date": "2026-01-23",
+   "title": "폴가이즈 Crown Jam (Fall Guys Crown Jam)",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "에픽게임즈코리아",
+   "summary": "폴가이즈 세계관을 기반으로 한 포트나이트 농구 스타일의 스포츠 모드",
+   "rating": "전체이용가",
+   "genre": "스포츠",
+   "platform": "PC/온라인 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NV-260123-001",
+   "date": "2026-01-23",
+   "title": "BLAZBLUE ENTROPY EFFECT X",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "코멧소프트",
+   "summary": "주인공 “Ace”의 머릿속으로 유입된 수많은 기억과 무너져가는 세계 앞에서 랩 연구의 진상을 밝히는 로그라이트 액션 게임",
+   "rating": "12세이용가",
+   "genre": "액션",
+   "platform": "비디오 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NV-260123-002",
+   "date": "2026-01-23",
+   "title": "물거품의 유크로니아",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "코멧소프트",
+   "summary": "공중도시 ‘이테하리’를 무대로 이상향에 가려진 진실을 둘러싼 사건에 휘말리는 여성향 연애 어드벤처 게임",
+   "rating": "15세이용가",
+   "genre": "어드벤처",
+   "platform": "비디오 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성",
+    "약물",
+    "범죄"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "GC-CC-NV-260123-003",
+   "date": "2026-01-23",
+   "title": "Pilo and the Holobook",
+   "org": "게임콘텐츠등급분류위원회",
+   "applicant": "게임피아(주)",
+   "summary": "주인공 ‘필로’가 미지의 행성을 탐험하며, 신비로운 발견을 ‘홀로북’에 스티커로 기록하는 어드벤처 게임",
+   "rating": "전체이용가",
+   "genre": "어드벤처",
+   "platform": "비디오 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260126-001",
+   "date": "2026-01-26",
+   "title": "페이펫 2048",
+   "org": "게임물관리위원회",
+   "applicant": "라인넥스트 주식회사",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260126-002",
+   "date": "2026-01-26",
+   "title": "페이펫 블록퍼즐",
+   "org": "게임물관리위원회",
+   "applicant": "라인넥스트 주식회사",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "퍼즐",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260126-003",
+   "date": "2026-01-26",
+   "title": "브레인롯 아이들",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 미디어나비",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NA-260129-001",
+   "date": "2026-01-29",
+   "title": "MiniDoll4(미니돌4)",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 더플레이",
+   "summary": "조이스틱과 버튼을 이용하여 집게로 경품을 획득하는 크레인 방식의 게임물(4인용)",
+   "rating": "전체이용가",
+   "genre": "크레인",
+   "platform": "아케이드 게임",
+   "descriptors": [],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-001",
+   "date": "2026-01-29",
+   "title": "Mario Games",
+   "org": "게임물관리위원회",
+   "applicant": "오케 마리오(ok mario)",
+   "summary": "PC 온라인 웹기반 환경에서 진행하는 슬롯머신 모사 무료 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-002",
+   "date": "2026-01-29",
+   "title": "꽃노리CD",
+   "org": "게임물관리위원회",
+   "applicant": "천지소프트",
+   "summary": "PC환경에서 CD를 통해 단독으로 실행되는 슬롯모사 게임물(무료)",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-003",
+   "date": "2026-01-29",
+   "title": "SunShine 바둑이",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 바둑이 포커 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-004",
+   "date": "2026-01-29",
+   "title": "SunShine 맞고",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 맞고 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-005",
+   "date": "2026-01-29",
+   "title": "SunShine 홀덤",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "유료, 무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 홀덤 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-006",
+   "date": "2026-01-29",
+   "title": "SunShine 토너먼트",
+   "org": "게임물관리위원회",
+   "applicant": "케이소프트",
+   "summary": "무료 게임머니를 이용하여 이용자 간 경기가 가능한 베팅성 웹보드 홀덤 토너먼트 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-NP-260129-007",
+   "date": "2026-01-29",
+   "title": "한게임 로얄홀덤 for PC",
+   "org": "게임물관리위원회",
+   "applicant": "엔에이치엔 주식회사",
+   "summary": "이용자간 포커와 홀덤 토너먼트를 즐길 수 있는 유료 온라인 베팅성 게임물",
+   "rating": "청소년이용불가",
+   "genre": "보드게임(베팅성)",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "사행성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OM-260129-001",
+   "date": "2026-01-29",
+   "title": "전장의 그녀 8",
+   "org": "게임물관리위원회",
+   "applicant": "젠스티",
+   "summary": "여성 캐릭터가 등장하는 캐릭터 탈의가 중심인 60초 슈팅 게임물",
+   "rating": "청소년이용불가",
+   "genre": "비행슈팅",
+   "platform": "모바일 게임",
+   "descriptors": [
+    "선정성"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OP-260129-001",
+   "date": "2026-01-29",
+   "title": "PARANORMASIGHT: The Mermaid＇s Curse",
+   "org": "게임물관리위원회",
+   "applicant": "SQUARE ENIX CO., LTD.",
+   "summary": "일본 고전 설화인 ＇인어 전설＇을 현대 호러 미스터리로 재해석한 비주얼 노벨 게임물",
+   "rating": "청소년이용불가",
+   "genre": "어드벤처",
+   "platform": "PC/온라인 게임",
+   "descriptors": [
+    "폭력성",
+    "언어"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "CC-OV-260129-001",
+   "date": "2026-01-29",
+   "title": "High On Life 2",
+   "org": "게임물관리위원회",
+   "applicant": "Squanch Games, Inc",
+   "summary": "지명수배 범죄자가 된 여동생을 구하기 위해 무법자가 되어 대형 제약회사를 무너뜨리기 위한 여정을 그린 FPS 게임물",
+   "rating": "청소년이용불가",
+   "genre": "FPS/TPS",
+   "platform": "비디오 게임",
+   "descriptors": [
+    "폭력성",
+    "선정성",
+    "언어",
+    "약물"
+   ],
+   "canceled": false
+  },
+  {
+   "id": "SC-OM-260129-001",
+   "date": "2026-01-29",
+   "title": "항구 키우기",
+   "org": "게임물관리위원회",
+   "applicant": "주식회사 넵튠",
+   "summary": "",
+   "rating": "전체이용가",
+   "genre": "캐주얼",
+   "platform": "모바일 게임",
+   "descriptors": [],
+   "canceled": false
+  }
+ ]
+}

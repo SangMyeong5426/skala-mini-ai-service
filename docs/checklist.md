@@ -25,9 +25,9 @@
 
 ### 1. 데이터
 
-- [ ] `tools/fetch_ratings.py` — API 월별 수집, `data/ratings/raw/`
-- [ ] 사례 DB `data/ratings/cases.json`(~2026-06), 기간 테스트
-- [ ] 기준표 `criteria.json`, 시행규칙 `rule-8.md`
+- [x] `tools/fetch_ratings.py` — API 월별 수집, `data/ratings/raw/` (2024-01~2026-09, 33개월 3,190건)
+- [x] 사례 DB `data/ratings/cases.json`(~2026-06, 1,396건), 기간 테스트 `tests/test_rating_data.py`
+- [x] 기준표 `criteria.json`, 시행규칙 `rule-8.md` — 사례집 재사용 조건은 확인 대기([followups](followups.md))
 
 ### 2. 평가셋 (기능 코드보다 먼저)
 
