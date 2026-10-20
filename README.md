@@ -8,7 +8,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 
 | 항목 | 값 |
 | --- | --- |
-| 과제 | TBD — [`docs/01-plan.md`](docs/01-plan.md) |
+| 과제 | **1. Base AI Agent 개선** — 질문을 제대로 이해하고 근거 있는 답만 내보내는 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
 | Before/After 실측 | [`docs/02-measurement.md`](docs/02-measurement.md) |
 | 결정 기록 | [`docs/decisions/`](docs/decisions/) |
@@ -102,6 +102,14 @@ skala-mini-ai-service/
 
 | 항목 | 문서 | 기한 |
 | --- | --- | --- |
-| 과제 1 / 2 선택, 개선 포인트 | [`docs/01-plan.md`](docs/01-plan.md) | Day1 17시 |
+| 진행 계획 Google Spread 등록 | [`docs/01-plan.md`](docs/01-plan.md#google-spread-등록용) | Day1 17시 |
+
+## 확정된 결정
+
+| 항목 | 결정 | 문서 |
+| --- | --- | --- |
+| 과제 | 1. Base AI Agent 개선 — 개선 항목 4개 + 선택 1개 | [`docs/01-plan.md`](docs/01-plan.md) |
+| 저장소 구조와 도구 | 원본은 `project/`, 산출물은 밖. venv · ruff · pytest(fake) | [결정 0001](docs/decisions/0001-repository-layout-and-tooling.md) |
+| 측정 백엔드 | ollama (qwen3:0.6b / qwen3:8b). fake 수치는 근거로 쓰지 않는다 | [`docs/02-measurement.md`](docs/02-measurement.md) |
 
 미해결 항목 전체는 [`docs/followups.md`](docs/followups.md).
