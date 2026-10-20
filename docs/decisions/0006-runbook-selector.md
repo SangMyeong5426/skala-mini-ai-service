@@ -2,7 +2,7 @@
 
 - 상태: Accepted — **효과 불확실**, 아래 Before/After 참고
 - 날짜: 2026-10-20
-- 계획 항목: [`01-plan.md`](../01-plan.md) 순번 5 · 설계 [`03-design.md`](../03-design.md#항목-5--runbook-선택을-의미-기반으로-선택)
+- 계획 항목: [`01-plan.md`](../task1/01-plan.md) 순번 5 · 설계 [`03-design.md`](../task1/03-design.md#항목-5--runbook-선택을-의미-기반으로-선택)
 
 ## 문제
 
@@ -44,7 +44,7 @@ runbook 6종을 기동 때 임베딩해 두고(메타데이터 = 파일 이름 =
 **좋아진 것은 전부 설계 뒤에 쓴 문항에서 나왔다.** 처음부터 있던 6문항에서는 오히려 하나를 잃었다.
 질문을 보는 쪽이 "알림이 없거나 질문 증상과 다른" 상황을 고치는 것은 맞지만, 질문에 여러 증상이 섞이면
 (r01: 느림 + CPU) 엉뚱한 쪽으로 끌린다. 평가 세트를 보고 규칙을 섞어 맞추지는 않았다. 원자료는
-`runs/eval-runbook_before_20261020-112839.json`과 [`02-measurement.md`](../02-measurement.md#final).
+`runs/eval-runbook_before_20261020-112839.json`과 [`02-measurement.md`](../task1/02-measurement.md#final).
 
 ## 한계와 트레이드오프
 

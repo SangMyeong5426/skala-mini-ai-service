@@ -2,7 +2,7 @@
 
 - 상태: Accepted
 - 날짜: 2026-10-20
-- 계획 항목: [`01-plan.md`](../01-plan.md) 순번 4 · 설계 [`03-design.md`](../03-design.md#항목-4--검수-근거-검증)
+- 계획 항목: [`01-plan.md`](../task1/01-plan.md) 순번 4 · 설계 [`03-design.md`](../task1/03-design.md#항목-4--검수-근거-검증)
 
 ## 문제
 
@@ -58,7 +58,7 @@
 | **b1** | 질문 무관 (**실제 응답 원문**) | **놓침** — 판정 모델이 relevant·faithful 모두 참으로 냈다 |
 
 검수 평가는 `validate_node` 하나만 부르므로 이 차이가 곧 이 항목의 효과다. 원자료는
-[`02-measurement.md`](../02-measurement.md#final).
+[`02-measurement.md`](../task1/02-measurement.md#final).
 
 ## 한계와 트레이드오프
 

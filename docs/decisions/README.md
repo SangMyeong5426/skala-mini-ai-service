@@ -16,3 +16,4 @@
 | [0006](0006-runbook-selector.md) | runbook 선택을 의미 검색으로 (선택 항목 5) | Accepted — 효과 불확실 | 2026-10-20 |
 | [0007](0007-chat-keeps-thinking.md) | 대화 경로만 thinking 유지 (항목 1 보완) | Accepted | 2026-10-20 |
 | [0008](0008-smaller-models-rejected.md) | 작성·검수를 작은 모델로 바꾸는 시도 | **Rejected** — 기준 미달 | 2026-10-20 |
+| [0009](0009-rating-domain.md) | 과제 2 — 등급 점검 도메인을 새 패키지로, LLM 단독을 Before로 (항목 7 제외) | Accepted | 2026-10-20 |

@@ -9,13 +9,14 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 | 항목 | 값 |
 | --- | --- |
 | 저장소 | <https://github.com/SangMyeong5426/skala-mini-ai-service> |
-| 과제 | **1. Base AI Agent 개선** — 질문을 제대로 이해하고 근거 있는 답만 내보내는 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
-| 핵심 결과 (반복 3회 중앙값) | 회귀 쿼리 11턴 396.5초 → **123.8초**, timeout 1 → 0 · 분류 23/30 → 30/30 · 대상 6/15 → 13/15 · 오염 초안 탐지 0/7 → 6/7 ([`02-measurement.md`](docs/02-measurement.md#발표용-수치--base--final2-반복-3회-중앙값-2026-10-20)) |
+| 과제 | **2. 신규 프로젝트** — 게임 등급분류 사전 점검 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
+| 핵심 결과 | TBD — 과제 2 Before/After 측정 후 |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
-| 상세 수정 설계 | [`docs/03-design.md`](docs/03-design.md) |
+| 상세 설계 | [`docs/03-design.md`](docs/03-design.md) |
 | 진행 체크리스트 | [`docs/checklist.md`](docs/checklist.md) |
-| 결과 보고서 (초안) | [`docs/04-report.md`](docs/04-report.md) |
+| 결과 보고서 | TBD (Day2) |
 | Before/After 실측 | [`docs/02-measurement.md`](docs/02-measurement.md) |
+| 과제 1 (보존) | Base 개선 항목 1~5와 결과 — [`docs/task1/`](docs/task1/), 태그 `task1` |
 | 결정 기록 | [`docs/decisions/`](docs/decisions/) |
 
 ## 빠른 시작 (macOS)
@@ -67,7 +68,7 @@ cd project
 ```
 
 Before/After 측정 — 잴 커밋을 worktree로 꺼내 그 코드로 잰다. ollama가 떠 있어야 한다
-(자세한 방법은 [`docs/02-measurement.md`](docs/02-measurement.md#측정-방법)).
+(자세한 방법은 [`docs/task1/02-measurement.md`](docs/task1/02-measurement.md#측정-방법)).
 
 ```bash
 scripts/measure-at base before write,e2e
@@ -102,12 +103,12 @@ skala-mini-ai-service/
 │   └── requirements-dev.txt     pytest·ruff (추가)
 ├── docs/
 │   ├── 00-assignment.md         과제 요건·일정·평가 기준
-│   ├── 01-plan.md               진행 계획 (Google Spread 등록 원본)
-│   ├── 02-measurement.md        Before/After 실측
-│   ├── 03-design.md             항목별 상세 수정 설계
-│   ├── 04-report.md             결과 보고서 초안 (Google Spread 붙여넣기용 요약 포함)
-│   ├── checklist.md             3일 체크리스트 — 진행 상황
-│   ├── decisions/               결정 기록 — 개선 항목별 한계·트레이드오프
+│   ├── 01-plan.md               진행 계획 (Google Spread 등록 원본) — 과제 2
+│   ├── 02-measurement.md        Before/After 실측 — 과제 2
+│   ├── 03-design.md             상세 설계 — 과제 2
+│   ├── checklist.md             체크리스트 — 진행 상황
+│   ├── task1/                   과제 1(Base 개선) 계획·측정·설계·보고서 — 보존
+│   ├── decisions/               결정 기록 — 항목별 한계·트레이드오프
 │   └── followups.md             미해결·확인 대기
 ├── tools/
 │   ├── measure_queries.py       회귀 쿼리 실측·비교 (--spawn: 질문마다 서버 새로)
@@ -136,13 +137,13 @@ skala-mini-ai-service/
 
 | 항목 | 문서 | 기한 |
 | --- | --- | --- |
-| 진행 계획 Google Spread 등록 | [`docs/01-plan.md`](docs/01-plan.md#google-spread-등록용) | Day1 17시 |
+| 진행 계획 Google Spread 등록 (과제 2) | [`docs/01-plan.md`](docs/01-plan.md#google-spread-등록용) | Day1 17시 |
 
 ## 확정된 결정
 
 | 항목 | 결정 | 문서 |
 | --- | --- | --- |
-| 과제 | 1. Base AI Agent 개선 — 개선 항목 4개 + 선택 1개 | [`docs/01-plan.md`](docs/01-plan.md) |
+| 과제 | 2. 신규 프로젝트 — 게임 등급분류 사전 점검 (과제 1 개선 항목 1~5를 끝낸 뒤 전환) | [`docs/01-plan.md`](docs/01-plan.md) |
 | 저장소 구조와 도구 | 원본은 `project/`, 산출물은 밖. venv · ruff · pytest(fake) | [결정 0001](docs/decisions/0001-repository-layout-and-tooling.md) |
 | 측정 백엔드 | ollama (qwen3:0.6b / qwen3:8b). fake 수치는 근거로 쓰지 않는다 | [`docs/02-measurement.md`](docs/02-measurement.md) |
 

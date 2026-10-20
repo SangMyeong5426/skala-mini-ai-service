@@ -9,7 +9,7 @@
 | 실행 환경 | Apple M5 · RAM 16GB, ollama 0.33.0, qwen3:0.6b(분류·계획·대화) · qwen3:8b(보고서 작성·검수) · qwen3-embedding:0.6b, temperature 0 |
 
 모든 수치는 이 저장소에서 직접 실행해 얻은 값이다. 원자료는 `runs/`, 계산 과정은
-[`02-measurement.md`](02-measurement.md), 항목별 근거와 한계는 [`decisions/`](decisions/)에 있다.
+[`02-measurement.md`](02-measurement.md), 항목별 근거와 한계는 [`decisions/`](../decisions/)에 있다.
 
 ## 한눈에 보기
 
@@ -122,7 +122,7 @@ thinking만 끈 상태(항목 1만 적용, 1회 측정)에서는 회귀 쿼리 �
 | 노드 평가 After | `runs/eval-route_final_20261020-113756.json` · `eval-target_final_20261020-113803.json` · `eval-judge_final_20261020-113227.json` · `eval-write_final_20261020-113307.json` · `eval-runbook_final_20261020-113405.json` |
 | 판정 기준 조정 | `runs/tune-embedding_20261020-113108.json` |
 | 작은 모델 시도 (기각) | `runs/try-models_20261020-142735.json` |
-| 결정·한계 | [`decisions/0002`](decisions/0002-ollama-think-control.md) ~ [`0008`](decisions/0008-smaller-models-rejected.md) |
+| 결정·한계 | [`decisions/0002`](../decisions/0002-ollama-think-control.md) ~ [`0008`](../decisions/0008-smaller-models-rejected.md) |
 
 ## Google Spread 붙여넣기용 요약
 
