@@ -54,8 +54,11 @@
 - [x] 보고서 버그 수정 2건 — `1de544c`(사례 번호), `fbb9717`(사례 개요 수치·등급 낮추기 조언)
 - [x] 상세 설명 평가셋 B(결정서 사유 39건)와 기준선 — `123c07e`, [0014](decisions/0014-detail-evalset.md)
 - [x] 법령 근거 제도 안내(기능 8, 계획 후 추가) — `da1b049`, [0015](decisions/0015-law-grounded-answers.md)
-- [ ] 평가셋 B·기준선·제도 문의·최종 회귀 쿼리 측정
-- [ ] `02-measurement.md` 표, 결정 기록 0009~0015 의 Before/After 칸
+- [x] 평가셋 B·기준선·제도 문의·최종 회귀 쿼리 측정 — `123c07e`·`da1b049`·`292ac84`
+- [x] 결합 규칙: 개발용 38문항으로 R1 선택, A·B 한 번 확인 — `292ac84`, [0016](decisions/0016-combine-cases-and-criteria.md)
+- [x] 법령 답변 조문 대조 검수 — `3d4af59`
+- [x] `02-measurement.md` 표, 결정 기록 0009~0016 의 Before/After 칸
+- [ ] 결합 규칙 R1 을 기본값으로 둘지 **(직접)** — [followups](followups.md)
 
 ## Day2 — 정리
 
