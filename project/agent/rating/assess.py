@@ -80,7 +80,9 @@ def rating_from_items(items: dict) -> str:
 #   thin-vote5  R3 얇으면 사례 다수결 — R2 와 같되 사례 5건 다수결(동률이면 더 가까운 쪽)
 #   thin-floor  R4 얇으면 사례를 하한으로 — 설명 구절 근거가 없을 때만 R1
 COMBINE_RULES = ("items", "case-floor", "thin-nn1", "thin-vote5", "thin-floor")
-COMBINE_RULE = "items"
+# 개발용 38문항(runs/choose-combination_20261020-182207.json): R0 14 · R1 18 · R2 17 · R3 17 · R4 16 — 정답이 가장 많은 R1.
+# 과소평가 21 → 11, 과대평가 2 → 8. 상세 설명에도 적용되는 규칙이라 평가셋 B 에서 처음 확인한다.
+COMBINE_RULE = "case-floor"
 
 
 def has_quote(items: dict) -> bool:

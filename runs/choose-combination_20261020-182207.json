@@ -1,0 +1,51 @@
+{
+  "source": "runs/eval-rdev_dev_20261020-181149.json",
+  "git": {
+    "commit": "9983fc9",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "table": [
+    {
+      "rule": "items",
+      "order": 0,
+      "correct": 14,
+      "n": 38,
+      "under": 21,
+      "over": 2
+    },
+    {
+      "rule": "case-floor",
+      "order": 1,
+      "correct": 18,
+      "n": 38,
+      "under": 11,
+      "over": 8
+    },
+    {
+      "rule": "thin-nn1",
+      "order": 2,
+      "correct": 17,
+      "n": 38,
+      "under": 14,
+      "over": 6
+    },
+    {
+      "rule": "thin-vote5",
+      "order": 3,
+      "correct": 17,
+      "n": 38,
+      "under": 15,
+      "over": 5
+    },
+    {
+      "rule": "thin-floor",
+      "order": 4,
+      "correct": 16,
+      "n": 38,
+      "under": 14,
+      "over": 7
+    }
+  ],
+  "chosen": "case-floor"
+}
