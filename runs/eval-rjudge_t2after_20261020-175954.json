@@ -1,0 +1,189 @@
+{
+  "kind": "rjudge",
+  "label": "t2after",
+  "started_at": "20261020-175954",
+  "evalset": "tools/evalsets/rating_judge.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-U7oJnT",
+  "git": {
+    "commit": "da1b049",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": null,
+    "CASE_SEARCH": null,
+    "RATING_ASSESSOR": null,
+    "CHAT_GROUNDING": null
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "semantic",
+      "RATING_CLARIFY": "rule",
+      "CASE_SEARCH": "semantic",
+      "RATING_ASSESSOR": "criteria",
+      "VALIDATOR": "grounded",
+      "CHAT_GROUNDING": "law"
+    }
+  },
+  "summary": {
+    "n": 12,
+    "detected": "7/7",
+    "false_reject": "0/5",
+    "stages": {
+      "rating": 1,
+      "cases": 2,
+      "numbers": 1,
+      "judge": 3
+    },
+    "latency_median_s": 4.588
+  },
+  "results": [
+    {
+      "id": "n1",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 5.778,
+      "error": null
+    },
+    {
+      "id": "n2",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 5.441,
+      "error": null
+    },
+    {
+      "id": "n3",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 4.68,
+      "error": null
+    },
+    {
+      "id": "n4",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 6.286,
+      "error": null
+    },
+    {
+      "id": "n5",
+      "expected": "pass",
+      "defect": null,
+      "passed": true,
+      "ok": true,
+      "stage": null,
+      "reason": null,
+      "latency_s": 6.377,
+      "error": null
+    },
+    {
+      "id": "p1",
+      "expected": "fail",
+      "defect": "rating_mismatch",
+      "passed": false,
+      "ok": true,
+      "stage": "rating",
+      "reason": "판정 결과는 청소년이용불가인데 보고서는 15세이용가라고 썼습니다",
+      "latency_s": 0.001,
+      "error": null
+    },
+    {
+      "id": "p2",
+      "expected": "fail",
+      "defect": "unknown_case",
+      "passed": false,
+      "ok": true,
+      "stage": "cases",
+      "reason": "검색되지 않은 사례 「아르카디아 크로니클」를 들었습니다",
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p3",
+      "expected": "fail",
+      "defect": "case_rating",
+      "passed": false,
+      "ok": true,
+      "stage": "cases",
+      "reason": "「GogoMatch」의 실제 등급은 전체이용가인데 12세이용가(이)라고 썼습니다",
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p4",
+      "expected": "fail",
+      "defect": "stats_number",
+      "passed": false,
+      "ok": true,
+      "stage": "numbers",
+      "reason": "수집된 통계에 없는 수치를 썼습니다: 9",
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "p5",
+      "expected": "fail",
+      "defect": "item_mismatch",
+      "passed": false,
+      "ok": true,
+      "stage": "judge",
+      "reason": "판정 결과·사실과 맞지 않는 내용 — 초안은 '카지노 딜러의 노출 의상'이라는 근거를 추가하여 선정성 항목을 판단했으나, 사용자가 제공한 수집된 사실에는 해당 내용이 없어 사실과 다르게 작성하였다.",
+      "latency_s": 4.329,
+      "error": null
+    },
+    {
+      "id": "p6",
+      "expected": "fail",
+      "defect": "irrelevant",
+      "passed": false,
+      "ok": true,
+      "stage": "judge",
+      "reason": "설명한 게임과 관련 없는 보고서 — 초안은 사용자가 묘사한 '귀여운 고양이를 움직여 같은 색 블록 3개를 맞추면 사라지는 모바일 퍼즐 게임'과 관련된 내용이 아닙니다. 대신 자동차 경주와 충돌 장면을 언급하며, 사용자의 질문과는 관련이 없습니다.",
+      "latency_s": 7.583,
+      "error": null
+    },
+    {
+      "id": "p7",
+      "expected": "fail",
+      "defect": "overclaim",
+      "passed": false,
+      "ok": true,
+      "stage": "judge",
+      "reason": "판정 결과·사실과 맞지 않는 내용 — 초안은 판정 결과에 '심의 결과가 달라질 가능성은 없으니 등급분류 신청 없이 바로 출시해도 됩니다'라고 명시하지만, 실제 등급분류는 심의 결과에 따라 달라질 수 있으므로 이는 사실과 다릅니다.",
+      "latency_s": 4.496,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "kind": "rlaw",
+  "label": "t2before",
+  "started_at": "20261020-181030",
+  "evalset": "tools/evalsets/rating_law.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-OHmSxo",
+  "git": {
+    "commit": "da1b049",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct",
+    "CHAT_GROUNDING": "off"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format",
+      "CHAT_GROUNDING": "off"
+    }
+  },
+  "summary": {
+    "n": 17,
+    "ok": "2/17",
+    "answer": "0/10",
+    "defer": "0/2",
+    "refuse": "0/3",
+    "smalltalk": "2/2",
+    "latency_median_s": 1.12
+  },
+  "results": [
+    {
+      "id": "l01",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "게임 등급은 기본, 중간, 전문, 그리고 전문가 등급으로 나뉘며, 각각은 해당하는 레벨에 맞춘 다양한 내용을 제공합니다. 게임 내용은 폭력, 선정, 사행 표현 등에 따라 달라집니다. 게임물관리위원회의 규정을 확인해 보세요.",
+      "latency_s": 2.323,
+      "error": null
+    },
+    {
+      "id": "l02",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "게임 출시 전에 등급분류를 확인하는 것은 중요합니다. 이는 게임의 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위 등)을 정확히 파악할 수 있도록 도움이 됩니다. 게임물관리위원회의 안내를 참고하여 체크하는 것이 좋습니다.",
+      "latency_s": 1.418,
+      "error": null
+    },
+    {
+      "id": "l03",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "개발 중인 게임을 테스트하려면 등급분류를 받아야 합니다. 게임 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)을 설명해 드릴 수 있습니다. 예를 들어, 폭력이나 선정을 강조한 게임은 '중급' 등급으로, 사행 표현의 수준을 고려한 게임은 '고급'으로 분류될 수 있습니다.",
+      "latency_s": 1.287,
+      "error": null
+    },
+    {
+      "id": "l04",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "등급분류를 받은 후 게임 내용을 수정하면 게임물관리위원회에 문의해 수정을 확인해 주세요. 게임 내용을 수정하면 등급을 다시 확인해 드릴 수 있습니다.",
+      "latency_s": 0.822,
+      "error": null
+    },
+    {
+      "id": "l05",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "자체 등급분류사업자는 게임물관리위원회에 게시된 내용을 바탕으로 지정할 수 있습니다. 게임물관리위원회는 게임의 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위 등)을 설명할 수 있어요.",
+      "latency_s": 0.99,
+      "error": null
+    },
+    {
+      "id": "l06",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "게임의 등급이나 내용을 명시해줘야 합니다. 등급은 게임의 복잡성과 깊이를 나타내며, 내용은 게임의 독특한 요소를 설명해 줍니다. 두 가지 모두 중요하지만, 내용이 더 깊이 있는 게임을 이해하기 위해 꼭 확인해 주세요.",
+      "latency_s": 1.325,
+      "error": null
+    },
+    {
+      "id": "l07",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "확률형 아이템 확률을 공개하지 않으면 게임의 신뢰도가 낮아질 수 있습니다. 이는 게임의 공정성을 유지하는 데 중요합니다. 하지만 개인적인 데이터 보호를 위해 공개하지 않으면도 문제가 발생할 수 있으니, 게임 운영자의 책임감을 잡아야 합니다.  \n\n게임 내용을 설명하면, 무형식 아이템이나 폭력 등이 포함된 게임은 공개하지 않으면도 게임의 규범과 범위를 명확히 하게 됩니다.",
+      "latency_s": 1.129,
+      "error": null
+    },
+    {
+      "id": "l08",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "등급분류를 신청할 때 수수료를 내야 합니다. 게임의 등급을 신청할 때 수수료가 포함되어야 하며, 게임 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)을 설명해 드릴 수 있습니다.",
+      "latency_s": 1.12,
+      "error": null
+    },
+    {
+      "id": "l09",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "청소년게임제공업은 게임의 내용과 범위를 더 깊게 설명하고, 일반게임제공업과는 달라지지 않으며, 폭력이나 선정 등 긍정적인 요소를 강조하는 방식을 따라야 합니다. 게임물관리위원회의 규정을 확인해 보세요.",
+      "latency_s": 0.935,
+      "error": null
+    },
+    {
+      "id": "l10",
+      "expect": "answer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "게임 등급분류 기준은 **게임물관리위원회**에 의해 정해진다. 등급은 게임의 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)에 따라 결정되며, 게임의 범위, 플레이어 수, 규칙 등을 고려하여 분류됩니다.",
+      "latency_s": 0.937,
+      "error": null
+    },
+    {
+      "id": "d01",
+      "expect": "defer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "청소년이용불가 게임은 14세 이상부터 할 수 있어요. 게임 내용은 무boundless, 폭력, 선정, 사행 표현 등 다양한 주제를 포함하고 있습니다. 게임물관리위원회가 제한사항을 확인해 주세요.",
+      "latency_s": 0.946,
+      "error": null
+    },
+    {
+      "id": "d02",
+      "expect": "defer",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "등급분류 수수료는 정확히 **1000원**입니다. 게임물관리위원회 안내를 확인해 주세요. 특정 게임의 등급을 물으면 게임 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)을 설명해 달라고 하겠습니다.",
+      "latency_s": 1.025,
+      "error": null
+    },
+    {
+      "id": "f01",
+      "expect": "refuse",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "게임물관리위원회 전화번호는 아래와 같습니다. 게임 내용을 설명할 경우 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 0.557,
+      "error": null
+    },
+    {
+      "id": "f02",
+      "expect": "refuse",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "작년에 등급분류 신청이 몇 건이었어요?  \n게임물관리위원회 안내를 확인해 주세요.  \n특정 게임의 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)을 설명해 드릴 수 있습니다.",
+      "latency_s": 1.095,
+      "error": null
+    },
+    {
+      "id": "f03",
+      "expect": "refuse",
+      "ok": false,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "리그 오브 레전드는 일반적으로 4세 등급을 받았습니다. 게임 내용은 레전드와 관련된 전략적 역할을 하는 게임입니다. 게임물관리위원회가 안내하여 운영되며, 다양한 스타일과 플레이어의 성적을 고려한 등급을 제공해 드릴 수 있습니다.",
+      "latency_s": 1.663,
+      "error": null
+    },
+    {
+      "id": "s01",
+      "expect": "smalltalk",
+      "ok": true,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "안녕하세요! 게임 등급 분류 제도에 대해 안내해 드릴 수 있습니다. 두세 문장으로 답하려면 게임 내용(무엇을 하는 게임인지, 폭력·선정·사행 표현의 수위)을 설명해 주세요.",
+      "latency_s": 1.61,
+      "error": null
+    },
+    {
+      "id": "s02",
+      "expect": "smalltalk",
+      "ok": true,
+      "answerable": null,
+      "citations": null,
+      "reason": null,
+      "text": "감사합니다! 게임 관련 궁금한 점이나 도움이 필요하시면 알려주세요. 😊",
+      "latency_s": 1.24,
+      "error": null
+    }
+  ]
+}
