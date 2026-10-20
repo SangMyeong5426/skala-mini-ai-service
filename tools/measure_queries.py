@@ -256,6 +256,23 @@ def compare(args: argparse.Namespace) -> None:
     eb = sum(s["errors"] for s in b.values())
     ea = sum(s["errors"] for s in a.values())
     print(f"- 오류(timeout 포함): {eb} → {ea}")
+    if before.get("repeat", 1) > 1 or after.get("repeat", 1) > 1:
+        print("\n회차별 11턴 합계 지연 (오류 난 턴도 걸린 시간을 더한다 — 사용자가 기다린 시간):")
+        for name, data in (("Before", before), ("After", after)):
+            print(f"- {name}: {_repeat_totals(data['results'])}")
+
+
+def _repeat_totals(results: list[dict]) -> str:
+    """회차마다 모든 턴의 지연을 더하고, 회차 사이 편차를 보인다 — 1회 측정의 흔들림을 가늠하는 용도."""
+    totals: dict[int, float] = {}
+    for r in results:
+        totals[r["repeat"]] = totals.get(r["repeat"], 0.0) + r["latency_s"]
+    values = [round(totals[k], 1) for k in sorted(totals)]
+    line = " · ".join(f"r{k} {v:g}초" for k, v in zip(sorted(totals), values, strict=True))
+    if len(values) > 1:
+        line += (f"  (중앙값 {statistics.median(values):g}초, 범위 {min(values):g}~{max(values):g}초, "
+                 f"최대/최소 {max(values) / min(values):.2f}배)")
+    return line
 
 
 def main() -> None:
