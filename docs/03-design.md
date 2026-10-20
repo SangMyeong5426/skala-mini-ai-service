@@ -51,12 +51,15 @@ Before로 쓴다. 발표의 최종 비교는 `base` → 최종 한 번이다.
 
 | 라벨 | 상태 | 재는 것 |
 | --- | --- | --- |
-| `before` | `base` 태그 (측정 완료, 회귀 쿼리만 남음) | 노드 평가 3종 + 회귀 쿼리 |
-| `step1` | 항목 1 | 노드 평가 3종 + 회귀 쿼리 |
+| `before` | `base` 태그 | 노드 평가 3종(완료) + 답변 작성 `write` + 회귀 쿼리 `e2e` |
+| `step1` | 항목 1 | 노드 평가 3종 + `write` + `e2e` |
 | `step2` | 항목 1~2 | route |
 | `step3` | 항목 1~3 | target |
-| `step4` | 항목 1~4 | judge + 회귀 쿼리 |
-| `final` | 전부 | 노드 평가 3종 + 회귀 쿼리 |
+| `step4` | 항목 1~4 | judge + `e2e` |
+| `final` | 전부 | 노드 평가 3종 + `write` + `e2e` |
+
+모두 `scripts/measure-at <커밋> <label> [단계]`으로 잰다 — 커밋을 worktree로 꺼내 재고, 회귀 쿼리는
+질문마다 서버를 새로 띄운다([`02-measurement.md`](02-measurement.md#측정-방법)).
 
 ### 4. 브랜치와 기록
 

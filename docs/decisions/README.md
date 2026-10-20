@@ -9,3 +9,4 @@
 | 번호 | 제목 | 상태 | 날짜 |
 | --- | --- | --- | --- |
 | [0001](0001-repository-layout-and-tooling.md) | 저장소 구조와 개발 도구 | Accepted | 2026-10-20 |
+| [0002](0002-ollama-think-control.md) | Ollama thinking 출력 제어 (항목 1) | Accepted | 2026-10-20 |
