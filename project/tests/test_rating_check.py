@@ -85,3 +85,23 @@ def test_facts_for_writer_show_titles_not_case_ids():
 
     assert "C1" not in facts and "CC-" not in facts
     assert "- 폭력성: 과도한 폭력 표현(청소년이용불가) — 근거: 비슷한 사례 「맨 인 더 다크 (Man In The Dark)」" in facts
+
+
+def test_numbers_copied_from_case_summaries_are_facts():
+    collected = [{"source": "cases", "scope": "all",
+                  "data": [{**CASES[0], "summary": "좀비 아포칼립스에서 생존하는 8인 협동 게임"}]}]
+
+    assert ungrounded_numbers("8인 협동으로 생존하는 사례가 있다", collected, DESC) == []
+
+
+def test_lowering_advice_is_computed_from_the_criteria():
+    from agent.rating.data import load_criteria
+    from agent.rating.facts import lowering_advice
+
+    criteria = load_criteria()
+    items = {"폭력성": {"present": True, "level": 2}, "언어": {"present": True, "level": 1},
+             "선정성": {"present": False, "level": 0}}
+
+    assert lowering_advice(items, criteria) == (
+        "폭력성을(를) '사실적인 폭력 표현'에서 '경미한 폭력 표현' 수준으로 낮추면 12세이용가를 노려 볼 수 있습니다.")
+    assert lowering_advice({"선정성": {"present": False, "level": 0}}, criteria).startswith("이미 가장 낮은")

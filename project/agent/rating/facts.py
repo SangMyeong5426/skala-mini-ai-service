@@ -29,7 +29,7 @@ def render_stats(stats: dict) -> str:
     return f"{where} 사례 {stats['total']}건 중 {by_rating}"
 
 
-def render_assessment(assessment: dict, cases: list[dict] | None = None) -> str:
+def render_assessment(assessment: dict, cases: list[dict] | None = None, criteria: dict | None = None) -> str:
     """판정 결과. 항목 줄은 보고서에 바로 옮겨 쓸 수 있는 모양 — '- 항목: 기준 문구(등급) — 근거: …'."""
     if assessment["method"] == "direct":
         descriptors = ", ".join(assessment["descriptors"]) or "없음"
@@ -51,13 +51,31 @@ def render_assessment(assessment: dict, cases: list[dict] | None = None) -> str:
         lines.append("- 해당 항목 없음")
     if absent:
         lines.append(f"- 해당 없음: {', '.join(absent)}")
+    if criteria is not None:
+        lines.append(f"등급을 낮추려면: {lowering_advice(items, criteria)}")
     return "\n".join(lines)
+
+
+def lowering_advice(items: dict, criteria: dict) -> str:
+    """등급을 정한 항목(가장 높은 단계)을 기준표의 한 단계 아래 표현으로 바꾸면 무엇이 되는지 — 코드가 계산한다.
+
+    작성 모델이 이 부분을 자유롭게 쓰면 "단계를 낮추면 15세로 조정" 같은 틀린 말을 했다(2026-10-20 회귀 쿼리).
+    """
+    present = {name: item["level"] for name, item in items.items() if item["present"]}
+    top = max(present.values(), default=0)
+    if top == 0:
+        return "이미 가장 낮은 등급(전체이용가)입니다."
+    leaders = [name for name, level in present.items() if level == top]
+    lowered = max([top - 1, *(level for name, level in present.items() if name not in leaders)])
+    changes = ", ".join(f"{name}을(를) '{criteria['items'][name][top]}'에서 '{criteria['items'][name][top - 1]}' 수준으로"
+                        for name in leaders)
+    return f"{changes} 낮추면 {RATINGS[lowered]}를 노려 볼 수 있습니다."
 
 
 def render_facts(assessment: dict, collected: list[dict]) -> str:
     """판정 결과 + 유사 사례 + 통계. 기준표 전문은 넣지 않는다(판정 결과에 해당 단계 문구가 이미 들어 있다)."""
     cases = latest(collected, "cases")
-    parts = [f"## 판정 결과\n{render_assessment(assessment, cases)}"]
+    parts = [f"## 판정 결과\n{render_assessment(assessment, cases, latest(collected, 'criteria'))}"]
     if cases:
         parts.append("## 비슷한 실제 사례 (게임물관리위원회 결정)\n" + "\n".join(f"- {render_case(c)}" for c in cases))
     stats = latest(collected, "stats")
