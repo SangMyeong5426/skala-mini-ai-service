@@ -1,0 +1,28 @@
+# 이 파일은 도구 설정만 담는다. 패키징하지 않는다.
+# 의존성의 기준은 requirements.txt / requirements-dev.txt 다.
+#   근거: docs/decisions/0001-repository-layout-and-tooling.md
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# 베이스 코드가 통과하는 범위에서 시작한다. 규칙을 늘리면 베이스 코드 수정이
+# 개선 변경과 섞여 Before/After 비교가 흐려진다.
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# 베이스 원본(all_total_vue_student)에 이미 있던 위반이다. 그 파일을 고칠 때
+# 해당 코드도 함께 지운다 — 예외가 남아 있으면 새 위반까지 가려진다.
+"server.py" = ["E402"]           # load_dotenv() 가 import 보다 먼저여야 한다 — 의도된 순서
+"agent/fake_llm.py" = ["E741"]
+"agent/graph.py" = ["F401", "E731"]
+"mcp_server_docs.py" = ["F401"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+# server.py·agent/ 를 패키지 설치 없이 import 한다.
+pythonpath = ["."]
+addopts = "-ra --strict-markers"

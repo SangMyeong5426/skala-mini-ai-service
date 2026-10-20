@@ -1,0 +1,15 @@
+#!/bin/sh
+# clone 직후 한 번 실행한다. 공유 Git hook과 커밋 메시지 템플릿을 켠다.
+
+set -eu
+
+repository_root=$(git rev-parse --show-toplevel)
+cd "$repository_root"
+
+git config --local core.hooksPath .githooks
+chmod +x .githooks/* scripts/*
+
+git config --local commit.template .gitmessage
+
+printf '%s\n' "Git hooks 활성화: $(git config --local --get core.hooksPath)"
+printf '%s\n' "커밋 템플릿 활성화: $(git config --local --get commit.template)"

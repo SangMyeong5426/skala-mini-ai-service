@@ -1,0 +1,11 @@
+# 개발용 — 테스트와 린트. 서버를 띄우는 데는 필요 없다.
+#
+#   bash sh/setup_venv.sh                                   # requirements.txt
+#   ./.venv/bin/python3 -m pip install -r requirements-dev.txt
+-r requirements.txt
+
+# 단위·스모크 테스트 (fake 백엔드로 그래프 전체를 돌린다)
+pytest==9.1.1
+
+# 린팅·포매팅
+ruff==0.16.8
