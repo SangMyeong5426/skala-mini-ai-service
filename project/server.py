@@ -98,7 +98,9 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
     switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if backend == "ollama" else None,
                 "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
                 "TARGET_RESOLVER": _switch("TARGET_RESOLVER", "semantic", "legacy", backend,
-                                           ("semantic", "legacy"))}
+                                           ("semantic", "legacy")),
+                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend,
+                                     ("grounded", "format"))}
     parts: dict = {}
     if "semantic" in (switches["ROUTER"], switches["TARGET_RESOLVER"]):
         parts["embedder"] = _make_embedder()
@@ -116,6 +118,9 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
             parts["embedder"], catalog,
             min_score=float(os.environ.get("TARGET_MIN_SCORE", DEFAULT_MIN_SCORE)),
             margin=float(os.environ.get("TARGET_MARGIN", TARGET_MARGIN)))
+    if switches["VALIDATOR"] == "grounded":   # 항목 4 — 판정은 답변을 쓰는 quality 모델이 맡는다
+        from agent.validator import GroundedValidator
+        parts["validator"] = GroundedValidator(quality_llm)
     return parts, switches
 
 

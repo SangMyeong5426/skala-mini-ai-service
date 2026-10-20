@@ -17,6 +17,8 @@ from pathlib import Path
 import httpx
 from langsmith import traceable
 
+from .validator import JUDGE_SCHEMA, JUDGE_SYSTEM, judge_user_message, parse_verdict
+
 OLLAMA_URL = "http://127.0.0.1:11434/api/chat"
 
 
@@ -263,3 +265,10 @@ class OllamaQualityLLM(OllamaLLM):
         if feedback:
             user += f"\n\n## 이전 초안에 대한 검증 반려 사유 (반드시 반영)\n{feedback}"
         return await self._chat_stream(system, user, on_token=on_token)
+
+    @traceable(run_type="llm", name="ollama_quality.judge")
+    def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
+        """항목 4 — LLM-as-judge. 판정 모양은 JSON 스키마로 강제한다(think 설정은 다른 호출과 같다)."""
+        content, usage = self._chat(JUDGE_SYSTEM, judge_user_message(query, facts, draft),
+                                    schema=JUDGE_SCHEMA)
+        return parse_verdict(content), usage

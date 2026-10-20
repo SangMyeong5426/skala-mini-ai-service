@@ -21,3 +21,4 @@ class SupervisorDeps:
     embedder: Any = None          # 항목 2·3 — 임베딩 클라이언트 (라우터·대상 추정이 나눠 쓴다)
     router: Any = None            # 항목 2 — None 이면 fast_llm.route
     target_resolver: Any = None   # 항목 3 — None 이면 base 의 plan (auth-service 폴백 포함)
+    validator: Any = None         # 항목 4 — None 이면 30자 + "1)" 검사
