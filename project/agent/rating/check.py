@@ -20,6 +20,8 @@ from .facts import latest, render_facts
 RATING_LINE = re.compile(r"예상 등급\s*[:：]\s*(" + "|".join(RATINGS) + ")")
 CITED = re.compile(r"「([^」]+)」\s*(?:\(([^)]*)\))?")
 QUOTED = re.compile(r'"[^"\n]*"')
+# 등급분류번호(예: CC-OM-240201-001, GC-CC-NP-251031-001) — 사례를 가리키는 번호라 수치가 아니다.
+CASE_ID = re.compile(r"[A-Z]{2}(?:-[A-Z]{2}){1,2}-\d{6}-\d{3}")
 LEVEL = re.compile(r"단계\s*\d")
 # 등급 이름(12세·15세)과 청소년 기준 나이(만 18세 · 19세), 내용정보 항목 수는 수치 근거 없이도 쓴다.
 ALWAYS_ALLOWED = {12.0, 15.0, 18.0, 19.0, float(len(ITEMS))}
@@ -56,7 +58,8 @@ def case_problems(draft: str, cases: list[dict]) -> list[str]:
 def ungrounded_numbers(draft: str, collected: list[dict], description: str) -> list[str]:
     """보고서의 수치 중 통계 Tool 결과·사례 수·게임 설명 어디에도 없는 것.
 
-    사례 제목·괄호(③이 본다), 따옴표 속 설명 인용(근거 검사가 본다), "단계 N", 목록 번호 "1)"은 수치로 보지 않는다.
+    사례 제목·괄호(③이 본다), 따옴표 속 설명 인용(근거 검사가 본다), 등급분류번호, "단계 N", 목록 번호 "1)"은
+    수치로 보지 않는다.
     통계의 결정일 범위는 근거에서 뺀다 — 날짜 숫자가 지어낸 작은 수치를 덮어 주지 않게.
     """
     allowed = set(ALWAYS_ALLOWED) | {float(n) for n in NUMBER.findall(description)}
@@ -65,7 +68,7 @@ def ungrounded_numbers(draft: str, collected: list[dict], description: str) -> l
         allowed |= {float(stats["total"]), *map(float, stats["by_rating"].values()),
                     *map(float, stats["descriptors"].values())}
     allowed.add(float(len(latest(collected, "cases") or [])))
-    text = LEVEL.sub(" ", QUOTED.sub(" ", CITED.sub(" ", draft)))
+    text = LEVEL.sub(" ", CASE_ID.sub(" ", QUOTED.sub(" ", CITED.sub(" ", draft))))
     unknown: list[str] = []
     for token in NUMBER.findall(LIST_MARKER.sub(" ", text)):
         if float(token) not in allowed and token not in unknown:
