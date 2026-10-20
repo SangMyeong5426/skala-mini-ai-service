@@ -1,281 +1,216 @@
-# 상세 수정 설계
+# 상세 설계 — 과제 2 (게임 등급분류 사전 점검)
 
-[`01-plan.md`](01-plan.md)의 개선 항목을 **어느 파일·함수를 어떻게 바꾸는지**까지 내린 문서다.
-구현 중에 설계와 다르게 가면 이 문서를 먼저 고치고, 왜 바꿨는지는 해당 결정 기록에 남긴다.
+[`01-plan.md`](01-plan.md)의 기능을 **어느 파일·함수를 어떻게 만드는지**까지 내린 문서다.
+과제 1 설계는 [`task1/03-design.md`](task1/03-design.md).
 
-## 구현하며 바뀐 것 (2026-10-20)
+## 전제
 
-아래 본문은 구현 전 설계 그대로 두고, 달라진 점만 여기 모은다. 이유는 각 결정 기록에 있다.
+- **오늘(Day1, 2026-10-20) 밤까지 구현과 1차 측정을 끝낸다.** Day2는 반복 측정·결정 기록·보고서,
+  Day3는 발표 준비만 한다. 계획을 쓴 시각은 16시 15분이고, 남은 시간은 약 7시간이다.
+- 과제 1 코드(인시던트 도메인)는 지우지 않는다. 새 도메인은 `agent/rating/`에 따로 두고 환경변수
+  `AGENT_DOMAIN`으로 고른다. 기존 테스트와 측정이 그대로 돌고, 공용 부품(임베딩, 의미 라우터, 검수 틀,
+  MCP 클라이언트, 스위치, 측정 도구)을 다시 쓴다.
+- 브랜치는 `feat/game-rating` 하나로 하고 단계마다 커밋한다. 커밋마다 `pytest`·`ruff`를 통과시킨다.
+  항목마다 브랜치를 나누는 과제 1 방식은 시간 때문에 쓰지 않는다.
+- 사용자가 직접 할 일은 **(직접)**으로 표시한다. 측정 명령도 직접 실행한다.
 
-| 항목 | 설계 | 구현 | 이유 |
-| --- | --- | --- | --- |
-| 공통 | 스위치 기본값은 ollama면 개선, `ROUTER`만 fake·openai에서 base | **모든 스위치가** ollama면 개선, fake·openai면 base | fake는 Wave 데모를 결정론으로 재현하는 백엔드, openai는 과금이라 측정 대상이 아니다 |
-| 공통 | step2~4를 커밋마다 스위치 조합으로 잰다 | **final 한 번**으로 잰다 | 노드 평가는 노드 하나만 부른다. route는 `ROUTER`에만, plan은 `TARGET_RESOLVER`에만 반응하므로 final의 노드별 결과가 곧 각 항목의 효과다 |
-| 공통 | — | `/health`에 실제 스위치 값(`switches`) | 결과 파일에 어떤 조합으로 쟀는지 남기기 위해 |
-| 1 | `OLLAMA_THINK` 하나로 모든 호출 | 대화 경로만 `OLLAMA_THINK_CHAT`(기본 true)로 분리 | 생각을 끄면 대화 답이 어색해졌다 — [0007](decisions/0007-chat-keeps-thinking.md) |
-| 2 | 질의에 Qwen3 지시문 | **지시문 없음**, margin 0.029 | 예시 LOO 정답률 0.95(지시문 0.925) — [0003](decisions/0003-semantic-router.md) |
-| 2 | — | `setup_ollama.sh`·`run_agent_ollma.sh`에 임베딩 모델 | 새 PC에서 기동 시 모델이 없으면 lifespan이 실패한다 |
-| 3 | auth-service 기본값 세 곳 **삭제** | **남겨 두고** 새 경로가 닿지 않게 함 | `TARGET_RESOLVER=legacy`로 원본을 그대로 재현하려면 base 경로가 남아 있어야 한다 |
-| 3 | margin·min_score를 예시로 조정 | 별도 조정용 문장(`tools/tuning/target.json`)으로 격자 탐색, min_score 0.40 · margin 0.04 | 대상 추정은 예시 kNN이 아니라 시스템 설명과의 유사도라 LOO를 쓸 수 없다 |
-| 5 | 유사도가 낮으면 키워드 규칙 폴백 | **폴백 없이 1위**, 지시문 없음 | 조정 데이터가 없어 임계값을 정할 근거가 없다. base도 늘 무언가를 고른다(맞는 게 없으면 db-down) |
-| 5 | target 세트의 6문항으로 측정 | runbook 세트 10문항을 새로 만듦 | 6문항으로는 차이를 말하기 어렵다. 새 문항은 설계 뒤에 썼다 — [0006](decisions/0006-runbook-selector.md)에 편향을 적었다 |
+## 구조
 
-## 공통 원칙
+### 새로 만들거나 고치는 파일
 
-### 1. 새 기능은 새 모듈 + 의존성 주입
-
-노드 함수의 시그니처(`state, deps`)는 그대로 둔다. 바뀌는 판단은 새 모듈의 객체로 만들고
-`SupervisorDeps`에 실어 노드에 주입한다. **필드가 `None`이면 노드는 base 동작을 그대로 한다** —
-v1 파이프라인, fake 백엔드, 기존 테스트가 손대지 않아도 돈다.
-
-```python
-@dataclass
-class SupervisorDeps:
-    fast_llm: Any
-    quality_llm: Any
-    mcp: Any
-    session_store: Any
-    version: str
-    embedder: Any = None          # 2·3·5가 함께 쓰는 임베딩 클라이언트
-    router: Any = None            # 항목 2 — None이면 fast_llm.route
-    target_resolver: Any = None   # 항목 3 — None이면 base의 auth-service 폴백
-    validator: Any = None         # 항목 4 — None이면 30자 + "1)" 검사
-    runbook_selector: Any = None  # 항목 5 — None이면 알림 키워드 규칙
+```text
+project/
+  mcp_server_rating.py          새 MCP 서버 — Tool rating_stats, Resource criteria·law·cases
+  data/ratings/raw/*.json       API 원자료(월별)
+  data/ratings/cases.json       사례 DB — 2026-06-30까지 결정분
+  data/ratings/criteria.json    내용정보 7항목 × 4단계 기준(출처 포함)
+  data/ratings/rule-8.md        시행규칙 제8조
+  data/ratings/router_examples.json
+  agent/rating/llm.py           도메인 프롬프트 — Ollama fast/quality, fake
+  agent/rating/graph.py         등급 점검 그래프
+  agent/rating/assess.py        단계 → 등급 규칙, 근거 인용 검사 (순수 함수)
+  agent/rating/cases.py         유사 사례 검색 (개요 임베딩 kNN)
+  agent/rating/check.py         검수 (형식 → 사실 대조 → LLM 판정)
+  agent/deps.py                 필드 추가
+  agent/mcp_client.py           find_tool 추가, rating 서버 등록
+  agent/router.py               라벨 이름 일반화 (incident 고정 → 인자로)
+  server.py                     AGENT_DOMAIN 분기, 등급 부품 조립
+  tests/test_rating_*.py
+tools/
+  fetch_ratings.py              API 수집·분할
+  make_rating_evalset.py        평가셋 A 표본 추출 (시드 고정)
+  eval_rating.py                rate · rroute · rclarify · rjudge
+  evalsets/rating*.json         평가셋 4종
+  queries_rating.json           회귀 쿼리 10개
+scripts/measure-at              단계 추가, MEASURE_QUERIES
 ```
 
-조립은 `server.py`에 `_build_components()`를 새로 두고 lifespan에서 부른다. `_build_llms()`와
-같은 방식으로 환경변수를 읽는다. `tools/eval_nodes.py`는 lifespan을 그대로 쓰므로 고치지 않는다.
+### 그래프 — 같은 뼈대, 다른 도메인
 
-### 2. 개선마다 환경변수 스위치
+노드 이름과 이벤트 타입은 과제 1과 같게 둔다. 프론트(`web_chat.html`)를 고치지 않고 그대로 쓰기 위해서다.
 
-| 환경변수 | 개선 후 기본값 | base 동작 | 항목 |
+| 노드 | 과제 1 (인시던트) | 과제 2 (등급 점검) |
+| --- | --- | --- |
+| route | 일반 대화 / 장애 신고 | 제도 문의·잡담 / 점검 요청 |
+| plan | 대상 시스템 추정, 모르면 clarify | 장르·플랫폼·설명 정리, 정보가 모자라면 clarify. 켜진 부품에 맞춰 조사 task를 만든다 |
+| clarify | 시스템 목록으로 되묻기 | 7항목 체크리스트로 되묻기 |
+| research | 모니터링 Tool + runbook Resource | 통계 Tool + 기준표 Resource + 유사 사례 검색 |
+| replan_check | runbook이 없으면 추가 조사 | 사례가 3건 미만이면 검색 범위를 넓혀(장르 → 플랫폼 → 전체) 다시 조사 |
+| analysis | 패턴 분석(선택) | **항목별 단계 판정 → 등급 = 단계 최댓값** (항상 실행) |
+| write → validate | 재작성 루프 최대 3회 | 같은 루프, 검수 내용만 바꾼다 |
+| gate | 섞여 든 analysis task 제거 | 뺀다 — LLM이 task를 만들지 않는다 |
+
+### 스위치 — 모두 끄면 Before(LLM 단독)
+
+과제 1과 같은 규칙이다. 지정하지 않으면 ollama는 개선 쪽, fake·openai는 원본 쪽이 기본이다.
+
+| 환경변수 | After (기본) | Before | 하는 일 |
 | --- | --- | --- | --- |
-| `OLLAMA_THINK` | `false` | `default`(옵션을 보내지 않음) | 1 |
-| `ROUTER` | `semantic` (fake·openai는 `llm`) | `llm` | 2 |
-| `TARGET_RESOLVER` | `semantic` | `legacy` | 3 |
-| `VALIDATOR` | `grounded` | `format` | 4 |
-| `RUNBOOK_SELECTOR` | `semantic` | `keyword` | 5 |
+| `AGENT_DOMAIN` | `rating` | — | `incident`면 과제 1 그대로 |
+| `ROUTER` | `semantic` | `llm` | 과제 1 의미 라우터를 등급 예시 문장으로 |
+| `RATING_CLARIFY` | `rule` | `off` | 정보가 모자라면 되묻기 |
+| `CASE_SEARCH` | `semantic` | `off` | 유사 사례 검색 + 통계 Tool |
+| `RATING_ASSESSOR` | `criteria` | `direct` | 기준표로 항목별 단계 판정 / LLM이 등급을 바로 답함 |
+| `VALIDATOR` | `grounded` | `format` | 사실 대조 검수 / 형식만 |
 
-이유는 셋이다. ① 라벨을 고쳐 Before를 다시 재야 할 때 `base` 체크아웃 없이 스위치만 내려 잰다.
-② 발표에서 같은 서버로 전/후를 바로 보여 줄 수 있다. ③ 문제가 생기면 재배포 없이 끈다 —
-원본 Wave 14의 `SUPERVISOR_VERSION` 토글과 같은 생각이다. 새 환경변수는 `project/.env.example`에 적는다.
+Before는 `ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=format`이다.
+부품을 하나씩 끄면 어느 부품이 얼마나 기여했는지도 잴 수 있다 — 한계·트레이드오프 근거로 쓴다.
 
-### 3. 측정 순서
+### LLM 호출 — fast/quality 분리는 그대로
 
-항목 1이 fast 모델(qwen3:0.6b)의 thinking을 끄면 **LLM 분류와 plan 결과 자체가 달라진다.**
-그래서 항목 1을 끝낸 상태(`step1`)에서 노드 평가 3종과 회귀 쿼리를 다시 재고, 그것을 항목 2~4의
-Before로 쓴다. 발표의 최종 비교는 `base` → 최종 한 번이다.
-
-| 라벨 | 상태 | 재는 것 |
+| 메서드 | 모델 | 언제 |
 | --- | --- | --- |
-| `before` | `base` 태그 | 노드 평가 3종(완료) + 답변 작성 `write` + 회귀 쿼리 `e2e` |
-| `step1` | 항목 1 | 노드 평가 3종 + `write` + `e2e` |
-| `step2` | 항목 1~2 | route |
-| `step3` | 항목 1~3 | target |
-| `step4` | 항목 1~4 | judge + `e2e` |
-| `final` | 전부 | 노드 평가 3종 + `write` + `e2e` |
+| `fast.route` | qwen3:0.6b | Before 라우팅, 의미 라우터가 판정을 미룰 때 |
+| `fast.chat` | qwen3:0.6b | 제도 문의·잡담 |
+| `quality.assess` | qwen3:8b | 7항목 단계 JSON — 기준표·사례·통계를 함께 준다 |
+| `quality.rate_direct` | qwen3:8b | Before — 설명만 보고 등급·내용정보 JSON |
+| `quality.write` | qwen3:8b | 점검 보고서 |
+| `quality.judge` | qwen3:8b | 검수 마지막 단계 |
 
-모두 `scripts/measure-at <커밋> <label> [단계]`으로 잰다 — 커밋을 worktree로 꺼내 재고, 회귀 쿼리는
-질문마다 서버를 새로 띄운다([`02-measurement.md`](02-measurement.md#측정-방법)).
+## 단계별 구현
 
-### 4. 브랜치와 기록
+시간은 목표다. 밀리면 [덜어 내는 순서](#덜어-내는-순서)대로 뺀다.
 
-항목 하나 = 브랜치 하나(`feat/ollama-think`, `feat/semantic-router`, `feat/target-resolver`,
-`feat/grounded-validator`, `feat/runbook-rag`). 테스트 통과와 측정을 마치면 `main`에 merge하고,
-`docs/decisions/`에 결정 기록을 하나씩 쓴다(템플릿의 "한계와 트레이드오프" 절 필수).
-`server.py`·그래프를 바꾸면 `project/doc/README.md`의 아키텍처 다이어그램도 같이 고친다.
+### 0. 확정·등록 (16:15–16:45)
 
----
+- **(직접)** Google Spread 계획 등록(17시 마감) — `01-plan.md` 맨 끝 표.
+- **(직접)** 강사에게 "LLM 단독 vs 에이전트"를 Before/After로 인정하는지 문의.
+- `main`의 지금 커밋에 `task1` 태그를 달고, 과제 1 문서(계획·측정·설계·보고서·체크리스트)를 `docs/task1/`로 옮겨
+  링크를 고친다. 결정 기록 0001~0008은 공용 부품의 근거라 그 자리에 둔다.
+- 브랜치 `feat/game-rating`. 확인 못 한 것을 `followups.md`로.
 
-## 항목 1 — Ollama thinking 제어
+### 1. 데이터 (16:45–17:30)
 
-**문제**: `OllamaLLM._chat`·`_chat_stream`이 `think`를 보내지 않아, qwen3가 화면에 안 나가는 생각
-토큰을 만든다. 8b 답변 작성이 40초~5분 30초+, 0.6b plan 호출도 300초 timeout(i08, 2회 재현).
+- `tools/fetch_ratings.py` — API를 월 단위로 받아 `data/ratings/raw/YYYY-MM.json`에 저장한다. 시작 시점은
+  2024-01로 하되, 오래된 달의 개요 채움률을 보고 정한다(평가 결과를 보고 정하지 않는다).
+- 분할: `cases.json` = 2026-06-30까지 결정분 중 개요 있음 · 4개 연령 등급 · 아케이드 제외.
+  평가용(2026-07~09)은 2단계에서 뽑는다.
+- `criteria.json` — 사례집 요약표(7항목 × 4단계, 열 = 전체·12·15·청불)를 옮기고 출처를 적는다.
+  옮기기 전에 GRAC 홈페이지 저작권 정책을 확인한다.
+- `rule-8.md` — 국가법령정보센터의 시행규칙 제8조.
+- 완료 기준: 건수·채움률 출력. 테스트로 "사례 DB의 최신 결정일 ≤ 2026-06-30"을 고정한다.
 
-| 파일 | 변경 |
-| --- | --- |
-| `agent/ollama_llm.py` | `OllamaLLM.__init__(model, usd_per_1k_tokens, think: bool \| None = None)`. `think`가 `None`이 아니면 `_chat`·`_chat_stream`의 payload에 `"think": self.think`를 넣는다 |
-| `server.py` `_build_llms` | `OLLAMA_THINK`(`false`·`true`·`default`)를 읽어 fast·quality 생성자에 넘긴다 |
-| `.env.example` | `# OLLAMA_THINK=false` 와 설명 한 줄 |
+### 2. 평가셋 먼저 (17:30–18:15)
 
-openai·fake 백엔드는 해당 없음.
+기능 코드를 쓰기 전에 만들고, 결과를 본 뒤에는 고치지 않는다.
 
-**테스트** (`tests/test_ollama_think.py`, ollama 없이): `httpx.post`·`AsyncClient.stream`을 가짜로
-바꿔 payload를 잡는다 — `think=False`면 `"think": false`가 들어가고, `None`이면 키가 없다.
-
-**완료 기준**: 테스트 통과. `step1` 측정에서 회귀 쿼리 timeout 0건, target 평가의 i08 오류 사라짐.
-
-**측정**: 회귀 쿼리 지연시간(중앙값·합계·timeout 건수), 노드 평가 3종 재측정(분류 정확도 변화 포함).
-
-**예상 한계**: 추론 과정을 끄면 분류·계획·답변 품질이 떨어질 수 있다 — `validation_attempts`와
-분류 정확도가 나빠지는지 같이 본다. 나빠지면 fast만 끄고 quality는 켜는 조합을 비교한다.
-
----
-
-## 항목 2 — 임베딩 기반 의미 라우터
-
-**문제**: qwen3:0.6b 분류가 일반 질문 15개 중 6개를 장애로 보낸다(분류 23/30).
-
-### 새 모듈
-
-| 파일 | 내용 |
-| --- | --- |
-| `agent/embedding.py` | `OllamaEmbedder(model="qwen3-embedding:0.6b")` — `async embed(texts) -> list[list[float]]` (`/api/embed`), `cosine(a, b)`. 질문 쪽에는 Qwen3-Embedding 권장 형식의 지시문(`Instruct: …\nQuery: …`)을 붙인다 |
-| `agent/router.py` | `LLMRouter(fast_llm)` — base 동작 래퍼. `SemanticRouter(embedder, examples, fallback, margin, k)` |
-| `data/router_examples.json` | `{"chat": [...], "incident": [...]}` 클래스당 15~20문장 |
-
-### `SemanticRouter.route(query)` 흐름
-
-1. 서버 기동 시 예시 문장을 한 번에 임베딩해 메모리에 둔다(실측 7문장 0.185초).
-2. 질문을 임베딩하고(실측 0.038초) 클래스별로 **상위 k개(기본 3) 유사도 평균**을 낸다.
-3. `incident - chat` 차이의 절댓값이 `ROUTER_MARGIN` 이상이면 그 클래스로 정한다.
-4. 차이가 작으면 `LLMRouter`(항목 1이 적용된 fast 모델)로 넘긴다.
-5. 결과 `{"route", "needs_analysis": False, "method": "semantic"|"llm-fallback", "scores"}`와 usage를 돌려준다.
-
-`needs_analysis`는 정하지 않는다 — incident 경로에서는 `plan_node`가 자기 결과로 덮어쓰므로
-라우터 값은 쓰이지 않는다(코드 확인).
-
-### 그래프 변경
-
-`route_node`: `deps.router`가 있으면 `await deps.router.route(query)`, 없으면 기존 `deps.fast_llm.route`.
-`RouteDecided` 이벤트에 `method`와 `scores`를 더한다. LangSmith에는 `@traceable`로 남긴다.
-
-### 지킬 것
-
-- 예시 문장은 `tools/evalsets/route.json`의 질문과 **겹치지 않게** 쓴다. `tests/`에 겹침 검사 테스트를 둔다.
-- `ROUTER_MARGIN`은 평가 세트로 고르지 않는다. 예시 문장 안에서 하나씩 빼고 맞히는 방식
-  (leave-one-out)으로 정하고 그 값을 결정 기록에 남긴다. 평가 세트로 고르면 정답을 외운 것이 된다.
-- 임베딩은 ollama가 필요하다. fake·openai 백엔드의 기본값은 `ROUTER=llm`이다.
-
-**테스트** (`tests/test_router.py`): 손으로 정한 벡터를 돌려주는 가짜 embedder로 — 차이가 크면
-semantic, 작으면 fallback이 불리는지. 예시 문장 ↔ 평가 세트 겹침 0건.
-
-**완료 기준**: `step2` 분류 정확도가 `step1`보다 높고, 재현된 오분류(c01·c02)가 chat으로 간다.
-
-**측정**: 분류 정확도·클래스별 정답, LLM fallback 비율, route 단계 지연(임베딩 0.04초 대 LLM 약 1초).
-
-**예상 한계**: 예시가 다루지 않는 표현에 약하다. margin을 넓히면 fallback이 늘어 LLM 지연과 오분류가
-돌아온다. 임베딩 모델이 GPU 메모리 2.4GB를 더 쓴다(16GB 기기에서 8b·0.6b와 동시 상주) — 메모리가 모자라면
-모델 교체 로드(실측 1.4초)가 생긴다. 예시 문장을 계속 관리해야 한다.
-
----
-
-## 항목 3 — 대상 시스템 추정·되묻기
-
-**문제**: 시스템명이 없으면 세 곳(`graph._extract_system_name`, ollama·openai `plan` 프롬프트,
-`_guess_target(s)`)에서 auth-service로 채운다. target 평가 6/15, 되묻기 0/5, 엉뚱한 진단 7건.
-
-### 시스템 카탈로그를 MCP Resource로
-
-| 파일 | 변경 |
-| --- | --- |
-| `data/systems.json` (새 파일) | `[{"name": "auth-service", "description": "로그인·인증·세션 토큰 발급"}, …]` 6개 |
-| `mcp_server.py` | Resource `catalog://systems` — 위 파일을 그대로 돌려준다 |
-| `agent/mcp_client.py` | 템플릿 없는 정적 resource를 찾는 `find_resource(uri)` 추가(`list_resources` 조회). 기존 `find_resource_template`과 같은 "서버 탐색 후 요청" 방식 |
-
-에이전트가 `data/monitoring.json`을 직접 읽어 시스템 목록을 만드는 곳이 세 군데(`graph.py`,
-`ollama_llm.py`, `openai_llm.py`)다. 카탈로그를 MCP로 받으면 목록의 출처가 MCP 서버 하나로 모인다.
-
-### 새 모듈 `agent/target.py` — `TargetResolver(embedder, catalog, threshold, margin)`
-
-`resolve(query) -> {"targets": [...], "method": ..., "reason": ...}`
-
-| 순서 | 조건 | 결과 |
+| 파일 | 내용 | 채점 |
 | --- | --- | --- |
-| 1 | 카탈로그 시스템명이 질문에 있다 | 등장한 **전부**, 등장 순서대로 (`name-match`) — i04 두 시스템 누락 해결 |
-| 2 | `xxx-service` 꼴인데 카탈로그에 없다 (예: billing-service) | `[]`, 이유 "모니터링 대상 아님" |
-| 3 | 질문 ↔ 시스템 설명 유사도 1위가 `threshold` 이상이고 2위와 `margin` 이상 차이 | 1위 하나 (`semantic`) |
-| 4 | 그 밖 | `[]`, 이유 "시스템 특정 불가" |
+| `evalsets/rating.json` (A) | 2026-07~09 결정분, 등급별 10개씩 40개(시드 고정). 입력 = 장르·플랫폼·개요. **제목은 뺀다** — LLM이 유명 게임 등급을 외워서 맞히지 않게 | 정확도, ±1단계 정확도, 과소평가 건수, 내용정보 F1 |
+| `evalsets/rating_route.json` | 제도 문의·잡담 15 + 점검 요청 15 | 분류 정확도 |
+| `evalsets/rating_clarify.json` | 충분한 설명 6 + 모자란 설명 6("우리 게임 몇 세야?") | 되묻기 정답률 |
+| `evalsets/rating_judge.json` | 정상 5 + 오염 7(등급 불일치, 없는 사례, 사례 등급 조작, 통계 조작, 없는 기준 문구, 무관한 게임, 근거 없는 단정) | 탐지율, 오탐률 |
+| `queries_rating.json` | 회귀 쿼리 10개(제도 문의 3, 점검 4, 정보 부족 2, 되묻기 후 보충 1) | 지연·비용 |
 
-### 그래프 변경
+- 라우터 예시 문장(`data/ratings/router_examples.json`)은 평가셋과 겹치지 않게 따로 쓴다.
+- `tools/evalsets/README.md`, `project/doc/regression_test_queries.md`를 함께 고친다.
+- 2단계와 3단계는 파일이 겹치지 않아 세션 두 개로 나눠 돌릴 수 있다(원하면).
 
-| 위치 | 변경 |
-| --- | --- |
-| `plan_node` | `deps.target_resolver`가 있으면 먼저 `resolve`. 대상이 없으면 **research task 0개 + `ClarifyRequested` 이벤트**를 돌려준다(평가 채점 약속). 대상이 있으면 research task는 resolver 결과로 만들고, LLM plan은 **대상이 2개 이상일 때만** 불러 `needs_analysis`만 받는다 |
-| 새 노드 `clarify` | LLM 없이 템플릿으로 답한다 — "어느 시스템인지 알려 주세요" + 카탈로그 6개와 설명. `final`을 채우고 END |
-| 새 조건 엣지 `plan → clarify \| gate` | research task가 없으면 `clarify` |
-| `_extract_system_name` | resolver의 첫 대상을 쓴다. 폴백 `auth-service` 삭제 |
-| ollama·openai `plan` 프롬프트, `_guess_target(s)` | "언급되지 않았으면 auth-service" 문구와 폴백 삭제 |
+### 3. 뼈대 + Before (18:15–19:30)
 
-LLM plan을 대상 2개 이상일 때만 부르는 이유: 대상은 이제 코드가 정하고, LLM이 더할 수 있는 것은
-`analysis` 필요 여부뿐이다. `analyze`는 여러 시스템 비교라 대상 1개면 쓸 일이 없다. 그 결과 단일
-시스템 질문에서 LLM 호출이 하나 줄고, i08 같은 plan 폭주 위험도 줄어든다.
+- `mcp_server_rating.py`
+  - Tool `rating_stats(genre, platform)`: 사례 DB에서 같은 장르·플랫폼의 등급 분포와 내용정보 빈도.
+  - Resource `criteria://descriptors`, `law://game-industry/rule-8`, `ratings://cases`.
+  - `mcp_client.py`에 rating 서버를 등록하고 `find_tool`을 더한다. 과제 1처럼 어느 서버가 제공하는지
+    조회한 뒤에 부른다.
+- `agent/rating/llm.py` — Ollama·fake 두 가지. 이번 단계에는 `route`·`chat`·`rate_direct`·`write`만.
+- `agent/rating/graph.py` — 부품이 모두 `None`이면 LLM 단독으로 끝까지 돈다.
+- `server.py` — `AGENT_DOMAIN` 분기. 기본값은 `rating`이고, `conftest.py`는 기존 테스트를 위해 `incident`로 고정한다.
+- `tools/eval_rating.py`, `scripts/measure-at`에 단계 추가(`rate`, `rroute`, `rclarify`, `rjudge`, e2e는 `MEASURE_QUERIES`).
+- 완료 기준: fake 백엔드로 등급 그래프가 끝까지 돈다(`tests/test_rating_smoke.py`).
+- **(직접) Before 측정 시작**:
 
-**프론트(선택, 2줄)**: `web_chat.html`의 `STEP_LABELS`에 `ClarifyRequested` 문구를 더한다.
-안 더해도 되묻기 답변 자체는 `FinalAnswer`로 보인다.
+  ```bash
+  ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=format \
+    MEASURE_QUERIES=tools/queries_rating.json scripts/measure-at HEAD before rate,rroute,rclarify,rjudge,e2e
+  ```
 
-**테스트** (`tests/test_target.py`): 이름 매칭 2개, 대상 밖 시스템, 가짜 embedder로 임계값 위·아래.
-`tests/test_smoke.py`에 fake 백엔드로 "서버가 좀 이상한데?" → `ClarifyRequested` + research 0개.
+  측정하는 동안 같은 ollama를 쓰지 않는다. 4단계 코딩은 fake 테스트로만 확인한다.
 
-**완료 기준**: `step3` target 정확도 상승, 되묻기 5건 중 다수 정답, 엉뚱한 진단 감소, 진단 정답 6/10 아래로 안 떨어짐.
+### 4. 핵심 — 단계 판정 + 유사 사례 (19:30–20:45)
 
-**측정**: target 정확도, 진단·되묻기 정답 수, 엉뚱한 진단 건수, plan 단계 지연.
+- `agent/rating/assess.py`
+  - `rating_from_levels(items)`: 해당 항목 단계의 최댓값을 등급으로 바꾼다(0 = 전체이용가 … 3 = 청소년이용불가).
+  - `ungrounded_evidence(items, description)`: LLM이 근거로 인용한 문구가 설명에 실제로 있는지 본다.
+    없으면 그 항목의 근거를 지우고 이벤트에 남긴다.
+- `quality.assess` — 기준표 28문장, 유사 사례 5건(등급·내용정보), 통계를 주고 항목마다
+  `{present, level, evidence}`를 JSON 스키마로 받는다. **등급은 LLM이 아니라 코드가 정한다.**
+- `agent/rating/cases.py` — `CaseRetriever`: 서버 기동 때 사례 개요를 한 번 임베딩해 두고(`ratings://cases`),
+  질문과 가까운 사례 k=5를 고른다. 장르·플랫폼 필터 → 3건 미만이면 replan_check가 범위를 넓힌다.
+  기동이 10초를 넘으면 임베딩을 파일로 캐시한다(gitignore).
+- 테스트: 최댓값 규칙, 근거 검사, 필터·넓히기(가짜 임베더).
 
-**예상 한계**: 설명 문구에 따라 결과가 흔들린다. 임계값을 높이면 진단할 질문까지 되묻는다(과잉 되묻기) —
-진단 정답 수로 감시한다. 카탈로그를 시스템 추가 때마다 관리해야 한다. 기동 시 MCP 왕복이 하나 는다.
+### 5. 검수 (20:45–21:30)
 
----
+`agent/rating/check.py` — 과제 1 검수처럼 싼 것부터 보고, 앞에서 떨어지면 뒤는 부르지 않는다.
 
-## 항목 4 — 검수 근거 검증
+1. 형식: "예상 등급:" 줄이 있는가.
+2. 등급 일치: 초안의 예상 등급이 코드가 계산한 등급과 같은가.
+3. 사례 일치: 초안에 나온 사례 게임이 검색된 사례 안에 있고, 같은 줄의 등급이 실제와 같은가.
+4. 수치 대조: 통계 수치가 Tool 결과에 있는가 — 과제 1의 `ungrounded_numbers`를 다시 쓴다.
+5. LLM 판정: 질문과 관련 있는가, 근거와 맞는가(도메인 프롬프트).
 
-**문제**: `validate_node`가 30자 + `1)`만 본다. 오염 초안 7건 중 0건 탐지.
+### 6. 라우터 + 되묻기 (21:30–22:00)
 
-### 새 모듈 `agent/validator.py` — 세 겹, 싼 것부터
+- `SemanticRouter`에서 `incident`로 고정된 라벨을 인자로 받게 바꾼다. 예시 문장을 교체하고
+  `tune_embedding.py --examples`로 margin을 다시 정한다(ollama 사용 — Before 측정이 끝난 뒤).
+- 되묻기 규칙: 요청 문구를 뺀 설명이 짧거나, 장르·플랫폼·내용 단서가 하나도 없으면 체크리스트로 묻는다.
+  직전 답이 되묻기였으면 이전 사용자 메시지를 이어 붙여 판정한다(세션 이력 사용).
 
-| 단계 | 검사 | 비용 | 잡을 것 (judge.json) |
-| --- | --- | --- | --- |
-| ① 형식 | 30자 이상 + `1)` (base 그대로) | 0 | — |
-| ② 수치 근거 | 초안의 수치가 수집값(모니터링 수치·알림 문구·runbook·analysis·질문)에 있는지. 알림 개수(`len(alerts)`)와 번호(`1)`)는 허용 | 0, 결정론 | b2 수치 조작, b3 수집 안 한 지표, b4 다른 시스템 |
-| ③ LLM-as-judge | quality 모델에 질문·수집 사실·초안을 주고 JSON(`relevant`, `faithful`, `reason`)으로 채점. `think=false` | LLM 1회 | b1·b5 질문 무관, b6 결론 왜곡, b7 지표 바꿔치기 |
+### 7. After 측정 (22:00–23:00)
 
-앞 단계에서 떨어지면 뒤 단계는 부르지 않는다. 불합격이면 구체적인 반려 사유(예: "수집되지 않은 수치
-99.8%를 인용했습니다")를 `validation_feedback`에 넣어 기존 재작성 루프(최대 3회)를 탄다.
+- **(직접)** 같은 커밋, 기본 스위치로 After를 잰다:
 
-| 파일 | 변경 |
-| --- | --- |
-| `agent/validator.py` | `FormatCheck`, `NumberGroundingCheck`, `LLMJudge`, 셋을 묶는 `GroundedValidator.check(query, collected, draft)` |
-| `agent/ollama_llm.py` · `openai_llm.py` · `fake_llm.py` | quality 클래스에 `judge(query, facts, draft)` 추가 — 백엔드마다 같은 인터페이스. fake는 결정론 규칙 |
-| `graph.validate_node` | `deps.validator`가 있으면 그 결과를 쓴다. 이벤트에 `stage`(어느 단계에서 떨어졌나)와 `reason` 추가 |
-| 3회 실패 시 | base는 "통과 처리"로 그대로 내보낸다. 근거 검증에서 떨어진 채 3회에 도달하면 답변 맨 앞에 "⚠️ 검수를 통과하지 못한 답변 — 사유"를 붙여 내보낸다 |
+  ```bash
+  MEASURE_QUERIES=tools/queries_rating.json scripts/measure-at HEAD after rate,rroute,rclarify,rjudge,e2e
+  ```
 
-**테스트** (`tests/test_validator.py`): `tools/evalsets/judge.json`을 읽어 ② 수치 근거 검사가
-정상 5건을 하나도 떨어뜨리지 않고 b2·b3·b4를 떨어뜨리는지(LLM 없이). ③은 가짜 judge로 순서·사유 전달만.
+- 부품 하나 끈 비교(1회): `CASE_SEARCH=off`로 `rate`만 — 사례 검색이 정확도와 지연에 주는 영향.
+- `02-measurement.md`에 1차 표. 정리는 Day2에 한다.
 
-**완료 기준**: `step4` 오염 초안 탐지 0/7 → 5/7 이상, 정상 초안 오탐 0/5 유지.
+### 8. 선택 (23:00~)
 
-**측정**: 탐지율, 오탐률, 검수 단계 지연(③의 LLM 1회), 회귀 쿼리 지연시간·`validation_attempts` 변화.
+- ~~항목별 심사 서브에이전트~~ — 검토 후 뺐다. 등급은 가장 높은 항목 하나로 정해지므로 항목을 나눠 심사해도
+  최종 등급에 더해지는 정보가 없고, 판정을 7번 따로 하면 그중 하나라도 높게 볼 확률이 커져 과대평가가 늘며,
+  로컬 ollama는 요청을 차례로 처리해 지연이 약 7배가 된다. 정답 데이터에 항목별 단계가 없어 효과를 잴 수도 없다
+  ([0009](decisions/0009-rating-domain.md)).
+- 결정서 사유 167건 RAG.
 
-**예상 한계**: 판정 모델도 틀린다. 작성 모델과 같은 계열(qwen3:8b)이라 같은 실수를 놓칠 수 있다.
-장애 답변마다 LLM 호출이 하나 늘어 지연이 커진다. 정상 답변을 떨어뜨리면 재작성이 늘어 더 느려진다.
-수치 추출 정규식이 단위·버전 번호·인스턴스 번호(`payments-service-3`)를 잘못 읽을 수 있다.
+## 덜어 내는 순서
 
----
+8(결정서 RAG) → 6의 되묻기 → 6의 라우터 재조정(LLM 라우팅 유지) → 5의 LLM 판정(코드 검사만 남김) → 평가셋 judge.
+**마지노선은 1~4와 7의 `rate`**다. 이것만 있어도 "LLM 단독 vs 기준표+사례" 등급 정확도 비교가 나온다.
 
-## 항목 5 — runbook 선택을 의미 기반으로 (선택)
+## 지킬 것
 
-**문제**: `replan_check_node`가 모니터링 status·alerts 문구의 키워드로 runbook을 고르고, 안 맞으면 `db-down`.
-질문 내용은 보지 않는다.
+- 평가셋은 기능 코드보다 먼저 만들고, 결과를 본 뒤에 고치지 않는다.
+- 판정 기준(margin 등)은 평가셋이 아니라 예시 문장 leave-one-out으로 정한다.
+- 사례 DB에 평가 기간(7~9월)이 섞이지 않게 테스트로 고정한다.
+- 같은 신청자의 비슷한 게임이 사례에 있으면 답이 새는 것처럼 작동할 수 있다 — Day2에 평가 게임과
+  같은 신청자의 사례 비율을 세서 한계로 적는다.
+- 새 환경변수는 단계마다 `.env.example`과 README 스위치 표에 적는다. 그래프 다이어그램(`project/doc/README.md`)은 Day2에 고친다.
 
-| 파일 | 변경 |
-| --- | --- |
-| `agent/runbook.py` (새 파일) | `RunbookSelector(embedder, runbooks, threshold)` — 기동 시 runbook 6종을 임베딩(메타데이터 incident_type = 파일 이름). `select(query, collected)`는 질문 + 알림 문구로 검색해 1위를 고른다. 유사도가 낮으면 키워드 규칙으로 폴백 |
-| `graph.replan_check_node` | `deps.runbook_selector`가 있으면 `_classify_incident_type` 대신 사용 |
-| runbook 목록 | 인덱싱용 본문은 `data/runbooks/*.md`를 직접 읽는다. 선택된 runbook 조회는 지금처럼 MCP Resource로 한다 |
+## Day2로 넘기는 것
 
-**측정 준비**: 구현 전에 `tools/eval_nodes.py`에 `runbook` 하위 명령을 더하고(`target.json`의
-`expected_runbook` 6건, 모니터링 기준값의 알림 문구로 collected 구성) **키워드 규칙으로 Before부터 잰다.**
-
-**예상 한계**: 문서 6개라 검색 이득이 작을 수 있다. runbook이 바뀌면 다시 임베딩해야 한다. 인덱싱이
-MCP를 거치지 않아 데이터 출처가 두 갈래가 된다.
-
----
-
-## 일정 배분 (Day2)
-
-| 시간 | 항목 | 비고 |
-| --- | --- | --- |
-| 오전 앞 | 1 | 1시간 안쪽. 끝나면 `step1` 측정을 백그라운드로 |
-| 오전 뒤 ~ 오후 초 | 2 | `embedding.py`는 3·5가 같이 쓴다 |
-| 오후 | 3 | MCP Resource 추가 포함 |
-| 오후 뒤 ~ 저녁 | 4 | 저녁에 `final` 측정 시작 — 장애 질문이 오래 걸린다 |
-| 여유 | 5 | 없으면 뺀다 (Day3 13시 마감) |
+반복 측정(repeat 3), 결정 기록(0009~), `02-measurement.md`·`04-report.md`, 아키텍처 다이어그램,
+`checklist.md`, main 머지, GitHub 원격 저장소.

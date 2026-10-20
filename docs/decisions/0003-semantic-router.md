@@ -2,7 +2,7 @@
 
 - 상태: Accepted
 - 날짜: 2026-10-20
-- 계획 항목: [`01-plan.md`](../01-plan.md) 순번 2 · 설계 [`03-design.md`](../03-design.md#항목-2--임베딩-기반-의미-라우터)
+- 계획 항목: [`01-plan.md`](../task1/01-plan.md) 순번 2 · 설계 [`03-design.md`](../task1/03-design.md#항목-2--임베딩-기반-의미-라우터)
 
 ## 문제
 
@@ -58,7 +58,7 @@
 | 분류 단계 지연 중앙값 | 0.986초 | 0.121초 | **0.040초** |
 
 원자료: `runs/eval-route_before_20261020-101334.json`, `runs/eval-route_step1_20261020-111855.json`,
-final은 [`02-measurement.md`](../02-measurement.md#final). 노드 평가는 `route_node` 하나만 부르므로
+final은 [`02-measurement.md`](../task1/02-measurement.md#final). 노드 평가는 `route_node` 하나만 부르므로
 final의 분류 결과는 다른 항목의 영향을 받지 않는다 — step1 대비 차이가 곧 이 항목의 효과다.
 
 ## 한계와 트레이드오프
