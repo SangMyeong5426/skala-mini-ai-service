@@ -105,3 +105,16 @@ def test_lowering_advice_is_computed_from_the_criteria():
     assert lowering_advice(items, criteria) == (
         "폭력성을(를) '사실적인 폭력 표현'에서 '경미한 폭력 표현' 수준으로 낮추면 12세이용가를 노려 볼 수 있습니다.")
     assert lowering_advice({"선정성": {"present": False, "level": 0}}, criteria).startswith("이미 가장 낮은")
+
+
+def test_facts_say_when_the_rating_follows_a_similar_case():
+    from agent.rating.facts import render_facts
+
+    assessment = {"method": "criteria", "rating": "청소년이용불가", "rating_items": "12세이용가", "rating_source": "cases",
+                  "nearest": {"title": "맨 인 더 다크 (Man In The Dark)", "rating": "청소년이용불가"},
+                  "described": True, "dropped": [], "items": {"폭력성": {"present": True, "level": 1,
+                                                                    "phrase": "경미한 폭력 표현", "evidence": "", "case_ids": []}}}
+    facts = render_facts(assessment, COLLECTED + [{"source": "criteria", "data": {"items": {}}}])
+
+    assert "기준표 판정은 12세이용가이지만" in facts
+    assert "비슷한 사례의 등급을 따랐습니다" in facts

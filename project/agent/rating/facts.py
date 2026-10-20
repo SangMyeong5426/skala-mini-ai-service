@@ -36,6 +36,10 @@ def render_assessment(assessment: dict, cases: list[dict] | None = None, criteri
         return (f"예상 등급: {assessment['rating']} (LLM 단독 판정)\n내용정보: {descriptors}\n"
                 f"이유: {assessment.get('reason', '')}")
     lines = [f"예상 등급: {assessment['rating']} (항목 단계의 최댓값으로 코드가 계산)"]
+    if assessment.get("rating_source") == "cases":   # 결합 규칙(결정 0016)이 사례 등급을 따랐다
+        near = assessment["nearest"]
+        lines = [f"예상 등급: {assessment['rating']} (기준표 판정은 {assessment['rating_items']}이지만, 설명에 표현 수위가 "
+                 f"충분하지 않아 가장 비슷한 실제 사례 「{near['title']}」({near['rating']})를 반영)"]
     titles = {c["id"]: c["title"] for c in cases or []}
     items = {name: assessment["items"].get(name, {"present": False}) for name in ITEMS}
     present = [(name, item) for name, item in items.items() if item["present"]]
@@ -51,7 +55,10 @@ def render_assessment(assessment: dict, cases: list[dict] | None = None, criteri
         lines.append("- 해당 항목 없음")
     if absent:
         lines.append(f"- 해당 없음: {', '.join(absent)}")
-    if criteria is not None:
+    if assessment.get("rating_source") == "cases":
+        lines.append("등급을 낮추려면: 설명만으로는 판정 근거가 부족해 비슷한 사례의 등급을 따랐습니다. 폭력·선정·사행 표현의 "
+                     "수위를 자세히 알려 주시면 기준표로 다시 판정합니다.")
+    elif criteria is not None:
         lines.append(f"등급을 낮추려면: {lowering_advice(items, criteria)}")
     return "\n".join(lines)
 

@@ -89,3 +89,20 @@ def test_assessor_uses_latest_cases_and_criteria_from_collected():
     assert assessment["rating"] == "청소년이용불가"
     assert assessment["items"]["폭력성"]["phrase"] == "과도한 폭력 표현"
     assert usage == {"usd": 0.001}
+
+
+def test_combination_rules_follow_their_definitions():
+    from agent.rating.assess import COMBINE_RULES, combine
+
+    quoted = {"폭력성": {"present": True, "level": 1, "evidence": "총으로 쏘면"}}
+    thin = {"폭력성": {"present": True, "level": 1, "evidence": "", "case_ids": ["C1"]}}
+    near = ["청소년이용불가", "12세이용가", "12세이용가"]
+
+    assert COMBINE_RULES[0] == "items"
+    assert combine("12세이용가", quoted, near, "items") == ("12세이용가", "items")
+    assert combine("12세이용가", quoted, near, "case-floor") == ("청소년이용불가", "cases")
+    assert combine("12세이용가", quoted, near, "thin-nn1") == ("12세이용가", "items")     # 구절 근거가 있다
+    assert combine("15세이용가", thin, near, "thin-nn1") == ("청소년이용불가", "cases")
+    assert combine("15세이용가", thin, near, "thin-vote5") == ("12세이용가", "cases")      # 다수결은 낮출 수도 있다
+    assert combine("15세이용가", thin, near, "thin-floor") == ("청소년이용불가", "cases")
+    assert combine("15세이용가", thin, [], "case-floor") == ("15세이용가", "items")       # 사례가 없으면 그대로

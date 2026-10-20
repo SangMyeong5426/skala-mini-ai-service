@@ -2,6 +2,10 @@
 
     project/.venv/bin/python tools/make_rating_evalset.py           # A — tools/evalsets/rating.json
     project/.venv/bin/python tools/make_rating_evalset.py detail    # B — tools/evalsets/rating_detail.json
+    project/.venv/bin/python tools/make_rating_evalset.py dev       # 개발용 — tools/evalsets/rating_dev.json
+
+개발용 — A 와 같은 기간·같은 규칙에서 **A 에 뽑히지 않은 것**으로 등급마다 10개(15세는 남은 8개 전부), 시드 20261021.
+    결합 규칙(사례 등급 ↔ 기준표 판정)을 이 문항으로만 고른다. A·B 는 고른 뒤 한 번만 확인한다(결정 0016).
 
 A — 기능 코드보다 먼저, 시드 고정.
 
@@ -45,9 +49,11 @@ from agent.rating.data import (  # noqa: E402
 )
 
 SEED = 20261020
+DEV_SEED = 20261021
 PER_RATING = 10
 OUT = ROOT / "tools" / "evalsets" / "rating.json"
 OUT_DETAIL = ROOT / "tools" / "evalsets" / "rating_detail.json"
+OUT_DEV = ROOT / "tools" / "evalsets" / "rating_dev.json"
 DECISIONS = ROOT / "tools" / "evalsets" / "source" / "grac_decision_reasons_2026q2.csv"
 MESSAGE = "출시 전에 등급을 미리 점검하고 싶어요. 장르: {genre}, 플랫폼: {platform}. 게임 내용: {summary}"
 CONCLUSION = re.compile(r"따라서|게임산업진흥에\s*관한\s*법률")
@@ -91,17 +97,21 @@ def build_detail() -> None:
     print("뺀 것:", skipped, "등급별:", counts)
 
 
-def main() -> None:
+def main(dev: bool = False) -> None:
     pool = [r for r in load_raw() if EVAL_FROM <= r["date"] <= EVAL_UNTIL and usable(r)]
     pool.sort(key=lambda r: (r["date"], r["id"]))
+    if dev:   # 평가셋 A 에 뽑힌 결정은 뺀다
+        taken = {i["rateno"] for i in json.loads(OUT.read_text())}
+        pool = [r for r in pool if r["id"] not in taken]
     applicants = {c["applicant"] for c in load_cases()}
-    rng = random.Random(SEED)
+    rng = random.Random(DEV_SEED if dev else SEED)
     items = []
     for rating in RATINGS:
-        picked = rng.sample([r for r in pool if r["rating"] == rating], PER_RATING)
+        candidates = [r for r in pool if r["rating"] == rating]
+        picked = rng.sample(candidates, min(PER_RATING, len(candidates)))
         for r in sorted(picked, key=lambda r: (r["date"], r["id"])):
             items.append({
-                "id": f"a{len(items) + 1:02d}",
+                "id": f"{'d' if dev else 'a'}{len(items) + 1:02d}",
                 "rateno": r["id"],
                 "message": MESSAGE.format(genre=r["genre"] or "기타", platform=r["platform"],
                                           summary=r["summary"]),
@@ -109,10 +119,13 @@ def main() -> None:
                 "label": {"rating": r["rating"], "descriptors": r["descriptors"]},
                 "applicant_in_cases": r["applicant"] in applicants,
             })
-    OUT.write_text(json.dumps(items, ensure_ascii=False, indent=1) + "\n")
-    print(f"평가 기간 후보 {len(pool)}건 중 등급마다 {PER_RATING}개 → {_display(OUT)}")
+    out = OUT_DEV if dev else OUT
+    out.write_text(json.dumps(items, ensure_ascii=False, indent=1) + "\n")
+    counts = {g: sum(i["label"]["rating"] == g for i in items) for g in RATINGS}
+    print(f"평가 기간 후보 {len(pool)}건 중 {len(items)}개 {counts} → {_display(out)}")
     print("같은 신청자가 사례 DB 에 있는 문항:", sum(i["applicant_in_cases"] for i in items), "/", len(items))
 
 
 if __name__ == "__main__":
-    build_detail() if sys.argv[1:] == ["detail"] else main()
+    command = sys.argv[1] if len(sys.argv) > 1 else "summary"
+    {"summary": main, "detail": build_detail, "dev": lambda: main(dev=True)}[command]()

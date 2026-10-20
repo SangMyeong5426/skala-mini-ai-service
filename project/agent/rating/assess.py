@@ -71,6 +71,43 @@ def rating_from_items(items: dict) -> str:
     return RATINGS[max((item["level"] for item in items.values() if item["present"]), default=0)]
 
 
+# 결합 규칙 — 기준표 판정(항목 단계 최댓값)과 비슷한 사례의 등급을 어떻게 합칠까(결정 0016).
+# 한 문장 개요에서는 사례 1건 기준선이, 상세 설명에서는 기준표 판정이 강했다(결정 0011). 후보는 결과를 보기 전에 정했고,
+# 평가셋 A 와 겹치지 않는 개발용 문항(tools/evalsets/rating_dev.json)으로 골랐다(tools/choose_combination.py).
+#   items       R0 지금 방식 — 항목 단계 최댓값
+#   case-floor  R1 사례를 하한으로 — R0 와 가장 가까운 사례 등급 중 높은 쪽
+#   thin-nn1    R2 얇으면 사례 1건 — 설명 구절 근거가 있는 항목이 없으면 가장 가까운 사례의 등급
+#   thin-vote5  R3 얇으면 사례 다수결 — R2 와 같되 사례 5건 다수결(동률이면 더 가까운 쪽)
+#   thin-floor  R4 얇으면 사례를 하한으로 — 설명 구절 근거가 없을 때만 R1
+COMBINE_RULES = ("items", "case-floor", "thin-nn1", "thin-vote5", "thin-floor")
+COMBINE_RULE = "items"
+
+
+def has_quote(items: dict) -> bool:
+    """설명 속 구절을 근거로 든 항목이 있는가 — 없으면 '얇은 설명'으로 본다."""
+    return any(item["present"] and item["evidence"] for item in items.values())
+
+
+def vote(case_ratings: list[str]) -> str:
+    counts = {r: case_ratings.count(r) for r in case_ratings}
+    top = max(counts.values())
+    return next(r for r in case_ratings if counts[r] == top)
+
+
+def combine(items_rating: str, items: dict, case_ratings: list[str], rule: str = COMBINE_RULE) -> tuple[str, str]:
+    """(최종 등급, 어디서 왔나 — "items" 또는 "cases"). case_ratings 는 가까운 순서의 사례 등급."""
+    if rule == "items" or not case_ratings:
+        return items_rating, "items"
+    nn1 = case_ratings[0]
+    higher = max(items_rating, nn1, key=RATINGS.index)
+    thin = not has_quote(items)
+    rating = {"case-floor": higher,
+              "thin-nn1": nn1 if thin else items_rating,
+              "thin-vote5": vote(case_ratings) if thin else items_rating,
+              "thin-floor": higher if thin else items_rating}[rule]
+    return rating, "items" if rating == items_rating else "cases"
+
+
 class CriteriaAssessor:
     """RATING_ASSESSOR=criteria — 기준표·유사 사례로 항목별 단계를 판정하고 등급은 코드가 계산한다."""
 
@@ -83,7 +120,11 @@ class CriteriaAssessor:
         cases = latest(collected, "cases") or []
         raw, usage = self.llm.assess(description, criteria, cases)
         items, dropped = normalize_items(raw.get("items", {}), description, cases, criteria)
-        return {"method": "criteria", "rating": rating_from_items(items),
+        items_rating = rating_from_items(items)
+        rating, source = combine(items_rating, items, [c["rating"] for c in cases])
+        nearest = {"title": cases[0]["title"], "rating": cases[0]["rating"]} if cases else None
+        return {"method": "criteria", "rating": rating, "rating_items": items_rating, "rating_source": source,
+                "combine_rule": COMBINE_RULE, "nearest": nearest,
                 "described": bool(raw.get("described", True)), "items": items, "dropped": dropped}, usage
 
 

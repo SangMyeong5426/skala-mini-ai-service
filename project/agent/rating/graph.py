@@ -197,7 +197,8 @@ async def analysis_node(state: RatingState, deps: SupervisorDeps) -> dict:
         assessment = normalize_direct(raw)
     update = {"assessment": assessment, "cost_usd": _cost(state, usage)}
     event = {"type": "AnalysisCompleted", "method": assessment["method"], "rating": assessment["rating"],
-             **({"dropped": len(assessment["dropped"])} if "dropped" in assessment else {})}
+             **({"dropped": len(assessment["dropped"])} if "dropped" in assessment else {}),
+             **{k: assessment[k] for k in ("rating_items", "rating_source") if k in assessment}}
     events = state["events"] + [event]
     if deps.clarifier is not None and not assessment.get("described", True):
         reason = "설명만으로는 무엇을 하는 게임인지 알 수 없습니다"
