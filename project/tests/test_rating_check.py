@@ -66,3 +66,22 @@ def test_numbers_from_titles_quotes_and_levels_are_not_counted():
     assert ungrounded_numbers(draft, COLLECTED, DESC) == []
     assert ungrounded_numbers("사례 9건", COLLECTED, DESC) == ["9"]
     assert ungrounded_numbers("2024년 사례", COLLECTED, DESC) == ["2024"]   # 결정일 범위는 근거가 아니다
+
+
+def test_case_ids_are_references_not_numbers():
+    """작성 모델이 사례 번호를 옮겨 써도 수치 대조에 걸리지 않는다(2026-10-20 회귀 쿼리에서 재작성 3회·경고)."""
+    draft = "비슷한 사례 CC-OP-240905-003, GC-CC-NP-251031-001 은 53건 중 하나다"
+
+    assert ungrounded_numbers(draft, COLLECTED, DESC) == []
+
+
+def test_facts_for_writer_show_titles_not_case_ids():
+    from agent.rating.facts import render_facts
+
+    assessment = {"method": "criteria", "rating": "청소년이용불가", "described": True, "dropped": [],
+                  "items": {"폭력성": {"present": True, "level": 3, "phrase": "과도한 폭력 표현",
+                                     "evidence": "", "case_ids": ["C1"]}}}
+    facts = render_facts(assessment, COLLECTED)
+
+    assert "C1" not in facts and "CC-" not in facts
+    assert "- 폭력성: 과도한 폭력 표현(청소년이용불가) — 근거: 비슷한 사례 「맨 인 더 다크 (Man In The Dark)」" in facts
