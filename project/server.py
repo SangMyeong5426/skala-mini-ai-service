@@ -74,6 +74,40 @@ def _build_llms():
     return backend, fast, quality
 
 
+def _switch(name: str, improved: str, base: str, backend: str, allowed: tuple[str, ...]) -> str:
+    """개선 스위치 값. 지정이 없으면 ollama 는 개선 쪽, fake·openai 는 base 쪽이 기본이다.
+
+    fake 는 Wave 데모를 결정론으로 재현하는 백엔드이고 openai 는 과금이라 측정 대상이 아니다.
+    """
+    value = os.environ.get(name, improved if backend == "ollama" else base).strip().lower()
+    if value not in allowed:
+        raise ValueError(f"{name} 는 {' · '.join(allowed)} 중 하나여야 합니다: {value!r}")
+    return value
+
+
+def _make_embedder():
+    from agent.embedding import OllamaEmbedder
+    return OllamaEmbedder(os.environ.get("OLLAMA_EMBED_MODEL", "qwen3-embedding:0.6b"))
+
+
+async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[dict, dict]:
+    """개선 항목의 부품을 스위치대로 만들어 (SupervisorDeps 에 실을 필드, 실제 스위치 값)을 돌려준다.
+
+    끈 부품은 넣지 않는다 — 필드가 None 이면 노드가 base 동작을 한다(docs/03-design.md 공통 원칙).
+    """
+    switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if backend == "ollama" else None,
+                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm"))}
+    parts: dict = {}
+    if switches["ROUTER"] == "semantic":
+        parts["embedder"] = _make_embedder()
+    if switches["ROUTER"] == "semantic":   # 항목 2
+        from agent.router import DEFAULT_MARGIN, LLMRouter, SemanticRouter, load_examples
+        parts["router"] = await SemanticRouter.create(
+            parts["embedder"], LLMRouter(fast_llm), load_examples(),
+            margin=float(os.environ.get("ROUTER_MARGIN", DEFAULT_MARGIN)))
+    return parts, switches
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global CREATION_COUNT
@@ -81,13 +115,16 @@ async def lifespan(app: FastAPI):
     mcp = MCPClient()
     await mcp.start()   # Wave 2 — MCP subprocess는 서버 수명 동안 딱 1개
     backend, fast_llm, quality_llm = _build_llms()
+    parts, switches = await _build_components(backend, fast_llm, quality_llm, mcp)
     app.state.llm_backend = backend
+    app.state.switches = switches
     deps = SupervisorDeps(
         fast_llm=fast_llm,
         quality_llm=quality_llm,
         mcp=mcp,
         session_store=SqliteSessionStore(),
         version=os.environ.get("SUPERVISOR_VERSION", "v2"),
+        **parts,
     )
     app.state.deps = deps
     app.state.graph = build_graph(deps) if deps.version == "v2" else None
@@ -112,7 +149,8 @@ async def health():
             "supervisor_version": app.state.deps.version,
             "llm_backend": app.state.llm_backend,
             "fast_llm": app.state.deps.fast_llm.name,
-            "quality_llm": app.state.deps.quality_llm.name}
+            "quality_llm": app.state.deps.quality_llm.name,
+            "switches": app.state.switches}
 
 
 @app.get("/version")
