@@ -2,8 +2,13 @@
 
 사례 DB 에 평가 기간(2026-07~09) 결정이 들어가면 평가 게임이 유사 사례로 검색돼 답이 샌다.
 """
+import json
+from pathlib import Path
+
 from agent.rating.data import (
     CASES_UNTIL,
+    EVAL_FROM,
+    EVAL_UNTIL,
     EXCLUDED_GENRES,
     EXCLUDED_PLATFORMS,
     ITEMS,
@@ -55,3 +60,17 @@ def test_criteria_has_four_levels_per_item():
     assert criteria["levels"] == RATINGS
     assert list(criteria["items"]) == ITEMS
     assert all(len(phrases) == 4 for phrases in criteria["items"].values())
+
+
+def test_evalset_a_is_outside_the_case_db():
+    """평가셋 A 의 게임은 사례 DB 에 없다 — 있으면 자기 자신이 유사 사례로 검색된다."""
+    evalset = Path(__file__).resolve().parents[2] / "tools" / "evalsets" / "rating.json"
+    items = json.loads(evalset.read_text())
+    case_ids = {c["id"] for c in load_cases()}
+    raw = {r["id"]: r for r in load_raw()}
+
+    assert len(items) == 40
+    for item in items:
+        assert item["rateno"] not in case_ids
+        assert EVAL_FROM <= raw[item["rateno"]]["date"] <= EVAL_UNTIL
+        assert raw[item["rateno"]]["title"] not in item["message"]

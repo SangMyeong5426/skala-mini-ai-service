@@ -31,9 +31,9 @@
 
 ### 2. 평가셋 (기능 코드보다 먼저)
 
-- [ ] 평가셋 A `rating.json` 40개 (2026-07~09, 시드 고정)
-- [ ] `rating_route.json` 30 · `rating_clarify.json` 12 · `rating_judge.json` 12
-- [ ] 회귀 쿼리 `queries_rating.json` 10개
+- [x] 평가셋 A `rating.json` 40개 (2026-07~09, 시드 고정) — `tools/make_rating_evalset.py`, [0010](decisions/0010-rating-data-and-evalsets.md)
+- [x] `rating_route.json` 30 · `rating_clarify.json` 12 · `rating_judge.json` 12 — [`tools/evalsets/README.md`](../tools/evalsets/README.md)
+- [x] 회귀 쿼리 `queries_rating.json` 10개(11턴)
 
 ### 3. 뼈대 + Before
 

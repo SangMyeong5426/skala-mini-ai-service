@@ -37,3 +37,27 @@
   의미를 잃는다. 라벨이 틀렸다고 판단되면 고치고, **Before부터 다시 잰다**.
 - 의미 라우터(항목 2)의 예시 문장은 이 파일의 질문과 겹치지 않게 따로 둔다. 겹치면 정답을 외운 것이 된다.
 - 문항을 더하거나 빼도 Before부터 다시 잰다. 결과 파일의 `evalset`과 개수로 어느 세트로 쟀는지 남는다.
+
+## 과제 2 — 게임 등급분류 사전 점검
+
+[`tools/eval_rating.py`](../eval_rating.py)가 읽는다. **기능 코드보다 먼저** 만들었다(결정 [0010](../../docs/decisions/0010-rating-data-and-evalsets.md)).
+회귀 쿼리는 [`../queries_rating.json`](../queries_rating.json)(10개, 11턴).
+
+| 파일 | 개수 | 부르는 노드 | 라벨 | 기능 |
+| --- | --- | --- | --- | --- |
+| `rating.json` (A) | 40 (등급마다 10) | plan → research → replan_check → analysis | `label.rating`, `label.descriptors` | 3 사례 검색·단계 판정 |
+| `rating_route.json` | 30 (chat 15 · review 15) | `route_node` | `expected_route` | 5 의미 라우터 |
+| `rating_clarify.json` | 12 (되묻기 6 · 점검 6) | plan → … → analysis | `expected_action`(clarify/assess) | 6 되묻기 |
+| `rating_judge.json` | 12 (정상 5 · 오염 7) | `validate_node` | `expected`(pass/fail), `defect` | 4 검수 |
+
+- **rating(A)**: 평가 기간(2026-07-01 ~ 2026-09-30)의 실제 결정에서 [`../make_rating_evalset.py`](../make_rating_evalset.py)가
+  시드 20261020으로 등급마다 10개씩 뽑았다. 사례 DB(~2026-06-30)와 기간이 겹치지 않는다. 입력은 장르·플랫폼·개요이고
+  **제목은 뺐다.** 정답은 게임물관리위원회의 결정 등급과 내용정보다. 개요에 원작·시리즈 이름이 들어 있는 문항이
+  있다(예: 디아블로 4) — 이름난 작품이면 LLM 이 외워서 맞힐 수 있고, Before·After에 똑같이 작용한다.
+- **rating_route**: 출시할 게임 하나의 등급을 예상·점검해 달라면 `review`, 제도 질문·인사·기능 질문은 `chat`.
+  등급 이름("청소년이용불가")이나 항목 이름("폭력성")이 들어 있어도 특정 게임의 점검이 아니면 `chat`이다.
+- **rating_clarify**: 무엇을 하는 게임인지(내용·표현) 한 줄도 없으면 `clarify`, 짧아도 내용이 있으면 `assess`.
+  장르·플랫폼·희망 등급만 있는 것은 `clarify`다.
+- **rating_judge**: 사례·통계는 실제 사례 DB에서 가져왔고(`collected`), 판정 결과(`assessment`)와 초안은 손으로 썼다.
+  오염 초안은 결함을 하나씩 심었다 — 예상 등급과 계산 등급 불일치(p1), 검색되지 않은 사례 인용(p2), 사례 등급 바꿔치기(p3),
+  통계 수치 조작(p4), 판정에 없는 항목 근거(p5), 다른 게임 이야기(p6), 근거 없는 단정·잘못된 안내(p7).
