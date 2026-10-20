@@ -39,11 +39,19 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 ### 개선 스위치
 
 개선마다 환경변수 하나로 켜고 끈다. 값은 `project/.env`에 적거나 실행할 때 앞에 붙인다.
-측정에서 원본 동작을 재현하거나, 문제가 생겼을 때 재배포 없이 끄는 데 쓴다.
+측정에서 원본 동작을 재현하거나, 문제가 생겼을 때 재배포 없이 끄는 데 쓴다. 지정하지 않으면
+**ollama 백엔드는 개선 쪽, fake·openai 백엔드는 원본 쪽**이 기본이다. 실제 값은 `/health`의 `switches`에 나온다.
 
-| 환경변수 | 값 | 항목 |
-| --- | --- | --- |
-| `OLLAMA_THINK` | `false`(기본) · `true` · `default`(원본 동작 — 옵션을 보내지 않음) | 1 — [결정 0002](docs/decisions/0002-ollama-think-control.md) |
+| 환경변수 | 개선 (ollama 기본) | 원본 | 항목 |
+| --- | --- | --- | --- |
+| `OLLAMA_THINK` | `false` | `default`(옵션을 보내지 않음) · `true` | 1 — [0002](docs/decisions/0002-ollama-think-control.md) |
+| `ROUTER` | `semantic` | `llm` | 2 — [0003](docs/decisions/0003-semantic-router.md) |
+| `TARGET_RESOLVER` | `semantic` | `legacy` | 3 — [0004](docs/decisions/0004-target-resolver.md) |
+| `VALIDATOR` | `grounded` | `format` | 4 — [0005](docs/decisions/0005-grounded-validator.md) |
+| `RUNBOOK_SELECTOR` | `semantic` | `keyword` | 5 — [0006](docs/decisions/0006-runbook-selector.md) |
+
+판정 기준은 `ROUTER_MARGIN`(0.029)·`TARGET_MIN_SCORE`(0.40)·`TARGET_MARGIN`(0.04)으로 덮어쓸 수 있다.
+임베딩 모델은 `OLLAMA_EMBED_MODEL`(기본 `qwen3-embedding:0.6b`).
 
 ## 개발
 
@@ -78,7 +86,9 @@ skala-mini-ai-service/
 │   ├── mcp_server.py            MCP "ops" — Tool·Resource·Prompt
 │   ├── mcp_server_docs.py       MCP "docs" — decoy
 │   ├── agent/                   그래프·LLM 백엔드 3종·MCP 클라이언트·세션·재시도
+│   │                            + embedding·router·target·validator·runbook (개선 항목 2~5)
 │   ├── data/                    monitoring.json, runbooks/ 6종
+│   │                            + router_examples.json(분류 예시), systems.json(시스템 카탈로그)
 │   ├── doc/                     원본 매뉴얼
 │   ├── sh/                      setup·run 스크립트 (+ run_agent_fake.sh)
 │   ├── tests/                   스모크 테스트 (추가)
@@ -94,8 +104,12 @@ skala-mini-ai-service/
 │   ├── decisions/               결정 기록 — 개선 항목별 한계·트레이드오프
 │   └── followups.md             미해결·확인 대기
 ├── tools/
-│   ├── measure_queries.py       회귀 쿼리 실측·비교
-│   └── queries.json             회귀 쿼리 10개 (11턴)
+│   ├── measure_queries.py       회귀 쿼리 실측·비교 (--spawn: 질문마다 서버 새로)
+│   ├── eval_nodes.py            노드 단위 평가 — route·target·judge·write·runbook
+│   ├── tune_embedding.py        의미 판정 기준 조정 (평가 세트 미사용)
+│   ├── queries.json             회귀 쿼리 10개 (11턴)
+│   ├── evalsets/                라벨 평가 세트 4종
+│   └── tuning/                  조정용 문장 (평가 세트 아님)
 ├── runs/                    실측 원자료 (커밋한다)
 ├── scripts/                 measure-at(커밋 단위 측정), setup-git-hooks, check-rule-docs
 ├── .github/workflows/ci.yml ruff + pytest(fake) + AGENTS≡CLAUDE

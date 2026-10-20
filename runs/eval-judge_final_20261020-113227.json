@@ -1,0 +1,161 @@
+{
+  "kind": "judge",
+  "label": "final",
+  "started_at": "20261020-113227",
+  "evalset": "tools/evalsets/judge.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-EsYA9s",
+  "git": {
+    "commit": "bdd205e",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": "false",
+    "ROUTER": "semantic",
+    "TARGET_RESOLVER": "semantic",
+    "VALIDATOR": "grounded",
+    "RUNBOOK_SELECTOR": "semantic"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "OLLAMA_THINK": "false",
+      "ROUTER": "semantic",
+      "TARGET_RESOLVER": "semantic",
+      "VALIDATOR": "grounded",
+      "RUNBOOK_SELECTOR": "semantic"
+    }
+  },
+  "summary": {
+    "bad_detected": "6/7",
+    "good_false_reject": "0/5",
+    "accuracy": 0.917,
+    "errors": 0,
+    "latency_median_s": 3.465
+  },
+  "results": [
+    {
+      "id": "g1",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 7.393,
+      "error": null
+    },
+    {
+      "id": "g2",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 3.777,
+      "error": null
+    },
+    {
+      "id": "g3",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 3.459,
+      "error": null
+    },
+    {
+      "id": "g4",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 3.851,
+      "error": null
+    },
+    {
+      "id": "g5",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 3.47,
+      "error": null
+    },
+    {
+      "id": "b1",
+      "expected": "fail",
+      "defect": "질문 무관",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 3.21,
+      "error": null
+    },
+    {
+      "id": "b2",
+      "expected": "fail",
+      "defect": "수치 조작",
+      "got": "fail",
+      "ok": true,
+      "feedback": "수집된 사실에 없는 수치를 인용했습니다: 99.8, 71.4. 수치는 수집된 사실에 있는 값만 그대로 인용하세요.",
+      "latency_s": 0.001,
+      "error": null
+    },
+    {
+      "id": "b3",
+      "expected": "fail",
+      "defect": "수집하지 않은 지표",
+      "got": "fail",
+      "ok": true,
+      "feedback": "수집된 사실에 없는 수치를 인용했습니다: 1.8, 3.2, 12. 수치는 수집된 사실에 있는 값만 그대로 인용하세요.",
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b4",
+      "expected": "fail",
+      "defect": "다른 시스템 진단",
+      "got": "fail",
+      "ok": true,
+      "feedback": "수집된 사실에 없는 수치를 인용했습니다: 34.0, 48.0. 수치는 수집된 사실에 있는 값만 그대로 인용하세요.",
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b5",
+      "expected": "fail",
+      "defect": "질문 무관",
+      "got": "fail",
+      "ok": true,
+      "feedback": "질문과 관련 없는 답변 — 사용자 질문은 LangGraph에 대한 개념 설명을 요청했으나, 답변 초안은 시스템 장애 대응 절차를 설명하고 있어 질문과 관련이 없습니다.. 사용자 질문에 맞게, 수집된 사실과 어긋나지 않게 다시 쓰세요.",
+      "latency_s": 3.819,
+      "error": null
+    },
+    {
+      "id": "b6",
+      "expected": "fail",
+      "defect": "결론 왜곡",
+      "got": "fail",
+      "ok": true,
+      "feedback": "질문과 관련 없는 답변 — 초안은 사용자 질문에 대한 정확한 진단을 제공하지 않으며, 수집된 사실과 상반된 결론을 내리고 있습니다.. 사용자 질문에 맞게, 수집된 사실과 어긋나지 않게 다시 쓰세요.",
+      "latency_s": 2.74,
+      "error": null
+    },
+    {
+      "id": "b7",
+      "expected": "fail",
+      "defect": "지표 바꿔치기",
+      "got": "fail",
+      "ok": true,
+      "feedback": "질문과 관련 없는 답변 — 초안은 사용자 질문에 대한 정확한 진단을 제공하지 않으며, 수집된 사실과 일치하지 않습니다. 사용자 질문은 메모리 사용률 증가에 대한 신고이지만, 초안은 CPU 과부하를 진단하고 메모리 사용률을 오해한 것으로 보입니다.. 사용자 질문에 맞게, 수집된 사실과 어긋나지 않게 다시 쓰세요.",
+      "latency_s": 4.696,
+      "error": null
+    }
+  ]
+}
