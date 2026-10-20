@@ -21,3 +21,4 @@
 | [0011](0011-case-search-and-item-levels.md) | 유사 사례 검색 + 항목별 단계 판정 — 등급은 코드가 최댓값으로, 근거 없는 항목은 지운다 | Accepted | 2026-10-20 |
 | [0012](0012-rating-validator.md) | 등급 점검 보고서 검수 — 등급·사례·수치는 코드가, 뜻은 LLM 이 | Accepted | 2026-10-20 |
 | [0013](0013-rating-router-and-clarify.md) | 등급 점검 라우팅과 되묻기 — 과제 1 의미 라우터 재사용, 설명이 없으면 묻는다 | Accepted | 2026-10-20 |
+| [0014](0014-detail-evalset.md) | 상세 설명 평가셋 B — 위원회 결정서 사유에서 결론을 지워 입력으로 | Accepted | 2026-10-20 |

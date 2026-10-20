@@ -46,6 +46,7 @@
 | 파일 | 개수 | 부르는 노드 | 라벨 | 기능 |
 | --- | --- | --- | --- | --- |
 | `rating.json` (A) | 40 (등급마다 10) | plan → research → replan_check → analysis | `label.rating`, `label.descriptors` | 3 사례 검색·단계 판정 |
+| `rating_detail.json` (B) | 39 (전체 3 · 12세 7 · 15세 10 · 청소년이용불가 19) | 〃 | 〃 | 3 — 상세 설명일 때 |
 | `rating_route.json` | 30 (chat 15 · review 15) | `route_node` | `expected_route` | 5 의미 라우터 |
 | `rating_clarify.json` | 12 (되묻기 6 · 점검 6) | plan → … → analysis | `expected_action`(clarify/assess) | 6 되묻기 |
 | `rating_judge.json` | 12 (정상 5 · 오염 7) | `validate_node` | `expected`(pass/fail), `defect` | 4 검수 |
@@ -54,6 +55,13 @@
   시드 20261020으로 등급마다 10개씩 뽑았다. 사례 DB(~2026-06-30)와 기간이 겹치지 않는다. 입력은 장르·플랫폼·개요이고
   **제목은 뺐다.** 정답은 게임물관리위원회의 결정 등급과 내용정보다. 개요에 원작·시리즈 이름이 들어 있는 문항이
   있다(예: 디아블로 4) — 이름난 작품이면 LLM 이 외워서 맞힐 수 있고, Before·After에 똑같이 작용한다.
+- **rating_detail(B)**: 한 문장 개요(A)로는 정확도 상한이 낮아 추가했다(결정 [0014](../../docs/decisions/0014-detail-evalset.md)).
+  위원회 결정서의 등급분류 사유에서 결론("따라서 … 결정함")과 "＊ 기준어" 머리를 지우고 개요와 상세 서술만 남겼다
+  (`make_rating_evalset.py detail`). 정답은 같은 등급분류번호의 API 결정 등급이다. 간소화 설문 결정(내용 서술 없음)과
+  사행성 게임물은 뺐고, 남은 것을 모두 썼다(표본 추출 없음). 이 게임들은 사례 DB 기간(2026-04~06)에 있어 평가할 때
+  자기 자신과 같은 제목의 사례를 검색에서 뺀다. 등급이 고르지 않다 — **늘 청소년이용불가라고 답해도 19/39**다.
+  출처: 공공데이터포털 「게임물관리위원회_등급분류증명서 및 결정서 정보」 2026년 2분기(공공누리 1유형, 출처 표시),
+  `source/grac_decision_reasons_2026q2.csv`(원본 CP949를 UTF-8로 바꿔 저장).
 - **rating_route**: 출시할 게임 하나의 등급을 예상·점검해 달라면 `review`, 제도 질문·인사·기능 질문은 `chat`.
   등급 이름("청소년이용불가")이나 항목 이름("폭력성")이 들어 있어도 특정 게임의 점검이 아니면 `chat`이다.
 - **rating_clarify**: 무엇을 하는 게임인지(내용·표현) 한 줄도 없으면 `clarify`, 짧아도 내용이 있으면 `assess`.
