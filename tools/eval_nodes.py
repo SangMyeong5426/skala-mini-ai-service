@@ -4,6 +4,7 @@
     project/.venv/bin/python tools/eval_nodes.py target --label before
     project/.venv/bin/python tools/eval_nodes.py judge  --label before
     project/.venv/bin/python tools/eval_nodes.py write  --label before
+    project/.venv/bin/python tools/eval_nodes.py runbook --label before
     project/.venv/bin/python tools/eval_nodes.py all    --label before
 
 | 하위 명령 | 부르는 곳              | 평가 세트                          | 채점                                 |
@@ -11,6 +12,7 @@
 | target    | plan_node              | tools/evalsets/target.json         | 대상 시스템 일치, 되묻기, 엉뚱한 진단 |
 | judge     | validate_node          | tools/evalsets/judge.json          | 오염 초안 탐지율, 정상 초안 오탐률    |
 | write     | quality_llm.write      | judge.json 정상 5건의 질문·수집 사실 | 답변 작성 LLM 호출 지연·토큰·완료 여부 |
+| runbook   | replan_check_node      | tools/evalsets/runbook.json        | 고른 runbook(incident_type) 정답률     |
 
 의존성은 server.py 의 lifespan 을 그대로 실행해 얻는다(LLM·MCP 서버·세션 저장소). 개선 코드가
 SupervisorDeps 구성이나 노드 안쪽을 바꿔도 이 스크립트는 고치지 않는다. 대신 개선 코드는 아래
@@ -22,6 +24,8 @@ SupervisorDeps 구성이나 노드 안쪽을 바꿔도 이 스크립트는 고�
 - write  : write_node 는 LangGraph 실행 안에서만 쓸 수 있는 스트림 writer 를 꺼내므로 그래프 밖에서
            부를 수 없다. 재려는 것은 LLM 호출 자체라 quality_llm.write 를 직접 부르고, --cap 초를
            넘기면 취소한다(연결이 끊기며 ollama 생성도 멈춘다).
+- runbook: replan_check_node 가 추가한 gap task(kind=runbook)의 target. 수집 사실은 모니터링 기준값
+           (data/monitoring.json, 지터 없음)으로 만든다 — research 직후의 상태를 재현한다.
 
 --code-root 로 다른 체크아웃(예: scripts/measure-at 이 만든 git worktree)의 project/ 코드를 잴 수 있다.
 평가 세트와 채점은 늘 이 파일 옆의 것을 쓴다 — Before 와 After 를 같은 입력으로 재기 위해서다.
@@ -42,7 +46,7 @@ from measure_queries import ROOT, _display, _git_state, _switches
 
 EVALSETS = ROOT / "tools" / "evalsets"
 DEFAULT_OUT_DIR = ROOT / "runs"
-KINDS = ["route", "target", "judge", "write"]
+KINDS = ["route", "target", "judge", "write", "runbook"]
 
 
 def _load(kind: str) -> list[dict]:
@@ -198,8 +202,37 @@ async def eval_write(deps, ctx: dict) -> tuple[list[dict], dict]:
     return rows, summary
 
 
+# ── runbook ───────────────────────────────────────────────────────────────
+async def eval_runbook(deps, ctx: dict) -> tuple[list[dict], dict]:
+    from agent.graph import replan_check_node
+
+    monitoring = json.loads((ctx["project"] / "data" / "monitoring.json").read_text())
+    rows = []
+    for item in _load("runbook"):
+        collected = [{"source": "monitoring", "data": {
+            "system_name": s, "status": monitoring[s]["status"],
+            "cpu_percent": monitoring[s]["cpu_base"], "memory_percent": monitoring[s]["memory_base"],
+            "alerts": monitoring[s].get("alerts", [])}} for s in item["targets"]]
+        tasks = [{"id": f"task-{i}", "agent": "research", "kind": "monitoring", "target": s,
+                  "status": "done"} for i, s in enumerate(item["targets"])]
+        state = {**_fresh_state(item["query"]), "tasks": tasks, "collected": collected,
+                 "replan_rounds": 0}
+        out, latency, error = await _timed(replan_check_node(state, deps))
+        gap = next((t for t in (out or {}).get("tasks", []) if t.get("kind") == "runbook"), None)
+        got = gap["target"] if gap else None
+        rows.append({**item, "got": got, "ok": got == item["expected_runbook"],
+                     "latency_s": latency, "error": error})
+        _print_row(rows[-1], f"{item['expected_runbook']:15} → {got}")
+
+    summary = {"accuracy": round(sum(r["ok"] for r in rows) / len(rows), 3),
+               "correct": f"{sum(r['ok'] for r in rows)}/{len(rows)}",
+               "errors": sum(r["error"] is not None for r in rows),
+               "latency_median_s": _median([r["latency_s"] for r in rows])}
+    return rows, summary
+
+
 EVALUATORS = {"route": eval_route, "target": eval_target, "judge": eval_judge,
-              "write": eval_write}
+              "write": eval_write, "runbook": eval_runbook}
 
 
 def _print_row(row: dict, detail: str) -> None:

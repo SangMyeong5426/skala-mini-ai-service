@@ -277,17 +277,26 @@ def _classify_incident_type(collected: list[dict]) -> str:
 
 @traceable(name="replan_check_node")
 async def replan_check_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 7 — 1차 수집 결과 평가. runbook이 없으면 gap task만 추가해 재조사."""
+    """Wave 7 — 1차 수집 결과 평가. runbook이 없으면 gap task만 추가해 재조사.
+
+    항목 5 — deps.runbook_selector 가 있으면 질문 + 알림 문구로 runbook 을 의미 검색한다.
+    없으면 base 의 키워드 규칙(_classify_incident_type)."""
     has_runbook = any(c["source"] == "runbook" for c in state.get("collected", []))
     rounds = state.get("replan_rounds", 0)
     if has_runbook or rounds >= 1:
         verdict = {"type": "ReplanCheck", "round": rounds, "is_sufficient": True}
         return {"events": state["events"] + [verdict]}
-    incident_type = _classify_incident_type(state.get("collected", []))
+    picked = {}
+    if deps.runbook_selector is not None:
+        picked = await deps.runbook_selector.select(state["query"], state.get("collected", []))
+        incident_type = picked["incident_type"]
+    else:
+        incident_type = _classify_incident_type(state.get("collected", []))
     gap_task = {"id": "task-gap-runbook", "agent": "research", "kind": "runbook",
                 "target": incident_type, "status": "pending"}
     verdict = {"type": "ReplanCheck", "round": rounds, "is_sufficient": False,
-               "gap_task": gap_task["id"], "target": incident_type}
+               "gap_task": gap_task["id"], "target": incident_type,
+               **({"method": picked["method"]} if picked else {})}
     return {"tasks": state["tasks"] + [gap_task], "replan_rounds": rounds + 1,
             "events": state["events"] + [verdict]}
 

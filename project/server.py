@@ -100,9 +100,11 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
                 "TARGET_RESOLVER": _switch("TARGET_RESOLVER", "semantic", "legacy", backend,
                                            ("semantic", "legacy")),
                 "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend,
-                                     ("grounded", "format"))}
+                                     ("grounded", "format")),
+                "RUNBOOK_SELECTOR": _switch("RUNBOOK_SELECTOR", "semantic", "keyword", backend,
+                                            ("semantic", "keyword"))}
     parts: dict = {}
-    if "semantic" in (switches["ROUTER"], switches["TARGET_RESOLVER"]):
+    if "semantic" in (switches["ROUTER"], switches["TARGET_RESOLVER"], switches["RUNBOOK_SELECTOR"]):
         parts["embedder"] = _make_embedder()
     if switches["ROUTER"] == "semantic":   # 항목 2
         from agent.router import DEFAULT_MARGIN, LLMRouter, SemanticRouter, load_examples
@@ -121,6 +123,9 @@ async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[d
     if switches["VALIDATOR"] == "grounded":   # 항목 4 — 판정은 답변을 쓰는 quality 모델이 맡는다
         from agent.validator import GroundedValidator
         parts["validator"] = GroundedValidator(quality_llm)
+    if switches["RUNBOOK_SELECTOR"] == "semantic":   # 항목 5
+        from agent.runbook import RunbookSelector, load_runbooks
+        parts["runbook_selector"] = await RunbookSelector.create(parts["embedder"], load_runbooks())
     return parts, switches
 
 

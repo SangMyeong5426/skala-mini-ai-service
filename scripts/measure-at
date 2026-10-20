@@ -6,8 +6,8 @@
 #   scripts/measure-at base before write,e2e
 #   OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1
 #
-# steps : 쉼표로 묶는다. 기본값 all = route,target,judge,write,e2e
-#   route·target·judge·write  tools/eval_nodes.py — 서버 없이 노드·LLM 호출을 직접 부른다
+# steps : 쉼표로 묶는다. 기본값 all = route,target,judge,write,runbook,e2e
+#   route·target·judge·write·runbook  tools/eval_nodes.py — 서버 없이 노드·LLM 호출을 직접 부른다
 #   e2e                       tools/measure_queries.py --spawn — 회귀 쿼리마다 서버를 새로 띄운다
 #
 # 측정 도구와 평가 세트는 지금 작업 트리의 것을, 에이전트 코드는 <git-ref> 의 것을 쓴다 —
@@ -22,7 +22,7 @@ repo="$PWD"
 ref="${1:?사용법: scripts/measure-at <git-ref> <label> [steps]}"
 label="${2:?label 이 필요합니다}"
 steps="${3:-all}"
-[ "$steps" = all ] && steps="route,target,judge,write,e2e"
+[ "$steps" = all ] && steps="route,target,judge,write,runbook,e2e"
 py="$repo/project/.venv/bin/python"
 port="${MEASURE_PORT:-8101}"
 out_dir="${MEASURE_OUT:-$repo/runs}"
@@ -45,7 +45,7 @@ echo "측정: $ref ($(git -C "$wt" rev-parse --short HEAD)) → label=$label ste
 IFS=',' read -ra list <<< "$steps"
 for step in "${list[@]}"; do
   case "$step" in
-    route|target|judge|write)
+    route|target|judge|write|runbook)
       "$py" -u tools/eval_nodes.py "$step" --label "$label" --backend "$backend" \
         --code-root "$wt" --out-dir "$out_dir" ;;
     e2e)
