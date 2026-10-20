@@ -25,6 +25,9 @@ class LLM:
     def answer_law(self, question, articles):
         return self.raw, {"usd": 0.001}
 
+    def judge_law(self, question, articles, answer):
+        return {"supported": True, "reason": "조문에 있다"}, {"usd": 0.002}
+
 
 def _answer(raw, question="청소년이용불가 게임은 몇 살부터 할 수 있어요?"):
     answerer = asyncio.run(LawAnswerer.create(Embedder(), LLM(raw), ARTICLES, k=2, cache_dir=None))
@@ -69,3 +72,25 @@ def test_smalltalk_gets_the_fixed_introduction():
 def test_article_references_are_not_numbers():
     assert ungrounded_numbers("제21조 제2항 제2호에 따르면 12세 미만은 안 됩니다", [ARTICLES[0]["text"]]) == []
     assert "36" in ungrounded_numbers("수수료는 36,000원입니다", [ARTICLES[0]["text"]])
+
+
+class JudgingLLM(LLM):
+    def __init__(self, raw, supported):
+        super().__init__(raw)
+        self.supported = supported
+
+    def judge_law(self, question, articles, answer):
+        return {"supported": self.supported, "reason": "15세는 15세이용가의 기준이다"}, {"usd": 0.002}
+
+
+def test_number_from_another_clause_is_caught_by_the_judge():
+    """'15세'는 제21조에 있지만 15세이용가의 숫자다 — 코드 검사는 지나가고, 검수 판정이 막는다."""
+    raw = {"kind": "law", "answerable": True, "citations": ["게임산업법 제21조"],
+           "answer": "청소년이용불가 게임은 12세 이상부터 이용할 수 있습니다."}
+    answerer = asyncio.run(LawAnswerer.create(Embedder(), JudgingLLM(raw, supported=False), ARTICLES, k=2,
+                                              cache_dir=None))
+    result, usage = asyncio.run(answerer.answer("청소년이용불가 게임은 몇 살부터 할 수 있어요?"))
+
+    assert not result["answerable"]
+    assert result["reason"].startswith("인용 조문과 맞지 않는 답입니다")
+    assert usage["usd"] == 0.003

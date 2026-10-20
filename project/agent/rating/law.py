@@ -7,7 +7,9 @@ LLM 단독(0.6b 대화)은 제도 질문에 근거 없이 답하다 틀렸다 �
      질문과 가까운 K개를 고른다. 사례 검색(cases.py)과 같은 방식·같은 캐시를 쓴다.
   2. 답변 — quality 모델이 검색된 조문만 보고 {kind, answerable, answer, citations} JSON 을 낸다.
   3. 코드 검사 — 인용한 조문이 검색된 조문인가, 답의 수치(나이·금액·기간)가 인용 조문이나 질문에 있는가.
-     하나라도 어기면 답하지 않는다 — "답할 수 없습니다" + 찾아본 조문 + 위원회 안내.
+  4. LLM 검수 — 코드 검사를 지난 답도 quality 모델이 인용 조문 원문과 대조한다. 숫자는 조문에 있어도 다른 항목의 숫자를
+     붙인 답("청소년이용불가는 15세 이상" — 15세는 15세이용가의 기준이다)을 코드는 못 잡았다(2026-10-20 제도 문의 평가).
+  하나라도 어기면 답하지 않는다 — "답할 수 없습니다" + 찾아본 조문 + 위원회 안내.
 
 인사·감사 같은 잡담(kind=smalltalk)은 법령 근거가 필요 없어 정해진 소개 문장으로 답한다.
 """
@@ -93,6 +95,11 @@ class LawAnswerer:
             unknown = ungrounded_numbers(raw["answer"], [question, *(article_text(by_key[c]) for c in citations)])
             if unknown:
                 reason = f"인용 조문에 없는 수치를 썼습니다({', '.join(unknown)})"
+            else:
+                verdict, judge_usage = self.llm.judge_law(question, [by_key[c] for c in citations], raw["answer"])
+                usage = {**usage, "usd": round(usage.get("usd", 0.0) + judge_usage.get("usd", 0.0), 6)}
+                if not verdict["supported"]:
+                    reason = f"인용 조문과 맞지 않는 답입니다 — {verdict['reason']}"
         if reason:
             listed = ", ".join(f"{a['key']}({a['title']})" for a in found)
             return {"kind": "law", "answerable": False, "citations": [], "searched": searched, "reason": reason,
