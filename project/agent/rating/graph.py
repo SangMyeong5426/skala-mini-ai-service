@@ -222,7 +222,9 @@ async def validate_node(state: RatingState, deps: SupervisorDeps) -> dict:
     draft = state["draft"]
     attempts = state.get("validation_attempts", 0) + 1
     if deps.validator is not None:
-        result = deps.validator.check(state["query"], state["assessment"], state.get("collected", []), draft)
+        # 질문 대신 판정한 설명을 넘긴다 — 되묻기 다음 턴이면 이전 질문까지 이어 붙인 것이다.
+        result = deps.validator.check(state.get("description", state["query"]), state["assessment"],
+                                      state.get("collected", []), draft)
     else:
         result = check_format(draft)
     update: dict = {"validation_attempts": attempts}

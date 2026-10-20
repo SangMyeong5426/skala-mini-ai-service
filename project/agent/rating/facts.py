@@ -32,7 +32,8 @@ def render_assessment(assessment: dict) -> str:
         return (f"예상 등급: {assessment['rating']} (LLM 단독 판정)\n내용정보: {descriptors}\n"
                 f"이유: {assessment.get('reason', '')}")
     lines = [f"예상 등급: {assessment['rating']} (항목 단계의 최댓값으로 코드가 계산)"]
-    present = [(name, item) for name, item in assessment["items"].items() if item["present"]]
+    items = {name: assessment["items"].get(name, {"present": False}) for name in ITEMS}
+    present = [(name, item) for name, item in items.items() if item["present"]]
     for name, item in present:
         grounds = []
         if item["evidence"]:
@@ -41,7 +42,7 @@ def render_assessment(assessment: dict) -> str:
             grounds.append(f"사례 {', '.join(item['case_ids'])}")
         lines.append(f"- {name}: 단계 {item['level']} {item['phrase']}({RATINGS[item['level']]}) — "
                      f"근거: {' / '.join(grounds)}")
-    absent = [name for name in ITEMS if not assessment["items"][name]["present"]]
+    absent = [name for name in ITEMS if not items[name]["present"]]
     if not present:
         lines.append("- 해당 항목 없음")
     if absent:
