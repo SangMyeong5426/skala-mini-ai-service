@@ -13,7 +13,13 @@ target : tools/tuning/target.json(평가 세트와 별개인 조정용 문장)�
 
 평가 세트(tools/evalsets/)는 읽지 않는다. 결과는 runs/tune-embedding_<시각>.json 에 남기고, 고른 값은
 agent/router.py·agent/target.py 의 기본값과 결정 기록(0003·0004)에 옮긴다.
+
+    project/.venv/bin/python tools/tune_embedding.py --domain rating
+
+과제 2 : router 만 — data/ratings/router_examples.json(chat / review)으로 같은 leave-one-out 을 한다.
+         고른 값은 agent/rating/data.py 의 ROUTER_MARGIN 과 결정 0013 에 옮긴다. 결과는 runs/tune-embedding-rating_<시각>.json.
 """
+import argparse
 import asyncio
 import json
 import statistics
@@ -24,7 +30,14 @@ from measure_queries import ROOT, _display, _git_state
 
 sys.path.insert(0, str(ROOT / "project"))
 from agent.embedding import OllamaEmbedder, cosine  # noqa: E402
-from agent.router import DEFAULT_K, ROUTE_INSTRUCTION, class_scores, load_examples  # noqa: E402
+from agent.rating.data import RATING_ROUTE_INSTRUCTION, ROUTER_EXAMPLES_PATH  # noqa: E402
+from agent.router import (  # noqa: E402
+    DEFAULT_K,
+    EXAMPLES_PATH,
+    ROUTE_INSTRUCTION,
+    class_scores,
+    load_examples,
+)
 from agent.target import TARGET_INSTRUCTION  # noqa: E402
 
 TUNING_TARGET = ROOT / "tools" / "tuning" / "target.json"
@@ -33,14 +46,15 @@ MARGINS = [round(0.005 * i, 3) for i in range(21)]            # 0 ~ 0.1
 MIN_SCORES = [round(0.2 + 0.025 * i, 3) for i in range(25)]   # 0.2 ~ 0.8
 
 
-def _pred(gap: float) -> str:
-    return "incident" if gap > 0 else "chat"
+def _pred(gap: float, work_label: str = "incident") -> str:
+    return work_label if gap > 0 else "chat"
 
 
-async def tune_router(embedder: OllamaEmbedder) -> dict:
-    examples = load_examples()
+async def tune_router(embedder: OllamaEmbedder, examples_path=EXAMPLES_PATH, work_label: str = "incident",
+                      route_instruction: str = ROUTE_INSTRUCTION, fallback=None) -> dict:
+    examples = load_examples(examples_path, work_label)
     report = {}
-    for name, instruction in (("instruction", ROUTE_INSTRUCTION), ("none", None)):
+    for name, instruction in (("instruction", route_instruction), ("none", None)):
         vecs = {label: await embedder.embed(texts, instruction) for label, texts in examples.items()}
         gaps = []
         for label, label_vecs in vecs.items():
@@ -49,16 +63,29 @@ async def tune_router(embedder: OllamaEmbedder) -> dict:
                         for lab, vs in vecs.items()}
                 s = class_scores(vec, rest, DEFAULT_K)
                 gaps.append({"text": examples[label][i], "label": label,
-                             "gap": round(s["incident"] - s["chat"], 4)})
-        wrong = [g for g in gaps if _pred(g["gap"]) != g["label"]]
+                             "gap": round(s[work_label] - s["chat"], 4)})
+        wrong = [g for g in gaps if _pred(g["gap"], work_label) != g["label"]]
         curve = []
         for m in MARGINS:
             decided = [g for g in gaps if abs(g["gap"]) >= m]
-            correct = sum(_pred(g["gap"]) == g["label"] for g in decided)
+            correct = sum(_pred(g["gap"], work_label) == g["label"] for g in decided)
             curve.append({"margin": m, "decided": len(decided),
                           "accuracy_decided": round(correct / len(decided), 3) if decided else None,
                           "fallback_rate": round(1 - len(decided) / len(gaps), 3)})
         suggested = round(max(abs(g["gap"]) for g in wrong) + 0.005, 3) if wrong else 0.0
+        if fallback is not None:
+            # 과제 2 — margin 아래는 LLM 이 판정한다. 그 LLM 이 예시 문장에서 얼마나 맞히는지까지 넣어,
+            # "margin 위는 의미 판정 + 아래는 LLM" 의 예시 정답률이 가장 높은 margin 을 고른다(동률이면 작은 쪽).
+            for g in gaps:
+                g["llm"] = fallback(g["text"])
+            for row in curve:
+                hits = sum((_pred(g["gap"], work_label) if abs(g["gap"]) >= row["margin"] else g["llm"]) == g["label"]
+                           for g in gaps)
+                row["combined_accuracy"] = round(hits / len(gaps), 3)
+            best = max(r["combined_accuracy"] for r in curve)
+            suggested = min(r["margin"] for r in curve if r["combined_accuracy"] == best)
+            print(f"[router/{name}] 대체 LLM 의 예시 정답률 "
+                  f"{sum(g['llm'] == g['label'] for g in gaps)}/{len(gaps)} → 결합 정답률 최고 {best} @ margin {suggested}")
         abs_gaps = sorted(abs(g["gap"]) for g in gaps)
         report[name] = {"loo_accuracy": round(1 - len(wrong) / len(gaps), 3), "wrong": wrong,
                         "suggested_margin": suggested,
@@ -128,15 +155,28 @@ async def tune_target(embedder: OllamaEmbedder) -> dict:
     return report
 
 
-async def main() -> None:
+async def main(domain: str) -> None:
     embedder = OllamaEmbedder()
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    report = {"started_at": stamp, "git": _git_state(), "embedder": embedder.name,
-              "router": await tune_router(embedder), "target": await tune_target(embedder)}
-    out = ROOT / "runs" / f"tune-embedding_{stamp}.json"
+    report = {"started_at": stamp, "git": _git_state(), "embedder": embedder.name, "domain": domain}
+    if domain == "rating":
+        from agent.rating.llm import (
+            OllamaRatingFastLLM,  # 서버와 같은 대체 LLM — qwen3:0.6b, 생각 끔
+        )
+        fast = OllamaRatingFastLLM("qwen3:0.6b", usd_per_1k_tokens=0.00015, think=False)
+        report["router"] = await tune_router(embedder, ROUTER_EXAMPLES_PATH, "review", RATING_ROUTE_INSTRUCTION,
+                                             fallback=lambda text: fast.route(text)[0]["route"])
+        out = ROOT / "runs" / f"tune-embedding-rating_{stamp}.json"
+    else:
+        report["router"] = await tune_router(embedder)
+        report["target"] = await tune_target(embedder)
+        out = ROOT / "runs" / f"tune-embedding_{stamp}.json"
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     print(f"\n저장: {_display(out)}")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--domain", choices=["incident", "rating"], default="incident",
+                        help="incident = 과제 1(router + target), rating = 과제 2(router)")
+    asyncio.run(main(parser.parse_args().domain))

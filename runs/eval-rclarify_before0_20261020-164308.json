@@ -1,0 +1,158 @@
+{
+  "kind": "rclarify",
+  "label": "before0",
+  "started_at": "20261020-164308",
+  "evalset": "tools/evalsets/rating_clarify.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-xREaAb",
+  "git": {
+    "commit": "b0cb295",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "ollama",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct"
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "domain": "rating",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": "false",
+      "OLLAMA_THINK_CHAT": "true",
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format"
+    }
+  },
+  "summary": {
+    "n": 12,
+    "accuracy": "6/12",
+    "missed_clarify": 6,
+    "needless_clarify": 0,
+    "latency_median_s": 3.332
+  },
+  "results": [
+    {
+      "id": "k01",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 2.99,
+      "error": null
+    },
+    {
+      "id": "k02",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 3.797,
+      "error": null
+    },
+    {
+      "id": "k03",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 4.452,
+      "error": null
+    },
+    {
+      "id": "k04",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 4.618,
+      "error": null
+    },
+    {
+      "id": "k05",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 3.071,
+      "error": null
+    },
+    {
+      "id": "k06",
+      "expected": "clarify",
+      "pred": "assess",
+      "ok": false,
+      "method": null,
+      "latency_s": 3.304,
+      "error": null
+    },
+    {
+      "id": "k07",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 4.114,
+      "error": null
+    },
+    {
+      "id": "k08",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 2.939,
+      "error": null
+    },
+    {
+      "id": "k09",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 5.052,
+      "error": null
+    },
+    {
+      "id": "k10",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 3.36,
+      "error": null
+    },
+    {
+      "id": "k11",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 2.982,
+      "error": null
+    },
+    {
+      "id": "k12",
+      "expected": "assess",
+      "pred": "assess",
+      "ok": true,
+      "method": null,
+      "latency_s": 2.758,
+      "error": null
+    }
+  ]
+}

@@ -12,8 +12,11 @@ CASES_PATH = DATA_DIR / "cases.json"
 CRITERIA_PATH = DATA_DIR / "criteria.json"
 RULE8_PATH = DATA_DIR / "rule-8.md"
 ROUTER_EXAMPLES_PATH = DATA_DIR / "router_examples.json"
-# 의미 라우터 판정 기준(점수 차). 과제 1 값(0.029)으로 시작하고 tools/tune_embedding.py 로 다시 정한다.
-ROUTER_MARGIN = 0.029
+# 의미 라우터 판정 기준(점수 차) — tools/tune_embedding.py --domain rating (예시 문장 leave-one-out, 평가셋 미사용).
+# 지시문 없이 LOO 0.867. margin 아래를 맡는 대체 LLM(0.6b)의 예시 정답률(16/30)까지 넣은 결합 정답률이 0.04 에서 가장 높다(0.967).
+ROUTER_MARGIN = 0.04
+# 비교용 지시문 — 과제 1처럼 붙일 때와 뗄 때를 예시 문장 leave-one-out 으로 비교한다.
+RATING_ROUTE_INSTRUCTION = "게임 등급분류 도우미에 들어온 메시지가 특정 게임의 등급 점검 요청인지 일반 질문인지 분류한다"
 
 # 단계 0~3. 사례집 요약표의 열 순서와 같다(전체 · 12 · 15 · 청소년이용불가).
 RATINGS = ["전체이용가", "12세이용가", "15세이용가", "청소년이용불가"]
