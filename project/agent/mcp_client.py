@@ -27,6 +27,11 @@ DEFAULT_SERVER_SCRIPTS = {
     "ops": SERVER_DIR / "mcp_server.py",
     "docs": SERVER_DIR / "mcp_server_docs.py",
 }
+# 과제 2(AGENT_DOMAIN=rating) — 등급분류 서버와 원본의 decoy 서버. Tool·Resource 를 어느 서버가 주는지는 조회해서 찾는다.
+RATING_SERVER_SCRIPTS = {
+    "rating": SERVER_DIR / "mcp_server_rating.py",
+    "docs": SERVER_DIR / "mcp_server_docs.py",
+}
 
 
 def _attr(obj, *names):
@@ -75,6 +80,22 @@ class MCPClient:
         async with self._lock:
             result = await self.sessions[server].call_tool(name, arguments)
         return json.loads(result.content[0].text)
+
+    @traceable(run_type="tool", name="mcp.list_tools")
+    async def list_tools(self, server: str) -> list:
+        async with self._lock:
+            result = await self.sessions[server].list_tools()
+        return result.tools
+
+    @traceable(run_type="tool", name="mcp.find_tool")
+    async def find_tool(self, tool_name: str) -> str:
+        """연결된 서버들을 순서대로 조회해 tool_name 을 제공하는 서버를 찾는다 — 과제 2 의 rating_stats 처럼
+        "ops" 가 아닌 서버의 Tool 도 서버를 미리 가정하지 않고 부르기 위해서다."""
+        for server_name in self.sessions:
+            tools = await self.list_tools(server_name)
+            if any(t.name == tool_name for t in tools):
+                return server_name
+        raise ValueError(f"MCP tool not found on any connected server: {tool_name}")
 
     @traceable(run_type="tool", name="mcp.list_resource_templates")
     async def list_resource_templates(self, server: str) -> list:

@@ -7,6 +7,7 @@ server.py 는 import 시점에 load_dotenv() 를 부르는데, load_dotenv 는 �
 import os
 
 os.environ["LLM_BACKEND"] = "fake"
+os.environ["AGENT_DOMAIN"] = "incident"   # 기존 테스트는 과제 1 도메인 기준. 등급 점검은 rating_client 로 띄운다
 os.environ["SUPERVISOR_VERSION"] = "v2"
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
 os.environ["LANGSMITH_TRACING"] = "false"
@@ -26,5 +27,22 @@ def client(tmp_path, monkeypatch):
 
     monkeypatch.setattr(server, "SqliteSessionStore",
                         lambda: SqliteSessionStore(tmp_path / "session.db"))
+    # 한 프로세스에서 앱을 여러 번 띄우므로 생성 횟수(Wave 1)는 픽스처마다 0 에서 센다.
+    monkeypatch.setattr(server, "CREATION_COUNT", 0)
+    with TestClient(server.app) as c:
+        yield c
+
+
+@pytest.fixture
+def rating_client(tmp_path, monkeypatch):
+    """과제 2 — AGENT_DOMAIN=rating 으로 띄운 앱. 부품 스위치는 fake 기본(LLM 단독)이고, 테스트가 환경변수로 켠다."""
+    import server
+    from agent.session_store import SqliteSessionStore
+
+    monkeypatch.setenv("AGENT_DOMAIN", "rating")
+    monkeypatch.setattr(server, "SqliteSessionStore",
+                        lambda: SqliteSessionStore(tmp_path / "session.db"))
+    # 한 프로세스에서 앱을 여러 번 띄우므로 생성 횟수(Wave 1)는 픽스처마다 0 에서 센다.
+    monkeypatch.setattr(server, "CREATION_COUNT", 0)
     with TestClient(server.app) as c:
         yield c
