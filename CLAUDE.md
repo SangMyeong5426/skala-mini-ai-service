@@ -61,6 +61,8 @@ SKALA 「AI 서비스 개발 Mini-project」(3일, 개인 과제) 저장소다. 
 | `/chat` 응답의 `metadata` 필드 | `server.py`의 `_metadata`, `tools/measure_queries.py`의 `METRICS`, `docs/02-measurement.md` 지표 표 |
 | 새 환경변수 | `project/.env.example`, `README.md` |
 | 회귀 쿼리 | `tools/queries.json`, `project/doc/regression_test_queries.md` |
+| 평가 세트 라벨·문항 | `tools/evalsets/*.json`, `tools/evalsets/README.md` — 바꾸면 Before부터 다시 잰다. 개선 코드를 보고 라벨을 옮기지 않는다 |
+| `route_node`·`plan_node`·`validate_node`의 반환 모양 | `tools/eval_nodes.py`의 채점 약속(모듈 docstring) — plan이 되묻기를 할 때는 research task를 하나도 만들지 않는다 |
 | 개선 항목 하나를 끝냈을 때 | `docs/01-plan.md` 상태, `docs/02-measurement.md` 결과, `docs/decisions/` 새 결정 |
 
 ## 검증

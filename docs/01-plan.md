@@ -41,9 +41,9 @@ Google Spread에 등록하는 계획의 원본이다. 진행 중에 고칠 수 �
 | 지표 묶음 | 입력 | 도구 | 비교 |
 | --- | --- | --- | --- |
 | 지연시간·비용·retry·검증 횟수 | 회귀 쿼리 10개 ([`tools/queries.json`](../tools/queries.json)) | `tools/measure_queries.py` (있음) | 항목 1 전/후, `base` → 최종 |
-| 분류 정확도 | 라벨 평가 질문 30개 — 오늘 재현한 오분류 포함 | 평가 스크립트 (만든다) | 항목 2 전/후 |
-| 시스템 추정·되묻기 | 시스템명 유무·간접 표현이 섞인 질문 | 위 평가 스크립트에 추가 | 항목 3 전/후 |
-| 검수 탐지율 | 정상 초안 + 일부러 오염시킨 초안 | 평가 스크립트 (만든다) | 항목 4 전/후 |
+| 분류 정확도 | [`tools/evalsets/route.json`](../tools/evalsets/route.json) 30개 — 오늘 재현한 오분류 포함 | `tools/eval_nodes.py route` | 항목 2 전/후 |
+| 시스템 추정·되묻기 | [`tools/evalsets/target.json`](../tools/evalsets/target.json) 15개 — 시스템명 유무·간접 표현 | `tools/eval_nodes.py target` | 항목 3 전/후 |
+| 검수 탐지율 | [`tools/evalsets/judge.json`](../tools/evalsets/judge.json) 12개 — 정상 5 + 오염 7(실제 응답 1) | `tools/eval_nodes.py judge` | 항목 4 전/후 |
 
 - 백엔드는 ollama(qwen3:0.6b / qwen3:8b)로 고정한다. fake 수치는 쓰지 않는다.
 - 분류·추정·검수 평가는 서버 없이 해당 클래스를 직접 부른다. temperature 0이라 같은 입력이면 결과가 재현된다.
@@ -57,7 +57,8 @@ Google Spread에 등록하는 계획의 원본이다. 진행 중에 고칠 수 �
 | Day1 ~17시 | 계획 등록(Google Spread). 평가 질문 세트 작성. `base`에서 Before 측정 |
 | Day2 오전 | 1 thinking 제어 → 측정. 2 의미 라우터 |
 | Day2 오후 | 3 대상 시스템 추정·되묻기. 4 검수 강화 |
-| Day3 ~14시 | 5(여유 시). `base` → 최종 측정. 결정 기록·한계 정리, 결과 보고서, Git 주소 등록 |
+| Day2 저녁 | 5(여유 시). `base` → 최종 측정 시작 — 장애 질문이 몇 분씩 걸리므로 Day3로 미루지 않는다 |
+| Day3 ~13시 | 결정 기록·한계 정리, 결과 보고서, Git 주소·보고서 주소 등록 (**마감 13시**, 2026-10-20 일정 변경) |
 | Day3 ~17:30 | 발표 — 문제 → 개선 포인트 → Before/After → 한계·추가 개선 |
 
 ## Google Spread 등록용
@@ -82,7 +83,7 @@ Google Spread에 등록하는 계획의 원본이다. 진행 중에 고칠 수 �
 | [`agent/graph.py`](../project/agent/graph.py) `_extract_system_name`, [`agent/ollama_llm.py`](../project/agent/ollama_llm.py) `plan` 프롬프트 · `_guess_target` | 시스템명이 없으면 `auth-service` — 세 곳에 박혀 있다. plan 프롬프트에 "언급되지 않았으면 auth-service를 기본으로 조사하라"가 그대로 들어 있다. | 3 |
 | [`agent/graph.py`](../project/agent/graph.py) `replan_check_node` · `_classify_incident_type` | plan은 모니터링 task만 세우므로 incident는 항상 한 번 재계획(`replan_rounds`=1)한다. 그때 runbook은 **질문이 아니라 모니터링 status·alerts 문구의 키워드**로 고르고, 안 맞으면 `db-down`이다. | 5 |
 | [`agent/graph.py`](../project/agent/graph.py) `validate_node` | 합격 조건은 30자 이상 + `1)` 포함뿐이다. 3회 불합격이면 통과 처리한다. | 4 |
-| [`agent/ollama_llm.py`](../project/agent/ollama_llm.py) `_chat` · `_chat_stream` | 요청에 `think`를 지정하지 않는다. Ollama 0.33 + qwen3는 이때 생각(thinking)을 별도 필드로 내고, 코드는 `content`만 읽는다. 생각 토큰은 화면에 나가지 않고 시간만 쓴다. 2026-10-20 실측: write 단계(qwen3:8b)가 한 번은 5,420토큰 · 5분 30초를 넘기고도 끝나지 않았고(payments-service 질의), 다른 한 번은 40.8초에 끝났다 — 질의마다 편차가 크다. qwen3:0.6b 짧은 질문은 `think` 미지정 1.77초(생각 527자), `think:false` 0.78초. | 1 |
+| [`agent/ollama_llm.py`](../project/agent/ollama_llm.py) `_chat` · `_chat_stream` | 요청에 `think`를 지정하지 않는다. Ollama 0.33 + qwen3는 이때 생각(thinking)을 별도 필드로 내고, 코드는 `content`만 읽는다. 생각 토큰은 화면에 나가지 않고 시간만 쓴다. 2026-10-20 실측: write 단계(qwen3:8b)가 한 번은 5,420토큰 · 5분 30초를 넘기고도 끝나지 않았고(payments-service 질의), 다른 한 번은 40.8초에 끝났다 — 질의마다 편차가 크다. qwen3:0.6b 짧은 질문은 `think` 미지정 1.77초(생각 527자), `think:false` 0.78초. 0.6b의 plan 호출도 폭주한다 — `결제가 자꾸 실패한다는 고객 문의가 들어오고 있어요`가 두 번 모두 300초 timeout(한 번은 5분에 36,132토큰 생성 후 취소). | 1 |
 | [`agent/graph.py`](../project/agent/graph.py) `research_node` | 노드 하나가 모니터링 Tool과 runbook Resource를 병렬로 부른다. | 범위 밖 (예시 3번) |
 | [`agent/graph.py`](../project/agent/graph.py) | 노드 10개와 라우팅 함수가 한 파일(338줄)에 있다. | 공통 (새 모듈로 분리) |
 | [`agent/ollama_llm.py`](../project/agent/ollama_llm.py) · [`openai_llm.py`](../project/agent/openai_llm.py) `chat` | chat 경로는 이력의 **마지막 10개 메시지**만 프롬프트에 넣는다. incident 경로는 이력을 쓰지 않는다. | 범위 밖 (예시 5번) |

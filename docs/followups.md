@@ -7,7 +7,8 @@
 | --- | --- | --- |
 | 진행 계획 Google Spread 등록 | 과제 1로 계획 작성 완료, 등록 전 | [`01-plan.md`](01-plan.md#google-spread-등록용) 표를 옮긴다 (Day1 17시까지) |
 | 임베딩 API | `qwen3-embedding:0.6b`는 받아져 있으나 호출은 확인 전 | 항목 2 착수 전에 `/api/embed` 한 번 호출, 차원·지연 확인 |
-| 평가 질문 세트 | 없음 | 분류 30문항(예시 문장과 겹치지 않게), 시스템 추정, 검수용 오염 초안 — Before 측정 전에 만든다 |
+| 평가 세트 라벨 검토 | 작성자 검토 전 ([`tools/evalsets/`](../tools/evalsets/)). Before 3종은 이 라벨로 측정 완료 | 라벨이 틀렸다고 보면 고치고 Before를 다시 잰다 (route·target·judge 합쳐 수 분, target은 폭주 시 문항당 최대 5분) |
+| 회귀 쿼리 지연시간 Before | 미측정 | 백엔드를 새로 띄운 직후 `measure_queries.py run --label before` — 장애 질문이 문항당 수 분 걸릴 수 있다 |
 | Before 측정 | `base` 태그(`199c839`) 생성됨, 측정 전 | 모델·`.env` 준비 후 `base`에서 ollama로 `measure_queries.py run --label before` |
 | ollama Before 측정 소요 시간 | incident 1건이 5분 넘게 끝나지 않는다(qwen3:8b thinking, [`01-plan.md`](01-plan.md#코드에서-확인한-사실)) | `measure_queries.py` 기본 timeout 300초에 걸려 오류로 남을 수 있다. 이 상태로 Before를 잴지, 시간 상한을 어떻게 둘지 개선 계획과 함께 정한다 |
 | GitHub 원격 저장소 | 미생성 | 만든 뒤 Google Spread에 Git 주소 등록 (Day3 14시까지) |

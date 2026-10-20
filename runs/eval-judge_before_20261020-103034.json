@@ -1,0 +1,145 @@
+{
+  "kind": "judge",
+  "label": "before",
+  "started_at": "20261020-103034",
+  "evalset": "tools/evalsets/judge.json",
+  "git": {
+    "commit": "ee9c0fc",
+    "dirty": true,
+    "agent_matches_base": true
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b"
+  },
+  "summary": {
+    "bad_detected": "0/7",
+    "good_false_reject": "0/5",
+    "accuracy": 0.417,
+    "errors": 0,
+    "latency_median_s": 0.0
+  },
+  "results": [
+    {
+      "id": "g1",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 0.031,
+      "error": null
+    },
+    {
+      "id": "g2",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 0.001,
+      "error": null
+    },
+    {
+      "id": "g3",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "g4",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "g5",
+      "expected": "pass",
+      "defect": null,
+      "got": "pass",
+      "ok": true,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b1",
+      "expected": "fail",
+      "defect": "질문 무관",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b2",
+      "expected": "fail",
+      "defect": "수치 조작",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b3",
+      "expected": "fail",
+      "defect": "수집하지 않은 지표",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b4",
+      "expected": "fail",
+      "defect": "다른 시스템 진단",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b5",
+      "expected": "fail",
+      "defect": "질문 무관",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b6",
+      "expected": "fail",
+      "defect": "결론 왜곡",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    },
+    {
+      "id": "b7",
+      "expected": "fail",
+      "defect": "지표 바꿔치기",
+      "got": "pass",
+      "ok": false,
+      "feedback": null,
+      "latency_s": 0.0,
+      "error": null
+    }
+  ]
+}

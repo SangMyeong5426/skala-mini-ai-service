@@ -1,0 +1,295 @@
+{
+  "kind": "route",
+  "label": "before",
+  "started_at": "20261020-101334",
+  "evalset": "tools/evalsets/route.json",
+  "git": {
+    "commit": "ee9c0fc",
+    "dirty": true,
+    "agent_matches_base": true
+  },
+  "health": {
+    "llm_backend": "ollama",
+    "fast_llm": "ollama:qwen3:0.6b",
+    "quality_llm": "ollama:qwen3:8b"
+  },
+  "summary": {
+    "accuracy": 0.767,
+    "correct": "23/30",
+    "chat_correct": "9/15",
+    "incident_correct": "14/15",
+    "latency_median_s": 0.986
+  },
+  "results": [
+    {
+      "id": "c01",
+      "query": "ai 에이전트에 대해 설명해줘",
+      "expected_route": "chat",
+      "tag": "설명 요청 — 2026-10-20 웹에서 재현된 오분류",
+      "got": "incident",
+      "latency_s": 2.501,
+      "ok": false
+    },
+    {
+      "id": "c02",
+      "query": "LangGraph에 대해 설명해줘",
+      "expected_route": "chat",
+      "tag": "설명 요청 — 2026-10-20 재현된 오분류",
+      "got": "incident",
+      "latency_s": 1.473,
+      "ok": false
+    },
+    {
+      "id": "c03",
+      "query": "MCP 프로토콜이 뭔지 설명해줘",
+      "expected_route": "chat",
+      "tag": "설명 요청",
+      "got": "chat",
+      "latency_s": 0.892,
+      "ok": true
+    },
+    {
+      "id": "c04",
+      "query": "RAG와 파인튜닝의 차이를 알려줘",
+      "expected_route": "chat",
+      "tag": "기술 일반",
+      "got": "incident",
+      "latency_s": 1.591,
+      "ok": false
+    },
+    {
+      "id": "c05",
+      "query": "안녕하세요",
+      "expected_route": "chat",
+      "tag": "인사",
+      "got": "chat",
+      "latency_s": 0.624,
+      "ok": true
+    },
+    {
+      "id": "c06",
+      "query": "너는 무슨 일을 할 수 있어?",
+      "expected_route": "chat",
+      "tag": "자기소개",
+      "got": "chat",
+      "latency_s": 0.795,
+      "ok": true
+    },
+    {
+      "id": "c07",
+      "query": "점심 메뉴 추천해줘",
+      "expected_route": "chat",
+      "tag": "일상",
+      "got": "chat",
+      "latency_s": 0.816,
+      "ok": true
+    },
+    {
+      "id": "c08",
+      "query": "고마워, 덕분에 해결됐어",
+      "expected_route": "chat",
+      "tag": "감사",
+      "got": "chat",
+      "latency_s": 0.907,
+      "ok": true
+    },
+    {
+      "id": "c09",
+      "query": "제 이름은 지수예요",
+      "expected_route": "chat",
+      "tag": "세션",
+      "got": "chat",
+      "latency_s": 0.991,
+      "ok": true
+    },
+    {
+      "id": "c10",
+      "query": "CPU랑 메모리는 어떻게 다른 거야?",
+      "expected_route": "chat",
+      "tag": "운영 용어 질문 — 장애 신고 아님",
+      "got": "chat",
+      "latency_s": 0.828,
+      "ok": true
+    },
+    {
+      "id": "c11",
+      "query": "p95 latency가 무슨 뜻이야?",
+      "expected_route": "chat",
+      "tag": "운영 용어 질문 — 장애 신고 아님",
+      "got": "incident",
+      "latency_s": 1.274,
+      "ok": false
+    },
+    {
+      "id": "c12",
+      "query": "장애 대응 보고서는 보통 어떤 항목으로 쓰나요?",
+      "expected_route": "chat",
+      "tag": "장애 키워드 포함 일반 질문 — 정규식 폴백이면 incident",
+      "got": "incident",
+      "latency_s": 1.025,
+      "ok": false
+    },
+    {
+      "id": "c13",
+      "query": "쿠버네티스에서 오토스케일링은 어떻게 동작해?",
+      "expected_route": "chat",
+      "tag": "운영 지식",
+      "got": "incident",
+      "latency_s": 1.904,
+      "ok": false
+    },
+    {
+      "id": "c14",
+      "query": "SRE와 DevOps의 차이가 뭐야?",
+      "expected_route": "chat",
+      "tag": "운영 지식",
+      "got": "chat",
+      "latency_s": 1.418,
+      "ok": true
+    },
+    {
+      "id": "c15",
+      "query": "오늘 회의 끝나고 뭐 할지 같이 정해줘",
+      "expected_route": "chat",
+      "tag": "일상",
+      "got": "chat",
+      "latency_s": 0.742,
+      "ok": true
+    },
+    {
+      "id": "i01",
+      "query": "payments-service 결제 응답이 느려지고 CPU가 치솟았어요, 원인 확인해주세요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 1",
+      "got": "incident",
+      "latency_s": 1.729,
+      "ok": true
+    },
+    {
+      "id": "i02",
+      "query": "cache-service 메모리 사용률이 계속 올라가고 있어요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 2 — 장애 키워드 없음",
+      "got": "incident",
+      "latency_s": 1.625,
+      "ok": true
+    },
+    {
+      "id": "i03",
+      "query": "log-service 디스크 공간이 부족하다는 알림이 왔어요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 3",
+      "got": "incident",
+      "latency_s": 1.139,
+      "ok": true
+    },
+    {
+      "id": "i04",
+      "query": "gateway-service에서 payments-service로 가는 요청이 타임아웃 나고 있어요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 4",
+      "got": "incident",
+      "latency_s": 0.981,
+      "ok": true
+    },
+    {
+      "id": "i05",
+      "query": "로그인 응답이 느려요, 원인 확인해주세요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 7 — 시스템명 없음",
+      "got": "incident",
+      "latency_s": 1.407,
+      "ok": true
+    },
+    {
+      "id": "i06",
+      "query": "billing-service 응답이 느려요",
+      "expected_route": "incident",
+      "tag": "회귀 쿼리 8 — 모니터링 대상 밖 시스템",
+      "got": "incident",
+      "latency_s": 1.31,
+      "ok": true
+    },
+    {
+      "id": "i07",
+      "query": "web-01 서버가 갑자기 응답을 안 해요",
+      "expected_route": "incident",
+      "tag": "시스템명 있음",
+      "got": "incident",
+      "latency_s": 0.751,
+      "ok": true
+    },
+    {
+      "id": "i08",
+      "query": "결제가 자꾸 실패한다는 고객 문의가 들어오고 있어요",
+      "expected_route": "incident",
+      "tag": "간접 표현",
+      "got": "incident",
+      "latency_s": 0.901,
+      "ok": true
+    },
+    {
+      "id": "i09",
+      "query": "auth-service 커넥션 풀이 꽉 찼다는 알림이 떴어요",
+      "expected_route": "incident",
+      "tag": "시스템명 있음",
+      "got": "incident",
+      "latency_s": 0.697,
+      "ok": true
+    },
+    {
+      "id": "i10",
+      "query": "방금 배포한 뒤로 5xx 에러가 급증했어요",
+      "expected_route": "incident",
+      "tag": "시스템명 없음",
+      "got": "incident",
+      "latency_s": 1.427,
+      "ok": true
+    },
+    {
+      "id": "i11",
+      "query": "사이트가 전체적으로 너무 느려요",
+      "expected_route": "incident",
+      "tag": "모호한 증상",
+      "got": "incident",
+      "latency_s": 0.678,
+      "ok": true
+    },
+    {
+      "id": "i12",
+      "query": "캐시 히트율이 갑자기 떨어졌어요",
+      "expected_route": "incident",
+      "tag": "간접 표현",
+      "got": "incident",
+      "latency_s": 2.604,
+      "ok": true
+    },
+    {
+      "id": "i13",
+      "query": "로그 수집이 멈춘 것 같아요, 확인 부탁해요",
+      "expected_route": "incident",
+      "tag": "간접 표현",
+      "got": "chat",
+      "latency_s": 0.918,
+      "ok": false
+    },
+    {
+      "id": "i14",
+      "query": "DB 연결이 끊겼다는 에러가 계속 나요",
+      "expected_route": "incident",
+      "tag": "모니터링 대상 밖",
+      "got": "incident",
+      "latency_s": 0.96,
+      "ok": true
+    },
+    {
+      "id": "i15",
+      "query": "서버가 좀 이상한데?",
+      "expected_route": "incident",
+      "tag": "모호한 증상",
+      "got": "incident",
+      "latency_s": 0.788,
+      "ok": true
+    }
+  ]
+}

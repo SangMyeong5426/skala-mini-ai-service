@@ -28,6 +28,9 @@ DEFAULT_QUERIES = ROOT / "tools" / "queries.json"
 DEFAULT_OUT_DIR = ROOT / "runs"
 METRICS = ["latency_s", "cost_usd", "retry_count", "replan_rounds",
            "validation_attempts", "task_count", "gate_removed"]
+# 에이전트 동작을 정하는 경로. 측정 시점에 이 경로가 base 태그와 같으면 Before 로 쓸 수 있다.
+AGENT_PATHS = ["project/agent", "project/server.py", "project/mcp_server.py",
+               "project/mcp_server_docs.py", "project/data"]
 
 
 def _display(path: Path) -> str:
@@ -40,8 +43,13 @@ def _git_state() -> dict:
     def git(*args: str) -> str:
         return subprocess.run(["git", *args], cwd=ROOT, capture_output=True,
                               text=True, check=False).stdout.strip()
+    # 작업 트리(커밋 안 한 변경 포함)를 base 와 비교한다. 0=같음, 1=다름, 그 외=base 태그 없음.
+    diff = subprocess.run(["git", "diff", "--quiet", "base", "--", *AGENT_PATHS],
+                          cwd=ROOT, capture_output=True, check=False).returncode
+    untracked = git("ls-files", "--others", "--exclude-standard", "--", *AGENT_PATHS)
     return {"commit": git("rev-parse", "--short", "HEAD") or None,
-            "dirty": bool(git("status", "--porcelain"))}
+            "dirty": bool(git("status", "--porcelain")),
+            "agent_matches_base": None if diff not in (0, 1) else (diff == 0 and not untracked)}
 
 
 def _measure_turn(client: httpx.Client, message: str, thread_id: str) -> dict:
