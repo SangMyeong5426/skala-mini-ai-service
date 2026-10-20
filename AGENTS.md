@@ -63,7 +63,8 @@ SKALA 「AI 서비스 개발 Mini-project」(3일, 개인 과제) 저장소다. 
 | 회귀 쿼리 | `tools/queries.json`, `project/doc/regression_test_queries.md` |
 | 평가 세트 라벨·문항 | `tools/evalsets/*.json`, `tools/evalsets/README.md` — 바꾸면 Before부터 다시 잰다. 개선 코드를 보고 라벨을 옮기지 않는다 |
 | `route_node`·`plan_node`·`validate_node`의 반환 모양 | `tools/eval_nodes.py`의 채점 약속(모듈 docstring) — plan이 되묻기를 할 때는 research task를 하나도 만들지 않는다 |
-| 개선 항목 하나를 끝냈을 때 | `docs/01-plan.md` 상태, `docs/02-measurement.md` 결과, `docs/decisions/` 새 결정 |
+| 개선 항목 하나를 끝냈을 때 | `docs/01-plan.md` 상태, `docs/02-measurement.md` 결과, `docs/decisions/` 새 결정, `docs/checklist.md` 체크 |
+| 할 일을 끝냈을 때 | `docs/checklist.md`에 체크하고 근거(커밋·파일)를 적는다. 사용자가 직접 할 일(**(직접)**)은 사용자가 알려 줄 때만 체크한다 |
 
 ## 검증
 
