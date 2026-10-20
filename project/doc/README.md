@@ -116,6 +116,53 @@ flowchart TB
   `analysis_node`가 내부적으로 스킵하고 바로 `write`로 넘어간다 — `needs_analysis`가
   실제로 유효한 경우에만 수집된 모니터링 결과들을 비교 분석한다.
 
+## 과제 2 — 게임 등급분류 사전 점검 (`AGENT_DOMAIN=rating`, 기본값)
+
+이 저장소는 과제 1(위 인시던트 대응 개선)을 끝낸 뒤 주제를 바꿨다. 같은 뼈대(노드 이름·이벤트·의존성 주입·스위치·MCP 서버 탐색)에
+도메인만 바꾼 그래프가 `agent/rating/`에 있고, `AGENT_DOMAIN=incident`면 위 그래프가 그대로 돈다(결정 0009).
+
+```mermaid
+flowchart TB
+    API["server.py /chat · /chat/stream"] --> RGraph
+
+    subgraph RGraph["agent/rating/graph.py — 등급 점검 StateGraph"]
+        R["route<br/>(의미 라우터 → 애매하면 LLM,<br/>되묻기 다음 턴은 바로 review)"] -->|chat| CA["chat_answer<br/>(제도 안내)"]
+        R -->|review| P["plan<br/>(장르·플랫폼은 코드가 추출,<br/>설명이 너무 짧으면 되묻기)"]
+        P -->|설명 없음| K["clarify<br/>(7항목 체크리스트, LLM 없음)"]
+        P --> RS["research<br/>(유사 사례 · 통계 Tool · 기준표 Resource)"]
+        RS --> RC["replan_check<br/>(사례 3건 미만이면 범위를 넓혀 재조사)"]
+        RC -->|부족| RS
+        RC -->|충분| A["analysis<br/>(7항목 단계 판정 → 근거 검사<br/>→ 등급 = 단계 최댓값)"]
+        A -->|described=false| K
+        A --> W["write"]
+        W --> V["validate<br/>(형식 → 등급 일치 → 사례 대조<br/>→ 수치 대조 → LLM 판정)"]
+        V -->|불합격| W
+        V -->|합격| F["finalize"]
+    end
+
+    RS -->|"find_tool · find_resource로<br/>서버 탐색 후 요청"| MCP
+
+    subgraph MCP["agent/mcp_client.py — rating + docs"]
+        subgraph RatingServer["mcp_server_rating.py (server=&quot;rating&quot;)"]
+            T["Tool: rating_stats"]
+            CR["Resource: criteria://descriptors"]
+            LW["Resource: law://game-industry/rule-8"]
+            CS["Resource: ratings://cases"]
+        end
+        DocsServer2["mcp_server_docs.py (decoy)"]
+    end
+
+    Parts["router · case_retriever · assessor<br/>clarifier · validator<br/>(스위치 — 모두 끄면 LLM 단독 = Before)"]
+    Parts -. "기동 시 1회 임베딩(캐시)" .-> CS
+    Data["data/ratings/<br/>raw · cases.json · criteria.json · rule-8.md"] --> RatingServer
+```
+
+- **데이터**: 게임물관리위원회 Open API 결정 3,190건(2024-01~2026-09)을 받아 두고, 실행 중에는 API를 부르지 않는다.
+  사례 DB는 2026-06-30까지(1,396건), 평가는 그 뒤(결정 0010).
+- **판정**: LLM(qwen3:8b)은 7개 내용정보 항목의 단계와 근거(설명 구절 · 사례 번호)만 낸다. 코드가 근거를 검사해 없는 항목을 지우고,
+  등급은 단계의 최댓값으로 계산한다(결정 0011).
+- **스위치**: 루트 `README.md`의 "개선 스위치". 모두 끄면 LLM 이 설명만 보고 등급을 바로 답한다 — 과제 2의 Before 다.
+
 ## 주요 유스케이스별 고수준 시퀀스 다이어그램
 
 ### 1. 가벼운 대화
@@ -203,6 +250,29 @@ sequenceDiagram
     B->>B: 말풍선 + 진행 상태(⏳) 렌더링
 ```
 
+### 6. 게임 등급 사전 점검 (과제 2)
+
+```mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant G as graph (rating)
+    participant E as 임베딩 (qwen3-embedding)
+    participant M as MCP 서버 (rating)
+    participant L as qwen3:8b
+
+    U->>G: POST /chat ("좀비를 총으로 쏘면 피가 튀는 PC FPS예요. 몇 세?")
+    G->>E: route — 예시 문장과 비교 → review
+    G->>G: plan — 장르·플랫폼 추출, 조사 task
+    G->>E: research — 유사 사례 kNN (사례 DB)
+    G->>M: research — rating_stats (Tool), criteria://descriptors (Resource)
+    G->>G: replan_check — 사례가 모자라면 범위를 넓혀 재조사
+    G->>L: analysis — 7항목 단계·근거 (JSON 스키마)
+    G->>G: 근거 검사 → 등급 = 단계 최댓값
+    G->>L: write — 보고서
+    G->>L: validate — 코드 검사 4단계 뒤 LLM 판정
+    G-->>U: 예상 등급 + 항목별 근거 + 실제 사례 + 등급을 낮추는 방법
+```
+
 ## 소스 디렉토리 구조
 
 ```
@@ -210,6 +280,7 @@ all_total_vue/
 ├── server.py              # FastAPI 진입점 — lifespan 싱글턴, /health·/version·/chat·/chat/stream
 ├── mcp_server.py           # fastmcp 서버("ops") — Tool/Resource/Prompt (실사용, stdio subprocess)
 ├── mcp_server_docs.py       # fastmcp 서버("docs") — API 문서 Resource만 제공하는 decoy (멀티 서버 탐색 데모용)
+├── mcp_server_rating.py     # (과제 2) fastmcp 서버("rating") — Tool rating_stats, Resource 기준표·시행규칙·사례 DB
 ├── web_chat.html            # 브라우저 채팅 화면 (정적 1파일)
 ├── web_demo_server.py       # web_chat.html 서빙 + /chat·/chat/stream·/health 프록시(:8600)
 ├── requirements.txt
@@ -229,12 +300,23 @@ all_total_vue/
 │   ├── router.py              # (항목 2) 의미 라우터 + LLM 폴백
 │   ├── target.py              # (항목 3) 대상 시스템 추정 — 못 정하면 되묻기
 │   ├── validator.py           # (항목 4) 형식 → 수치 대조 → LLM 판정
-│   └── runbook.py             # (항목 5) runbook 의미 검색
+│   ├── runbook.py             # (항목 5) runbook 의미 검색
+│   └── rating/                # (과제 2) 게임 등급분류 사전 점검 — AGENT_DOMAIN=rating
+│       ├── graph.py             # 등급 점검 StateGraph (과제 1과 같은 노드 이름)
+│       ├── llm.py               # 도메인 프롬프트 — Ollama fast/quality, fake
+│       ├── data.py              # 등급·항목 이름, 사례 DB 기간, 걸러 내는 규칙, 통계
+│       ├── profile.py           # 장르·플랫폼 추출, 되묻기 다음 턴 이어 붙이기
+│       ├── cases.py             # 유사 사례 검색 (임베딩 kNN + 캐시)
+│       ├── assess.py            # 근거 검사, 등급 = 단계 최댓값
+│       ├── check.py             # 보고서 검수 (형식 → 등급 → 사례 → 수치 → LLM)
+│       ├── clarify.py           # 되묻기 규칙
+│       └── facts.py             # 판정·사실을 프롬프트 글로
 │
 ├── data/
 │   ├── monitoring.json        # MCP Tool이 조회하는 모니터링 데이터
 │   ├── systems.json           # (항목 3) 시스템 카탈로그 — MCP Resource catalog://systems
 │   ├── router_examples.json   # (항목 2) 분류 예시 문장
+│   ├── ratings/                # (과제 2) raw/ 원자료 · cases.json 사례 DB · criteria.json 기준표 · rule-8.md · router_examples.json
 │   └── runbooks/               # MCP Resource가 조회하는 대응 매뉴얼 6종
 │       ├── db-down.md
 │       ├── cpu-spike.md
