@@ -10,6 +10,7 @@
 | 하위 명령 | 부르는 곳                                  | 평가셋                    | 채점                                          |
 | rate      | plan → research ⇄ replan_check → analysis | evalsets/rating.json (A) | 등급 정확도, ±1단계, 과소·과대평가, 되묻기, 내용정보 F1 |
 | rateb     | 〃 — 상세 설명                             | evalsets/rating_detail.json (B) | 〃. 자기 자신·같은 제목의 사례는 검색에서 뺀다 |
+| rdev      | 〃 — 개발용(결합 규칙을 고르는 데만 쓴다)   | evalsets/rating_dev.json   | 〃. 행마다 항목 판정·사례 등급을 남긴다(tools/choose_combination.py) |
 | rroute    | route_node                                | evalsets/rating_route.json   | chat/review 분류 정확도                    |
 | rclarify  | plan → research ⇄ replan_check → analysis | evalsets/rating_clarify.json | 되묻기 정답률                              |
 | rjudge    | validate_node                             | evalsets/rating_judge.json   | 오염 초안 탐지율, 정상 초안 오탐률          |
@@ -48,8 +49,8 @@ from measure_queries import ROOT, _display, _git_state, _switches
 
 EVALSETS = ROOT / "tools" / "evalsets"
 DEFAULT_OUT_DIR = ROOT / "runs"
-FILES = {"rate": "rating", "rateb": "rating_detail", "rroute": "rating_route", "rclarify": "rating_clarify",
-         "rjudge": "rating_judge", "rbase": "rating", "rlaw": "rating_law"}
+FILES = {"rate": "rating", "rateb": "rating_detail", "rdev": "rating_dev", "rroute": "rating_route",
+         "rclarify": "rating_clarify", "rjudge": "rating_judge", "rbase": "rating", "rlaw": "rating_law"}
 REFUSAL_HINT = re.compile(r"답할 수 없|근거를 찾지 못|확인할 수 없|알 수 없")
 MAX_ROUNDS = 4   # research ⇄ replan_check 왕복 상한 — 그래프는 범위를 두 번까지만 넓힌다
 
@@ -99,6 +100,8 @@ async def eval_rate(deps, ctx: dict, kind: str = "rate") -> tuple[list[dict], di
             action, pred, desc = "assess", out["assessment"]["rating"], describe(out["assessment"])
         assessment = (out or {}).get("assessment", {})
         cases = [c for c in (out or {}).get("collected", []) if c["source"] == "cases"]
+        present = {name: {"level": i["level"], "quote": bool(i["evidence"]), "case_ids": i.get("case_ids", [])}
+                   for name, i in assessment.get("items", {}).items() if i["present"]}
         rows.append({
             "id": item["id"], "label": gold, "pred": pred, "action": action, "ok": pred == gold,
             "diff": ratings.index(pred) - ratings.index(gold) if pred else None,
@@ -106,6 +109,9 @@ async def eval_rate(deps, ctx: dict, kind: str = "rate") -> tuple[list[dict], di
             "method": assessment.get("method"), "dropped": assessment.get("dropped", []),
             "cases_scope": cases[-1]["scope"] if cases else None,
             "cases": [c["id"] for c in cases[-1]["data"]] if cases else [],
+            "case_ratings": [c["rating"] for c in cases[-1]["data"]] if cases else [],
+            "items": present, "rating_items": assessment.get("rating_items"),
+            "rating_source": assessment.get("rating_source"),
             "applicant_in_cases": item.get("applicant_in_cases"),
             "latency_s": latency, "cost_usd": (out or {}).get("cost_usd"), "error": error,
         })
@@ -199,6 +205,10 @@ async def eval_rateb(deps, ctx: dict) -> tuple[list[dict], dict]:
     return await eval_rate(deps, ctx, "rateb")
 
 
+async def eval_rdev(deps, ctx: dict) -> tuple[list[dict], dict]:
+    return await eval_rate(deps, ctx, "rdev")
+
+
 async def eval_rbase(deps, ctx: dict) -> tuple[list[dict], dict]:
     """기준선 — LLM 없이 비슷한 사례의 등급만으로 맞힌다. 에이전트가 사례 검색 위에 무엇을 더했는지 보려고 둔다."""
     g, ratings, retriever = ctx["graph"], ctx["RATINGS"], deps.case_retriever
@@ -277,8 +287,8 @@ async def eval_rlaw(deps, ctx: dict) -> tuple[list[dict], dict]:
     return rows, summary
 
 
-EVALUATORS = {"rate": eval_rate, "rateb": eval_rateb, "rroute": eval_rroute, "rclarify": eval_rclarify,
-              "rjudge": eval_rjudge, "rbase": eval_rbase, "rlaw": eval_rlaw}
+EVALUATORS = {"rate": eval_rate, "rateb": eval_rateb, "rdev": eval_rdev, "rroute": eval_rroute,
+              "rclarify": eval_rclarify, "rjudge": eval_rjudge, "rbase": eval_rbase, "rlaw": eval_rlaw}
 
 
 async def _run(kinds: list[str], args: argparse.Namespace) -> None:
@@ -336,7 +346,7 @@ def main() -> None:
                         help="잴 코드의 체크아웃 — 그 안의 project/ 를 import 한다")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR))
     args = parser.parse_args()
-    kinds = [k for k in EVALUATORS if k != "rbase"] if args.kind == "all" else [args.kind]
+    kinds = [k for k in EVALUATORS if k not in ("rbase", "rdev")] if args.kind == "all" else [args.kind]
     asyncio.run(_run(kinds, args))
 
 

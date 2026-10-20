@@ -58,7 +58,7 @@ for step in "${list[@]}"; do
     route|target|judge|write|runbook)
       "$py" -u tools/eval_nodes.py "$step" --label "$label" --backend "$backend" \
         --code-root "$wt" --out-dir "$out_dir" ;;
-    rate|rateb|rroute|rclarify|rjudge|rbase|rlaw)
+    rate|rateb|rdev|rroute|rclarify|rjudge|rbase|rlaw)
       "$py" -u tools/eval_rating.py "$step" --label "$label" --backend "$backend" \
         --code-root "$wt" --out-dir "$out_dir" ;;
     e2e)
