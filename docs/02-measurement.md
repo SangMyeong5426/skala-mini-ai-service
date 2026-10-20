@@ -280,6 +280,38 @@ final 구성에서 실제로 나간 답을 따로 확인했다(답변 본문을 
 알려졌습니다."라고 답했다** — 이름은 기억하지만 질문에 맞는 답이 아니다. 대화 답변(0.6b)도 thinking을 끈
 영향이다([0002 한계](decisions/0002-ollama-think-control.md#한계와-트레이드오프)).
 
+## final2 (final + 대화 경로만 thinking) — 2026-10-20
+
+final의 대화 답이 어색해져([0002](decisions/0002-ollama-think-control.md#한계와-트레이드오프)) 대화 경로만 thinking을
+다시 켰다([0007](decisions/0007-chat-keeps-thinking.md)). 장애 처리 경로는 같은 코드다.
+
+```bash
+OLLAMA_THINK=false ROUTER=semantic TARGET_RESOLVER=semantic VALIDATOR=grounded RUNBOOK_SELECTOR=semantic \
+  scripts/measure-at feat/chat-think final2 e2e        # OLLAMA_THINK_CHAT 은 지정하지 않아 true
+```
+
+`runs/e2e_final2_20261020-132116.json` (코드 `32b59c1`, 이 측정부터 답변 본문을 기록한다).
+
+| # | final | final2 | final2 답변 (대화만) |
+| --- | --- | --- | --- |
+| 1 | 15.5초 | 18.0초 | |
+| 2 | 15.4초 | 12.5초 | |
+| 3 | 14.3초 | 13.1초 | |
+| 4 | 31.6초 | 16.5초 | |
+| 5 | 23.9초 | 19.9초 | |
+| 6 | 34.2초 | 14.2초 | |
+| 7 | 23.0초 | 14.5초 | |
+| 8 | 0.09초 | 0.09초 | (되묻기) |
+| 9 | 0.4초 | 0.9초 | "안녕하세요! 저는 빠르게 비서입니다." |
+| 10 | 0.3초 | 0.5초 | "안녕하세요!" |
+| 10.2 | 0.2초 | 0.6초 | "저의 이름은 민수입니다." |
+| **합계** | **159.0초** | **110.8초** | 추정 비용 $0.0514 → $0.0496, timeout 0 |
+
+**1회 측정의 편차가 크다.** 장애 질문 1~7은 final과 final2가 같은 코드인데 합계가 158.0초 → 108.8초(−31%)로
+달라졌다. 모니터링 Tool이 호출마다 수치를 흔들어(지터) 프롬프트가 달라지고, 그에 따라 생성 길이와 검수 결과가
+달라진다. base → final의 차이(411초 → 110~159초)는 이 편차보다 훨씬 크지만, 발표용 수치는 `--repeat 3`으로
+다시 재 중앙값을 쓰는 편이 안전하다([`followups.md`](followups.md)).
+
 ## 결과 요약 — base → final
 
 | 개선 항목 | 핵심 수치 (base → final) | 결정 기록 |
@@ -289,4 +321,5 @@ final 구성에서 실제로 나간 답을 따로 확인했다(답변 본문을 
 | 3 대상 추정·되묻기 | 대상 6/15 → **13/15**, 되묻기 0/5 → 3/5, 엉뚱한 진단 7 → 2 | [0004](decisions/0004-target-resolver.md) |
 | 4 검수 근거 검증 | 오염 초안 탐지 0/7 → **6/7**, 정상 오탐 0/5 유지, 검수 +3.5초 | [0005](decisions/0005-grounded-validator.md) |
 | 5 runbook 의미 검색 | 6/10 → 8/10 — **원래 문항만 보면 5/6 → 4/6**, 효과 불확실 | [0006](decisions/0006-runbook-selector.md) |
-| 전체 (회귀 쿼리 11턴) | 411.4초 → **159.0초 (−61.4%)**, 추정 비용 +7.6%, timeout 0 → 0 | — |
+| 1 보완 — 대화만 thinking | 대화 답 자연스러움 6건 중 1 → 4, 대화 지연 +0.5초 (0.2초 → 0.7초, base 1.2~1.9초) | [0007](decisions/0007-chat-keeps-thinking.md) |
+| 전체 (회귀 쿼리 11턴) | 411.4초 → **159.0초 (final) · 110.8초 (final2)** — 1회 측정 편차 ±30% 안팎, timeout 0 → 0 | — |
