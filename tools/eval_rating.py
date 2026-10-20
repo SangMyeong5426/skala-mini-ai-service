@@ -11,6 +11,7 @@
 | rate      | plan → research ⇄ replan_check → analysis | evalsets/rating.json (A) | 등급 정확도, ±1단계, 과소·과대평가, 되묻기, 내용정보 F1 |
 | rateb     | 〃 — 상세 설명                             | evalsets/rating_detail.json (B) | 〃. 자기 자신·같은 제목의 사례는 검색에서 뺀다 |
 | rdev      | 〃 — 개발용(결합 규칙을 고르는 데만 쓴다)   | evalsets/rating_dev.json   | 〃. 행마다 항목 판정·사례 등급을 남긴다(tools/choose_combination.py) |
+| rbenign   | 〃 — 평범한 게임 10개                       | evalsets/rating_benign.json | 청소년이용불가·15세 이상으로 올린 수(과대평가 점검) |
 | rroute    | route_node                                | evalsets/rating_route.json   | chat/review 분류 정확도                    |
 | rclarify  | plan → research ⇄ replan_check → analysis | evalsets/rating_clarify.json | 되묻기 정답률                              |
 | rjudge    | validate_node                             | evalsets/rating_judge.json   | 오염 초안 탐지율, 정상 초안 오탐률          |
@@ -49,7 +50,8 @@ from measure_queries import ROOT, _display, _git_state, _switches
 
 EVALSETS = ROOT / "tools" / "evalsets"
 DEFAULT_OUT_DIR = ROOT / "runs"
-FILES = {"rate": "rating", "rateb": "rating_detail", "rdev": "rating_dev", "rroute": "rating_route",
+FILES = {"rate": "rating", "rateb": "rating_detail", "rdev": "rating_dev", "rbenign": "rating_benign",
+         "rroute": "rating_route",
          "rclarify": "rating_clarify", "rjudge": "rating_judge", "rbase": "rating", "rlaw": "rating_law"}
 REFUSAL_HINT = re.compile(r"답할 수 없|근거를 찾지 못|확인할 수 없|알 수 없")
 MAX_ROUNDS = 4   # research ⇄ replan_check 왕복 상한 — 그래프는 범위를 두 번까지만 넓힌다
@@ -209,6 +211,14 @@ async def eval_rdev(deps, ctx: dict) -> tuple[list[dict], dict]:
     return await eval_rate(deps, ctx, "rdev")
 
 
+async def eval_rbenign(deps, ctx: dict) -> tuple[list[dict], dict]:
+    """평범한 게임 10개 — 청소년이용불가로 올리면 실패. 과대평가 점검용(정답은 모두 전체이용가)."""
+    rows, summary = await eval_rate(deps, ctx, "rbenign")
+    summary["youth_restricted"] = sum(r["pred"] == "청소년이용불가" for r in rows)
+    summary["fifteen_or_more"] = sum(r["pred"] in ("15세이용가", "청소년이용불가") for r in rows)
+    return rows, summary
+
+
 async def eval_rbase(deps, ctx: dict) -> tuple[list[dict], dict]:
     """기준선 — LLM 없이 비슷한 사례의 등급만으로 맞힌다. 에이전트가 사례 검색 위에 무엇을 더했는지 보려고 둔다."""
     g, ratings, retriever = ctx["graph"], ctx["RATINGS"], deps.case_retriever
@@ -287,7 +297,7 @@ async def eval_rlaw(deps, ctx: dict) -> tuple[list[dict], dict]:
     return rows, summary
 
 
-EVALUATORS = {"rate": eval_rate, "rateb": eval_rateb, "rdev": eval_rdev, "rroute": eval_rroute,
+EVALUATORS = {"rate": eval_rate, "rateb": eval_rateb, "rdev": eval_rdev, "rbenign": eval_rbenign, "rroute": eval_rroute,
               "rclarify": eval_rclarify, "rjudge": eval_rjudge, "rbase": eval_rbase, "rlaw": eval_rlaw}
 
 
@@ -346,7 +356,7 @@ def main() -> None:
                         help="잴 코드의 체크아웃 — 그 안의 project/ 를 import 한다")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR))
     args = parser.parse_args()
-    kinds = [k for k in EVALUATORS if k not in ("rbase", "rdev")] if args.kind == "all" else [args.kind]
+    kinds = [k for k in EVALUATORS if k not in ("rbase", "rdev", "rbenign")] if args.kind == "all" else [args.kind]
     asyncio.run(_run(kinds, args))
 
 

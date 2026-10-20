@@ -58,7 +58,7 @@ def get_law_articles() -> str:
 
 @mcp.resource("ratings://cases")
 def get_rating_cases() -> str:
-    """사례 DB(JSON) — 2026-06-30까지 게임물관리위원회 결정 중 개요가 있는 연령 등급(사행성 게임물 제외)."""
+    """사례 DB(JSON) — 2026-06-30까지 게임물관리위원회 결정 중 연령 등급(사행성 게임물 제외). 개요 없는 간소화 결정도 넣는다."""
     return CASES_PATH.read_text()
 
 

@@ -32,11 +32,20 @@ CASES_UNTIL = "2026-06-30"
 EVAL_FROM, EVAL_UNTIL = "2026-07-01", "2026-09-30"
 
 
+def usable_case(row: dict) -> bool:
+    """사례 DB 에 넣을 결정인가 — 연령 등급(거부 아님) · 사행성 게임물 아님 · 취소 아님. 개요는 없어도 된다.
+
+    개요가 없는 결정의 대부분은 간소화 등급분류(게임산업법 제21조의10, 번호 SC-)다. 이 절차는 청소년이용불가를 다루지
+    않아 거의 다 전체·12·15세다. 처음에는 개요 없는 결정을 뺐는데, 그러자 사례 기간 모바일 결정 548건 중 전체이용가 293건이
+    34건만 남고 청소년이용불가 188건은 181건이 남아, 모바일 사례의 77%가 청소년이용불가가 됐다(결정 0017).
+    """
+    return (row["rating"] in RATINGS and row["platform"] not in EXCLUDED_PLATFORMS
+            and row["genre"] not in EXCLUDED_GENRES and not row["canceled"])
+
+
 def usable(row: dict) -> bool:
-    """사례·평가에 쓸 수 있는 결정인가 — 개요 있음 · 연령 등급(거부 아님) · 사행성 게임물 아님 · 취소 아님."""
-    return (bool(row["summary"].strip()) and row["rating"] in RATINGS
-            and row["platform"] not in EXCLUDED_PLATFORMS and row["genre"] not in EXCLUDED_GENRES
-            and not row["canceled"])
+    """평가 입력으로 쓸 결정인가 — usable_case 이면서 개요가 있다(입력할 게임 설명이 있어야 한다)."""
+    return usable_case(row) and bool(row["summary"].strip())
 
 
 def load_raw(raw_dir: Path = RAW_DIR) -> list[dict]:
@@ -47,9 +56,9 @@ def load_raw(raw_dir: Path = RAW_DIR) -> list[dict]:
 
 
 def build_cases(rows: list[dict], until: str = CASES_UNTIL) -> list[dict]:
-    """사례 DB — until 까지 결정분 중 usable 한 것. 날짜·번호 순으로 정렬해 결과가 늘 같게 한다."""
+    """사례 DB — until 까지 결정분 중 usable_case 한 것. 날짜·번호 순으로 정렬해 결과가 늘 같게 한다."""
     keep = ("id", "date", "title", "applicant", "rating", "genre", "platform", "descriptors", "summary")
-    cases = [{k: r[k] for k in keep} for r in rows if r["date"] <= until and usable(r)]
+    cases = [{k: r[k] for k in keep} for r in rows if r["date"] <= until and usable_case(r)]
     return sorted(cases, key=lambda c: (c["date"], c["id"]))
 
 

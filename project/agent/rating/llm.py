@@ -138,7 +138,7 @@ def cases_text(cases: list[dict]) -> str:
     if not cases:
         return "(비슷한 사례 없음)"
     return "\n".join(f"- [{c['id']}] 「{c['title']}」 {c['rating']} · 내용정보: {', '.join(c['descriptors']) or '없음'}"
-                     f" — {c['summary']}" for c in cases)
+                     f" — {c['summary'] or '개요 없음(간소화 등급분류 등)'}" for c in cases)
 
 
 def write_user_message(query: str, assessment: dict, collected: list[dict], feedback: str | None) -> str:
