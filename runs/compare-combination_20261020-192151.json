@@ -1,0 +1,50 @@
+{
+  "source": "runs/eval-rbenign_dev2_20261020-191919.json",
+  "git": {
+    "commit": "18a9ba8",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "table": [
+    {
+      "rule": "items",
+      "order": 0,
+      "correct": 9,
+      "n": 10,
+      "under": 0,
+      "over": 1
+    },
+    {
+      "rule": "case-floor",
+      "order": 1,
+      "correct": 8,
+      "n": 10,
+      "under": 0,
+      "over": 2
+    },
+    {
+      "rule": "thin-nn1",
+      "order": 2,
+      "correct": 8,
+      "n": 10,
+      "under": 0,
+      "over": 2
+    },
+    {
+      "rule": "thin-vote5",
+      "order": 3,
+      "correct": 9,
+      "n": 10,
+      "under": 0,
+      "over": 1
+    },
+    {
+      "rule": "thin-floor",
+      "order": 4,
+      "correct": 8,
+      "n": 10,
+      "under": 0,
+      "over": 2
+    }
+  ]
+}
