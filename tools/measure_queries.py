@@ -124,7 +124,7 @@ def _measure_turn(client: httpx.Client, message: str, thread_id: str) -> dict:
     body = r.json()
     meta = body.get("metadata", {})
     return {"ok": True, "latency_s": latency, "reply_chars": len(body.get("reply", "")),
-            "route": meta.get("route"),
+            "reply": body.get("reply", ""), "route": meta.get("route"),
             **{k: meta.get(k) for k in METRICS if k != "latency_s"},
             "langsmith_run_id": meta.get("langsmith_run_id"), "error": None}
 

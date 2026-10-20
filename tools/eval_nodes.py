@@ -95,19 +95,25 @@ async def eval_route(deps, ctx: dict) -> tuple[list[dict], dict]:
     for item in _load("route"):
         out, latency, error = await _timed(route_node(_fresh_state(item["query"]), deps))
         got = (out or {}).get("route")
+        # 의미 라우터면 판정 방식(semantic·llm-fallback)과 점수 차가 이벤트에 있다. base 에는 없다.
+        decided = ((out or {}).get("events") or [{}])[-1]
         rows.append({**item, "got": got, "latency_s": latency, "error": error,
-                     "ok": got == item["expected_route"]})
-        _print_row(rows[-1], f"{item['expected_route']:8} → {got}")
+                     "ok": got == item["expected_route"],
+                     "method": decided.get("method"), "gap": decided.get("gap")})
+        _print_row(rows[-1], f"{item['expected_route']:8} → {got}"
+                   + (f"  ({decided['method']}, gap {decided.get('gap')})" if decided.get("method") else ""))
 
     by_class = {}
     for label in ("chat", "incident"):
         group = [r for r in rows if r["expected_route"] == label]
         by_class[label] = f"{sum(r['ok'] for r in group)}/{len(group)}"
+    methods = [r["method"] for r in rows if r["method"]]
     summary = {"accuracy": round(sum(r["ok"] for r in rows) / len(rows), 3),
                "correct": f"{sum(r['ok'] for r in rows)}/{len(rows)}",
                "chat_correct": by_class["chat"], "incident_correct": by_class["incident"],
                "errors": sum(r["error"] is not None for r in rows),
-               "latency_median_s": _median([r["latency_s"] for r in rows])}
+               "latency_median_s": _median([r["latency_s"] for r in rows]),
+               "methods": {m: methods.count(m) for m in sorted(set(methods))}}
     return rows, summary
 
 
@@ -130,9 +136,13 @@ async def eval_target(deps, ctx: dict) -> tuple[list[dict], dict]:
         # 엉뚱한 진단: 진단을 내렸는데 되물었어야 했거나, 정답에 없는 시스템을 조사했다.
         off_target = action == "diagnose" and (
             item["expected_action"] == "clarify" or any(t not in expected for t in targets))
+        # 대상 추정기면 PlanCreated·ClarifyRequested 이벤트에 판정 방식(name-match·semantic…)이 있다.
+        planned = ((out or {}).get("events") or [{}])[-1]
         rows.append({**item, "got_action": action, "got_targets": targets,
-                     "ok": ok, "off_target": off_target, "latency_s": latency, "error": error})
-        _print_row(rows[-1], f"{item['expected_action']:8} {expected} → {action} {targets}")
+                     "ok": ok, "off_target": off_target, "latency_s": latency, "error": error,
+                     "method": planned.get("method"), "reason": planned.get("reason")})
+        _print_row(rows[-1], f"{item['expected_action']:8} {expected} → {action} {targets}"
+                   + (f"  ({planned['method']})" if planned.get("method") else ""))
 
     diagnose = [r for r in rows if r["expected_action"] == "diagnose"]
     clarify = [r for r in rows if r["expected_action"] == "clarify"]
