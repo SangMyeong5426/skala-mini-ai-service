@@ -9,6 +9,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 | 항목 | 값 |
 | --- | --- |
 | 과제 | **1. Base AI Agent 개선** — 질문을 제대로 이해하고 근거 있는 답만 내보내는 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
+| 핵심 결과 (반복 3회 중앙값) | 회귀 쿼리 11턴 396.5초 → **123.8초**, timeout 1 → 0 · 분류 23/30 → 30/30 · 대상 6/15 → 13/15 · 오염 초안 탐지 0/7 → 6/7 ([`02-measurement.md`](docs/02-measurement.md#발표용-수치--base--final2-반복-3회-중앙값-2026-10-20)) |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
 | 상세 수정 설계 | [`docs/03-design.md`](docs/03-design.md) |
 | 진행 체크리스트 | [`docs/checklist.md`](docs/checklist.md) |
