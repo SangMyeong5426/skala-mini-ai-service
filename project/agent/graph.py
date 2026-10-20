@@ -74,9 +74,16 @@ def _cost(state: AgentState, usage: dict) -> float:
 
 @traceable(name="route_node")
 async def route_node(state: AgentState, deps: SupervisorDeps) -> dict:
-    """Wave 5 — 모든 쿼리가 무거운 파이프라인을 탈 필요는 없다."""
-    result, usage = deps.fast_llm.route(state["query"])
-    event = {"type": "RouteDecided", "route": result["route"]}
+    """Wave 5 — 모든 쿼리가 무거운 파이프라인을 탈 필요는 없다.
+
+    항목 2 — deps.router 가 있으면 의미 라우터가 먼저 판정하고, 애매할 때만 LLM 으로 넘긴다.
+    이벤트에 판정 방식(method)과 두 클래스 점수 차(gap)를 남긴다."""
+    if deps.router is not None:
+        result, usage = await deps.router.route(state["query"])
+    else:
+        result, usage = deps.fast_llm.route(state["query"])
+    event = {"type": "RouteDecided", "route": result["route"],
+             **{k: result[k] for k in ("method", "gap") if k in result}}
     return {"route": result["route"], "needs_analysis": result["needs_analysis"],
             "cost_usd": _cost(state, usage),
             "events": state.get("events", []) + [event]}
