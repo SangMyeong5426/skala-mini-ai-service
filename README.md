@@ -94,9 +94,8 @@ skala-mini-ai-service/
 | 언제 | 할 일 | 상태 |
 | --- | --- | --- |
 | Day1 ~17시 | 과제 선택, 진행 계획(초안) → Google Spread | 진행 중 |
-| ~Day3 14시 | 구현, Git 주소 → Google Spread | — |
-| ~Day3 14시 | 결과 보고서 → Google Spread | — |
-| ~Day3 17:30 | 개인별 발표 (Zoom) | — |
+| ~Day3 **13시** | 구현 마무리, 결과 보고서 작성 → Git 주소·보고서 주소를 Google Spread에 | — |
+| ~Day3 17:30 | 개인별 결과 보고서 발표 (반별 자율 진행) | — |
 
 ## 결정 대기 중
 
