@@ -10,6 +10,7 @@
 import base64
 import hashlib
 import json
+import re
 from array import array
 from pathlib import Path
 
@@ -34,6 +35,10 @@ def effective_scope(scope: str, genre: str | None, platform: str | None) -> str:
     if scope == "platform" and not platform:
         scope = "all"
     return scope
+
+
+def _norm_title(title: str) -> str:
+    return re.sub(r"[\W_]+", "", title).casefold()
 
 
 def _in_scope(case: dict, scope: str, genre: str | None, platform: str | None) -> bool:
@@ -67,6 +72,7 @@ class CaseRetriever:
         self.cases = cases
         self.vectors = vectors
         self.k = k
+        self.excluded: set[int] = set()
 
     @classmethod
     async def create(cls, embedder, cases: list[dict], k: int = DEFAULT_K,
@@ -84,12 +90,22 @@ class CaseRetriever:
                 _write_cache(path, vectors)
         return cls(embedder, cases, vectors, k)
 
+    def exclude(self, case_id: str | None = None, title: str | None = None) -> None:
+        """평가 전용 — 다음 검색부터 이 결정(같은 번호, 또는 띄어쓰기·대소문자를 무시하고 같은 제목)을 뺀다.
+
+        평가셋 B 의 게임은 사례 DB 기간에 있어 자기 자신이 검색되면 답이 샌다. 인자 없이 부르면 되돌린다.
+        """
+        key = _norm_title(title) if title else None
+        self.excluded = {i for i, c in enumerate(self.cases)
+                         if case_id and (c["id"] == case_id or (key and _norm_title(c["title"]) == key))}
+
     @traceable(name="case_retriever.search")
     async def search(self, text: str, genre: str | None = None, platform: str | None = None,
                      scope: str = "genre+platform") -> tuple[list[dict], str]:
         """(가까운 사례 k건 — 각 사례에 score, 실제로 쓴 범위)."""
         scope = effective_scope(scope, genre, platform)
-        candidates = [i for i, c in enumerate(self.cases) if _in_scope(c, scope, genre, platform)]
+        candidates = [i for i, c in enumerate(self.cases)
+                      if i not in self.excluded and _in_scope(c, scope, genre, platform)]
         if not candidates:
             return [], scope
         [query_vec] = await self.embedder.embed([text])

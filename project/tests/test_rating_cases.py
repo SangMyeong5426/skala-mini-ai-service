@@ -64,3 +64,16 @@ def test_cache_is_reused_for_same_model_and_cases(tmp_path):
     assert first.calls == 1     # 사례 4건 — 한 묶음
     assert second.calls == 0    # 캐시에서 읽었다
     assert retriever.vectors[0][:2] == [2.0, 0.0]   # 제목·개요에 "좀비"가 두 번
+
+
+def test_exclude_hides_the_same_decision_and_title_until_reset(tmp_path):
+    """평가셋 B 의 게임은 사례 DB 기간에 있다 — 평가할 때 자기 자신(같은 번호·같은 제목)을 검색에서 뺀다."""
+    retriever = _create(FakeEmbedder(), tmp_path)
+
+    retriever.exclude("C9", "좀비  헌터")   # 번호는 달라도 제목이 같으면 뺀다
+    hidden, _ = asyncio.run(retriever.search("좀비를 총으로 쏘는 게임", None, None, "all"))
+    retriever.exclude()
+    shown, _ = asyncio.run(retriever.search("좀비를 총으로 쏘는 게임", None, None, "all"))
+
+    assert "C0" not in [c["id"] for c in hidden]
+    assert shown[0]["id"] == "C0"

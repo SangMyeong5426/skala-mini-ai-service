@@ -74,3 +74,19 @@ def test_evalset_a_is_outside_the_case_db():
         assert item["rateno"] not in case_ids
         assert EVAL_FROM <= raw[item["rateno"]]["date"] <= EVAL_UNTIL
         assert raw[item["rateno"]]["title"] not in item["message"]
+
+
+def test_evalset_b_labels_come_from_the_api_and_hide_the_conclusion():
+    """평가셋 B — 정답은 같은 번호의 API 결정 등급이고, 입력에는 등급·규정 호수(결론)가 남지 않는다."""
+    import re
+
+    evalset = Path(__file__).resolve().parents[2] / "tools" / "evalsets" / "rating_detail.json"
+    items = json.loads(evalset.read_text())
+    raw = {r["id"]: r for r in load_raw()}
+    leak = re.compile("|".join([*RATINGS, "이용가", "등급", r"제\s*7\s*조", "따라서"]))
+
+    assert items
+    for item in items:
+        assert item["label"]["rating"] == raw[item["rateno"]]["rating"]
+        assert usable(raw[item["rateno"]])
+        assert not leak.search(item["detail"]), item["id"]
