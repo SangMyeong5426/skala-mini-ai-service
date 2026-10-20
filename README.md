@@ -45,6 +45,7 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 | 환경변수 | 개선 (ollama 기본) | 원본 | 항목 |
 | --- | --- | --- | --- |
 | `OLLAMA_THINK` | `false` | `default`(옵션을 보내지 않음) · `true` | 1 — [0002](docs/decisions/0002-ollama-think-control.md) |
+| `OLLAMA_THINK_CHAT` | `true` (대화 경로만 생각) | `default` — `OLLAMA_THINK=default`면 따라간다 | 1 보완 — [0007](docs/decisions/0007-chat-keeps-thinking.md) |
 | `ROUTER` | `semantic` | `llm` | 2 — [0003](docs/decisions/0003-semantic-router.md) |
 | `TARGET_RESOLVER` | `semantic` | `legacy` | 3 — [0004](docs/decisions/0004-target-resolver.md) |
 | `VALIDATOR` | `grounded` | `format` | 4 — [0005](docs/decisions/0005-grounded-validator.md) |

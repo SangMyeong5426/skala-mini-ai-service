@@ -1,6 +1,6 @@
 # 0002: Ollama thinking 출력 제어
 
-- 상태: Accepted
+- 상태: Accepted — 대화(chat) 경로는 [0007](0007-chat-keeps-thinking.md)이 보완
 - 날짜: 2026-10-20
 - 계획 항목: [`01-plan.md`](../01-plan.md) 순번 1 · 설계 [`03-design.md`](../03-design.md#항목-1--ollama-thinking-제어)
 
@@ -85,8 +85,8 @@ base 회귀 쿼리 측정에서는 timeout이 한 건도 없었다 — 폭주는
   fast만 끄고 quality는 켜는 조합은 재지 않았다 — 지금은 스위치 하나가 둘 다 바꾼다.
 - **대화 답변(0.6b)의 품질도 떨어졌다.** final 구성에서 "제 이름이 뭐였죠?"에 "민수님의 이름이 정확히
   알려졌습니다."라고 답했다 — 이름은 기억하지만 질문에 맞는 답이 아니다. 같은 이력으로 직접 비교하면
-  thinking을 켤 때 "민수님!", 끌 때 "민수님의 이름은 뭐였죠?"였다. 대화 경로는 원래 1~2초라 그 경로만
-  thinking을 켜는 선택지가 있다(후속 과제, [`followups.md`](../followups.md)).
+  thinking을 켤 때 "민수님!", 끌 때 "민수님의 이름은 뭐였죠?"였다. 대화 경로만 thinking을 다시 켜는
+  것으로 보완했다 — [0007](0007-chat-keeps-thinking.md).
 - **생성 길이 상한이 없는 근본 문제는 남는다.** 생각을 꺼도 모델이 반복 출력에 빠지면 길어질 수 있다.
   `num_predict` 상한이나 스트림 전체 시간 제한은 후속 과제로 [`followups.md`](../followups.md)에 둔다.
 - 측정용 `default`를 남겨 두었으므로 운영에서 실수로 켜지 않도록 `.env.example`에 원본 동작이라고 적었다.
