@@ -83,8 +83,12 @@ Before/After 측정 — 잴 커밋을 worktree로 꺼내 그 코드로 잰다. o
 (자세한 방법은 [`docs/task1/02-measurement.md`](docs/task1/02-measurement.md#측정-방법)).
 
 ```bash
+# 과제 2 — 같은 커밋에서 스위치만 바꾼다 (docs/02-measurement.md)
+scripts/measure-at <커밋> after rating
+ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=format \
+  scripts/measure-at <커밋> before rating
+# 과제 1
 scripts/measure-at base before write,e2e
-OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1
 ```
 
 clone 직후 한 번, 커밋 템플릿과 pre-commit 훅(AGENTS≡CLAUDE, `.env` 차단, ruff)을 켠다.
@@ -103,10 +107,13 @@ skala-mini-ai-service/
 │   ├── web_chat.html            Vue 3 (CDN) 채팅 UI
 │   ├── mcp_server.py            MCP "ops" — Tool·Resource·Prompt
 │   ├── mcp_server_docs.py       MCP "docs" — decoy
+│   ├── mcp_server_rating.py     MCP "rating" — 등급 통계 Tool, 기준표·시행규칙·사례 Resource (과제 2)
 │   ├── agent/                   그래프·LLM 백엔드 3종·MCP 클라이언트·세션·재시도
-│   │                            + embedding·router·target·validator·runbook (개선 항목 2~5)
+│   │                            + embedding·router·target·validator·runbook (과제 1 개선 항목 2~5)
+│   │                            + rating/ — 등급 점검 그래프·판정·사례 검색·검수·되묻기 (과제 2)
 │   ├── data/                    monitoring.json, runbooks/ 6종
 │   │                            + router_examples.json(분류 예시), systems.json(시스템 카탈로그)
+│   │                            + ratings/ — 등급분류 원자료·사례 DB·기준표·시행규칙 (과제 2)
 │   ├── doc/                     원본 매뉴얼
 │   ├── sh/                      setup·run 스크립트 (+ run_agent_fake.sh)
 │   ├── tests/                   스모크 테스트 (추가)
@@ -125,10 +132,14 @@ skala-mini-ai-service/
 ├── tools/
 │   ├── measure_queries.py       회귀 쿼리 실측·비교 (--spawn: 질문마다 서버 새로)
 │   ├── eval_nodes.py            노드 단위 평가 — route·target·judge·write·runbook
-│   ├── tune_embedding.py        의미 판정 기준 조정 (평가 세트 미사용)
+│   ├── tune_embedding.py        의미 판정 기준 조정 (평가 세트 미사용, --domain rating)
+│   ├── eval_rating.py           과제 2 노드 평가 — rate·rroute·rclarify·rjudge
+│   ├── fetch_ratings.py         게임물관리위원회 API 수집·사례 DB 생성 (과제 2)
+│   ├── make_rating_evalset.py   평가셋 A 표본 추출 (시드 고정)
+│   ├── queries_rating.json      과제 2 회귀 쿼리 10개 (11턴)
 │   ├── try_models.py            작성·판정 모델 교체 시험 (기각, 결정 0008)
 │   ├── queries.json             회귀 쿼리 10개 (11턴)
-│   ├── evalsets/                라벨 평가 세트 4종
+│   ├── evalsets/                라벨 평가 세트 — 과제 1 4종 + 과제 2 4종(rating*)
 │   └── tuning/                  조정용 문장 (평가 세트 아님)
 ├── runs/                    실측 원자료 (커밋한다)
 ├── scripts/                 measure-at(커밋 단위 측정), setup-git-hooks, check-rule-docs

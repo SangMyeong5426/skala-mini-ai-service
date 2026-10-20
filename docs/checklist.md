@@ -37,16 +37,16 @@
 
 ### 3. 뼈대 + Before
 
-- [ ] `mcp_server_rating.py` (Tool `rating_stats`, Resource 기준표·법령·사례)
-- [ ] LLM 단독으로 끝까지 도는 등급 그래프, `AGENT_DOMAIN`
-- [ ] `tools/eval_rating.py`, `scripts/measure-at` 단계
-- [ ] Before 측정
+- [x] `mcp_server_rating.py` (Tool `rating_stats`, Resource 기준표·법령·사례) — `b0cb295`
+- [x] LLM 단독으로 끝까지 도는 등급 그래프, `AGENT_DOMAIN` — `b0cb295`
+- [x] `tools/eval_rating.py`, `scripts/measure-at` 단계 — `b0cb295`
+- [x] Before 1차 측정 `before0` (`b0cb295`) — 등급 14/40, 라우팅 15/30, 되묻기 6/12, 탐지 0/7
 
 ### 4~6. 기능
 
-- [ ] 유사 사례 검색 + 항목별 단계 판정(등급 = 단계 최댓값)
-- [ ] 검수(형식 → 등급 일치 → 사례 → 수치 → LLM 판정)
-- [ ] 의미 라우터 교체, 되묻기
+- [x] 유사 사례 검색 + 항목별 단계 판정(등급 = 단계 최댓값) — `242dcb4`, [0011](decisions/0011-case-search-and-item-levels.md)
+- [x] 검수(형식 → 등급 일치 → 사례 → 수치 → LLM 판정) — `3024e52`, [0012](decisions/0012-rating-validator.md)
+- [x] 의미 라우터 교체(margin 0.04), 되묻기 — `0876038`, [0013](decisions/0013-rating-router-and-clarify.md)
 
 ### 7. After
 
