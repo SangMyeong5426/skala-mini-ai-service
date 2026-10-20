@@ -1,11 +1,12 @@
-"""항목 2·3 — Ollama 임베딩 클라이언트 (기본 qwen3-embedding:0.6b).
+"""항목 2·3·5 — Ollama 임베딩 클라이언트 (기본 qwen3-embedding:0.6b).
 
-의미 라우터(router.py)와 대상 시스템 추정(target.py)이 같은 인스턴스를 나눠 쓴다. 서버 기동 때
+의미 라우터(router.py)·대상 시스템 추정(target.py)·runbook 선택(runbook.py)이 같은 인스턴스를 나눠 쓴다. 서버 기동 때
 예시 문장·시스템 설명을 한 번 임베딩해 두고, 요청마다 질문 하나만 임베딩한다
 (2026-10-20 실측: 질문 하나 0.038초, 모델 첫 로드 1.4초, 1024차원).
 
 Qwen3-Embedding 은 질의 앞에 과제 지시문을 붙이는 형식(Instruct: …\\nQuery:…)을 권한다. 붙일지와
-어떤 문장을 붙일지는 각 사용처가 정한다 — tools/tune_embedding.py 로 비교한 결과를 따른다.
+어떤 문장을 붙일지는 각 사용처가 정한다 — tools/tune_embedding.py 로 비교해 보니 라우터·대상 추정 모두
+지시문 없이가 나아, 지금은 어느 곳도 붙이지 않는다(비교용 문장은 각 모듈에 남겨 두었다).
 """
 import math
 

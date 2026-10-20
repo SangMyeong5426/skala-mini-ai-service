@@ -20,8 +20,10 @@ from langsmith import traceable
 from .embedding import cosine
 
 EXAMPLES_PATH = Path(__file__).resolve().parent.parent / "data" / "router_examples.json"
+# 비교용 지시문. 예시 문장 LOO 에서 지시문 없이(0.95)가 붙일 때(0.925)보다 나아 기본은 쓰지 않는다.
 ROUTE_INSTRUCTION = "운영 지원 에이전트에 들어온 메시지가 지금 일어난 장애 신고인지 일반 대화인지 분류한다"
-DEFAULT_MARGIN = 0.02   # 임시값 — tools/tune_embedding.py 결과로 갱신한다
+# LOO 에서 틀린 예시의 |gap| 최댓값(0.024) + 0.005 — 예시끼리도 헷갈린 영역은 LLM 에 넘긴다.
+DEFAULT_MARGIN = 0.029
 DEFAULT_K = 3
 
 
@@ -54,7 +56,7 @@ class LLMRouter:
 class SemanticRouter:
     def __init__(self, embedder, fallback: LLMRouter, example_vecs: dict[str, list[list[float]]],
                  margin: float = DEFAULT_MARGIN, k: int = DEFAULT_K,
-                 instruction: str | None = ROUTE_INSTRUCTION):
+                 instruction: str | None = None):
         self.embedder = embedder
         self.fallback = fallback
         self.example_vecs = example_vecs
@@ -66,7 +68,7 @@ class SemanticRouter:
     async def create(cls, embedder, fallback: LLMRouter, examples: dict[str, list[str]],
                      **kwargs) -> "SemanticRouter":
         """서버 기동 때 한 번 — 예시 문장을 클래스별로 임베딩해 메모리에 둔다."""
-        instruction = kwargs.get("instruction", ROUTE_INSTRUCTION)
+        instruction = kwargs.get("instruction")
         example_vecs = {label: await embedder.embed(texts, instruction)
                         for label, texts in examples.items()}
         return cls(embedder, fallback, example_vecs, **kwargs)

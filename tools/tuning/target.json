@@ -1,0 +1,25 @@
+{
+  "_note": "대상 시스템 추정(agent/target.py)의 min_score·margin 을 정하는 조정용 문장. 평가 세트(tools/evalsets/target.json)와 질문·표현이 겹치지 않게 쓴다. 시스템 이름은 넣지 않는다 — 이름이 있으면 이름 매칭으로 끝나 의미 판정까지 오지 않는다.",
+  "positives": [
+    {"query": "사용자 인증 토큰이 자꾸 만료돼요", "target": "auth-service"},
+    {"query": "회원 인증 단계에서 오류가 나요", "target": "auth-service"},
+    {"query": "웹 페이지가 하얗게 뜨고 안 열려요", "target": "web-01"},
+    {"query": "첫 화면 응답이 너무 늦어요", "target": "web-01"},
+    {"query": "환불 처리가 계속 실패해요", "target": "payments-service"},
+    {"query": "정산 배치가 끝나지 않아요", "target": "payments-service"},
+    {"query": "캐시에 저장된 값이 오래된 데이터예요", "target": "cache-service"},
+    {"query": "메모리 캐시 서버가 응답이 없어요", "target": "cache-service"},
+    {"query": "외부 API 요청 라우팅이 이상해요", "target": "gateway-service"},
+    {"query": "API 게이트웨이에서 요청을 거부해요", "target": "gateway-service"},
+    {"query": "로그 검색 결과가 비어 있어요", "target": "log-service"},
+    {"query": "로그 보관 용량 경고가 왔어요", "target": "log-service"}
+  ],
+  "ambiguous": [
+    "뭔가 장애가 난 것 같아요",
+    "에러가 갑자기 많아졌어요",
+    "대시보드에 경고가 한꺼번에 떠요",
+    "어디가 문제인지 모르겠는데 사용자 불만이 많아요",
+    "오늘따라 시스템이 전반적으로 버벅여요",
+    "알림이 너무 많이 와요"
+  ]
+}
