@@ -20,3 +20,4 @@ class SupervisorDeps:
     version: str         # Wave 14 — SUPERVISOR_VERSION (v1/v2)
     embedder: Any = None          # 항목 2·3 — 임베딩 클라이언트 (라우터·대상 추정이 나눠 쓴다)
     router: Any = None            # 항목 2 — None 이면 fast_llm.route
+    target_resolver: Any = None   # 항목 3 — None 이면 base 의 plan (auth-service 폴백 포함)

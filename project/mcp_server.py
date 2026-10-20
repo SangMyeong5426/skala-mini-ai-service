@@ -62,6 +62,12 @@ def get_incident_runbook(incident_type: str) -> str:
     return runbook_path.read_text()
 
 
+@mcp.resource("catalog://systems")
+def get_system_catalog() -> str:
+    """모니터링 대상 시스템과 설명(JSON). 대상 시스템 추정(항목 3)이 서버 기동 때 한 번 읽는다."""
+    return (DATA_DIR / "systems.json").read_text()
+
+
 @mcp.prompt()
 def incident_analysis_prompt(system_name: str, symptom: str) -> str:
     """장애 진단 표준 절차 프롬프트 — planning 노드가 계획을 세울 때 이 절차를 따른다."""
