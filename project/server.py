@@ -37,15 +37,48 @@ class ChatRequest(BaseModel):   # Wave 1 — Pydantic 요청 검증
     thread_id: str = "default"
 
 
+def _parse_think(name: str, value: str) -> bool | None:
+    value = value.strip().lower()
+    if value == "default":
+        return None
+    if value in ("true", "false"):
+        return value == "true"
+    raise ValueError(f"{name} 는 false · true · default 중 하나여야 합니다: {value!r}")
+
+
+def _ollama_think() -> bool | None:
+    """OLLAMA_THINK=false(기본) | true | default — qwen3 의 생각(thinking) 출력.
+
+    default 는 옵션을 보내지 않는 원본 동작이다. 측정에서 원본을 재현할 때 쓴다
+    (docs/decisions/0002-ollama-think-control.md).
+    """
+    return _parse_think("OLLAMA_THINK", os.environ.get("OLLAMA_THINK", "false"))
+
+
+def _ollama_think_chat(general: bool | None) -> bool | None:
+    """OLLAMA_THINK_CHAT=true | false | default — 대화(chat) 경로만 따로 정한다.
+
+    지정하지 않으면 OLLAMA_THINK 가 원본(default)일 때는 원본 그대로, 그 밖에는 true 다.
+    대화는 원래 1~2초 경로라 생각을 켜도 비용이 작고, 끄면 답이 어색해진다
+    (docs/decisions/0007-chat-keeps-thinking.md).
+    """
+    value = os.environ.get("OLLAMA_THINK_CHAT")
+    if value is None:
+        return None if general is None else True
+    return _parse_think("OLLAMA_THINK_CHAT", value)
+
+
 def _build_llms():
     """LLM_BACKEND=fake(기본, 결정론) | ollama(로컬 실모델) | openai(실제 OpenAI API)."""
     backend = os.environ.get("LLM_BACKEND", "fake")
     if backend == "ollama":
         from agent.ollama_llm import OllamaFastLLM, OllamaQualityLLM
+        think = _ollama_think()
         fast = OllamaFastLLM(os.environ.get("OLLAMA_FAST_MODEL", "qwen3:0.6b"),
-                             usd_per_1k_tokens=0.00015)
+                             usd_per_1k_tokens=0.00015, think=think,
+                             chat_think=_ollama_think_chat(think))
         quality = OllamaQualityLLM(os.environ.get("OLLAMA_QUALITY_MODEL", "qwen3:8b"),
-                                   usd_per_1k_tokens=0.005)
+                                   usd_per_1k_tokens=0.005, think=think)
         return backend, fast, quality
     if backend == "openai":
         from agent.openai_llm import OpenAIFastLLM, OpenAIQualityLLM
@@ -59,6 +92,65 @@ def _build_llms():
     return backend, fast, quality
 
 
+def _switch(name: str, improved: str, base: str, backend: str, allowed: tuple[str, ...]) -> str:
+    """개선 스위치 값. 지정이 없으면 ollama 는 개선 쪽, fake·openai 는 base 쪽이 기본이다.
+
+    fake 는 Wave 데모를 결정론으로 재현하는 백엔드이고 openai 는 과금이라 측정 대상이 아니다.
+    """
+    value = os.environ.get(name, improved if backend == "ollama" else base).strip().lower()
+    if value not in allowed:
+        raise ValueError(f"{name} 는 {' · '.join(allowed)} 중 하나여야 합니다: {value!r}")
+    return value
+
+
+def _make_embedder():
+    from agent.embedding import OllamaEmbedder
+    return OllamaEmbedder(os.environ.get("OLLAMA_EMBED_MODEL", "qwen3-embedding:0.6b"))
+
+
+async def _build_components(backend: str, fast_llm, quality_llm, mcp) -> tuple[dict, dict]:
+    """개선 항목의 부품을 스위치대로 만들어 (SupervisorDeps 에 실을 필드, 실제 스위치 값)을 돌려준다.
+
+    끈 부품은 넣지 않는다 — 필드가 None 이면 노드가 base 동작을 한다(docs/03-design.md 공통 원칙).
+    """
+    ollama = backend == "ollama"
+    switches = {"OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if ollama else None,
+                # 실제로 쓰는 값 — 지정이 없을 때 OLLAMA_THINK 에 따라 정해지므로 환경변수가 아니라 결과를 적는다
+                "OLLAMA_THINK_CHAT": ({None: "default", True: "true", False: "false"}[fast_llm.chat_think]
+                                      if ollama else None),
+                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
+                "TARGET_RESOLVER": _switch("TARGET_RESOLVER", "semantic", "legacy", backend,
+                                           ("semantic", "legacy")),
+                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend,
+                                     ("grounded", "format")),
+                "RUNBOOK_SELECTOR": _switch("RUNBOOK_SELECTOR", "semantic", "keyword", backend,
+                                            ("semantic", "keyword"))}
+    parts: dict = {}
+    if "semantic" in (switches["ROUTER"], switches["TARGET_RESOLVER"], switches["RUNBOOK_SELECTOR"]):
+        parts["embedder"] = _make_embedder()
+    if switches["ROUTER"] == "semantic":   # 항목 2
+        from agent.router import DEFAULT_MARGIN, LLMRouter, SemanticRouter, load_examples
+        parts["router"] = await SemanticRouter.create(
+            parts["embedder"], LLMRouter(fast_llm), load_examples(),
+            margin=float(os.environ.get("ROUTER_MARGIN", DEFAULT_MARGIN)))
+    if switches["TARGET_RESOLVER"] == "semantic":   # 항목 3 — 카탈로그는 MCP Resource 로 받는다
+        from agent.target import DEFAULT_MARGIN as TARGET_MARGIN
+        from agent.target import DEFAULT_MIN_SCORE, TargetResolver
+        catalog_server = await mcp.find_resource("catalog://systems")
+        catalog = json.loads(await mcp.read_resource("catalog://systems", server=catalog_server))
+        parts["target_resolver"] = await TargetResolver.create(
+            parts["embedder"], catalog,
+            min_score=float(os.environ.get("TARGET_MIN_SCORE", DEFAULT_MIN_SCORE)),
+            margin=float(os.environ.get("TARGET_MARGIN", TARGET_MARGIN)))
+    if switches["VALIDATOR"] == "grounded":   # 항목 4 — 판정은 답변을 쓰는 quality 모델이 맡는다
+        from agent.validator import GroundedValidator
+        parts["validator"] = GroundedValidator(quality_llm)
+    if switches["RUNBOOK_SELECTOR"] == "semantic":   # 항목 5
+        from agent.runbook import RunbookSelector, load_runbooks
+        parts["runbook_selector"] = await RunbookSelector.create(parts["embedder"], load_runbooks())
+    return parts, switches
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global CREATION_COUNT
@@ -66,13 +158,16 @@ async def lifespan(app: FastAPI):
     mcp = MCPClient()
     await mcp.start()   # Wave 2 — MCP subprocess는 서버 수명 동안 딱 1개
     backend, fast_llm, quality_llm = _build_llms()
+    parts, switches = await _build_components(backend, fast_llm, quality_llm, mcp)
     app.state.llm_backend = backend
+    app.state.switches = switches
     deps = SupervisorDeps(
         fast_llm=fast_llm,
         quality_llm=quality_llm,
         mcp=mcp,
         session_store=SqliteSessionStore(),
         version=os.environ.get("SUPERVISOR_VERSION", "v2"),
+        **parts,
     )
     app.state.deps = deps
     app.state.graph = build_graph(deps) if deps.version == "v2" else None
@@ -97,7 +192,8 @@ async def health():
             "supervisor_version": app.state.deps.version,
             "llm_backend": app.state.llm_backend,
             "fast_llm": app.state.deps.fast_llm.name,
-            "quality_llm": app.state.deps.quality_llm.name}
+            "quality_llm": app.state.deps.quality_llm.name,
+            "switches": app.state.switches}
 
 
 @app.get("/version")

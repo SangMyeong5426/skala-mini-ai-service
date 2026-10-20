@@ -6,24 +6,28 @@
 
 ## 측정 방법
 
-1. 서버를 **새로** 띄운다. MCP 클라이언트가 프로세스 첫 모니터링 조회를 일부러 한 번
-   실패시키므로(재시도 데모), 띄운 직후에 재야 Before와 After의 retry 조건이 같다.
+**`scripts/measure-at`으로 잰다.** 잴 커밋을 git worktree로 따로 꺼내 그 코드로 돌린다. 측정 도구와
+평가 세트는 지금 작업 트리의 것을, 에이전트 코드만 그 커밋의 것을 쓰므로 Before와 After가 같은 입력·같은
+채점으로 잰다. 측정 도중 작업 트리의 파일을 고쳐도 결과에 섞이지 않는다.
 
-   ```bash
-   cd project && bash sh/run_agent_ollma.sh
-   ```
+```bash
+scripts/measure-at base before write,e2e                      # Before (원본 코드)
+OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1  # 항목 1 적용, 전 단계
+project/.venv/bin/python tools/measure_queries.py compare runs/e2e_before_<시각>.json runs/e2e_step1_<시각>.json
+```
 
-2. 다른 터미널에서 회귀 쿼리([`tools/queries.json`](../tools/queries.json), 10개 · 11턴)를 보낸다.
+| 단계 | 도구 | 하는 일 |
+| --- | --- | --- |
+| `route`·`target`·`judge` | `tools/eval_nodes.py` | 노드를 직접 불러 라벨 세트로 채점 (아래 "노드 단위 평가") |
+| `write` | `tools/eval_nodes.py write` | 답변 작성 LLM 호출(`quality_llm.write`) 하나의 지연·토큰. judge 세트 정상 5건의 질문·수집 사실을 입력으로 쓰고, 300초를 넘기면 취소해 timeout으로 센다 |
+| `e2e` | `tools/measure_queries.py --spawn` | 회귀 쿼리([`tools/queries.json`](../tools/queries.json), 10개 · 11턴)를 `POST /chat`으로 보낸다. **질문마다 서버를 새로 띄우고 끝나면 내린다** |
 
-   ```bash
-   project/.venv/bin/python tools/measure_queries.py run --label before --repeat 3
-   ```
+질문마다 서버를 새로 띄우는 이유: base에서는 클라이언트가 300초 timeout으로 끊어도 서버가 그 요청의
+LLM 생성을 끝까지 계속한다. 한 서버로 이어서 재면 앞 질문의 생성이 ollama를 붙잡아 뒤 질문의 지연에
+섞인다. 프로세스를 내리면 연결이 끊기며 ollama 생성도 취소된다. 대신 MCP 첫 조회 재시도(데모)가 장애
+질문마다 한 번씩 일어나 `retry_count`가 늘 1이다 — Before와 After 조건이 같으므로 비교에는 문제없다.
 
-3. 개선 후 같은 백엔드·모델·repeat로 다시 재고 비교한다.
-
-   ```bash
-   project/.venv/bin/python tools/measure_queries.py compare runs/before_<시각>.json runs/after_<시각>.json
-   ```
+측정하는 동안 같은 ollama로 다른 요청(웹 채팅 등)을 보내지 않는다. 지연시간이 섞인다.
 
 | 지표 | 뜻 | 출처 |
 | --- | --- | --- |
@@ -45,6 +49,10 @@
   토큰 수에 가상 단가(`server.py`의 `usd_per_1k_tokens`)를 곱한 추정이다. 표에 그렇게 적는다.
 - 같은 백엔드·같은 모델·같은 repeat 수로 잰 것끼리만 비교한다. `compare`가 다르면 경고한다.
 - 측정 시점의 커밋은 결과 파일의 `git.commit`에 남는다. Before는 `base` 태그에서 잰다.
+  개선 스위치(`OLLAMA_THINK` 등) 값은 `switches`에 남는다.
+- route·target·judge의 Before(10:13~10:30)는 `scripts/measure-at`을 만들기 전에 작업 트리에서 쟀다
+  (`agent_matches_base: true`, LangSmith 추적 켜짐). 이후 측정은 worktree에 `.env`가 없어 추적이 꺼진
+  채로 돈다. 추적은 별도 스레드로 보내므로 LLM 호출 시간(초 단위)에 비해 차이는 무시할 만하다.
 
 ## 노드 단위 평가
 
@@ -64,7 +72,8 @@ project/.venv/bin/python tools/eval_nodes.py all --label before
 | --- | --- |
 | 기기 | Apple M5, RAM 16GB (Metal, GPU 가용 11.8GiB) |
 | LLM 백엔드 · 모델 | ollama 0.33.0 · qwen3:0.6b(fast) / qwen3:8b(quality), temperature 0 |
-| repeat | 노드 평가 1회 (temperature 0). 회귀 쿼리는 TBD |
+| repeat | 1회 (temperature 0). 회귀 쿼리는 질문마다 서버를 새로 띄움 |
+| 임베딩 | qwen3-embedding:0.6b (항목 2·3·5) |
 
 ## Before (`base`) — 2026-10-20
 
@@ -134,6 +143,40 @@ qwen3:0.6b도 thinking이 폭주한다. 실서버였다면 이 질문은 5분 �
 현재 검수는 "30자 이상 + `1)` 포함"만 본다. 수치 조작, 수집하지 않은 지표, 다른 시스템 진단,
 질문 무관(실제 응답 원문 b1 포함), 결론 왜곡, 지표 바꿔치기가 모두 형식을 지켜서 통과한다.
 
+### 답변 작성 (write) — `runs/eval-write_before_20261020-110710.json`
+
+judge 세트 정상 5건의 질문·수집 사실로 quality 모델(qwen3:8b)의 `write`를 직접 불렀다.
+
+| 지표 | 값 |
+| --- | --- |
+| 완료 | 5/5 (300초 timeout 0) |
+| 지연 중앙값 · 최대 | 34.8초 · 78.3초 |
+| 토큰 중앙값 (입력 + 생성, 생각 포함) | 1,029 |
+
+### runbook 선택 (runbook) — `runs/eval-runbook_before_20261020-112839.json`
+
+키워드 규칙이라 LLM을 쓰지 않는다. **6/10.** 알림이 아직 없는 시스템(r07·r08)은 `db-down`, 알림 종류가
+섞이면(r04) 또는 알림과 질문 증상이 다르면(r09) 규칙 순서상 먼저 걸리는 `cpu-spike`를 골랐다.
+
+### 회귀 쿼리 (e2e) — `runs/e2e_before_20261020-111046.json`
+
+질문마다 서버를 새로 띄워 11턴을 보냈다. **timeout 0건.**
+
+| # | 질문 | route | 지연 |
+| --- | --- | --- | --- |
+| 1 | payments-service 결제 응답이 느려지고 CPU가 치솟았어요… | incident | 37.9초 |
+| 2 | cache-service 메모리 사용률이 계속 올라가고 있어요 | incident | 50.5초 |
+| 3 | log-service 디스크 공간이 부족하다는 알림이 왔어요 | incident | 90.5초 |
+| 4 | gateway-service에서 payments-service로 가는 요청이 타임아웃… | incident | 39.7초 |
+| 5 | web-01 CPU 급증, auth-service 커넥션 풀도 같이 확인해줘 | incident | 51.6초 |
+| 6 | payments-service랑 cache-service 둘 다 저하됐는데… | incident | 52.2초 |
+| 7 | 로그인 응답이 느려요, 원인 확인해주세요 | incident | 36.1초 |
+| 8 | billing-service 응답이 느려요 | incident | 47.8초 |
+| 9 | 안녕, 너는 누구야? | chat | 1.9초 |
+| 10 | 제 이름은 민수입니다 | chat | 1.9초 |
+| 10.2 | 제 이름이 뭐였죠? | chat | 1.2초 |
+| | **합계** | | **411.4초** (추정 비용 $0.0478) |
+
 ### 요약
 
 | 평가 | Before |
@@ -141,13 +184,142 @@ qwen3:0.6b도 thinking이 폭주한다. 실서버였다면 이 질문은 5분 �
 | 분류 정확도 | 23/30 (76.7%) |
 | 대상 시스템 정확도 | 6/15 (40%), 엉뚱한 진단 7건, timeout 1건 |
 | 오염 초안 탐지 | 0/7 |
-| 회귀 쿼리 지연시간 | TBD — 백엔드를 새로 띄운 직후 `measure_queries.py`로 잰다 |
+| 답변 작성 지연 중앙값 | 34.8초 |
+| runbook 선택 | 6/10 |
+| 회귀 쿼리 11턴 합계 | 411.4초, timeout 0 |
 
 route 결과 파일은 `eval_nodes.py`에 항목별 오류 기록을 넣기 전 버전으로 쟀다. 그 측정에서는 오류가
 없었으므로 채점은 같다.
 
-## 결과
+## step1 (항목 1 — thinking 끔) — 2026-10-20
 
-| 개선 항목 | Before 파일 | After 파일 | 핵심 수치 | 해석 |
+`OLLAMA_THINK=false scripts/measure-at feat/ollama-think step1` (코드 `63fdab2` — 항목 1만 적용).
+
+| 평가 | base | step1 | 원자료 |
+| --- | --- | --- | --- |
+| 분류 정확도 | 23/30 | 24/30 | `runs/eval-route_step1_20261020-111855.json` |
+| 분류 지연 중앙값 | 0.986초 | 0.121초 | 〃 |
+| 대상 시스템 정확도 | 6/15 | **5/15** | `runs/eval-target_step1_20261020-111901.json` |
+| 엉뚱한 진단 | 7 | **10** | 〃 |
+| plan 지연 중앙값 · 최대 | 2.239초 · 300.0초 | 0.588초 · 1.2초 | 〃 |
+| 오염 초안 탐지 | 0/7 | 0/7 (코드 검사라 같다) | `runs/eval-judge_step1_20261020-111913.json` |
+| 답변 작성 지연 중앙값 · 최대 | 34.8초 · 78.3초 | **9.3초 · 12.2초** | `runs/eval-write_step1_20261020-111914.json` |
+| 답변 작성 토큰 중앙값 | 1,029 | 580 | 〃 |
+| 회귀 쿼리 11턴 합계 | 411.4초 | **101.4초 (−75.3%)** | `runs/e2e_step1_20261020-112004.json` |
+| 추정 비용 합계 | $0.0478 | $0.0289 (−39.6%) | 〃 |
+
+thinking을 끄면 빨라지는 대신 0.6b의 판단이 거칠어진다. 대상 계획에서 시스템 다섯 개를 한꺼번에 조사하거나
+(i04·i07), 회귀 쿼리 10번 "제 이름은 민수입니다"를 장애로 분류했다(1.9초 → 11.9초). 이 손실을 항목 2·3이 메운다.
+
+## final (항목 1~5 모두) — 2026-10-20
+
+```bash
+OLLAMA_THINK=false ROUTER=semantic TARGET_RESOLVER=semantic VALIDATOR=grounded RUNBOOK_SELECTOR=semantic \
+  scripts/measure-at feat/runbook-rag final
+```
+
+코드 `bdd205e`. 노드 평가는 노드 하나만 부르므로, 각 노드의 final 결과가 곧 그 노드를 바꾼 항목의 효과다
+(route ← 항목 2, plan ← 항목 3, validate ← 항목 4, replan_check ← 항목 5, write ← 항목 1).
+route·target은 판정 방식(method)을 기록하도록 도구를 고친 뒤 같은 조건으로 한 번 더 쟀고, 두 번 모두 같은
+점수였다(`…113217`·`…113756`, `…113223`·`…113803`).
+
+### 노드 평가
+
+| 평가 | base | step1 | **final** | 원자료 (final) |
 | --- | --- | --- | --- | --- |
-| TBD | TBD | TBD | TBD | TBD |
+| 분류 정확도 | 23/30 | 24/30 | **30/30** | `runs/eval-route_final_20261020-113756.json` |
+| 분류 방식 | LLM | LLM | 임베딩 29 · LLM 폴백 1 | 〃 |
+| 분류 지연 중앙값 | 0.986초 | 0.121초 | **0.043초** | 〃 |
+| 대상 시스템 정확도 | 6/15 | 5/15 | **13/15** | `runs/eval-target_final_20261020-113803.json` |
+| 진단할 질문 · 되물을 질문 | 6/10 · 0/5 | 5/10 · 0/5 | **10/10 · 3/5** | 〃 |
+| 엉뚱한 진단 | 7 | 10 | **2** | 〃 |
+| plan 지연 중앙값 · 최대 | 2.239초 · 300.0초 | 0.588초 · 1.2초 | 0.035초 · 1.5초 | 〃 |
+| 오염 초안 탐지 · 정상 오탐 | 0/7 · 0/5 | 0/7 · 0/5 | **6/7 · 0/5** | `runs/eval-judge_final_20261020-113227.json` |
+| 검수 지연 중앙값 | 0초 | 0초 | 3.465초 | 〃 |
+| 답변 작성 지연 중앙값 | 34.8초 | 9.3초 | 10.2초 | `runs/eval-write_final_20261020-113307.json` |
+| runbook 선택 | 6/10 | 6/10 | **8/10** | `runs/eval-runbook_final_20261020-113405.json` |
+
+final에서 틀린 것:
+
+| 평가 | 문항 | 결과 |
+| --- | --- | --- |
+| target | i11 사이트가 전체적으로 너무 느려요 | 되묻기 대신 web-01 — "사이트"가 웹 서버 설명에 끌림 |
+| target | i15 서버가 좀 이상한데? | 되묻기 대신 web-01 — "서버"가 웹 서버 설명에 끌림 |
+| judge | b1 실제 응답 원문(질문 무관) | 통과 — LLM 판정이 놓침. 같은 유형의 합성 초안 b5는 잡았다 |
+| runbook | r01 payments CPU 치솟음 + 응답 느림 | high-latency — base는 맞혔다 |
+| runbook | r04 gateway → payments 타임아웃 | high-latency — base도 틀렸다(cpu-spike) |
+
+### 회귀 쿼리 — `runs/e2e_final_20261020-113408.json`
+
+| # | 질문 | base | step1 | **final** |
+| --- | --- | --- | --- | --- |
+| 1 | payments-service 결제 응답이 느려지고 CPU가 치솟았어요… | 37.9초 | 11.1초 | 15.5초 |
+| 2 | cache-service 메모리 사용률이 계속 올라가고 있어요 | 50.5초 | 8.2초 | 15.4초 |
+| 3 | log-service 디스크 공간이 부족하다는 알림이 왔어요 | 90.5초 | 10.2초 | 14.3초 |
+| 4 | gateway-service에서 payments-service로… (두 시스템) | 39.7초 | 10.6초 | 31.6초 |
+| 5 | web-01 CPU 급증, auth-service 커넥션 풀도… (두 시스템) | 51.6초 | 12.5초 | 23.9초 |
+| 6 | payments-service랑 cache-service 둘 다… (두 시스템) | 52.2초 | 12.6초 | 34.2초 |
+| 7 | 로그인 응답이 느려요, 원인 확인해주세요 | 36.1초 | 12.9초 | 23.0초 |
+| 8 | billing-service 응답이 느려요 | 47.8초 (진단¹) | 10.7초 (진단¹) | **0.09초 (되묻기)** |
+| 9 | 안녕, 너는 누구야? | 1.9초 | 0.4초 | 0.4초 |
+| 10 | 제 이름은 민수입니다 | 1.9초 | 11.9초 (장애로 오분류) | 0.3초 |
+| 10.2 | 제 이름이 뭐였죠? | 1.2초 | 0.2초 | 0.2초 |
+| | **합계** | **411.4초** | **101.4초** | **159.0초** |
+| | 추정 비용 합계 (가상 단가) | $0.0478 | $0.0289 | $0.0514 |
+| | timeout | 0 | 0 | 0 |
+
+¹ 회귀 쿼리 결과에는 조사 대상이 남지 않는다. 같은 질문인 대상 평가 i06에서 base·step1 모두 auth-service로
+채웠다.
+
+final이 step1보다 느리고 비싼 이유는 **장애 답변마다 검수 LLM 판정(8b)이 한 번 더 돌기 때문**이다(검수 한 번에
+약 3.5초). 시스템이 둘인 질문(4~6)은 비교 분석 여부를 묻는 LLM 계획과 더 긴 답변이 더해져 20초 이상 늘었다.
+반대로 대상 밖 시스템(8)은 진단 없이 바로 되묻고 끝나 0.09초다.
+
+final 구성에서 실제로 나간 답을 따로 확인했다(답변 본문을 기록하도록 도구를 고친 뒤, 기록은 scratchpad).
+"ai 에이전트에 대해 설명해줘"는 0.38초에 일반 대화로 답했다. **"제 이름이 뭐였죠?"는 "민수님의 이름이 정확히
+알려졌습니다."라고 답했다** — 이름은 기억하지만 질문에 맞는 답이 아니다. 대화 답변(0.6b)도 thinking을 끈
+영향이다([0002 한계](decisions/0002-ollama-think-control.md#한계와-트레이드오프)).
+
+## final2 (final + 대화 경로만 thinking) — 2026-10-20
+
+final의 대화 답이 어색해져([0002](decisions/0002-ollama-think-control.md#한계와-트레이드오프)) 대화 경로만 thinking을
+다시 켰다([0007](decisions/0007-chat-keeps-thinking.md)). 장애 처리 경로는 같은 코드다.
+
+```bash
+OLLAMA_THINK=false ROUTER=semantic TARGET_RESOLVER=semantic VALIDATOR=grounded RUNBOOK_SELECTOR=semantic \
+  scripts/measure-at feat/chat-think final2 e2e        # OLLAMA_THINK_CHAT 은 지정하지 않아 true
+```
+
+`runs/e2e_final2_20261020-132116.json` (코드 `32b59c1`, 이 측정부터 답변 본문을 기록한다).
+
+| # | final | final2 | final2 답변 (대화만) |
+| --- | --- | --- | --- |
+| 1 | 15.5초 | 18.0초 | |
+| 2 | 15.4초 | 12.5초 | |
+| 3 | 14.3초 | 13.1초 | |
+| 4 | 31.6초 | 16.5초 | |
+| 5 | 23.9초 | 19.9초 | |
+| 6 | 34.2초 | 14.2초 | |
+| 7 | 23.0초 | 14.5초 | |
+| 8 | 0.09초 | 0.09초 | (되묻기) |
+| 9 | 0.4초 | 0.9초 | "안녕하세요! 저는 빠르게 비서입니다." |
+| 10 | 0.3초 | 0.5초 | "안녕하세요!" |
+| 10.2 | 0.2초 | 0.6초 | "저의 이름은 민수입니다." |
+| **합계** | **159.0초** | **110.8초** | 추정 비용 $0.0514 → $0.0496, timeout 0 |
+
+**1회 측정의 편차가 크다.** 장애 질문 1~7은 final과 final2가 같은 코드인데 합계가 158.0초 → 108.8초(−31%)로
+달라졌다. 모니터링 Tool이 호출마다 수치를 흔들어(지터) 프롬프트가 달라지고, 그에 따라 생성 길이와 검수 결과가
+달라진다. base → final의 차이(411초 → 110~159초)는 이 편차보다 훨씬 크지만, 발표용 수치는 `--repeat 3`으로
+다시 재 중앙값을 쓰는 편이 안전하다([`followups.md`](followups.md)).
+
+## 결과 요약 — base → final
+
+| 개선 항목 | 핵심 수치 (base → final) | 결정 기록 |
+| --- | --- | --- |
+| 1 thinking 제어 | 회귀 쿼리 합계 411.4초 → 101.4초(step1) · 답변 작성 중앙값 34.8초 → 9.3초 · plan 최악 300초 timeout → 1.2초 | [0002](decisions/0002-ollama-think-control.md) |
+| 2 의미 라우터 | 분류 23/30 → **30/30**, 분류 지연 0.986초 → 0.043초 | [0003](decisions/0003-semantic-router.md) |
+| 3 대상 추정·되묻기 | 대상 6/15 → **13/15**, 되묻기 0/5 → 3/5, 엉뚱한 진단 7 → 2 | [0004](decisions/0004-target-resolver.md) |
+| 4 검수 근거 검증 | 오염 초안 탐지 0/7 → **6/7**, 정상 오탐 0/5 유지, 검수 +3.5초 | [0005](decisions/0005-grounded-validator.md) |
+| 5 runbook 의미 검색 | 6/10 → 8/10 — **원래 문항만 보면 5/6 → 4/6**, 효과 불확실 | [0006](decisions/0006-runbook-selector.md) |
+| 1 보완 — 대화만 thinking | 대화 답 자연스러움 6건 중 1 → 4, 대화 지연 +0.5초 (0.2초 → 0.7초, base 1.2~1.9초) | [0007](decisions/0007-chat-keeps-thinking.md) |
+| 전체 (회귀 쿼리 11턴) | 411.4초 → **159.0초 (final) · 110.8초 (final2)** — 1회 측정 편차 ±30% 안팎, timeout 0 → 0 | — |

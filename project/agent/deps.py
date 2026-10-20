@@ -3,6 +3,9 @@
 노드 함수가 closure의 지역 변수에 암묵적으로 기대지 않도록, supervisor가 쓰는 모든
 의존성을 SupervisorDeps 하나에 명시적으로 담아 functools.partial로 각 노드에 주입한다.
 파일을 어디로 옮겨도, 단위 테스트에서 mock deps로 갈아 끼워도 동작이 같다.
+
+개선 항목(docs/03-design.md)의 부품도 여기에 싣는다. 값이 None 이면 노드는 base 동작을
+그대로 한다 — 스위치를 끈 서버, v1 파이프라인, 기존 테스트가 손대지 않아도 돈다.
 """
 from dataclasses import dataclass
 from typing import Any
@@ -15,3 +18,8 @@ class SupervisorDeps:
     mcp: Any             # Wave 2  — MCP stdio 클라이언트 (Tool/Resource/Prompt)
     session_store: Any   # Wave 12 — SQLite 세션 저장소
     version: str         # Wave 14 — SUPERVISOR_VERSION (v1/v2)
+    embedder: Any = None          # 항목 2·3·5 — 임베딩 클라이언트 (라우터·대상 추정·runbook 선택이 나눠 쓴다)
+    router: Any = None            # 항목 2 — None 이면 fast_llm.route
+    target_resolver: Any = None   # 항목 3 — None 이면 base 의 plan (auth-service 폴백 포함)
+    validator: Any = None         # 항목 4 — None 이면 30자 + "1)" 검사
+    runbook_selector: Any = None  # 항목 5 — None 이면 알림 문구 키워드 규칙

@@ -1,0 +1,12 @@
+[
+  {"id": "r01", "query": "payments-service 결제 응답이 느려지고 CPU가 치솟았어요, 원인 확인해주세요", "targets": ["payments-service"], "expected_runbook": "cpu-spike", "tag": "target i01"},
+  {"id": "r02", "query": "cache-service 메모리 사용률이 계속 올라가고 있어요", "targets": ["cache-service"], "expected_runbook": "memory-leak", "tag": "target i02"},
+  {"id": "r03", "query": "log-service 디스크 공간이 부족하다는 알림이 왔어요", "targets": ["log-service"], "expected_runbook": "disk-full", "tag": "target i03"},
+  {"id": "r04", "query": "gateway-service에서 payments-service로 가는 요청이 타임아웃 나고 있어요", "targets": ["gateway-service", "payments-service"], "expected_runbook": "network-timeout", "tag": "target i04 — 두 시스템의 알림 종류가 다르다"},
+  {"id": "r05", "query": "로그인 응답이 느려요, 원인 확인해주세요", "targets": ["auth-service"], "expected_runbook": "high-latency", "tag": "target i05"},
+  {"id": "r06", "query": "auth-service 커넥션 풀이 꽉 찼다는 알림이 떴어요", "targets": ["auth-service"], "expected_runbook": "high-latency", "tag": "target i09"},
+  {"id": "r07", "query": "web-01 CPU 사용률이 갑자기 100%까지 올랐어요", "targets": ["web-01"], "expected_runbook": "cpu-spike", "tag": "모니터링에 아직 알림 없음 — 증상은 질문에만 있다"},
+  {"id": "r08", "query": "web-01 메모리가 몇 시간째 계속 늘고 있어요", "targets": ["web-01"], "expected_runbook": "memory-leak", "tag": "모니터링에 아직 알림 없음 — 증상은 질문에만 있다"},
+  {"id": "r09", "query": "payments-service가 DB에 연결을 못 한다는 에러가 나요", "targets": ["payments-service"], "expected_runbook": "db-down", "tag": "알림(CPU)과 질문 증상(DB 연결)이 다르다"},
+  {"id": "r10", "query": "cache-service 힙 메모리가 한계에 가까워요", "targets": ["cache-service"], "expected_runbook": "memory-leak", "tag": "알림 문구와 같은 증상"}
+]

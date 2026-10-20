@@ -8,6 +8,10 @@
 | `route.json` | 30 (chat 15 · incident 15) | `route_node` | `expected_route` | 2 의미 라우터 |
 | `target.json` | 15 (진단 10 · 되묻기 5) | `plan_node` | `expected_action`, `expected_targets`, `expected_runbook` | 3 대상 시스템 추정, 5 runbook |
 | `judge.json` | 12 (정상 5 · 오염 7) | `validate_node` | `expected`(pass/fail), `defect` | 4 검수 강화 |
+| `runbook.json` | 10 | `replan_check_node` | `expected_runbook` | 5 runbook 선택 |
+
+조정용 문장(`../tuning/`)은 평가 세트가 아니다. 판정 기준(margin·min_score)을 정하는 데만 쓰고,
+평가 세트로는 기준을 고르지 않는다.
 
 ## 라벨을 붙인 기준
 
@@ -22,6 +26,10 @@
   종류(`defect`)를 하나씩 심었다. `b1`만 실제 응답 원문이고(2026-10-20 웹 채팅, "ai 에이전트에 대해
   설명해줘" 오분류), 나머지는 손으로 썼다(`source`). runbook은 본문 대신 이름(`ref`)으로 적고
   스크립트가 `project/data/runbooks/`에서 읽어 넣는다.
+
+- **runbook**: 증상이 runbook 하나를 분명히 가리키는 질문만 넣었다. 6문항(r01~r06)은 target 세트에서
+  가져왔고, 4문항(r07~r10)은 **항목 5 설계 뒤에** 새로 썼다 — 모니터링에 아직 알림이 없거나 알림과
+  질문 증상이 다른 경우다. 질문을 보지 않는 base 규칙의 약점을 겨냥한 문항이 들어 있다는 뜻이다.
 
 ## 지킬 것
 
