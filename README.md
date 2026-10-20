@@ -8,6 +8,7 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 
 | 항목 | 값 |
 | --- | --- |
+| 저장소 | <https://github.com/SangMyeong5426/skala-mini-ai-service> |
 | 과제 | **1. Base AI Agent 개선** — 질문을 제대로 이해하고 근거 있는 답만 내보내는 에이전트 ([`docs/01-plan.md`](docs/01-plan.md)) |
 | 핵심 결과 (반복 3회 중앙값) | 회귀 쿼리 11턴 396.5초 → **123.8초**, timeout 1 → 0 · 분류 23/30 → 30/30 · 대상 6/15 → 13/15 · 오염 초안 탐지 0/7 → 6/7 ([`02-measurement.md`](docs/02-measurement.md#발표용-수치--base--final2-반복-3회-중앙값-2026-10-20)) |
 | 요건·평가 기준 | [`docs/00-assignment.md`](docs/00-assignment.md) |
@@ -22,7 +23,8 @@ LangGraph StateGraph · MCP(Tool/Resource/Prompt) · SSE 스트리밍 · SQLite 
 필요한 것: Python 3.11, [Ollama](https://ollama.com). 모든 명령은 `project/`에서 실행한다.
 
 ```bash
-cd project
+git clone https://github.com/SangMyeong5426/skala-mini-ai-service.git
+cd skala-mini-ai-service/project
 bash sh/setup_venv.sh                                    # .venv + requirements.txt (최초 1회)
 ./.venv/bin/python3 -m pip install -r requirements-dev.txt   # pytest, ruff
 cp -n .env.example .env                                  # LangSmith 키를 채운다
