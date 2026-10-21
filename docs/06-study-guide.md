@@ -12,6 +12,7 @@
 | --- | --- |
 | **이 문서** | 공부용 — 장표 구성안, 코드를 따라 읽는 순서, 외울 숫자, 자기 점검 문제 |
 | [`05-presentation-notes.md`](05-presentation-notes.md) | 발표 준비 노트 — 쉬운 용어 풀이, 기능별 설명, 시연 순서, 예상 질문 |
+| [`07-concepts.md`](07-concepts.md) | 개념 풀이 — 발표에서 말하지 않는 MCP·Tool·RAG·임베딩·partial 등을 비유와 우리 코드로 |
 | [`04-report.md`](04-report.md) | 제출용 결과 보고서 |
 | [`02-measurement.md`](02-measurement.md) · [`decisions/`](decisions/) | 수치 원본 · 기능마다 "왜"의 원본 |
 
