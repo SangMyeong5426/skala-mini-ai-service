@@ -1,0 +1,356 @@
+{
+  "kind": "rroute",
+  "label": "oa-after",
+  "started_at": "20261021-093510",
+  "evalset": "tools/evalsets/rating_route.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-l9ReTZ",
+  "git": {
+    "commit": "ae379fc",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "openai",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": null,
+    "CASE_SEARCH": null,
+    "RATING_ASSESSOR": null,
+    "CHAT_GROUNDING": null
+  },
+  "health": {
+    "llm_backend": "openai",
+    "domain": "rating",
+    "fast_llm": "openai:gpt-4o-mini",
+    "quality_llm": "openai:gpt-4o",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": null,
+      "OLLAMA_THINK_CHAT": null,
+      "ROUTER": "semantic",
+      "RATING_CLARIFY": "rule",
+      "CASE_SEARCH": "semantic",
+      "RATING_ASSESSOR": "criteria",
+      "VALIDATOR": "grounded",
+      "CHAT_GROUNDING": "law"
+    }
+  },
+  "summary": {
+    "n": 30,
+    "accuracy": "29/30",
+    "chat_as_review": 1,
+    "review_as_chat": 0,
+    "methods": {
+      "semantic": 24,
+      "llm-fallback": 6
+    },
+    "latency_median_s": 0.035
+  },
+  "results": [
+    {
+      "id": "c01",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.1176,
+      "latency_s": 0.037,
+      "error": null
+    },
+    {
+      "id": "c02",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.046,
+      "latency_s": 0.032,
+      "error": null
+    },
+    {
+      "id": "c03",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.1412,
+      "latency_s": 0.031,
+      "error": null
+    },
+    {
+      "id": "c04",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": -0.0257,
+      "latency_s": 0.925,
+      "error": null
+    },
+    {
+      "id": "c05",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.222,
+      "latency_s": 0.107,
+      "error": null
+    },
+    {
+      "id": "c06",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.1881,
+      "latency_s": 0.035,
+      "error": null
+    },
+    {
+      "id": "c07",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": 0.0025,
+      "latency_s": 0.831,
+      "error": null
+    },
+    {
+      "id": "c08",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": -0.0362,
+      "latency_s": 0.855,
+      "error": null
+    },
+    {
+      "id": "c09",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": 0.0024,
+      "latency_s": 0.974,
+      "error": null
+    },
+    {
+      "id": "c10",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.2052,
+      "latency_s": 0.05,
+      "error": null
+    },
+    {
+      "id": "c11",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.0946,
+      "latency_s": 0.04,
+      "error": null
+    },
+    {
+      "id": "c12",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "semantic",
+      "gap": -0.0509,
+      "latency_s": 0.041,
+      "error": null
+    },
+    {
+      "id": "c13",
+      "expected": "chat",
+      "pred": "review",
+      "ok": false,
+      "method": "semantic",
+      "gap": 0.073,
+      "latency_s": 0.034,
+      "error": null
+    },
+    {
+      "id": "c14",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": -0.0338,
+      "latency_s": 0.79,
+      "error": null
+    },
+    {
+      "id": "c15",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm-fallback",
+      "gap": -0.0391,
+      "latency_s": 0.93,
+      "error": null
+    },
+    {
+      "id": "r01",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1371,
+      "latency_s": 0.074,
+      "error": null
+    },
+    {
+      "id": "r02",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1441,
+      "latency_s": 0.039,
+      "error": null
+    },
+    {
+      "id": "r03",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1156,
+      "latency_s": 0.036,
+      "error": null
+    },
+    {
+      "id": "r04",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1208,
+      "latency_s": 0.033,
+      "error": null
+    },
+    {
+      "id": "r05",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1096,
+      "latency_s": 0.033,
+      "error": null
+    },
+    {
+      "id": "r06",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1505,
+      "latency_s": 0.034,
+      "error": null
+    },
+    {
+      "id": "r07",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.0729,
+      "latency_s": 0.035,
+      "error": null
+    },
+    {
+      "id": "r08",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1839,
+      "latency_s": 0.033,
+      "error": null
+    },
+    {
+      "id": "r09",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1983,
+      "latency_s": 0.032,
+      "error": null
+    },
+    {
+      "id": "r10",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1381,
+      "latency_s": 0.032,
+      "error": null
+    },
+    {
+      "id": "r11",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.0867,
+      "latency_s": 0.031,
+      "error": null
+    },
+    {
+      "id": "r12",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1496,
+      "latency_s": 0.031,
+      "error": null
+    },
+    {
+      "id": "r13",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1314,
+      "latency_s": 0.032,
+      "error": null
+    },
+    {
+      "id": "r14",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1312,
+      "latency_s": 0.032,
+      "error": null
+    },
+    {
+      "id": "r15",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "semantic",
+      "gap": 0.1069,
+      "latency_s": 0.035,
+      "error": null
+    }
+  ]
+}

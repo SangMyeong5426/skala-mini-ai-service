@@ -1,0 +1,355 @@
+{
+  "kind": "rroute",
+  "label": "oa-before",
+  "started_at": "20261021-093050",
+  "evalset": "tools/evalsets/rating_route.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-SGzkTR",
+  "git": {
+    "commit": "ae379fc",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "openai",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct",
+    "CHAT_GROUNDING": "off"
+  },
+  "health": {
+    "llm_backend": "openai",
+    "domain": "rating",
+    "fast_llm": "openai:gpt-4o-mini",
+    "quality_llm": "openai:gpt-4o",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": null,
+      "OLLAMA_THINK_CHAT": null,
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format",
+      "CHAT_GROUNDING": "off"
+    }
+  },
+  "summary": {
+    "n": 30,
+    "accuracy": "30/30",
+    "chat_as_review": 0,
+    "review_as_chat": 0,
+    "methods": {
+      "llm": 30
+    },
+    "latency_median_s": 0.794
+  },
+  "results": [
+    {
+      "id": "c01",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.702,
+      "error": null
+    },
+    {
+      "id": "c02",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.696,
+      "error": null
+    },
+    {
+      "id": "c03",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.693,
+      "error": null
+    },
+    {
+      "id": "c04",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 1.037,
+      "error": null
+    },
+    {
+      "id": "c05",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.683,
+      "error": null
+    },
+    {
+      "id": "c06",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.776,
+      "error": null
+    },
+    {
+      "id": "c07",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.676,
+      "error": null
+    },
+    {
+      "id": "c08",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.815,
+      "error": null
+    },
+    {
+      "id": "c09",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.92,
+      "error": null
+    },
+    {
+      "id": "c10",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.947,
+      "error": null
+    },
+    {
+      "id": "c11",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.689,
+      "error": null
+    },
+    {
+      "id": "c12",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.857,
+      "error": null
+    },
+    {
+      "id": "c13",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.811,
+      "error": null
+    },
+    {
+      "id": "c14",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.777,
+      "error": null
+    },
+    {
+      "id": "c15",
+      "expected": "chat",
+      "pred": "chat",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.986,
+      "error": null
+    },
+    {
+      "id": "r01",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.656,
+      "error": null
+    },
+    {
+      "id": "r02",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.933,
+      "error": null
+    },
+    {
+      "id": "r03",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.649,
+      "error": null
+    },
+    {
+      "id": "r04",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.767,
+      "error": null
+    },
+    {
+      "id": "r05",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.831,
+      "error": null
+    },
+    {
+      "id": "r06",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.67,
+      "error": null
+    },
+    {
+      "id": "r07",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.703,
+      "error": null
+    },
+    {
+      "id": "r08",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.833,
+      "error": null
+    },
+    {
+      "id": "r09",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 1.013,
+      "error": null
+    },
+    {
+      "id": "r10",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.691,
+      "error": null
+    },
+    {
+      "id": "r11",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.772,
+      "error": null
+    },
+    {
+      "id": "r12",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.842,
+      "error": null
+    },
+    {
+      "id": "r13",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 1.093,
+      "error": null
+    },
+    {
+      "id": "r14",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 0.824,
+      "error": null
+    },
+    {
+      "id": "r15",
+      "expected": "review",
+      "pred": "review",
+      "ok": true,
+      "method": "llm",
+      "gap": null,
+      "latency_s": 1.304,
+      "error": null
+    }
+  ]
+}
