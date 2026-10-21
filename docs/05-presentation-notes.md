@@ -154,11 +154,12 @@ flowchart LR
 | `project/agent/mcp_client.py` | `find_tool` 추가, 등급 서버 목록 | 어느 서버에 도구가 있는지 미리 가정하지 않고 찾는다(Base 방식) |
 | `project/agent/router.py` | 라벨 이름을 고정값에서 인자로 | 과제 1 의미 라우터를 이 도메인에 다시 쓰려고 |
 | `scripts/measure-at`, `tools/measure_queries.py` | 등급 평가 단계·스위치 기록 | 같은 커밋에서 Before/After 를 재는 도구 |
+| `project/web_chat.html` | `/health` 의 `domain` 을 보고 제목·입력 예시·진행 표시를 등급 점검 문구로 | 원본 문구("운영 인시던트", "장애유형: undefined")가 시연에 그대로 보였다. 인시던트 모드 화면은 그대로 |
 
 ### 과제 2에서 손대지 않은 것
 
-`web_chat.html`(채팅 화면), `web_demo_server.py`, `mcp_server.py`·`mcp_server_docs.py`(인시던트), `sh/` 실행 스크립트 — `git diff task1..HEAD`로 확인했다. 그래서 **채팅 화면 제목이 아직
-"운영 인시던트 대응 에이전트"로 나온다**. 시연 전에 고칠지 정해야 한다(9절).
+`web_demo_server.py`(화면 서버·프록시), `mcp_server.py`·`mcp_server_docs.py`(인시던트), `sh/` 실행 스크립트 — `git diff task1..HEAD`로 확인했다.
+채팅 화면(`web_chat.html`)은 노드·이벤트 이름을 과제 1과 같게 둬서 그대로 돌았고, 마지막에 문구만 등급 점검용으로 바꿨다(위 표).
 
 ---
 
@@ -373,7 +374,7 @@ cd project && bash sh/run_frontend.sh
 - 백엔드 스크립트가 묻는 "계속하시겠습니까?"에 `y`. 끝에 보여 주는 curl 예시는 과제 1(auth-service) 것이라 무시한다.
 - 발표의 수치는 모두 qwen3(Ollama)로 잰 값이다. OpenAI 답은 다를 수 있다(예: 신체 절단 RPG — qwen 15세이용가, gpt-4o 청소년이용불가).
   "같은 에이전트에 모델만 바꿔 끼울 수 있다"까지만 말하고, OpenAI 결과를 수치로 쓰지 않는다.
-- 화면의 진행 표시는 과제 1 문구 그대로라 "대응 매뉴얼(runbook) 조회 (장애유형: undefined)" 같은 줄이 보인다(화면 코드는 고치지 않았다).
+- 진행 표시가 단계마다 나온다: 등급 점검 요청으로 분류 → 계획 → 비슷한 실제 결정 N건 → 통계(MCP Tool) → 기준표(MCP Resource) → 항목별 판정 → 초안 → 검수. 설명할 때 이 줄을 짚으면 된다.
 
 아래 입력은 모두 평가셋·회귀 쿼리에 있는 문장이라 측정 때(qwen3) 나온 답을 알고 있다. 온도 0으로 돌려 변동은 적지만 같은 답이 보장되지는 않는다 — 리허설로 한 번 확인한다.
 
@@ -394,7 +395,7 @@ ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=f
 - 점검 한 번에 40~60초 걸린다. 시연 시간을 고려해 캡처를 미리 떠 두는 것이 안전하다.
 - 피가 나오지 않는 좀비 게임(회귀 쿼리 10)은 여전히 청소년이용불가로 나온다. 한계를 보여 줄 때만 쓴다 — 이 답의 "설명만으로는 판정 근거가 부족해" 문장은
   정확하지 않다(설명 인용이 근거로 있었다. followups). 연애 시뮬레이션(회귀 쿼리 6)은 보고서 모양이 흐트러져 나와 시연에 쓰지 않는다.
-- 채팅 화면 제목·입력 예시가 원본("운영 인시던트 대응 에이전트", auth-service 예시) 그대로다 — 시연 전에 고칠지 정한다.
+- 화면을 새로 열 때 예전 문구가 보이면 브라우저 캐시다 — 새로고침(⌘+Shift+R)한다.
 - 측정과 시연을 동시에 하지 않는다(같은 Ollama 를 쓰면 느려진다).
 
 ---
