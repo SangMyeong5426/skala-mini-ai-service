@@ -79,7 +79,7 @@
 </head>
 <body>
 <div id="app">
-  <header>운영 인시던트 대응 에이전트 <span>{{ backendLabel }}</span></header>
+  <header>{{ text.title }} <span>{{ backendLabel }}</span></header>
   <div id="log" ref="logEl">
     <template v-for="item in log" :key="item.id">
       <div v-if="item.kind === 'user'" class="row user">
@@ -104,7 +104,7 @@
     <input
       v-model="input"
       autocomplete="off"
-      placeholder="예: auth-service 로그인 응답이 느려졌어요. 원인 확인해주세요"
+      :placeholder="text.placeholder"
     />
     <button type="submit" :disabled="sending">보내기</button>
   </form>
@@ -129,9 +129,37 @@ const STEP_LABELS = {
   Finalize: () => '최종 답변 완성',
 };
 
+// 과제 2 — AGENT_DOMAIN=rating 이면 /health 의 domain 을 보고 화면 문구와 진행 표시를 바꾼다(incident 는 위 그대로).
+const DOMAIN_TEXT = {
+  incident: { title: '운영 인시던트 대응 에이전트',
+              placeholder: '예: auth-service 로그인 응답이 느려졌어요. 원인 확인해주세요' },
+  rating: { title: '게임 등급분류 사전 점검 에이전트',
+            placeholder: '예: 모바일 퍼즐 게임이에요. 같은 색 블록을 맞추면 점수를 얻어요. 몇 세 등급일까요?' },
+};
+const SCOPE_LABELS = { 'genre+platform': '같은 장르·플랫폼', platform: '같은 플랫폼', all: '전체' };
+const RATING_LABELS = {
+  RouteDecided: e => e.route === 'review' ? '등급 점검 요청으로 분류' : '제도 문의·대화로 분류',
+  PlanCreated: e => `계획 수립: 비슷한 사례 · 등급 통계 · 기준표 조사${e.genre || e.platform
+      ? ` (${[e.genre, e.platform].filter(Boolean).join(' · ')})` : ''}`,
+  TaskCompleted: e => ({ cases: `비슷한 실제 결정 ${e.count}건 찾음 (${SCOPE_LABELS[e.scope] || e.scope})`,
+                         stats: '같은 장르·플랫폼 등급 통계 조회 (MCP Tool)',
+                         criteria: '내용정보 기준표 읽기 (MCP Resource)' }[e.source] || null),
+  ReplanCheck: e => e.is_sufficient ? null : `비슷한 사례가 ${e.found}건뿐 → 범위를 넓혀 다시 찾기`,
+  ClarifyRequested: e => `게임 설명이 부족함 → 되묻기 (${e.reason})`,
+  AnalysisCompleted: e => `항목별 판정 → 예상 등급 ${e.rating}` + (e.rating_source === 'cases'
+      ? ` (기준표 판정 ${e.rating_items}, 가장 비슷한 사례의 등급을 하한으로)` : ''),
+  LawAnswer: e => e.kind === 'smalltalk' ? null : e.answerable
+      ? `법령 조문 근거로 답함 (${e.citations.join(', ')})` : '법령에서 근거를 찾지 못함 → 답할 수 없음',
+  DraftWritten: STEP_LABELS.DraftWritten,
+  Validation: STEP_LABELS.Validation,
+  Finalize: STEP_LABELS.Finalize,
+};
+
 createApp({
   setup() {
     const backendLabel = ref('all_total_vue');
+    const domain = ref('incident');
+    const text = reactive({ ...DOMAIN_TEXT.incident });
     const log = ref([]);
     const input = ref('');
     const sending = ref(false);
@@ -141,6 +169,9 @@ createApp({
 
     fetch('/health').then(r => r.json()).then(h => {
       backendLabel.value = `${h.llm_backend} 실모델(${h.fast_llm}/${h.quality_llm}) · all_total_vue`;
+      domain.value = h.domain === 'rating' ? 'rating' : 'incident';
+      Object.assign(text, DOMAIN_TEXT[domain.value]);
+      document.title = `${text.title} (Vue)`;
     }).catch(() => {});
 
     async function scrollToBottom() {
@@ -195,7 +226,7 @@ createApp({
           return;
         }
 
-        const fn = STEP_LABELS[e.type];
+        const fn = (domain.value === 'rating' ? RATING_LABELS : STEP_LABELS)[e.type];
         if (!fn) return;
         const label = fn(e);
         if (!label) return;
@@ -206,7 +237,7 @@ createApp({
       es.onerror = () => { es.close(); sending.value = false; };
     }
 
-    return { backendLabel, log, input, sending, logEl, onSubmit };
+    return { backendLabel, text, log, input, sending, logEl, onSubmit };
   },
 }).mount('#app');
 </script>
