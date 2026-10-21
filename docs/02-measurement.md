@@ -5,7 +5,7 @@
 ## 측정 방법
 
 - **Before = 스위치를 모두 끈 LLM 단독, After = 기본값.** 같은 커밋, 같은 평가셋에서 스위치만 바꾼다
-  ([결정 0009](decisions/0009-rating-domain.md)).
+  ([결정 0009](decisions/0009-rating-domain.md)). 이 방식을 Before/After 로 써도 되는지 강사에게 확인했다(2026-10-21, 괜찮다는 답).
 
   ```bash
   ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=format \
