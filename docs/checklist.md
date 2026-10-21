@@ -61,6 +61,7 @@
 - [x] 사례 DB 수정 뒤 개발용 다시 고르기(R1)와 최종 확인 — A 19/40 · B 27/39 · 평범한 게임 8/10 · 회귀 쿼리, `18a9ba8`·`133901f`(`runs/*check2*`)
 - [x] `02-measurement.md` 표, 결정 기록 0009~0017 의 Before/After 칸
 - [x] 발표 준비 노트(코드 변경·이유·과제 2 세부 기능 표·수치·한계·시연) — [`05-presentation-notes.md`](05-presentation-notes.md)
+- [x] 발표·코드 학습 가이드(과제 안내의 발표 순서·평가 항목 기준 장표 구성안, 코드 따라 읽기, 자기 점검 문제) — [`06-study-guide.md`](06-study-guide.md)
 - [x] 시연용 OpenAI 백엔드(등급 점검) — [0018](decisions/0018-openai-backend-for-rating-demo.md), `tests/test_rating_openai.py`, 실제 API 7턴·웹 화면 확인
 - [x] 채팅 화면 문구를 등급 점검용으로(제목·입력 예시·진행 표시, `/health` 의 domain 기준) — `project/web_chat.html`, 웹 화면에서 확인
 - [x] OpenAI 보조 측정(A·B·분류·제도 문의·평범한 게임 Before/After) — `ae379fc`, `runs/*oa-*`, [`02-measurement.md`](02-measurement.md) "보조 측정" 절
