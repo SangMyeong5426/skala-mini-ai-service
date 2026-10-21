@@ -105,8 +105,11 @@ def _build_llms(domain: str = "incident"):
 
 def _build_rating_llms(backend: str):
     """과제 2 — 프롬프트만 등급 점검용이고 모델·thinking 설정은 과제 1 과 같다."""
-    if backend == "openai":
-        raise ValueError("AGENT_DOMAIN=rating 은 openai 백엔드를 지원하지 않습니다 — 과금이라 범위 밖(결정 0009)")
+    if backend == "openai":   # 시연용 — 과금되므로 측정에 쓰지 않는다(결정 0018)
+        from agent.rating.llm import OpenAIRatingFastLLM, OpenAIRatingQualityLLM
+        fast = OpenAIRatingFastLLM(os.environ.get("OPENAI_FAST_MODEL", "gpt-4o-mini"), usd_per_1k_tokens=0.00015)
+        quality = OpenAIRatingQualityLLM(os.environ.get("OPENAI_QUALITY_MODEL", "gpt-4o"), usd_per_1k_tokens=0.005)
+        return backend, fast, quality
     if backend == "ollama":
         from agent.rating.llm import OllamaRatingFastLLM, OllamaRatingQualityLLM
         think = _ollama_think()
@@ -127,6 +130,17 @@ def _switch(name: str, improved: str, base: str, backend: str, allowed: tuple[st
     fake 는 Wave 데모를 결정론으로 재현하는 백엔드이고 openai 는 과금이라 측정 대상이 아니다.
     """
     value = os.environ.get(name, improved if backend == "ollama" else base).strip().lower()
+    if value not in allowed:
+        raise ValueError(f"{name} 는 {' · '.join(allowed)} 중 하나여야 합니다: {value!r}")
+    return value
+
+
+def _rating_switch(name: str, improved: str, base: str, backend: str, allowed: tuple[str, ...]) -> str:
+    """과제 2 스위치. 지정이 없으면 fake 만 base(LLM 단독)이고 ollama·openai 는 개선 쪽이다.
+
+    openai 는 시연용으로 열었으니 에이전트로 떠야 한다 — 과금이라 측정에는 쓰지 않는다(결정 0018).
+    """
+    value = os.environ.get(name, base if backend == "fake" else improved).strip().lower()
     if value not in allowed:
         raise ValueError(f"{name} 는 {' · '.join(allowed)} 중 하나여야 합니다: {value!r}")
     return value
@@ -187,13 +201,13 @@ async def _build_rating_components(backend: str, fast_llm, quality_llm, mcp) -> 
                 "OLLAMA_THINK": os.environ.get("OLLAMA_THINK", "false") if ollama else None,
                 "OLLAMA_THINK_CHAT": ({None: "default", True: "true", False: "false"}[fast_llm.chat_think]
                                       if ollama else None),
-                "ROUTER": _switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
-                "RATING_CLARIFY": _switch("RATING_CLARIFY", "rule", "off", backend, ("rule", "off")),
-                "CASE_SEARCH": _switch("CASE_SEARCH", "semantic", "off", backend, ("semantic", "off")),
-                "RATING_ASSESSOR": _switch("RATING_ASSESSOR", "criteria", "direct", backend,
-                                           ("criteria", "direct")),
-                "VALIDATOR": _switch("VALIDATOR", "grounded", "format", backend, ("grounded", "format")),
-                "CHAT_GROUNDING": _switch("CHAT_GROUNDING", "law", "off", backend, ("law", "off"))}
+                "ROUTER": _rating_switch("ROUTER", "semantic", "llm", backend, ("semantic", "llm")),
+                "RATING_CLARIFY": _rating_switch("RATING_CLARIFY", "rule", "off", backend, ("rule", "off")),
+                "CASE_SEARCH": _rating_switch("CASE_SEARCH", "semantic", "off", backend, ("semantic", "off")),
+                "RATING_ASSESSOR": _rating_switch("RATING_ASSESSOR", "criteria", "direct", backend,
+                                                  ("criteria", "direct")),
+                "VALIDATOR": _rating_switch("VALIDATOR", "grounded", "format", backend, ("grounded", "format")),
+                "CHAT_GROUNDING": _rating_switch("CHAT_GROUNDING", "law", "off", backend, ("law", "off"))}
     parts: dict = {"domain": "rating"}
     if "semantic" in (switches["ROUTER"], switches["CASE_SEARCH"]) or switches["CHAT_GROUNDING"] == "law":
         parts["embedder"] = _make_embedder()

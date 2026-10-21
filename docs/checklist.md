@@ -61,6 +61,7 @@
 - [x] 사례 DB 수정 뒤 개발용 다시 고르기(R1)와 최종 확인 — A 19/40 · B 27/39 · 평범한 게임 8/10 · 회귀 쿼리, `18a9ba8`·`133901f`(`runs/*check2*`)
 - [x] `02-measurement.md` 표, 결정 기록 0009~0017 의 Before/After 칸
 - [x] 발표 준비 노트(코드 변경·이유·과제 2 세부 기능 표·수치·한계·시연) — [`05-presentation-notes.md`](05-presentation-notes.md)
+- [x] 시연용 OpenAI 백엔드(등급 점검) — [0018](decisions/0018-openai-backend-for-rating-demo.md), `tests/test_rating_openai.py`, 실제 API 7턴·웹 화면 확인
 - [x] 결합 규칙 R1 을 기본값으로 둘지 **(직접)** — 유지로 결정(2026-10-21), [0016](decisions/0016-combine-cases-and-criteria.md)
 
 ## Day2 — 정리
