@@ -75,11 +75,11 @@ Base 의 그래프 뼈대·MCP·검수 구조와 과제 1 의 의미 라우터·
 | 기술 요소 | 어디에 | 어떻게 · 왜 |
 | --- | --- | --- |
 | Multi-Agent | — (검토 후 제외, [결정 0009](decisions/0009-rating-domain.md)) | 등급 = 가장 높은 항목 하나라 항목별 심사 에이전트로 나눠도 이득이 없고, 판정을 7번 따로 하면 과대평가와 지연만 커진다 |
-| MCP | `project/mcp_server_rating.py`, `agent/mcp_client.py` | 등급분류 전용 서버를 새로 만들었다. Tool 1(통계) + Resource 4(기준표·시행규칙 제8조·법령 조문·사례 DB). 에이전트는 `find_tool`·`find_resource`로 서버를 찾아 쓴다(Base 방식) — 자료를 바꿔도 에이전트 코드는 그대로 |
+| MCP | `project/mcp_server_rating.py`, `agent/mcp_client.py` | 등급분류 전용 서버를 새로 만들었다. Tool 1(통계) + Resource 4(기준표·시행규칙 제8조·법령 조문·사례 DB). 에이전트는 서버를 미리 정하지 않고 찾아서 쓴다 — 이 방식과 `call_tool`·`read_resource`는 Base 것이고, 도구가 있는 서버를 찾는 `find_tool`은 과제 2에서 새로 추가했다(`find_resource`는 과제 1). 자료를 바꿔도 에이전트 코드는 그대로 |
 | RAG | `agent/rating/cases.py`, `agent/rating/law.py`, `agent/router.py` | 실제 결정 1,751건·조문 148개·분류 예시를 임베딩(qwen3-embedding)해 두고 코사인 유사도로 찾는다. 찾은 자료만 보고 판단·답변하고, 인용은 코드가 검사한다 |
 | 의존성 주입 | `agent/deps.py`, `server._build_rating_components`, 노드마다 `partial(fn, deps=deps)` | 부품(사례 검색·판정·검수·되묻기·법령 답변)을 밖에서 넣는다. 부품을 빼면 그 단계는 LLM 단독으로 돌아 **스위치 6개로 Before/After 를 같은 프로그램에서 잰다** |
 | LangSmith | `@traceable` 30곳(등급 모듈) | 노드·LLM 호출마다 추적 기록이 남는다 |
-| 모듈화 | `agent/rating/` 10개 모듈(graph·llm·assess·cases·check·law·clarify·profile·facts·data) | 도메인 분리 — `AGENT_DOMAIN=incident` 로 띄우면 과제 1 인시던트 에이전트가 그대로 돈다 |
+| 모듈화 | `agent/rating/` 10개 모듈(graph·llm·assess·cases·check·law·clarify·profile·facts·data), 1,462줄 — 모두 과제 2에서 새로 작성 | 도메인 분리 — `AGENT_DOMAIN=incident` 로 띄우면 과제 1 인시던트 에이전트가 그대로 돈다. 노드마다 맡는 모듈은 2-2 표 |
 | 단위 테스트 | `project/tests/test_rating_*.py` 8개 파일 · 전체 122개 | 가짜 LLM·임베더로 결정론적으로 — 근거 없는 항목 삭제, 스위치를 끄면 LLM 단독, OpenAI 요청 모양 등 |
 | 평가(LLM-as-judge) | `agent/rating/check.py`, `law.py` 의 `judge_law` | 등급·사례·숫자처럼 정답이 정해진 검사는 코드가 먼저 하고, 뜻만 LLM 이 본다 |
 
@@ -103,6 +103,21 @@ flowchart LR
 ```
 
 노드 이름은 Base 와 같게 둬서 채팅 화면·측정 도구를 그대로 쓴다. 되돌아가는 길(재조사·재작성)에는 횟수 제한을 둬 무한 반복이 없다.
+
+**Base 에서 가져온 것과 새로 쓴 것.** `StateGraph` 뼈대, 노드마다 부품을 넣는 `partial(fn, deps=deps)`, 갈림길 3곳(route · replan_check · validate)은
+Base 의 `build_graph` 에 있던 구조다. Base 의 `gate` 노드를 빼고 **clarify 노드와 그리로 가는 갈림길 2곳**(plan → clarify, analysis → clarify)을 새로 넣었다.
+그래프 파일([`agent/rating/graph.py`](../project/agent/rating/graph.py))과 노드 안쪽 로직은 모두 새로 썼다. 노드마다 안쪽을 맡는 모듈은 아래와 같다.
+
+| 노드 | 맡는 모듈 | 하는 일 |
+| --- | --- | --- |
+| route | `agent/router.py` (과제 1 의미 라우터 — 예시 문장만 바꿔 다시 씀) | 질문을 제도 문의 / 점검 요청으로 분류 |
+| plan | `rating/profile.py` · `rating/clarify.py` | 장르·플랫폼 뽑기, 설명이 모자라면 되묻기로 |
+| research | `rating/cases.py` + MCP 서버 `mcp_server_rating.py` | 비슷한 실제 결정 5건(임베딩), 통계(Tool), 기준표(Resource) |
+| analysis | `rating/assess.py` | 7항목 판정 → 근거 구절 확인 → 단계 최댓값으로 등급 → 사례 하한(R1) |
+| write | `rating/llm.py` · `rating/facts.py` | 보고서 작성 프롬프트, 작성·검수가 같이 보는 사실 문장 |
+| validate | `rating/check.py` | 형식·등급·인용 사례·숫자(코드) → 질문과 맞는가(LLM) |
+| chat_answer | `rating/law.py` | 조문 4개 검색, 인용 조문·숫자 검사 |
+| (공통) | `rating/llm.py` · `rating/data.py` | 프롬프트·JSON 형식과 LLM 연결(Ollama·OpenAI), 등급·항목 상수와 사례 DB 만들기 |
 
 ### 2-3. 구현한 기능 화면 캡처
 
