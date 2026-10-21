@@ -242,6 +242,7 @@ Base 의 `build_graph` 에 있던 구조다. Base 의 `gate` 노드를 빼고 **
 | 3 | 사례 등급을 따른 보고서의 설명 문장 고치기 + 검수에 넣기 | 4-8 |
 | 4 | 위원회 결정서 사유를 RAG 로, 자체등급분류 데이터 확인 | 판정 근거가 개요 한 줄보다 두꺼워진다 |
 | 5 | 모델을 바꿀 때 되묻기 조건을 개발용 문항으로 다시 맞추기 | gpt-4o 는 평범한 리듬·축구 게임도 되물었다(3-4) |
+| 6 | 사례 검색에 키워드 검색(BM25)을 섞는 혼합 검색 — 개발용 문항으로 비교 | BM25 혼자는 임베딩보다 낫지 않았지만(개발용 38문항, 5건 다수결 22 vs 23) 찾는 사례가 많이 달라(1위 같음 10/38) 합치면 나을 수 있다. 재지 않았다 |
 
 ---
 
@@ -265,6 +266,7 @@ Base 의 `build_graph` 에 있던 구조다. Base 의 `gate` 노드를 빼고 **
 | 결합 규칙 선택 | `runs/choose-combination_20261020-182207.json` · `runs/choose-combination_20261020-192150.json` (수정 뒤 다시) |
 | 보조 측정 (OpenAI) | `runs/eval-*_oa-{before,after}_20261021-*.json` |
 | 결정·한계 | [`decisions/0009`](decisions/0009-rating-domain.md) ~ [`0018`](decisions/0018-openai-backend-for-rating-demo.md) |
+| 검색 방식 보조 비교 (임베딩 vs BM25, 개발용) | `runs/compare-retrieval_dev_20261021-185816.json` — [`02-measurement.md`](02-measurement.md) "보조 비교" |
 | 화면 캡처 | `docs/images/` — 실행 화면은 웹 채팅(헤드리스 Chrome), Before/After 화면은 qwen3 로 같은 질문을 보낸 것 |
 
 ## Google Spread 붙여넣기용 요약

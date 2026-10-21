@@ -71,6 +71,8 @@ tools/
   make_rating_evalset.py        평가셋 A·B·개발용 표본 추출 (시드 고정)
   eval_rating.py                rate · rateb · rdev · rbenign · rroute · rclarify · rjudge · rbase · rlaw
   choose_combination.py         결합 규칙 고르기 — 개발용 결과만 받는다 (0016)
+  compare_retrieval.py          사례 검색 방식 비교 — 임베딩 vs BM25, 개발용 38문항, LLM 없음
+  report_before_after.py        보고서 Before/After 요약을 runs/ 원자료에서 그대로 찍기
   evalsets/rating*.json         평가셋 8종
   queries_rating.json           회귀 쿼리 10개
 scripts/measure-at              단계 추가, MEASURE_QUERIES

@@ -73,4 +73,8 @@
 
 - [x] 반복 측정(repeat 3) — 회귀 쿼리 Before/After 3회, `f585537`, `runs/e2e_r3-*`, [`02-measurement.md`](02-measurement.md) "반복 측정" 절
 - [x] 결정 기록, `02-measurement.md` 표, 결과 보고서, 아키텍처 다이어그램 — 0009~0018, [`04-report.md`](04-report.md), `project/doc/README.md`(`3d40556`)
-- [ ] `main` 머지·push **(직접 승인)**
+- [x] 발표자용 개념 풀이(발표에서 빼는 MCP·Tool·RAG·임베딩·partial 설명) — [`07-concepts.md`](07-concepts.md), `d2010b7`
+- [x] 사례 검색 방식 보조 비교(임베딩 vs BM25, 개발용 38문항, 평가셋 안 씀) — `746b7c7`·`7af3033`, [`02-measurement.md`](02-measurement.md) "보조 비교"
+- [x] 발표 덱을 Google Slides 로(`G080_AI_Service_Mini`, 내 Drive) — 사용자가 옮긴 위치를 로컬 덱에 반영, 마지막 장에 주제, 두 판의 도형 위치·글 비교로 같음 확인(2026-10-21)
+- [x] `main` 머지 — 사용자 요청으로 fast-forward(2026-10-21, 로컬)
+- [ ] push **(직접 승인)** — 사용자가 나중에 하기로(2026-10-21)
