@@ -47,7 +47,7 @@
 | --- | --- | --- | --- | --- |
 | `rating.json` (A) | 40 (등급마다 10) | plan → research → replan_check → analysis | `label.rating`, `label.descriptors` | 3 사례 검색·단계 판정 |
 | `rating_benign.json` | 10 (모두 전체이용가 기대) | 〃 | `label.rating` | 과대평가 점검 — 청소년이용불가·15세 이상으로 올린 수 |
-| `rating_dev.json` (개발용) | 38 | 〃 | 〃 | 결합 규칙 선택에만(결정 0016) |
+| `rating_dev.json` (개발용) | 38 | 〃 | 〃 | 결합 규칙 선택(결정 0016), 사례 검색 방식 비교(임베딩 vs BM25, `tools/compare_retrieval.py`) — 평가셋 대신 여기서만 고른다 |
 | `rating_detail.json` (B) | 39 (전체 3 · 12세 7 · 15세 10 · 청소년이용불가 19) | 〃 | 〃 | 3 — 상세 설명일 때 |
 | `rating_route.json` | 30 (chat 15 · review 15) | `route_node` | `expected_route` | 5 의미 라우터 |
 | `rating_clarify.json` | 12 (되묻기 6 · 점검 6) | plan → … → analysis | `expected_action`(clarify/assess) | 6 되묻기 |
