@@ -40,7 +40,8 @@ backend="${LLM_BACKEND:-ollama}"
 export LLM_BACKEND="$backend"
 
 [ -x "$py" ] || { echo "project/.venv 가 없습니다 — cd project && bash sh/setup_venv.sh" >&2; exit 1; }
-if [ "$backend" = ollama ] && ! curl -s --max-time 2 http://127.0.0.1:11434/api/tags >/dev/null; then
+# openai 백엔드도 임베딩은 로컬 ollama 를 쓴다(결정 0018). openai 는 OPENAI_API_KEY 가 환경에 있어야 한다.
+if [ "$backend" != fake ] && ! curl -s --max-time 2 http://127.0.0.1:11434/api/tags >/dev/null; then
   echo "ollama serve 가 응답하지 않습니다" >&2; exit 1
 fi
 if lsof -ti:"$port" >/dev/null 2>&1; then
