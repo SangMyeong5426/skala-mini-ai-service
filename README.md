@@ -126,6 +126,11 @@ skala-mini-ai-service/
 │   ├── 01-plan.md               진행 계획 (Google Spread 등록 원본) — 과제 2
 │   ├── 02-measurement.md        Before/After 실측 — 과제 2
 │   ├── 03-design.md             상세 설계 — 과제 2
+│   ├── 04-report.md             결과 보고서 (제출용) — 과제 2
+│   ├── 05-presentation-notes.md 발표 준비 노트 — 기능별 설명·시연·예상 질문
+│   ├── 06-study-guide.md        발표·코드 학습 가이드 — 장표 구성·코드 따라 읽기
+│   ├── 07-concepts.md           개념 풀이 (발표자용) — MCP·RAG·임베딩·partial 등
+│   ├── images/                  보고서 화면 캡처
 │   ├── checklist.md             체크리스트 — 진행 상황
 │   ├── task1/                   과제 1(Base 개선) 계획·측정·설계·보고서 — 보존
 │   ├── decisions/               결정 기록 — 항목별 한계·트레이드오프
@@ -134,13 +139,17 @@ skala-mini-ai-service/
 │   ├── measure_queries.py       회귀 쿼리 실측·비교 (--spawn: 질문마다 서버 새로)
 │   ├── eval_nodes.py            노드 단위 평가 — route·target·judge·write·runbook
 │   ├── tune_embedding.py        의미 판정 기준 조정 (평가 세트 미사용, --domain rating)
-│   ├── eval_rating.py           과제 2 노드 평가 — rate·rroute·rclarify·rjudge
+│   ├── eval_rating.py           과제 2 노드 평가 — rate·rateb·rdev·rbenign·rroute·rclarify·rjudge·rbase·rlaw
+│   ├── choose_combination.py    결합 규칙 고르기 — 개발용 결과만 (결정 0016)
+│   ├── compare_retrieval.py     사례 검색 방식 비교 — 임베딩 vs BM25 (개발용 38문항)
+│   ├── report_before_after.py   보고서 Before/After 요약 (runs/ 원자료에서)
+│   ├── fetch_laws.py            법령 원문 수집 (과제 2 기능 8)
 │   ├── fetch_ratings.py         게임물관리위원회 API 수집·사례 DB 생성 (과제 2)
-│   ├── make_rating_evalset.py   평가셋 A 표본 추출 (시드 고정)
+│   ├── make_rating_evalset.py   평가셋 A·B·개발용 표본 추출 (시드 고정)
 │   ├── queries_rating.json      과제 2 회귀 쿼리 10개 (11턴)
 │   ├── try_models.py            작성·판정 모델 교체 시험 (기각, 결정 0008)
 │   ├── queries.json             회귀 쿼리 10개 (11턴)
-│   ├── evalsets/                라벨 평가 세트 — 과제 1 4종 + 과제 2 4종(rating*)
+│   ├── evalsets/                라벨 평가 세트 — 과제 1 4종 + 과제 2 8종(rating*)
 │   └── tuning/                  조정용 문장 (평가 세트 아님)
 ├── runs/                    실측 원자료 (커밋한다)
 ├── scripts/                 measure-at(커밋 단위 측정), setup-git-hooks, check-rule-docs
