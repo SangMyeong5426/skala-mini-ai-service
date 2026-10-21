@@ -126,13 +126,13 @@ flowchart TB
     API["server.py /chat · /chat/stream"] --> RGraph
 
     subgraph RGraph["agent/rating/graph.py — 등급 점검 StateGraph"]
-        R["route<br/>(의미 라우터 → 애매하면 LLM,<br/>되묻기 다음 턴은 바로 review)"] -->|chat| CA["chat_answer<br/>(제도 안내)"]
+        R["route<br/>(의미 라우터 → 애매하면 LLM,<br/>되묻기 다음 턴은 바로 review)"] -->|chat| CA["chat_answer<br/>(법령 조문 검색 → 근거로만 답,<br/>근거 없으면 답할 수 없음)"]
         R -->|review| P["plan<br/>(장르·플랫폼은 코드가 추출,<br/>설명이 너무 짧으면 되묻기)"]
         P -->|설명 없음| K["clarify<br/>(7항목 체크리스트, LLM 없음)"]
         P --> RS["research<br/>(유사 사례 · 통계 Tool · 기준표 Resource)"]
         RS --> RC["replan_check<br/>(사례 3건 미만이면 범위를 넓혀 재조사)"]
         RC -->|부족| RS
-        RC -->|충분| A["analysis<br/>(7항목 단계 판정 → 근거 검사<br/>→ 등급 = 단계 최댓값)"]
+        RC -->|충분| A["analysis<br/>(7항목 단계 판정 → 근거 검사<br/>→ 등급 = 단계 최댓값과<br/>가장 비슷한 사례 등급 중 높은 쪽)"]
         A -->|described=false| K
         A --> W["write"]
         W --> V["validate<br/>(형식 → 등급 일치 → 사례 대조<br/>→ 수치 대조 → LLM 판정)"]
@@ -147,21 +147,25 @@ flowchart TB
             T["Tool: rating_stats"]
             CR["Resource: criteria://descriptors"]
             LW["Resource: law://game-industry/rule-8"]
+            LA["Resource: law://game-industry/articles"]
             CS["Resource: ratings://cases"]
         end
         DocsServer2["mcp_server_docs.py (decoy)"]
     end
 
-    Parts["router · case_retriever · assessor<br/>clarifier · validator<br/>(스위치 — 모두 끄면 LLM 단독 = Before)"]
+    Parts["router · case_retriever · assessor<br/>clarifier · validator · law_answerer<br/>(스위치 — 모두 끄면 LLM 단독 = Before)"]
     Parts -. "기동 시 1회 임베딩(캐시)" .-> CS
-    Data["data/ratings/<br/>raw · cases.json · criteria.json · rule-8.md"] --> RatingServer
+    Data["data/ratings/<br/>raw · cases.json · criteria.json · rule-8.md · law/articles.json"] --> RatingServer
 ```
 
 - **데이터**: 게임물관리위원회 Open API 결정 3,190건(2024-01~2026-09)을 받아 두고, 실행 중에는 API를 부르지 않는다.
   사례 DB는 2026-06-30까지(1,751건 — 개요 없는 간소화 등급분류 결정 포함, 결정 0017), 평가는 그 뒤(결정 0010).
 - **판정**: LLM(qwen3:8b)은 7개 내용정보 항목의 단계와 근거(설명 구절 · 사례 번호)만 낸다. 코드가 근거를 검사해 없는 항목을 지우고,
   등급은 단계의 최댓값으로 계산한다(결정 0011).
+- **결합**: 기준표 판정과 가장 비슷한 실제 사례의 등급 중 높은 쪽을 쓴다(R1 — 개발용 문항으로 골랐다, 결정 0016).
+- **제도 안내**: 게임산업법·시행령·시행규칙 148개 조문에서 찾아 답하고, 인용·수치를 코드와 LLM 이 검사해 근거가 없으면 답하지 않는다(결정 0015).
 - **스위치**: 루트 `README.md`의 "개선 스위치". 모두 끄면 LLM 이 설명만 보고 등급을 바로 답한다 — 과제 2의 Before 다.
+- **백엔드**: 측정은 ollama(qwen3). 시연용으로 openai 도 꽂을 수 있다 — 프롬프트는 같고 보내는 곳만 다르며, 임베딩은 로컬 ollama 를 그대로 쓴다(결정 0018).
 
 ## 주요 유스케이스별 고수준 시퀀스 다이어그램
 
@@ -303,12 +307,13 @@ all_total_vue/
 │   ├── runbook.py             # (항목 5) runbook 의미 검색
 │   └── rating/                # (과제 2) 게임 등급분류 사전 점검 — AGENT_DOMAIN=rating
 │       ├── graph.py             # 등급 점검 StateGraph (과제 1과 같은 노드 이름)
-│       ├── llm.py               # 도메인 프롬프트 — Ollama fast/quality, fake
+│       ├── llm.py               # 도메인 프롬프트 — Ollama fast/quality, OpenAI(시연용), fake
 │       ├── data.py              # 등급·항목 이름, 사례 DB 기간, 걸러 내는 규칙, 통계
 │       ├── profile.py           # 장르·플랫폼 추출, 되묻기 다음 턴 이어 붙이기
 │       ├── cases.py             # 유사 사례 검색 (임베딩 kNN + 캐시)
 │       ├── assess.py            # 근거 검사, 등급 = 단계 최댓값
 │       ├── check.py             # 보고서 검수 (형식 → 등급 → 사례 → 수치 → LLM)
+│       ├── law.py               # 법령 근거 제도 안내 — 조문 검색, 인용·수치·조문 대조 검사
 │       ├── clarify.py           # 되묻기 규칙
 │       └── facts.py             # 판정·사실을 프롬프트 글로
 │
@@ -316,7 +321,7 @@ all_total_vue/
 │   ├── monitoring.json        # MCP Tool이 조회하는 모니터링 데이터
 │   ├── systems.json           # (항목 3) 시스템 카탈로그 — MCP Resource catalog://systems
 │   ├── router_examples.json   # (항목 2) 분류 예시 문장
-│   ├── ratings/                # (과제 2) raw/ 원자료 · cases.json 사례 DB · criteria.json 기준표 · rule-8.md · router_examples.json
+│   ├── ratings/                # (과제 2) raw/ 원자료 · cases.json 사례 DB · criteria.json 기준표 · rule-8.md · law/ 법령 조문 · router_examples.json
 │   └── runbooks/               # MCP Resource가 조회하는 대응 매뉴얼 6종
 │       ├── db-down.md
 │       ├── cpu-spike.md
