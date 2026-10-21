@@ -69,6 +69,6 @@
 
 ## Day2 — 정리
 
-- [ ] 반복 측정(repeat 3)
+- [x] 반복 측정(repeat 3) — 회귀 쿼리 Before/After 3회, `f585537`, `runs/e2e_r3-*`, [`02-measurement.md`](02-measurement.md) "반복 측정" 절
 - [x] 결정 기록, `02-measurement.md` 표, 결과 보고서, 아키텍처 다이어그램 — 0009~0018, [`04-report.md`](04-report.md), `project/doc/README.md`(`3d40556`)
 - [ ] `main` 머지·push **(직접 승인)**
