@@ -68,5 +68,5 @@
 ## Day2 — 정리
 
 - [ ] 반복 측정(repeat 3)
-- [ ] 결정 기록, `02-measurement.md` 표, 결과 보고서, 아키텍처 다이어그램
+- [x] 결정 기록, `02-measurement.md` 표, 결과 보고서, 아키텍처 다이어그램 — 0009~0018, [`04-report.md`](04-report.md), `project/doc/README.md`(`3d40556`)
 - [ ] `main` 머지·push **(직접 승인)**
