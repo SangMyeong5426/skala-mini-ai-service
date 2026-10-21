@@ -1,0 +1,264 @@
+{
+  "kind": "rlaw",
+  "label": "oa-after",
+  "started_at": "20261021-093518",
+  "evalset": "tools/evalsets/rating_law.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-l9ReTZ",
+  "git": {
+    "commit": "ae379fc",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "openai",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": null,
+    "CASE_SEARCH": null,
+    "RATING_ASSESSOR": null,
+    "CHAT_GROUNDING": null
+  },
+  "health": {
+    "llm_backend": "openai",
+    "domain": "rating",
+    "fast_llm": "openai:gpt-4o-mini",
+    "quality_llm": "openai:gpt-4o",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": null,
+      "OLLAMA_THINK_CHAT": null,
+      "ROUTER": "semantic",
+      "RATING_CLARIFY": "rule",
+      "CASE_SEARCH": "semantic",
+      "RATING_ASSESSOR": "criteria",
+      "VALIDATOR": "grounded",
+      "CHAT_GROUNDING": "law"
+    }
+  },
+  "summary": {
+    "n": 17,
+    "ok": "16/17",
+    "answer": "9/10",
+    "defer": "2/2",
+    "refuse": "3/3",
+    "smalltalk": "2/2",
+    "latency_median_s": 2.146
+  },
+  "results": [
+    {
+      "id": "l01",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제21조"
+      ],
+      "reason": null,
+      "text": "게임 등급은 네 가지로 나뉩니다. 첫째, '전체이용가'는 누구나 이용할 수 있는 게임물입니다. 둘째, '12세이용가'는 12세 미만은 이용할 수 없는 게임물입니다. 셋째, '15세이용가'는 15세 미만은 이용할 수 없는 게임물입니다. 마지막으로, '청소년이용불가'는 청소년은 이용할 수 없는 게임물입니다.\n\n근거:\n- 게임산업법 제21조(등급분류)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.287,
+      "error": null
+    },
+    {
+      "id": "l02",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제21조"
+      ],
+      "reason": null,
+      "text": "게임물을 유통시키거나 이용에 제공하기 위해 제작 또는 배급하고자 하는 자는 해당 게임물을 제작 또는 배급하기 전에 등급분류를 받아야 한다. 다만, 특정 조건에 해당하는 게임물은 예외가 될 수 있다.\n\n근거:\n- 게임산업법 제21조(등급분류)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.253,
+      "error": null
+    },
+    {
+      "id": "l03",
+      "expect": "answer",
+      "ok": false,
+      "answerable": false,
+      "citations": [],
+      "reason": "검색하지 않은 조문을 인용했습니다(게임산업법 제21조 제1항 제3호)",
+      "text": "제공된 법령(게임산업진흥에 관한 법률·시행령·시행규칙)에서 이 질문에 답할 근거를 찾지 못해 답할 수 없습니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.\n\n찾아본 조문: 게임산업법 제21조(등급분류), 게임산업법 제21조의10(등급분류 절차의 간소화), 게임산업법 시행규칙 제9조(등급분류의 신청 등), 게임산업법 제21조의4(자체등급분류의 효력)",
+      "latency_s": 1.381,
+      "error": null
+    },
+    {
+      "id": "l04",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 시행규칙 제9조의2",
+        "게임산업법 제21조"
+      ],
+      "reason": null,
+      "text": "등급분류를 받은 게임물의 내용을 수정하려는 경우, 수정 내용을 입증할 수 있는 자료를 첨부하여 관리위원회에 신고해야 합니다. 수정 후 24시간 이내에 수정된 내용을 관리위원회에 제출해야 하며, 등급분류 시스템에 입력함으로써 제출을 갈음할 수 있습니다. 만약 수정이 기존 등급에 영향을 미치지 않는 경미한 사항이라면 신고가 필요하지 않을 수 있습니다.\n\n근거:\n- 게임산업법 시행규칙 제9조의2(게임물의 내용수정)\n- 게임산업법 제21조(등급분류)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.983,
+      "error": null
+    },
+    {
+      "id": "l05",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제21조의2"
+      ],
+      "reason": null,
+      "text": "자체등급분류사업자는 문화체육관광부장관이 지정합니다. 지정은 제21조의2 제2항이 정하는 요건을 갖춘 사업자 중에서 자체등급분류 업무운영 계획의 적정성 등을 심사하여 3년 이내의 기간을 정하여 이루어집니다.\n\n근거:\n- 게임산업법 제21조의2(자체등급분류사업자의 지정)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.146,
+      "error": null
+    },
+    {
+      "id": "l06",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제33조"
+      ],
+      "reason": null,
+      "text": "네, 게임물을 유통시키거나 이용에 제공할 목적으로 제작 또는 배급하는 자는 해당 게임물마다 제작 또는 배급하는 자의 상호, 등급 및 게임물내용정보를 표시해야 합니다. 이는 게임산업법 제33조에 명시된 표시의무에 해당합니다.\n\n근거:\n- 게임산업법 제33조(표시의무)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.229,
+      "error": null
+    },
+    {
+      "id": "l07",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제33조"
+      ],
+      "reason": null,
+      "text": "네, 게임물을 유통시키거나 이용에 제공할 목적으로 제작, 배급 또는 제공하는 자는 해당 게임물 내에서 사용되는 확률형 아이템의 종류와 종류별 공급 확률정보를 반드시 표시해야 합니다. 이는 게임산업법 제33조 제2항에 명시되어 있습니다.\n\n근거:\n- 게임산업법 제33조(표시의무)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.342,
+      "error": null
+    },
+    {
+      "id": "l08",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제41조"
+      ],
+      "reason": null,
+      "text": "네, 등급분류를 신청할 때 수수료를 납부해야 합니다. 게임산업법 제41조에 따르면, 등급분류를 신청하는 자는 위원회가 문화체육관광부장관의 승인을 얻어 정하는 수수료를 납부해야 합니다.\n\n근거:\n- 게임산업법 제41조(수수료)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.105,
+      "error": null
+    },
+    {
+      "id": "l09",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제2조"
+      ],
+      "reason": null,
+      "text": "청소년게임제공업은 전체이용가 게임물만을 설치하여 공중에게 제공하는 영업을 말하며, 일반게임제공업은 청소년이용불가 게임물과 전체이용가 게임물을 모두 설치하여 제공하는 영업을 의미합니다.\n\n근거:\n- 게임산업법 제2조(정의)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.217,
+      "error": null
+    },
+    {
+      "id": "l10",
+      "expect": "answer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 시행규칙 제8조"
+      ],
+      "reason": null,
+      "text": "게임 등급분류 기준은 게임산업법 제21조 제1항 및 제2항에 따라 정해져 있으며, 구체적인 기준은 게임산업법 시행규칙 제8조에 명시되어 있습니다. 또한, 세부적인 등급분류기준은 게임물관리위원회의 규정으로 정해집니다.\n\n근거:\n- 게임산업법 시행규칙 제8조(등급분류기준 등)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.302,
+      "error": null
+    },
+    {
+      "id": "d01",
+      "expect": "defer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제21조"
+      ],
+      "reason": null,
+      "text": "청소년이용불가 등급의 게임물은 청소년은 이용할 수 없는 게임물로, 성인만 이용할 수 있습니다.\n\n근거:\n- 게임산업법 제21조(등급분류)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.083,
+      "error": null
+    },
+    {
+      "id": "d02",
+      "expect": "defer",
+      "ok": true,
+      "answerable": true,
+      "citations": [
+        "게임산업법 제41조"
+      ],
+      "reason": null,
+      "text": "등급분류 수수료는 위원회가 문화체육관광부장관의 승인을 얻어 정하는 수수료를 납부해야 합니다. 정확한 금액은 조문에 명시되어 있지 않으며, 문화체육관광부장관의 승인을 통해 결정됩니다.\n\n근거:\n- 게임산업법 제41조(수수료)\n\n※ 법령 원문을 요약한 안내입니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.",
+      "latency_s": 2.227,
+      "error": null
+    },
+    {
+      "id": "f01",
+      "expect": "refuse",
+      "ok": true,
+      "answerable": false,
+      "citations": [],
+      "reason": "법령에서 답을 찾지 못했습니다",
+      "text": "제공된 법령(게임산업진흥에 관한 법률·시행령·시행규칙)에서 이 질문에 답할 근거를 찾지 못해 답할 수 없습니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.\n\n찾아본 조문: 게임산업법 시행규칙 제24조(사후관리), 게임산업법 제48조(과태료), 게임산업법 시행령 제8조의3(게임과몰입 예방조치 등), 게임산업법 시행령 제8조(게임문화의 기반조성)",
+      "latency_s": 0.856,
+      "error": null
+    },
+    {
+      "id": "f02",
+      "expect": "refuse",
+      "ok": true,
+      "answerable": false,
+      "citations": [],
+      "reason": "법령에서 답을 찾지 못했습니다",
+      "text": "제공된 법령(게임산업진흥에 관한 법률·시행령·시행규칙)에서 이 질문에 답할 근거를 찾지 못해 답할 수 없습니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.\n\n찾아본 조문: 게임산업법 제23조(등급의 재분류 등), 게임산업법 시행규칙 제10조(등급분류 거부결정 절차), 게임산업법 시행규칙 제11조(등급분류증명서 등), 게임산업법 시행규칙 제9조(등급분류의 신청 등)",
+      "latency_s": 0.802,
+      "error": null
+    },
+    {
+      "id": "f03",
+      "expect": "refuse",
+      "ok": true,
+      "answerable": false,
+      "citations": [],
+      "reason": "법령에서 답을 찾지 못했습니다",
+      "text": "제공된 법령(게임산업진흥에 관한 법률·시행령·시행규칙)에서 이 질문에 답할 근거를 찾지 못해 답할 수 없습니다. 정확한 내용은 게임물관리위원회 안내를 확인해 주세요.\n\n찾아본 조문: 게임산업법 시행령 제14조의3(등급분류기관의 적정성 평가), 게임산업법 제21조의10(등급분류 절차의 간소화), 게임산업법 시행규칙 제8조(등급분류기준 등), 게임산업법 시행규칙 제11조(등급분류증명서 등)",
+      "latency_s": 0.83,
+      "error": null
+    },
+    {
+      "id": "s01",
+      "expect": "smalltalk",
+      "ok": true,
+      "answerable": false,
+      "citations": [],
+      "reason": null,
+      "text": "안녕하세요. 저는 출시 전 게임의 등급을 점검하고, 게임산업진흥에 관한 법률·시행령·시행규칙에 근거해 등급분류 제도를 안내합니다. 점검할 게임의 내용(장르, 플랫폼, 폭력·선정·사행 표현의 수위)을 알려 주세요.",
+      "latency_s": 1.016,
+      "error": null
+    },
+    {
+      "id": "s02",
+      "expect": "smalltalk",
+      "ok": true,
+      "answerable": false,
+      "citations": [],
+      "reason": null,
+      "text": "안녕하세요. 저는 출시 전 게임의 등급을 점검하고, 게임산업진흥에 관한 법률·시행령·시행규칙에 근거해 등급분류 제도를 안내합니다. 점검할 게임의 내용(장르, 플랫폼, 폭력·선정·사행 표현의 수위)을 알려 주세요.",
+      "latency_s": 0.83,
+      "error": null
+    }
+  ]
+}

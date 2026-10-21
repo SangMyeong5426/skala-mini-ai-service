@@ -1,0 +1,2073 @@
+{
+  "kind": "rateb",
+  "label": "oa-after",
+  "started_at": "20261021-093353",
+  "evalset": "tools/evalsets/rating_detail.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-l9ReTZ",
+  "git": {
+    "commit": "ae379fc",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "openai",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": null,
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": null,
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": null,
+    "CASE_SEARCH": null,
+    "RATING_ASSESSOR": null,
+    "CHAT_GROUNDING": null
+  },
+  "health": {
+    "llm_backend": "openai",
+    "domain": "rating",
+    "fast_llm": "openai:gpt-4o-mini",
+    "quality_llm": "openai:gpt-4o",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": null,
+      "OLLAMA_THINK_CHAT": null,
+      "ROUTER": "semantic",
+      "RATING_CLARIFY": "rule",
+      "CASE_SEARCH": "semantic",
+      "RATING_ASSESSOR": "criteria",
+      "VALIDATOR": "grounded",
+      "CHAT_GROUNDING": "law"
+    }
+  },
+  "summary": {
+    "n": 39,
+    "accuracy": "31/39",
+    "within_one": "37/39",
+    "under": 0,
+    "over": 8,
+    "clarified": 0,
+    "errors": 0,
+    "descriptors": {
+      "precision": 0.919,
+      "recall": 0.983,
+      "f1": 0.95
+    },
+    "accuracy_by_label": {
+      "전체이용가": "3/3",
+      "12세이용가": "4/7",
+      "15세이용가": "5/10",
+      "청소년이용불가": "19/19"
+    },
+    "accuracy_applicant_in_cases": "0/0",
+    "accuracy_applicant_new": "0/0",
+    "confusion": {
+      "전체이용가": {
+        "전체이용가": 3
+      },
+      "12세이용가": {
+        "12세이용가": 4,
+        "청소년이용불가": 2,
+        "15세이용가": 1
+      },
+      "15세이용가": {
+        "15세이용가": 5,
+        "청소년이용불가": 5
+      },
+      "청소년이용불가": {
+        "청소년이용불가": 19
+      }
+    },
+    "dropped_items": 0,
+    "latency_median_s": 1.813,
+    "cost_usd_sum": 0.33884
+  },
+  "results": [
+    {
+      "id": "b01",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-250905-003",
+        "GC-CC-NP-240823-003",
+        "CC-OP-240104-001",
+        "GC-CC-NP-240927-002",
+        "GC-CC-NP-260227-001"
+      ],
+      "case_ratings": [
+        "12세이용가",
+        "15세이용가",
+        "12세이용가",
+        "12세이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        },
+        "선정성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.755,
+      "cost_usd": 0.009025,
+      "error": null
+    },
+    {
+      "id": "b02",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "약물"
+      ],
+      "descriptors_pred": [
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-240726-008",
+        "GC-CC-NV-260619-007",
+        "GC-CC-NV-250822-001",
+        "GC-CC-NV-240726-003",
+        "GC-CC-NV-251226-001"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "12세이용가",
+        "전체이용가"
+      ],
+      "items": {
+        "약물": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NV-240726-003"
+          ]
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.625,
+      "cost_usd": 0.008645,
+      "error": null
+    },
+    {
+      "id": "b03",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-240628-003",
+        "GC-CC-NV-260410-001",
+        "CC-OV-241128-001",
+        "GC-CC-NV-240905-008",
+        "GC-CC-NV-240726-002"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "15세이용가",
+        "청소년이용불가",
+        "12세이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OV-241128-001"
+          ]
+        },
+        "언어": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OV-241128-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.899,
+      "cost_usd": 0.00897,
+      "error": null
+    },
+    {
+      "id": "b04",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-240216-002",
+        "CC-OP-240411-001",
+        "CC-OP-241121-001",
+        "GC-CC-NP-240308-007",
+        "GC-CC-NP-240322-005"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "청소년이용불가",
+        "12세이용가",
+        "전체이용가"
+      ],
+      "items": {},
+      "rating_items": "전체이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.383,
+      "cost_usd": 0.00807,
+      "error": null
+    },
+    {
+      "id": "b05",
+      "label": "12세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 2,
+      "descriptors_label": [
+        "폭력성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OV-251106-001",
+        "CC-NV-240530-002",
+        "GC-CC-NV-240405-002",
+        "CC-OV-250515-001",
+        "CC-OV-251113-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "전체이용가",
+        "15세이용가",
+        "15세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        },
+        "약물": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.815,
+      "cost_usd": 0.00901,
+      "error": null
+    },
+    {
+      "id": "b06",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-250418-008",
+        "GC-CC-NV-240517-001",
+        "GC-CC-NV-240531-002",
+        "GC-CC-NV-240531-003",
+        "GC-CC-NV-240726-007"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "전체이용가"
+      ],
+      "items": {},
+      "rating_items": "전체이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.491,
+      "cost_usd": 0.00802,
+      "error": null
+    },
+    {
+      "id": "b07",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-NP-240207-002",
+        "CC-OP-251204-001",
+        "GC-CC-NP-260424-008",
+        "GC-CC-NP-240517-004",
+        "CC-OP-250626-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "15세이용가",
+        "15세이용가",
+        "12세이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-250626-002"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.83,
+      "cost_usd": 0.00863,
+      "error": null
+    },
+    {
+      "id": "b08",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240822-001",
+        "CC-OM-260212-001",
+        "SC-OM-260506-001",
+        "CC-OM-251230-001",
+        "SC-OM-250908-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "전체이용가",
+        "청소년이용불가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-260212-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.224,
+      "cost_usd": 0.00837,
+      "error": null
+    },
+    {
+      "id": "b09",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "언어",
+        "범죄"
+      ],
+      "descriptors_pred": [
+        "언어",
+        "범죄"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250206-001",
+        "CC-OM-241205-002",
+        "SC-OM-260518-002",
+        "CC-OM-260115-001",
+        "SC-OM-260528-003"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "전체이용가",
+        "15세이용가",
+        "전체이용가"
+      ],
+      "items": {
+        "언어": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250206-001"
+          ]
+        },
+        "범죄": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.751,
+      "cost_usd": 0.008675,
+      "error": null
+    },
+    {
+      "id": "b10",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-240628-002",
+        "GC-CC-NV-251114-007",
+        "GC-CC-NV-240216-004",
+        "GC-CC-NV-251128-004",
+        "GC-CC-NV-240726-009"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "청소년이용불가",
+        "전체이용가",
+        "12세이용가",
+        "15세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NV-240628-002"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.397,
+      "cost_usd": 0.00849,
+      "error": null
+    },
+    {
+      "id": "b11",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-260611-001",
+        "CC-OM-240801-001",
+        "CC-OM-250821-001",
+        "CC-OM-251120-001",
+        "CC-OM-251230-002"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "15세이용가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-240801-001",
+            "CC-OM-250821-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.672,
+      "cost_usd": 0.00852,
+      "error": null
+    },
+    {
+      "id": "b12",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "공포",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-250822-001",
+        "GC-CC-NV-240726-008",
+        "GC-CC-NV-251226-001",
+        "CC-OV-250626-004",
+        "GC-CC-NV-241011-004"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "15세이용가",
+        "15세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NV-241011-004"
+          ]
+        },
+        "공포": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        },
+        "약물": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OV-250626-004"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.662,
+      "cost_usd": 0.00901,
+      "error": null
+    },
+    {
+      "id": "b13",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-260108-005",
+        "CC-OM-250918-003",
+        "CC-OM-250403-002",
+        "CC-OM-250227-004",
+        "CC-OM-250508-003"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        },
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-260108-005",
+            "CC-OM-250918-003",
+            "CC-OM-250403-002",
+            "CC-OM-250227-004",
+            "CC-OM-250508-003"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.174,
+      "cost_usd": 0.008915,
+      "error": null
+    },
+    {
+      "id": "b14",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-NP-250605-006",
+        "GC-CC-NP-250613-002",
+        "CC-OP-250612-001",
+        "GC-CC-NP-251212-001",
+        "GC-CC-NP-241206-003"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "15세이용가",
+        "15세이용가",
+        "15세이용가",
+        "15세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-250613-002",
+            "CC-OP-250612-001"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.638,
+      "cost_usd": 0.0083,
+      "error": null
+    },
+    {
+      "id": "b15",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어",
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-260424-008",
+        "GC-CC-NP-250207-006",
+        "CC-NP-240207-002",
+        "GC-CC-NP-260605-002",
+        "CC-OP-240509-001"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "12세이용가",
+        "청소년이용불가",
+        "전체이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-250207-006"
+          ]
+        },
+        "언어": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-260424-008"
+          ]
+        },
+        "사행성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.256,
+      "cost_usd": 0.00932,
+      "error": null
+    },
+    {
+      "id": "b16",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240509-004",
+        "CC-OM-250918-001",
+        "CC-OM-250605-005",
+        "CC-OM-251106-003",
+        "CC-OM-250306-003"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "사행성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-240509-004",
+            "CC-OM-250918-001",
+            "CC-OM-250605-005",
+            "CC-OM-251106-003",
+            "CC-OM-250306-003"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.389,
+      "cost_usd": 0.00844,
+      "error": null
+    },
+    {
+      "id": "b17",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "공포"
+      ],
+      "descriptors_pred": [
+        "공포"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OV-251230-001",
+        "CC-OV-250612-001",
+        "GC-CC-NV-241220-003",
+        "CC-OV-240620-001",
+        "GC-CC-NV-260109-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "15세이용가",
+        "청소년이용불가",
+        "전체이용가"
+      ],
+      "items": {
+        "공포": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OV-251230-001"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.542,
+      "cost_usd": 0.00882,
+      "error": null
+    },
+    {
+      "id": "b18",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OP-250821-001",
+        "CC-NP-250612-005",
+        "CC-OP-240725-001",
+        "CC-NP-250612-002",
+        "CC-OP-241121-002"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "청소년이용불가",
+        "15세이용가",
+        "청소년이용불가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-250821-001"
+          ]
+        },
+        "약물": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-250821-001"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.13,
+      "cost_usd": 0.008825,
+      "error": null
+    },
+    {
+      "id": "b19",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OP-240808-001",
+        "CC-OP-240222-002",
+        "CC-OP-240111-001",
+        "GC-CC-NP-240614-007",
+        "CC-OP-240229-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "12세이용가",
+        "12세이용가",
+        "12세이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-240111-001"
+          ]
+        },
+        "언어": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.607,
+      "cost_usd": 0.008815,
+      "error": null
+    },
+    {
+      "id": "b20",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240509-004",
+        "CC-OM-250306-003",
+        "CC-OM-250605-005",
+        "CC-OM-241114-004",
+        "CC-OM-250515-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "사행성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-240509-004",
+            "CC-OM-250306-003",
+            "CC-OM-250605-005",
+            "CC-OM-241114-004",
+            "CC-OM-250515-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.813,
+      "cost_usd": 0.00833,
+      "error": null
+    },
+    {
+      "id": "b21",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240307-001",
+        "CC-OM-240926-004",
+        "CC-OM-251023-002",
+        "SC-OM-240516-001",
+        "CC-OM-260108-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        },
+        "사행성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.831,
+      "cost_usd": 0.008575,
+      "error": null
+    },
+    {
+      "id": "b22",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "선정성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성",
+        "언어",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-260227-001",
+        "SC-FP-241210-001",
+        "GC-CC-NP-240823-003",
+        "GC-CC-NP-240322-001",
+        "CC-OP-260521-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "12세이용가",
+        "15세이용가",
+        "12세이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-260227-001"
+          ]
+        },
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": []
+        },
+        "언어": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-260227-001"
+          ]
+        },
+        "약물": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.981,
+      "cost_usd": 0.00919,
+      "error": null
+    },
+    {
+      "id": "b23",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "SC-FP-241210-001",
+        "GC-CC-NP-260605-012",
+        "CC-OP-250320-002",
+        "GC-CC-NP-250905-003",
+        "GC-CC-NP-240905-003"
+      ],
+      "case_ratings": [
+        "12세이용가",
+        "12세이용가",
+        "15세이용가",
+        "12세이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-240905-003"
+          ]
+        },
+        "선정성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-250905-003"
+          ]
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.157,
+      "cost_usd": 0.009035,
+      "error": null
+    },
+    {
+      "id": "b24",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성",
+        "언어"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240822-001",
+        "CC-OM-260416-001",
+        "CC-OM-260212-001",
+        "SC-OM-250908-002",
+        "CC-OM-251230-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "12세이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-240822-001"
+          ]
+        },
+        "언어": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-260212-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.146,
+      "cost_usd": 0.00866,
+      "error": null
+    },
+    {
+      "id": "b25",
+      "label": "12세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 2,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240801-001",
+        "CC-OM-240718-002",
+        "SC-OM-250305-001",
+        "CC-OM-240905-001",
+        "CC-OM-250306-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "12세이용가",
+        "12세이용가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "사행성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.559,
+      "cost_usd": 0.008225,
+      "error": null
+    },
+    {
+      "id": "b26",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "공포",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포",
+        "언어",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-241011-007",
+        "GC-CC-NP-260313-008",
+        "CC-OP-250220-002",
+        "GC-CC-NP-260313-021",
+        "GC-CC-NP-240628-007"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "12세이용가",
+        "12세이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-260313-008"
+          ]
+        },
+        "공포": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-241011-007"
+          ]
+        },
+        "언어": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-250220-002"
+          ]
+        },
+        "약물": {
+          "level": 3,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.731,
+      "cost_usd": 0.009715,
+      "error": null
+    },
+    {
+      "id": "b27",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어",
+        "약물"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NP-240216-006",
+        "GC-CC-NP-250725-008",
+        "SC-FP-241210-001",
+        "GC-CC-NP-260522-012",
+        "CC-OP-241226-001"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "12세이용가",
+        "12세이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NP-260522-012"
+          ]
+        },
+        "언어": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-241226-001"
+          ]
+        },
+        "약물": {
+          "level": 1,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.329,
+      "cost_usd": 0.00911,
+      "error": null
+    },
+    {
+      "id": "b28",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250619-005",
+        "CC-OM-251106-004",
+        "CC-OM-250814-002",
+        "SC-OM-250422-001",
+        "CC-OM-260226-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "전체이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250619-005",
+            "CC-OM-251106-004",
+            "CC-OM-250814-002",
+            "CC-OM-260226-002"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.702,
+      "cost_usd": 0.008515,
+      "error": null
+    },
+    {
+      "id": "b29",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "선정성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "선정성",
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-240801-001",
+        "CC-OM-250821-001",
+        "SC-OM-250429-001",
+        "CC-OM-251120-001",
+        "CC-OM-251230-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "15세이용가",
+        "청소년이용불가",
+        "15세이용가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-240801-001",
+            "CC-OM-250821-001"
+          ]
+        },
+        "사행성": {
+          "level": 2,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-251230-002"
+          ]
+        }
+      },
+      "rating_items": "15세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 3.057,
+      "cost_usd": 0.008765,
+      "error": null
+    },
+    {
+      "id": "b30",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "범죄"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-251204-001",
+        "CC-OM-240711-002",
+        "SC-OM-250407-001",
+        "CC-OM-251211-002",
+        "CC-OM-240905-003"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "15세이용가",
+        "15세이용가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-251204-001",
+            "CC-OM-240905-003"
+          ]
+        },
+        "범죄": {
+          "level": 3,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.032,
+      "cost_usd": 0.00845,
+      "error": null
+    },
+    {
+      "id": "b31",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "약물",
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OV-250424-002",
+        "GC-CC-NV-240726-009",
+        "GC-CC-NV-240216-004",
+        "GC-CC-NV-250711-001",
+        "GC-CC-NV-240308-003"
+      ],
+      "case_ratings": [
+        "12세이용가",
+        "15세이용가",
+        "전체이용가",
+        "12세이용가",
+        "15세이용가"
+      ],
+      "items": {
+        "약물": {
+          "level": 3,
+          "quote": true,
+          "case_ids": []
+        },
+        "사행성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": []
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.851,
+      "cost_usd": 0.009075,
+      "error": null
+    },
+    {
+      "id": "b32",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250710-003",
+        "CC-OM-250731-005",
+        "CC-OM-250227-003",
+        "CC-OM-241024-002",
+        "CC-OM-260305-002"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250710-003",
+            "CC-OM-250731-005"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.625,
+      "cost_usd": 0.008545,
+      "error": null
+    },
+    {
+      "id": "b33",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250821-004",
+        "CC-OM-250710-002",
+        "CC-OM-260319-003",
+        "CC-OM-250605-006",
+        "CC-OM-251211-008"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250821-004",
+            "CC-OM-250710-002",
+            "CC-OM-260319-003",
+            "CC-OM-250605-006",
+            "CC-OM-251211-008"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.279,
+      "cost_usd": 0.008655,
+      "error": null
+    },
+    {
+      "id": "b34",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250306-003",
+        "CC-OM-240509-004",
+        "CC-OM-250605-005",
+        "CC-OM-250515-001",
+        "CC-OM-241114-004"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250306-003",
+            "CC-OM-240509-004",
+            "CC-OM-250605-005",
+            "CC-OM-250515-001",
+            "CC-OM-241114-004"
+          ]
+        },
+        "사행성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250306-003",
+            "CC-OM-240509-004",
+            "CC-OM-250605-005",
+            "CC-OM-250515-001",
+            "CC-OM-241114-004"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 2.28,
+      "cost_usd": 0.008635,
+      "error": null
+    },
+    {
+      "id": "b35",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-240531-002",
+        "GC-CC-NV-240531-003",
+        "GC-CC-NV-250627-001",
+        "GC-CC-NV-240726-007",
+        "GC-CC-NV-240726-006"
+      ],
+      "case_ratings": [
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "전체이용가",
+        "전체이용가"
+      ],
+      "items": {},
+      "rating_items": "전체이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.429,
+      "cost_usd": 0.00794,
+      "error": null
+    },
+    {
+      "id": "b36",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OP-241010-001",
+        "GC-CC-NP-260227-006",
+        "GC-CC-NP-250711-013",
+        "CC-OP-240404-001",
+        "GC-CC-NP-251226-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "15세이용가",
+        "12세이용가",
+        "청소년이용불가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "사행성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OP-241010-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.723,
+      "cost_usd": 0.00886,
+      "error": null
+    },
+    {
+      "id": "b37",
+      "label": "12세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-260123-002",
+        "CC-OV-250320-001",
+        "CC-OV-250109-001",
+        "GC-CC-NV-241220-003",
+        "CC-OV-250918-001"
+      ],
+      "case_ratings": [
+        "15세이용가",
+        "12세이용가",
+        "청소년이용불가",
+        "15세이용가",
+        "청소년이용불가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "CC-OV-250320-001"
+          ]
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "cases",
+      "applicant_in_cases": null,
+      "latency_s": 1.692,
+      "cost_usd": 0.008875,
+      "error": null
+    },
+    {
+      "id": "b38",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "CC-OM-250619-005",
+        "CC-OM-251106-004",
+        "CC-OM-250814-002",
+        "CC-OM-260528-001",
+        "SC-OM-250422-001"
+      ],
+      "case_ratings": [
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "청소년이용불가",
+        "전체이용가"
+      ],
+      "items": {
+        "선정성": {
+          "level": 3,
+          "quote": true,
+          "case_ids": [
+            "CC-OM-250619-005",
+            "CC-OM-251106-004",
+            "CC-OM-250814-002",
+            "CC-OM-260528-001"
+          ]
+        }
+      },
+      "rating_items": "청소년이용불가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.803,
+      "cost_usd": 0.00851,
+      "error": null
+    },
+    {
+      "id": "b39",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "criteria",
+      "dropped": [],
+      "cases_scope": "genre+platform",
+      "cases": [
+        "GC-CC-NV-250627-005",
+        "GC-CC-NV-240726-010",
+        "GC-CC-NV-240308-005",
+        "GC-CC-NV-240531-002",
+        "GC-CC-NV-250919-001"
+      ],
+      "case_ratings": [
+        "12세이용가",
+        "12세이용가",
+        "전체이용가",
+        "전체이용가",
+        "전체이용가"
+      ],
+      "items": {
+        "폭력성": {
+          "level": 1,
+          "quote": true,
+          "case_ids": [
+            "GC-CC-NV-250627-005",
+            "GC-CC-NV-240726-010"
+          ]
+        }
+      },
+      "rating_items": "12세이용가",
+      "rating_source": "items",
+      "applicant_in_cases": null,
+      "latency_s": 1.703,
+      "cost_usd": 0.008305,
+      "error": null
+    }
+  ]
+}

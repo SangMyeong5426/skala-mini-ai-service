@@ -1,0 +1,1128 @@
+{
+  "kind": "rateb",
+  "label": "oa-before",
+  "started_at": "20261021-092658",
+  "evalset": "tools/evalsets/rating_detail.json",
+  "code_root": "/private/var/folders/kv/71cxdxrs3t30w99_t6ytqx3m0000gn/T/skala-measure-SGzkTR",
+  "git": {
+    "commit": "ae379fc",
+    "dirty": false,
+    "agent_matches_base": false
+  },
+  "switches": {
+    "LLM_BACKEND": "openai",
+    "OLLAMA_THINK": null,
+    "OLLAMA_THINK_CHAT": null,
+    "ROUTER": "llm",
+    "TARGET_RESOLVER": null,
+    "VALIDATOR": "format",
+    "RUNBOOK_SELECTOR": null,
+    "AGENT_DOMAIN": "rating",
+    "RATING_CLARIFY": "off",
+    "CASE_SEARCH": "off",
+    "RATING_ASSESSOR": "direct",
+    "CHAT_GROUNDING": "off"
+  },
+  "health": {
+    "llm_backend": "openai",
+    "domain": "rating",
+    "fast_llm": "openai:gpt-4o-mini",
+    "quality_llm": "openai:gpt-4o",
+    "switches": {
+      "AGENT_DOMAIN": "rating",
+      "OLLAMA_THINK": null,
+      "OLLAMA_THINK_CHAT": null,
+      "ROUTER": "llm",
+      "RATING_CLARIFY": "off",
+      "CASE_SEARCH": "off",
+      "RATING_ASSESSOR": "direct",
+      "VALIDATOR": "format",
+      "CHAT_GROUNDING": "off"
+    }
+  },
+  "summary": {
+    "n": 39,
+    "accuracy": "25/39",
+    "within_one": "37/39",
+    "under": 6,
+    "over": 8,
+    "clarified": 0,
+    "errors": 0,
+    "descriptors": {
+      "precision": 0.981,
+      "recall": 0.914,
+      "f1": 0.946
+    },
+    "accuracy_by_label": {
+      "전체이용가": "3/3",
+      "12세이용가": "4/7",
+      "15세이용가": "5/10",
+      "청소년이용불가": "13/19"
+    },
+    "accuracy_applicant_in_cases": "0/0",
+    "accuracy_applicant_new": "0/0",
+    "confusion": {
+      "전체이용가": {
+        "전체이용가": 3
+      },
+      "12세이용가": {
+        "12세이용가": 4,
+        "15세이용가": 3
+      },
+      "15세이용가": {
+        "청소년이용불가": 5,
+        "15세이용가": 5
+      },
+      "청소년이용불가": {
+        "청소년이용불가": 13,
+        "전체이용가": 2,
+        "15세이용가": 4
+      }
+    },
+    "dropped_items": 0,
+    "latency_median_s": 1.183,
+    "cost_usd_sum": 0.250985
+  },
+  "results": [
+    {
+      "id": "b01",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성",
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.082,
+      "cost_usd": 0.002275,
+      "error": null
+    },
+    {
+      "id": "b02",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "약물"
+      ],
+      "descriptors_pred": [
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.207,
+      "cost_usd": 0.00232,
+      "error": null
+    },
+    {
+      "id": "b03",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.349,
+      "cost_usd": 0.00236,
+      "error": null
+    },
+    {
+      "id": "b04",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.265,
+      "cost_usd": 0.00208,
+      "error": null
+    },
+    {
+      "id": "b05",
+      "label": "12세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.159,
+      "cost_usd": 0.00235,
+      "error": null
+    },
+    {
+      "id": "b06",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.183,
+      "cost_usd": 0.00198,
+      "error": null
+    },
+    {
+      "id": "b07",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 81.237,
+      "cost_usd": 0.083785,
+      "error": null
+    },
+    {
+      "id": "b08",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.398,
+      "cost_usd": 0.00215,
+      "error": null
+    },
+    {
+      "id": "b09",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "언어",
+        "범죄"
+      ],
+      "descriptors_pred": [
+        "언어",
+        "범죄"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.174,
+      "cost_usd": 0.00238,
+      "error": null
+    },
+    {
+      "id": "b10",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 0.931,
+      "cost_usd": 0.00207,
+      "error": null
+    },
+    {
+      "id": "b11",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.15,
+      "cost_usd": 0.00216,
+      "error": null
+    },
+    {
+      "id": "b12",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "공포",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "공포",
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.031,
+      "cost_usd": 0.002415,
+      "error": null
+    },
+    {
+      "id": "b13",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.056,
+      "cost_usd": 0.00217,
+      "error": null
+    },
+    {
+      "id": "b14",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.458,
+      "cost_usd": 0.00222,
+      "error": null
+    },
+    {
+      "id": "b15",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "사행성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.13,
+      "cost_usd": 0.002525,
+      "error": null
+    },
+    {
+      "id": "b16",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.428,
+      "cost_usd": 0.00213,
+      "error": null
+    },
+    {
+      "id": "b17",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "공포"
+      ],
+      "descriptors_pred": [
+        "공포"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.078,
+      "cost_usd": 0.00227,
+      "error": null
+    },
+    {
+      "id": "b18",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.28,
+      "cost_usd": 0.002355,
+      "error": null
+    },
+    {
+      "id": "b19",
+      "label": "15세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "언어"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.029,
+      "cost_usd": 0.002395,
+      "error": null
+    },
+    {
+      "id": "b20",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.222,
+      "cost_usd": 0.002045,
+      "error": null
+    },
+    {
+      "id": "b21",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.101,
+      "cost_usd": 0.002255,
+      "error": null
+    },
+    {
+      "id": "b22",
+      "label": "청소년이용불가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -3,
+      "descriptors_label": [
+        "폭력성",
+        "선정성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 104.244,
+      "cost_usd": 0.084075,
+      "error": null
+    },
+    {
+      "id": "b23",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.178,
+      "cost_usd": 0.002325,
+      "error": null
+    },
+    {
+      "id": "b24",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.134,
+      "cost_usd": 0.002235,
+      "error": null
+    },
+    {
+      "id": "b25",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.049,
+      "cost_usd": 0.00205,
+      "error": null
+    },
+    {
+      "id": "b26",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "공포",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어",
+        "공포",
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.345,
+      "cost_usd": 0.00274,
+      "error": null
+    },
+    {
+      "id": "b27",
+      "label": "12세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성",
+        "언어",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "언어",
+        "약물"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.107,
+      "cost_usd": 0.002515,
+      "error": null
+    },
+    {
+      "id": "b28",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.299,
+      "cost_usd": 0.002155,
+      "error": null
+    },
+    {
+      "id": "b29",
+      "label": "15세이용가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "선정성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "선정성",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.198,
+      "cost_usd": 0.002365,
+      "error": null
+    },
+    {
+      "id": "b30",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.432,
+      "cost_usd": 0.002245,
+      "error": null
+    },
+    {
+      "id": "b31",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "사행성",
+        "약물"
+      ],
+      "descriptors_pred": [
+        "약물",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.409,
+      "cost_usd": 0.00245,
+      "error": null
+    },
+    {
+      "id": "b32",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.598,
+      "cost_usd": 0.00219,
+      "error": null
+    },
+    {
+      "id": "b33",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.006,
+      "cost_usd": 0.00214,
+      "error": null
+    },
+    {
+      "id": "b34",
+      "label": "청소년이용불가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": -1,
+      "descriptors_label": [
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.195,
+      "cost_usd": 0.00205,
+      "error": null
+    },
+    {
+      "id": "b35",
+      "label": "전체이용가",
+      "pred": "전체이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [],
+      "descriptors_pred": [],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.11,
+      "cost_usd": 0.00201,
+      "error": null
+    },
+    {
+      "id": "b36",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성",
+        "사행성"
+      ],
+      "descriptors_pred": [
+        "폭력성",
+        "사행성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.299,
+      "cost_usd": 0.002405,
+      "error": null
+    },
+    {
+      "id": "b37",
+      "label": "12세이용가",
+      "pred": "12세이용가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.264,
+      "cost_usd": 0.002235,
+      "error": null
+    },
+    {
+      "id": "b38",
+      "label": "청소년이용불가",
+      "pred": "청소년이용불가",
+      "action": "assess",
+      "ok": true,
+      "diff": 0,
+      "descriptors_label": [
+        "선정성"
+      ],
+      "descriptors_pred": [
+        "선정성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.081,
+      "cost_usd": 0.00208,
+      "error": null
+    },
+    {
+      "id": "b39",
+      "label": "12세이용가",
+      "pred": "15세이용가",
+      "action": "assess",
+      "ok": false,
+      "diff": 1,
+      "descriptors_label": [
+        "폭력성"
+      ],
+      "descriptors_pred": [
+        "폭력성"
+      ],
+      "method": "direct",
+      "dropped": [],
+      "cases_scope": null,
+      "cases": [],
+      "case_ratings": [],
+      "items": {},
+      "rating_items": null,
+      "rating_source": null,
+      "applicant_in_cases": null,
+      "latency_s": 1.087,
+      "cost_usd": 0.00203,
+      "error": null
+    }
+  ]
+}
