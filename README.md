@@ -45,7 +45,7 @@ bash sh/setup_ollama.sh                                  # qwen3:0.6b / qwen3:8b
 
 개선마다 환경변수 하나로 켜고 끈다. 값은 `project/.env`에 적거나 실행할 때 앞에 붙인다.
 측정에서 원본 동작을 재현하거나, 문제가 생겼을 때 재배포 없이 끄는 데 쓴다. 지정하지 않으면
-**ollama 백엔드는 개선 쪽, fake·openai 백엔드는 원본 쪽**이 기본이다. 실제 값은 `/health`의 `switches`에 나온다.
+**ollama 백엔드는 개선 쪽, fake·openai 백엔드는 원본 쪽**이 기본이다. 단 과제 2(등급 점검)는 openai 도 개선 쪽이 기본이다(시연용, [결정 0018](docs/decisions/0018-openai-backend-for-rating-demo.md) — 임베딩 때문에 Ollama 도 떠 있어야 한다). 실제 값은 `/health`의 `switches`에 나온다.
 
 | 환경변수 | 개선 (ollama 기본) | 원본 | 항목 |
 | --- | --- | --- | --- |

@@ -4,12 +4,15 @@
 JSON 스키마만 둔다. fake 판은 테스트용 결정론 규칙이다 — 판정 품질의 근거로 쓰지 않는다.
 """
 import json
+import os
 import re
 
+import httpx
 from langsmith import traceable
 
 from ..fake_llm import FakeLLM
 from ..ollama_llm import OllamaLLM
+from ..openai_llm import OPENAI_URL
 from ..validator import JUDGE_SCHEMA, judge_user_message, parse_verdict
 from .data import ITEMS, RATINGS
 from .facts import render_facts
@@ -229,6 +232,83 @@ class OllamaRatingQualityLLM(OllamaLLM):
     def judge(self, query: str, facts: str, draft: str) -> tuple[dict, dict]:
         content, usage = self._chat(JUDGE_SYSTEM, judge_user_message(query, facts, draft), schema=JUDGE_SCHEMA)
         return parse_verdict(content), usage
+
+
+# ── openai — 시연용(결정 0018). 프롬프트·스키마·파싱은 위 Ollama 클래스를 그대로 쓰고 보내는 곳만 바꾼다 ──
+class OpenAITransport:
+    """Ollama 등급 클래스의 _chat · _chat_stream 을 OpenAI Chat Completions 호출로 바꿔 끼운다.
+
+    과금되는 원격 API 라 측정에는 쓰지 않는다(CLAUDE.md). JSON 출력은 Ollama 에 주던 스키마를
+    response_format(json_schema)으로 그대로 넘긴다. 테스트는 transport 에 httpx.MockTransport 를 넣는다.
+    LangSmith 추적 이름은 물려받은 메서드의 것(ollama_rating_*)이 그대로 남는다.
+    """
+
+    def __init__(self, model: str, usd_per_1k_tokens: float, transport: httpx.MockTransport | None = None):
+        self.name = f"openai:{model}"
+        self.model = model
+        self.usd_per_1k = usd_per_1k_tokens
+        self.think = None        # 물려받은 메서드가 넘기는 Ollama 설정 — OpenAI 에는 보내지 않는다
+        self.chat_think = None
+        self.transport = transport
+
+    def _headers(self) -> dict:
+        key = os.environ.get("OPENAI_API_KEY", "")
+        if not key:
+            raise RuntimeError("OPENAI_API_KEY가 설정되지 않았습니다 — .env 에 넣으세요.")
+        return {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+
+    def _openai_payload(self, system: str, user: str, schema: dict | None = None, stream: bool = False) -> dict:
+        payload = {"model": self.model, "temperature": 0,
+                   "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+        if schema is not None:
+            payload["response_format"] = {"type": "json_schema", "json_schema": {"name": "answer", "schema": schema}}
+        if stream:
+            payload["stream"] = True
+            payload["stream_options"] = {"include_usage": True}   # 마지막 조각에 토큰 수가 온다
+        return payload
+
+    def _usage(self, usage: dict | None) -> dict:
+        tokens = (usage or {}).get("total_tokens", 0)
+        return {"model": self.name, "tokens": tokens, "usd": round(tokens / 1000 * self.usd_per_1k, 6)}
+
+    def _chat(self, system: str, user: str, schema: dict | None = None) -> tuple[str, dict]:
+        with httpx.Client(timeout=120.0, transport=self.transport) as client:
+            resp = client.post(OPENAI_URL, json=self._openai_payload(system, user, schema), headers=self._headers())
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"] or "", self._usage(data.get("usage"))
+
+    async def _chat_stream(self, system: str, user: str, on_token=None, *,
+                           think: bool | None = None) -> tuple[str, dict]:
+        """보고서·대화를 조각 단위로 받아 on_token 으로 바로 넘긴다(Ollama 쪽과 같은 약속). SSE 의 data: 줄만 읽는다."""
+        chunks: list[str] = []
+        usage = self._usage(None)
+        payload = self._openai_payload(system, user, stream=True)
+        async with httpx.AsyncClient(timeout=120.0, transport=self.transport) as client:
+            async with client.stream("POST", OPENAI_URL, json=payload, headers=self._headers()) as resp:
+                resp.raise_for_status()
+                async for line in resp.aiter_lines():
+                    if not line.startswith("data: ") or line == "data: [DONE]":
+                        continue
+                    data = json.loads(line[len("data: "):])
+                    if data.get("usage"):
+                        usage = self._usage(data["usage"])
+                    for choice in data.get("choices") or []:
+                        piece = (choice.get("delta") or {}).get("content") or ""
+                        if piece:
+                            chunks.append(piece)
+                            if on_token is not None:
+                                on_token(piece)
+        usage["prompt"] = f"[SYSTEM]\n{system}\n\n[USER]\n{user}"
+        return "".join(chunks), usage
+
+
+class OpenAIRatingFastLLM(OpenAITransport, OllamaRatingFastLLM):
+    """분류·제도 안내 대화 — 기본 gpt-4o-mini."""
+
+
+class OpenAIRatingQualityLLM(OpenAITransport, OllamaRatingQualityLLM):
+    """판정·보고서 작성·검수·법령 답변 — 기본 gpt-4o."""
 
 
 # ── fake — 테스트용 결정론 규칙 ─────────────────────────────────────────────

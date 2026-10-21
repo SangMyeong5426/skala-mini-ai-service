@@ -25,3 +25,4 @@
 | [0015](0015-law-grounded-answers.md) | 제도 문의는 법령 조문에 근거해 답하고, 근거가 없으면 답할 수 없다고 한다 | Accepted | 2026-10-20 |
 | [0017](0017-simplified-decisions-in-case-db.md) | 사례 DB 쏠림 바로잡기 — 개요 없는 간소화 등급분류 결정도 넣는다 | Accepted | 2026-10-20 |
 | [0016](0016-combine-cases-and-criteria.md) | 사례 등급과 기준표 판정의 결합 — 개발용 문항으로 R1(사례 하한)을 고르고 평가셋은 한 번만 본다 | Accepted | 2026-10-20 |
+| [0018](0018-openai-backend-for-rating-demo.md) | 등급 점검을 OpenAI 로도 띄운다 — 보내는 곳만 바꾸고 측정에는 쓰지 않는다 | Accepted | 2026-10-21 |

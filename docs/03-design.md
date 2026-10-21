@@ -82,7 +82,8 @@ scripts/measure-at              단계 추가, MEASURE_QUERIES
 
 ### 스위치 — 모두 끄면 Before(LLM 단독)
 
-과제 1과 같은 규칙이다. 지정하지 않으면 ollama는 개선 쪽, fake·openai는 원본 쪽이 기본이다.
+지정하지 않으면 fake 만 원본 쪽이고 ollama·openai 는 개선 쪽이 기본이다(`server._rating_switch`). openai 는 시연용이고 측정에 쓰지 않는다([0018](decisions/0018-openai-backend-for-rating-demo.md)).
+과제 1(인시던트)은 그대로 — openai 는 원본 쪽이 기본이다.
 
 | 환경변수 | After (기본) | Before | 하는 일 |
 | --- | --- | --- | --- |
