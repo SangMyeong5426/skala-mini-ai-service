@@ -458,5 +458,6 @@ ROUTER=llm RATING_CLARIFY=off CASE_SEARCH=off RATING_ASSESSOR=direct VALIDATOR=f
 | 수치 원본·측정 방법 | [`02-measurement.md`](02-measurement.md) |
 | 파일·함수 단위 설계와 계획에서 바뀐 것 | [`03-design.md`](03-design.md) |
 | 기능마다 왜·한계 | [`decisions/0009`](decisions/0009-rating-domain.md) ~ [`0017`](decisions/0017-simplified-decisions-in-case-db.md) |
+| 개념 풀이(MCP·Tool·RAG·임베딩·partial 등, 발표에서는 말하지 않음) | [`07-concepts.md`](07-concepts.md) |
 | 확인 못 한 것 | [`followups.md`](followups.md) |
 | 과제 안내 요약·평가 기준 | [`00-assignment.md`](00-assignment.md) |
