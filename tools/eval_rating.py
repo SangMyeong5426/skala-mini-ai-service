@@ -317,7 +317,7 @@ async def _run(kinds: list[str], args: argparse.Namespace) -> None:
     from agent.rating.data import RATINGS
     from agent.rating.profile import extract_profile
 
-    if args.backend == "ollama":
+    if args.backend != "fake":   # openai 도 임베딩(사례 검색·라우터·조문)은 로컬 ollama 를 쓴다
         _check_ollama()
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     out_dir = Path(args.out_dir)
@@ -350,8 +350,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("kind", choices=[*EVALUATORS, "all"])
     parser.add_argument("--label", required=True, help="결과 파일 이름에 들어간다 (예: before, after)")
-    parser.add_argument("--backend", default="ollama", choices=["ollama", "fake"],
-                        help="fake 는 스크립트 점검용이다. 결과를 근거로 쓰지 않는다")
+    parser.add_argument("--backend", default="ollama", choices=["ollama", "openai", "fake"],
+                        help="fake 는 스크립트 점검용이다. openai 는 과금되는 보조 측정용이다(결정 0018) — "
+                             "OPENAI_API_KEY 가 환경에 있어야 하고 임베딩 때문에 ollama 도 떠 있어야 한다")
     parser.add_argument("--code-root", default=str(ROOT),
                         help="잴 코드의 체크아웃 — 그 안의 project/ 를 import 한다")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR))
