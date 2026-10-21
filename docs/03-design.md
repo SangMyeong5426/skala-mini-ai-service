@@ -38,6 +38,8 @@
 
 ### 새로 만들거나 고치는 파일
 
+2026-10-21 현재 코드 기준으로 맞췄다. 계획에서 달라진 이유는 위 "구현하며 바뀐 것"과 결정 기록에 있다.
+
 ```text
 project/
   mcp_server_rating.py          새 MCP 서버 — Tool rating_stats, Resource criteria·law·cases
@@ -46,21 +48,30 @@ project/
   data/ratings/criteria.json    내용정보 7항목 × 4단계 기준(출처 포함)
   data/ratings/rule-8.md        시행규칙 제8조
   data/ratings/router_examples.json
-  agent/rating/llm.py           도메인 프롬프트 — Ollama fast/quality, fake
+  data/ratings/law/articles.json 게임산업법·시행령·시행규칙 148개 조문 (기능 8)
+  agent/rating/llm.py           도메인 프롬프트 — Ollama fast/quality, OpenAI(시연용, 0018), fake
+  agent/rating/data.py          등급·항목 이름, 사례 DB·평가 기간, 걸러 내는 규칙(usable_case·usable), 통계
+  agent/rating/profile.py       장르·플랫폼 추출, 되묻기 다음 턴 이어 붙이기
+  agent/rating/clarify.py       되묻기 규칙
+  agent/rating/facts.py         판정·사실을 작성 프롬프트 글로, "등급을 낮추려면" 계산
+  agent/rating/law.py           법령 근거 제도 안내 (기능 8)
   agent/rating/graph.py         등급 점검 그래프
-  agent/rating/assess.py        단계 → 등급 규칙, 근거 인용 검사 (순수 함수)
+  agent/rating/assess.py        단계 → 등급 규칙, 근거 인용 검사, 결합 규칙 R0~R4 (순수 함수)
   agent/rating/cases.py         유사 사례 검색 (제목·장르·플랫폼·개요 임베딩 kNN)
   agent/rating/check.py         검수 (형식 → 사실 대조 → LLM 판정)
   agent/deps.py                 필드 추가
   agent/mcp_client.py           find_tool 추가, rating 서버 등록
   agent/router.py               라벨 이름 일반화 (incident 고정 → 인자로)
-  server.py                     AGENT_DOMAIN 분기, 등급 부품 조립
-  tests/test_rating_*.py
+  server.py                     AGENT_DOMAIN 분기, 등급 부품 조립, _rating_switch
+  web_chat.html                 domain 이 rating 이면 제목·입력 예시·진행 표시를 등급 점검 문구로
+  tests/test_rating_*.py        8개 파일
 tools/
   fetch_ratings.py              API 수집·분할
-  make_rating_evalset.py        평가셋 A 표본 추출 (시드 고정)
-  eval_rating.py                rate · rroute · rclarify · rjudge
-  evalsets/rating*.json         평가셋 4종
+  fetch_laws.py                 법령 원문 수집 (기능 8)
+  make_rating_evalset.py        평가셋 A·B·개발용 표본 추출 (시드 고정)
+  eval_rating.py                rate · rateb · rdev · rbenign · rroute · rclarify · rjudge · rbase · rlaw
+  choose_combination.py         결합 규칙 고르기 — 개발용 결과만 받는다 (0016)
+  evalsets/rating*.json         평가셋 8종
   queries_rating.json           회귀 쿼리 10개
 scripts/measure-at              단계 추가, MEASURE_QUERIES
 ```
